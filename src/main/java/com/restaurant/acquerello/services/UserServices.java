@@ -1,4 +1,7 @@
 package com.restaurant.acquerello.services;
 
-public interface UserServices {
+import com.restaurant.acquerello.models.User;
+
+public interface UserServices  {
+    public User save(User user);
 }
