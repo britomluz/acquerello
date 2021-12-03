@@ -1,4 +1,5 @@
 package com.restaurant.acquerello.configurations;
 
-public class WebAuthentication {
+
+public class WebAuthentication{
 }

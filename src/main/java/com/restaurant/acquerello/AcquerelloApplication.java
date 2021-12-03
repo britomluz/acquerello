@@ -1,7 +1,9 @@
 package com.restaurant.acquerello;
 
+import com.restaurant.acquerello.models.Product;
 import com.restaurant.acquerello.models.User;
 import com.restaurant.acquerello.models.UserType;
+import com.restaurant.acquerello.repositories.ProductRepositories;
 import com.restaurant.acquerello.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,10 +18,12 @@ public class AcquerelloApplication {
 	}
 
 	@Bean
-	public CommandLineRunner initData(UserRepository userRepository) {
+	public CommandLineRunner initData(UserRepository userRepository, ProductRepositories productRepositories) {
 		return (args) -> {
 		userRepository.save(new User("Luigi", "number one", "admin@admin.com", "SafePassword1234", "Fake Street 123", 5554343L, UserType.ADMIN, "dire"));
 		userRepository.save(new User("Brian", "Cuenca", "correo@user.com", "muzarelle123", "Anywhere", 5551232L, UserType.USER, "rrewe"));
+
+        productRepositories.save(new Product("Pasta primavera","tallarin con salsa roja", "hhhhh",25D, 10));
 		};
 	}
 
