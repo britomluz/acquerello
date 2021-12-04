@@ -31,11 +31,11 @@ public class AcquerelloApplication {
 			userRepository.save(user2);
 
 			//GABRIEL: CREATE PRODUCTS TO TEST DE APP
-			Product product1 = new Product("Pasta primavera","tallarin con salsa roja","aaaaaaaaaaaaaaaaaaa", "hhhhh",25D, 10);
+			Product product1 = new Product("Pasta primavera","tallarin con salsa roja", "hhhhh",25D, 10);
         	productRepository.save(product1);
-			Product product2 = new Product("Torta de chocolate", "panque de chocolate, cubierto con salsa de chocolate","dddddd", "hhh", 5D, 15);
+			Product product2 = new Product("Torta de chocolate", "panque de chocolate, cubierto con salsa de chocolate", "hhh", 5D, 15);
 			productRepository.save(product2);
-			Product product3 = new Product("Coca-cola", "bebida de cola", "ccccccccccccccc", "hhh", 2D, 20);
+			Product product3 = new Product("Coca-cola", "bebida de cola", "hhh", 2D, 20);
 			productRepository.save(product3);
 
 			//GABRIEL: CREATE CATEGORIES TO TEST DE APP
@@ -53,8 +53,6 @@ public class AcquerelloApplication {
 			productCategoryRepository.save(productCategory2);
 			ProductCategory productCategory3 = new ProductCategory(product3, category3);
 			productCategoryRepository.save(productCategory3);
-
-
 		};
 	}
 

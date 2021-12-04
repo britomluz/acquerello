@@ -11,8 +11,7 @@ import java.util.stream.Collectors;
 public class ProductDTO {
     private Long id;
     private String name;
-    private String shortDescription;
-    private String longDescription;
+    private String description;
     private String productImage;
     private Double price;
     private Integer stock;
@@ -21,8 +20,7 @@ public class ProductDTO {
     public ProductDTO(Product product) {
         this.id = product.getId();
         this.name = product.getName();
-        this.shortDescription = product.getShortDescription();
-        this.longDescription = product.getLongDescription();
+        this.description = product.getDescription();
         this.productImage = product.getProductImage();
         this.price = product.getPrice();
         this.stock = product.getStock();
@@ -45,20 +43,12 @@ public class ProductDTO {
         this.name = name;
     }
 
-    public String getShortDescription() {
-        return shortDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
-
-    public String getLongDescription() {
-        return longDescription;
-    }
-
-    public void setLongDescription(String longDescription) {
-        this.longDescription = longDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getProductImage() {
