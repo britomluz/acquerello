@@ -1,7 +1,7 @@
 package com.restaurant.acquerello.controllers;
 
-import com.restaurant.acquerello.dtos.ProductDTO;
-import com.restaurant.acquerello.services.ProductService;
+import com.restaurant.acquerello.dtos.CategoryDTO;
+import com.restaurant.acquerello.services.CategoryService;
 import com.restaurant.acquerello.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,14 +16,15 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
-public class ProductController {
-    @Autowired
-    private ProductService productService;
+public class CategoryController {
 
-    @GetMapping("/products")
-    public ResponseEntity<?> getAllProducts(){
+    @Autowired
+    private CategoryService categoryService;
+
+    @GetMapping("/categories")
+    public ResponseEntity<?> getAllCategories(){
         try {
-            return new ResponseEntity<>(Util.makeDTO("products", productService.getAll().stream().map(ProductDTO::new).collect(Collectors.toSet())), HttpStatus.OK);
+            return new ResponseEntity<>(Util.makeDTO("categories", categoryService.getAll().stream().map(CategoryDTO::new).collect(Collectors.toList())), HttpStatus.OK);
         } catch (Exception e){
             return new ResponseEntity<>("Error en solicitud",HttpStatus.BAD_REQUEST);
         }

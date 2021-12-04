@@ -4,6 +4,8 @@ import com.restaurant.acquerello.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+//CREATED BY GABRIEL
+
 @RepositoryRestResource
-public interface ProductRepositories extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 }

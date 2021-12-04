@@ -2,10 +2,10 @@ package com.restaurant.acquerello.models;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.*;
+
+//CREATED BY GABRIEL
 
 @Entity
 public class Product {
@@ -14,17 +14,22 @@ public class Product {
     @GenericGenerator(name="native", strategy = "native")
     private Long id;
     private String name;
-    private String description;
+    private String shortDescription;
+    private String longDescription;
     private String productImage;
     private Double price;
     private Integer stock;
 
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    private Set<ProductCategory> productCategories = new LinkedHashSet<>();
+
     public Product() {
     }
 
-    public Product(String name, String description, String productImage, Double price, Integer stock) {
+    public Product(String name, String shortDescription, String longDescription, String productImage, Double price, Integer stock) {
         this.name = name;
-        this.description = description;
+        this.shortDescription = shortDescription;
+        this.longDescription = longDescription;
         this.productImage = productImage;
         this.price = price;
         this.stock = stock;
@@ -46,12 +51,20 @@ public class Product {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getShortDescription() {
+        return shortDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getLongDescription() {
+        return longDescription;
+    }
+
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
     }
 
     public String getProductImage() {
@@ -76,5 +89,13 @@ public class Product {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Set<ProductCategory> getProductCategories() {
+        return productCategories;
+    }
+
+    public void setProductCategories(Set<ProductCategory> productCategories) {
+        this.productCategories = productCategories;
     }
 }

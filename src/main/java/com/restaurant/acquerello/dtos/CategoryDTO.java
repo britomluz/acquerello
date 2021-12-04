@@ -2,11 +2,15 @@ package com.restaurant.acquerello.dtos;
 
 import com.restaurant.acquerello.models.Category;
 
+
+//CREATED BY GABRIEL
+
 public class CategoryDTO {
     private Long id;
     private String name;
     private String description;
     private String categoryImage;
+
 
     public CategoryDTO(Category category) {
         this.id = category.getId();
@@ -46,4 +50,5 @@ public class CategoryDTO {
     public void setCategoryImage(String categoryImage) {
         this.categoryImage = categoryImage;
     }
+
 }

@@ -2,10 +2,13 @@ package com.restaurant.acquerello.models;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+//CREATED BY GABRIEL
+
+@Entity
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
@@ -14,6 +17,9 @@ public class Category {
     private String name;
     private String description;
     private String categoryImage;
+
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+    private Set<ProductCategory> productCategories = new LinkedHashSet<>();
 
     public Category() {
     }
@@ -54,5 +60,13 @@ public class Category {
 
     public void setCategoryImage(String categoryImage) {
         this.categoryImage = categoryImage;
+    }
+
+    public Set<ProductCategory> getProductCategories() {
+        return productCategories;
+    }
+
+    public void setProductCategories(Set<ProductCategory> productCategories) {
+        this.productCategories = productCategories;
     }
 }

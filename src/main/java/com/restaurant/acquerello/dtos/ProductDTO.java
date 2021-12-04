@@ -2,21 +2,31 @@ package com.restaurant.acquerello.dtos;
 
 import com.restaurant.acquerello.models.Product;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+//CREATED BY GABRIEL
+
 public class ProductDTO {
     private Long id;
     private String name;
-    private String description;
+    private String shortDescription;
+    private String longDescription;
     private String productImage;
     private Double price;
     private Integer stock;
+    private Set<ProductCategoryDTO> categories = new LinkedHashSet<>();
 
     public ProductDTO(Product product) {
         this.id = product.getId();
         this.name = product.getName();
-        this.description = product.getDescription();
+        this.shortDescription = product.getShortDescription();
+        this.longDescription = product.getLongDescription();
         this.productImage = product.getProductImage();
         this.price = product.getPrice();
         this.stock = product.getStock();
+        this.categories = product.getProductCategories().stream().map(ProductCategoryDTO::new).collect(Collectors.toSet());
     }
 
     public Long getId() {
@@ -35,12 +45,20 @@ public class ProductDTO {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getShortDescription() {
+        return shortDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getLongDescription() {
+        return longDescription;
+    }
+
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
     }
 
     public String getProductImage() {
@@ -65,5 +83,13 @@ public class ProductDTO {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Set<ProductCategoryDTO> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<ProductCategoryDTO> categories) {
+        this.categories = categories;
     }
 }

@@ -5,6 +5,8 @@ import com.restaurant.acquerello.models.Product;
 import java.util.List;
 import java.util.Optional;
 
+//CREATED BY GABRIEL
+
 public interface ProductService {
     public Product save(Product product);
     public List<Product> getAll();
