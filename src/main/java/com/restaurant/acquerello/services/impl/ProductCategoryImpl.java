@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 //CREATED BY GABRIEL
 
@@ -35,5 +36,10 @@ public class ProductCategoryImpl implements ProductCategoryServices {
     @Override
     public Optional<ProductCategory> getById(Long id) {
         return productCategoryRepository.findById(id);
+    }
+
+    @Override
+    public void deleteAll(Set<ProductCategory> categories) {
+        productCategoryRepository.deleteAll(categories);
     }
 }
