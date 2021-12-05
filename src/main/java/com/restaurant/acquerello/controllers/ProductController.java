@@ -87,4 +87,5 @@ public class ProductController {
         productService.deleteProduct(id);
         return new ResponseEntity<>("Product deleted",HttpStatus.OK);
     }
+
 }
