@@ -3,6 +3,8 @@ package com.restaurant.acquerello.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -19,6 +21,9 @@ public class User {
     private Long number;
     private UserType type;
     private String img;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Order> orders = new ArrayList<>();
 
     public  User() {}
 
@@ -99,6 +104,19 @@ public class User {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public void addOrder(Order order) {
+        order.setUser(this);
+        orders.add(order);
     }
 
     @Override
