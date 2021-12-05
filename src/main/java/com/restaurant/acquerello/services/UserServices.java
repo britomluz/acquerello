@@ -6,4 +6,5 @@ import com.restaurant.acquerello.models.User;
 
 public interface UserServices  {
     public User save(User user);
+    public User getByEmail(String email);
 }

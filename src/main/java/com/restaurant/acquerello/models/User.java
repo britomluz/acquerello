@@ -22,9 +22,9 @@ public class User {
     private UserType type;
     private String img;
 
-    public  User() {}
+    public User() {}
 
-    public User(String firstName, String lastName,String email, String password, String address, Long number, UserType type, String img) {
+    public User(String firstName, String lastName, String email, String password, String address, Long number, UserType type, String img) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
