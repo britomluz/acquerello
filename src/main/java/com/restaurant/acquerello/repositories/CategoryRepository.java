@@ -1,12 +1,11 @@
 package com.restaurant.acquerello.repositories;
 
-import com.restaurant.acquerello.models.User;
+import com.restaurant.acquerello.models.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-//CREATED BY BRIAN
+//CREATED BY GABRIEL
 
 @RepositoryRestResource
-public interface UserRepository extends JpaRepository<User, Long> {
-    User findByEmail(String email);
+public interface CategoryRepository extends JpaRepository<Category,Long> {
 }

@@ -6,6 +6,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//CREATED BY BRIAN
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -25,9 +27,10 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Order> orders = new ArrayList<>();
 
-    public  User() {}
 
-    public User(String firstName, String lastName,String email, String password, String address, Long number, UserType type, String img) {
+    public User() {}
+
+    public User(String firstName, String lastName, String email, String password, String address, Long number, UserType type, String img) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

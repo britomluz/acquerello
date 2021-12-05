@@ -7,6 +7,8 @@ import com.restaurant.acquerello.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+//CREATED BY BRIAN
+
 @Service
 public class UserServicesImpl implements UserServices {
     @Autowired
@@ -15,5 +17,10 @@ public class UserServicesImpl implements UserServices {
     @Override
     public User save(User user) {
       return userRepository.save(user);
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }
