@@ -1,5 +1,6 @@
 package com.restaurant.acquerello.models;
 
+import org.apache.logging.log4j.util.Strings;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -19,10 +20,13 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    private String address;
     private Long number;
     private UserType type;
     private String img;
+
+    @ElementCollection
+    @Column(name = "address")
+    private List<String> address = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Order> orders = new ArrayList<>();
@@ -30,7 +34,7 @@ public class User {
 
     public User() {}
 
-    public User(String firstName, String lastName, String email, String password, String address, Long number, UserType type, String img) {
+    public User(String firstName, String lastName, String email, String password, List<String> address, Long number, UserType type, String img) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -77,11 +81,11 @@ public class User {
         this.password = password;
     }
 
-    public String getAddress() {
+    public List<String> getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(List<String> address) {
         this.address = address;
     }
 

@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @SpringBootApplication
 public class AcquerelloApplication {
@@ -38,8 +39,8 @@ public class AcquerelloApplication {
 			Order order1 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.IN_PROCESS, 32.43);
 			Order order2 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.IN_PROCESS, 11.43);
 
-			userRepository.save(new User("Luigi", "number one", "admin@admin.com", passwordEncoder.encode("SafePassword1234"), "Fake Street 123", 5554343L, UserType.ADMIN, "dire"));
-			userRepository.save(new User("Brian", "Cuenca", "correo@user.com", passwordEncoder.encode("muzarelle123"), "Anywhere", 5551232L, UserType.USER, "rrewe"));
+			userRepository.save(new User("Luigi", "number one", "admin@admin.com", passwordEncoder.encode("SafePassword1234"), List.of("Fake Street 123"), 5554343L, UserType.ADMIN, "dire"));
+			userRepository.save(new User("Brian", "Cuenca", "correo@user.com", passwordEncoder.encode("muzarelle123"), List.of("Hills 123"), 5551232L, UserType.USER, "rrewe"));
 
 			orderRepository.save(order1);
 			orderRepository.save(order2);
