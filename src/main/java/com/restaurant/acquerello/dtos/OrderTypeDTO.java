@@ -1,4 +1,4 @@
-package com.restaurant.acquerello.controllers;
+package com.restaurant.acquerello.dtos;
 
 import com.restaurant.acquerello.models.Order;
 import com.restaurant.acquerello.models.OrderState;
