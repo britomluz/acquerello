@@ -24,9 +24,6 @@ public class User {
     private UserType type;
     private String img;
 
-    @ElementCollection
-    @Column(name = "address")
-    private List<String> address = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Order> orders = new ArrayList<>();
@@ -34,12 +31,11 @@ public class User {
 
     public User() {}
 
-    public User(String firstName, String lastName, String email, String password, List<String> address, Long number, UserType type, String img) {
+    public User(String firstName, String lastName, String email, String password, Long number, UserType type, String img) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.address = address;
         this.number = number;
         this.type = type;
         this.img = img;
@@ -79,14 +75,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public List<String> getAddress() {
-        return address;
-    }
-
-    public void setAddress(List<String> address) {
-        this.address = address;
     }
 
     public Long getNumber() {
@@ -134,7 +122,6 @@ public class User {
         sb.append(", lastName='").append(lastName).append('\'');
         sb.append(", email='").append(email).append('\'');
         sb.append(", password='").append(password).append('\'');
-        sb.append(", address='").append(address).append('\'');
         sb.append(", number=").append(number);
         sb.append(", type=").append(type);
         sb.append('}');

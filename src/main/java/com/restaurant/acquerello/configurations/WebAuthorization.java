@@ -1,6 +1,7 @@
 package com.restaurant.acquerello.configurations;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -18,9 +19,11 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/api/products").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/users").permitAll()
                 .antMatchers("/h2-console/**", "/web/**", "/scripts/**", "/assets/**","/styles/**").permitAll()
-                .antMatchers("/**").hasAuthority("USER")
-                .antMatchers("/**").hasAuthority("ADMIN")
+                .antMatchers("/api/**").hasAuthority("USER")
+                .antMatchers("/rest/**", "/api/users/**").hasAuthority("ADMIN")
                 .and()
                 .formLogin()
                     .usernameParameter("email")

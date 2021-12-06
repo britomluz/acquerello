@@ -32,8 +32,8 @@ public class AcquerelloApplication {
 									  ProductCategoryRepository productCategoryRepository) {
 		return (args) -> {
 			// Brian: Create User and Order
-			User user1 = new User("Luigi", "number one", "admin@admin.com", passwordEncoder.encode("SafePassword1234"), List.of("Fake Street 123"), 5554343L, UserType.ADMIN, "https://discord.com/channels/913867704660787211/913868768881553468/917153794817683456");
-			User user2 = new User("Brian", "Cuenca", "correo@user.com", passwordEncoder.encode("muzarelle123"), List.of("Hills 123"), 5551232L, UserType.USER, "rrewe");
+			User user1 = new User("Luigi", "number one", "admin@admin.com", passwordEncoder.encode("SafePassword1234"), 5554343L, UserType.ADMIN, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
+			User user2 = new User("Brian", "Cuenca", "correo@user.com", passwordEncoder.encode("muzarelle123"), 5551232L, UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
 
 
 			// Brian: Creating orders
