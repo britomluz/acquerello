@@ -286,10 +286,17 @@ footer{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center;    
 }
-
-
+.glass{        
+    backdrop-filter: blur(8px);
+}
+.containerLogin{
+    padding: 50px;
+}
+.containerSignup{
+    padding: 50px;
+}
 /*login end*/
 
 
