@@ -5,7 +5,7 @@ const App = createApp({
   created() {},
   methods: {
       Edit(){
-          axios.patch("")
+          axios.patch("/api/order/edit")
           .then(response=>console.log(response))
           .catch(err=>console.log(err))
       },
