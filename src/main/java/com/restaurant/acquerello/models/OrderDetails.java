@@ -2,10 +2,9 @@ package com.restaurant.acquerello.models;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class OrderDetails {
@@ -17,6 +16,9 @@ public class OrderDetails {
     private Integer quantity;
     private Double price;
     private Double total;
+
+    @OneToMany(mappedBy = "orderDetails")
+    private List<Order> orders = new ArrayList<>();
 
     public OrderDetails() {}
 
@@ -61,6 +63,19 @@ public class OrderDetails {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public void addOrders(Order order) {
+        order.setOrderDetails(this);
+        orders.add(order);
     }
 
     @Override

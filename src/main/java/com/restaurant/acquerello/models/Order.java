@@ -3,8 +3,9 @@ package com.restaurant.acquerello.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "orders_list")
@@ -21,6 +22,10 @@ public class Order {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_oder")
     private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_detail")
+    private OrderDetails orderDetails;
 
     public Order() {}
 
@@ -73,6 +78,14 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public OrderDetails getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(OrderDetails orderDetails) {
+        this.orderDetails = orderDetails;
     }
 
     @Override

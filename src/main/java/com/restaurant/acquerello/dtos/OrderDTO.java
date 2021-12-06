@@ -1,26 +1,16 @@
 package com.restaurant.acquerello.dtos;
 
-import com.restaurant.acquerello.models.OrderDetails;
-
-import javax.persistence.OneToOne;
-
-public class OrderDetailsDTO {
-    private Long id;
+public class OrderDTO {
     private String name;
     private Integer quantity;
     private Double price;
     private Double total;
 
-    public OrderDetailsDTO(OrderDetails orderDetails) {
-        this.id = orderDetails.getId();
-        this.name = orderDetails.getName();
-        this.quantity = orderDetails.getQuantity();
-        this.price = orderDetails.getPrice();
-        this.total = orderDetails.getTotal();
-    }
-
-    public Long getId() {
-        return id;
+    public OrderDTO(String name, Integer quantity, Double price, Double total) {
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+        this.total = total;
     }
 
     public String getName() {

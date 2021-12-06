@@ -32,14 +32,28 @@ public class AcquerelloApplication {
 									  ProductCategoryRepository productCategoryRepository) {
 		return (args) -> {
 			// Brian: Create User and Order
+			User user1 = new User("Luigi", "number one", "admin@admin.com", passwordEncoder.encode("SafePassword1234"), List.of("Fake Street 123"), 5554343L, UserType.ADMIN, "https://discord.com/channels/913867704660787211/913868768881553468/917153794817683456");
+			User user2 = new User("Brian", "Cuenca", "correo@user.com", passwordEncoder.encode("muzarelle123"), List.of("Hills 123"), 5551232L, UserType.USER, "rrewe");
+
+
+			// Brian: Creating orders
 			Order order1 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.IN_PROCESS, 32.43);
 			Order order2 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.IN_PROCESS, 11.43);
 
+			// Brian : Creating order details
 			OrderDetails orderDetails1 = new OrderDetails("Pancho a la muzarelle", 1, 15.99, 15.99);
 			OrderDetails orderDetails2 = new OrderDetails("Champiñone en caja", 2, 29.99, 29.99);
 
-			userRepository.save(new User("Luigi", "number one", "admin@admin.com", passwordEncoder.encode("SafePassword1234"), List.of("Fake Street 123"), 5554343L, UserType.ADMIN, "https://discord.com/channels/913867704660787211/913868768881553468/917153794817683456"));
-			userRepository.save(new User("Brian", "Cuenca", "correo@user.com", passwordEncoder.encode("muzarelle123"), List.of("Hills 123"), 5551232L, UserType.USER, "rrewe"));
+			// Brian : Adding order details to orders
+			orderDetails1.addOrders(order1);
+			orderDetails2.addOrders(order2);
+
+			// Brian: Adding orders to Users
+			user1.addOrder(order1);
+			user2.addOrder(order2);
+
+			userRepository.save(user1);
+			userRepository.save(user2);
 
 			orderDetailsRepository.save(orderDetails1);
 			orderDetailsRepository.save(orderDetails2);
