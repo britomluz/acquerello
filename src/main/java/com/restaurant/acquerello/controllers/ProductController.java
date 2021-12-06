@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -38,7 +40,7 @@ public class ProductController {
     @GetMapping("/products")
     public ResponseEntity<?> getAllProducts(){
         try {
-            return new ResponseEntity<>(Util.makeDTO("products", productService.getAll().stream().map(ProductDTO::new).collect(Collectors.toSet())), HttpStatus.OK);
+            return new ResponseEntity<>(Util.makeDTO("products", productService.getAll().stream().map(ProductDTO::new).collect(Collectors.toSet()).stream().sorted(Comparator.comparing(ProductDTO::getId)).collect(Collectors.toCollection(LinkedHashSet::new))), HttpStatus.OK);
         } catch (Exception e){
             return new ResponseEntity<>("Error in request",HttpStatus.BAD_REQUEST);
         }
