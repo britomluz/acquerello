@@ -1,6 +1,7 @@
 package com.restaurant.acquerello.controllers;
 
 import com.restaurant.acquerello.dtos.CreateProductDTO;
+import com.restaurant.acquerello.dtos.ModifyProductDTO;
 import com.restaurant.acquerello.dtos.ProductDTO;
 import com.restaurant.acquerello.models.*;
 import com.restaurant.acquerello.services.CategoryService;
@@ -59,16 +60,48 @@ public class ProductController {
             return new ResponseEntity<>("Error in data",HttpStatus.FORBIDDEN);
         }
         if (createProductDTO.getPrice() <= 0){
-            return new ResponseEntity<>("Price cant be 0 or less",HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Price cannot be 0 or less",HttpStatus.FORBIDDEN);
         }
         if (createProductDTO.getStock() <= 0){
-            return new ResponseEntity<>("Stock cant be 0 or less",HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Stock cannot be 0 or less",HttpStatus.FORBIDDEN);
         }
         Product product = new Product(createProductDTO.getName(), createProductDTO.getDescription(), createProductDTO.getProductImage(), createProductDTO.getPrice(), createProductDTO.getStock());
         productService.save(product);
         ProductCategory productCategory = new ProductCategory(product, category);
         productCategoryServices.save(productCategory);
         return new ResponseEntity<>("Product created",HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/products/edit/{id}")
+    public ResponseEntity<?> editProduct(Authentication authentication, @PathVariable("id") Long id,
+                                         @RequestBody ModifyProductDTO modifyProductDTO){
+        User user = userServices.getByEmail(authentication.getName());
+        if (!user.getType().equals(UserType.ADMIN)){
+            return new ResponseEntity<>("Don't have authority",HttpStatus.FORBIDDEN);
+        }
+        if (modifyProductDTO.getName().isEmpty() || modifyProductDTO.getDescription().isEmpty() ||
+        modifyProductDTO.getProductImage().isEmpty() || modifyProductDTO.getPrice().toString().isEmpty()
+        || modifyProductDTO.getStock().toString().isEmpty()){
+            return new ResponseEntity<>("Error in data",HttpStatus.FORBIDDEN);
+        }
+        if (modifyProductDTO.getStock() < 0){
+            return new ResponseEntity<>("Stock cannot be less than 0",HttpStatus.FORBIDDEN);
+        }
+        if (modifyProductDTO.getPrice() <= 0){
+            return new ResponseEntity<>("Price cannot be 0 or less",HttpStatus.FORBIDDEN);
+        }
+        Product product = productService.getById(id).orElse(null);
+        if (product == null){
+            return new ResponseEntity<>("Product doesn't exist",HttpStatus.FORBIDDEN);
+        }
+        product.setName(modifyProductDTO.getName());
+        product.setDescription(modifyProductDTO.getDescription());
+        product.setProductImage(modifyProductDTO.getProductImage());
+        product.setPrice(modifyProductDTO.getPrice());
+        product.setStock(modifyProductDTO.getStock());
+        productService.save(product);
+
+        return new ResponseEntity<>("Product edited",HttpStatus.OK);
     }
 
     @DeleteMapping("/products/delete/{id}")
