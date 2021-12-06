@@ -275,7 +275,7 @@ footer{
 
 
 /*login start*/
-.headerLogin{
+.mainLogin{
     background-image: linear-gradient(rgba(5,7,12, 0.60), rgba(5,7,12, 0.60)), url("../assets/acquerello.jpeg");
     background-repeat: no-repeat;
     background-position: center center;
@@ -289,7 +289,8 @@ footer{
     align-items: center;    
 }
 .glass{        
-    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.438);
+    backdrop-filter: blur(8px);    
 }
 .containerLogin{
     padding: 50px;
@@ -297,9 +298,72 @@ footer{
 .containerSignup{
     padding: 50px;
 }
+.formIndex input{
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    width: 100%;
+    padding: 8px;
+    color: white;
+    width: 100%;
+}
+.formIndex input:focus{   
+    background: rgba(255, 255, 255, 0.287);     
+    outline: none;
+    
+}
+
+.formIndex input:-webkit-autofill,
+.formIndex input:-webkit-autofill:hover, 
+.formIndex input:-webkit-autofill:focus, 
+.formIndex input:-webkit-autofill:active  {
+    box-shadow: 0 0 0 30px rgba(0, 0, 0, 0.924) inset !important;
+}
+.formIndex input:-webkit-autofill {
+    -webkit-text-fill-color: rgb(255, 255, 255) !important;
+}
+.formIndex label{
+    color: var(--color1);
+}
+.formIndex .errorForm{
+    color: var(--color2);
+    font-weight: 600;
+}
+.correctForm{
+    color: var(--color1);    
+}
+
+.formIndex button{
+    color: var(--color4);
+    background: transparent;
+    border: 1px solid var(--color4);
+    padding: 5px 15px;
+    margin-top: 20px;
+}
+.formIndex button:hover{
+    color: var(--color2);
+    background: var(--color4);
+    border: 1px solid var(--color4);    
+}
+
 /*login end*/
 
-
+.formsIndex input{    
+    background: transparent;
+}
+.formsIndex .email,
+.formsIndex .password,
+.formsIndex .phone,
+.formsIndex .fname,
+.formsIndex .lname{
+    border-bottom: 2px solid var(--color4);
+    margin: 5px 0px;
+    display: flex;
+    align-items: center;    
+}
+.formsIndex input::placeholder,
+.formsIndex i{
+    color: var(--color4);
+}
 
 
 @media (max-width: 768px) {

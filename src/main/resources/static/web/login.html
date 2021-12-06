@@ -79,21 +79,119 @@
       </div>
     </nav>
 
-    <header class="headerLogin d-flex align-items-center">
-      <div class="glass d-flex justify-content-center">
-        <div class="containerLogin">
-          <h1>Log in</h1>
-          <h3>Italian Food</h3>
+    <main class="mainLogin d-flex align-items-center">
+      <div class="glass d-flex flex-column justify-content-center align-items-center">
+        
+        <!-- <div class="backContainer d-flex">
+          <div class="">
+            <h3>Already have an account</h3>
+            <h4>Log in with your account</h4>
+            <button>Log in</button>
+          </div>
+          <div class="">          
+            <h3>Don't have an account yet?</h3>
+            <h4>Register a new account</h4>
+            <button>Sign up</button>
+          </div>
+        </div> -->
+
+        <div class="formsIndex d-flex">
+
+          <div class="containerLogin">
+            <h1>Log in</h1>
+            <h3>Italian Food</h3>
+            <form class="formIndex">
+                          
+              <!-- EMIAL -->
+              <div class="email">     
+                <i class="bi bi-envelope-fill"></i>             
+                  <input id="mail" type="text" placeholder="Email" v-model.trim="email.input"
+                      v-on:input="validator_emial(email)">
+                  
+              </div>
+              <div v-if="email.correct == false">{{email.msg}}</div>
+              <!-- PASSWORD -->
+              <div class="password">  
+                <i class="bi bi-lock-fill"></i>                
+                  <input id="password" type="password" v-model.trim="password.input" v-on:input="validator_password(password)" placeholder="Password">                 
+                  
+              </div>            
+              <div v-if="password.correct == false">{{password.msg}}</div>
+              <!-- BTN -->
+              <button type="button" @click="send">
+                  Log in
+              </button>
+            </form>
+          </div>
+          <div class="containerSignup">
+            <h1>Sign up</h1>
+            <h3>Italian Food</h3>
+            <form class="formIndex">
+              <!-- FIRSTNAME -->
+              <div class="fname">
+                <i class="bi bi-person-fill"></i>
+                  <input  id="fname" type="text" placeholder="Firstname" v-model.trim="firstname.input"
+                      v-on:input="validator_firstname(firstname)">
+                                 
+              </div>
+              <div  v-if="firstname.correct == false">
+                <small class="errorForm"> {{firstname.msg}} </small>
+             </div>
+              <!-- LASTNAME -->
+              <div class="lname" >
+                <i class="bi bi-person-fill"></i>
+                  <input id="lname" type="text" placeholder="Lastname" v-model="lastname.input"
+                      v-on:input="validator_lastname(lastname)">
+                                 
+              </div>
+              <div v-if="lastname.correct==false">
+                <small class="errorForm"> {{lastname.msg}} </small>
+             </div> 
+              <!-- EMIAL -->
+              <div class="email">   
+                <i class="bi bi-envelope-fill"></i>                
+                  <input  id="mail" type="text" placeholder="Email" v-model.trim="email.input"
+                      v-on:input="validator_emial(email)">
+                                 
+              </div>
+              <div  v-if="email.correct == false">
+                <small class="errorForm">{{email.msg}} </small>
+              </div> 
+              <!-- PASSWORD -->
+              <div  class="password">
+                <i class="bi bi-lock-fill"></i>
+                  <input id="password" type="password" v-model.trim="password.input" v-on:input="validator_password(password)" placeholder="Password">
+                                
+              </div>
+              <div v-if="password.correct == false">
+                <small class="errorForm">
+                {{password.msg}}</small></div>  
+              <!--PHONE -->
+              <div class="phone">
+                <i class="bi bi-telephone-fill"></i>
+                  <input  id="phone" type="text" v-model.trim="phone.input" v-on:input="validator_phone(phone)"
+                      placeholder="Phone">                      
+                                
+              </div>
+              <div v-if="phone.correct == false">
+                <small class="errorForm">{{phone.msg}} </small>
+            </div> 
+              <div><small>Eg. (123) 123 4566</small></div>
+              <!-- BTN -->
+              <button type="button" @click="send">
+                  Sign up
+              </button>
+            </form>
+          </div>
+
+
         </div>
-        <div class="containerSignup">
-          <h1>Sign up</h1>
-          <h3>Italian Food</h3>
-        </div>
+
       </div>
-    </header>
+    </main>
 
     <main>
-
+      
     </main>
 
 
@@ -144,7 +242,7 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://unpkg.com/vue@next"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="./scripts/index.js"></script>
+  <script src="../scripts/index.js"></script>
 
 </body>
 
