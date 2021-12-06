@@ -27,7 +27,7 @@ public class ProductCategory {
     }
 
     public ProductCategory(Product product, Category category) {
-        this.name = category.getName();
+        this.name = product.getName();
         this.product = product;
         this.category = category;
     }
