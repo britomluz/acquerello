@@ -166,7 +166,7 @@ const App = Vue.createApp({
       }
     },
     login(){
-        axios.post("/api/login",`email=${this.email_two.input}&password=${this.password_two.input}`)
+        axios.post("/api/login",`email=${this.email_two.input}&password=${this.password_two.input}`)//aaa
         .then(response=>window.location.href="/web/myaccount.html")
         .catch(err=>console.log(err))
 
