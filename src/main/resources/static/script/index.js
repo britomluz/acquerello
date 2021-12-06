@@ -100,10 +100,10 @@ const App = Vue.createApp({
         data.correct = false;
       } else if (
         data.input.match(
-          /^[+]?(1\-|1\s|1|\d{3}\-|\d{3}\s|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/g
+          /^[+]?(1\|1\s|1|\d{3}\|\d{3}\s|)?((\(\d{3}\))|\d{3})(\|\s)?(\d{3})(\|\s)?(\d{4})$/g
         )
       ) {
-        //does not accept format 0 but (), +, 1-541-754-3010 are accepted just fill in field
+        //does not accept format 0 but + is accepted just fill in field
         data.msg = "phone field is correct";
         data.correct = true;
       } else {
