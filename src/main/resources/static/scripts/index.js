@@ -34,7 +34,7 @@ const App = Vue.createApp({
   created() {},
   methods: {
     validator_firstname(data) {
-      if (!data.input.trim()) {
+      if (!data.input) {
         data.msg = "field is empty";
         data.correct = false;
       } else if (data.input.search(/^[a-zA-Z\s]*$/)) {
@@ -52,7 +52,7 @@ const App = Vue.createApp({
       }
     },
     validator_lastname(data) {
-      if (!data.input.trim()) {
+      if (!data.input) {
         data.msg = "field is empty";
         data.correct = false;
       } else if (data.input.search(/^[a-zA-Z\s]*$/)) {
@@ -70,7 +70,7 @@ const App = Vue.createApp({
       }
     },
     validator_emial(data) {
-      if (!data.input.trim()) {
+      if (!data.input) {
         data.msg = "field is empty";
         data.correct = false;
       } else if (
@@ -86,7 +86,7 @@ const App = Vue.createApp({
       }
     },
     validator_password(data) {
-      if (!data.input.trim()) {
+      if (!data.input) {
         data.msg = "field is empty";
         data.correct = false;
       } else if (data.input.search(/[A-Za-z0-9!?-]{8,20}/)) {
@@ -98,7 +98,7 @@ const App = Vue.createApp({
       }
     },
     validator_phone(data) {
-      if (!data.input.trim()) {
+      if (!data.input) {
         data.msg = "field is empty";
         data.correct = false;
       } else if (

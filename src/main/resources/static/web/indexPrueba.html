@@ -46,7 +46,7 @@
                 <!-- EMIAL -->
                 <div>
                     <label for="mail">email</label>
-                    <input type="text" placeholder="emai@email.com" v-model.trim="email.input"
+                    <input type="text" placeholder="emai@email.com" v-model="email.input"
                         v-on:input="validator_emial(email)">
                     <div v-if="email.correct == false">{{email.msg}}</div>
                     <div v-else>{{email.msg}}</div>
@@ -54,14 +54,14 @@
                 <!-- PASSWORD -->
                 <div>
                     <label for="password">Password</label>
-                    <input type="password" v-model.trim="password.input" v-on:input="validator_password(password)">
+                    <input type="password" v-model="password.input" v-on:input="validator_password(password)">
                     <div v-if="password.correct == false">{{password.msg}}</div>
                     <div v-else>{{password.msg}}</div>
                 </div>
                 <!--PHONE -->
                 <div>
                     <label for="phone">Phone</label>
-                    <input type="text" v-model.trim="phone.input" v-on:input="validator_phone(phone)"
+                    <input type="text" v-model="phone.input" v-on:input="validator_phone(phone)"
                         placeholder="1231234566">
                     <div v-if="phone.correct == false">
                         {{phone.msg}}
