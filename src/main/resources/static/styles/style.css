@@ -1,0 +1,350 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;  
+  text-decoration: none;
+  transition: all .2s linear;
+  color: var(--color5);  
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+:root{
+    --color1: #9dab86;
+    --color2: #b61a1a;
+    --color3: #f2edd7;
+    --color4: #faf4eb;
+    --color5: #4d4d4d;
+    --fontTitle1: 'Great Vibes', cursive;
+    --fontTitle2: 'Montserrat', Verdana, Tahoma, sans-serif;
+}
+
+h1 {
+    font-family: var(--fontTitle1);
+    font-size: 5rem;
+    color: var(--color1);
+    text-align: center;
+}
+h2 {
+    font-family: var(--fontTitle1);
+    font-size: 5rem;
+    color: var(--color1);
+    text-align: center;
+}
+h3 {
+    font-family: var(--fontTitle2);
+    font-size: 1.6rem;
+    letter-spacing: .6rem;
+    text-transform: uppercase;
+    color: var(--color2);
+    text-align: center;    
+}
+/* .navbar{
+    background: transparent!important;
+} */
+.fondoTransp{
+    transition: all 1s ease;
+}
+.fondoBlack{
+    background: black!important;
+}
+
+nav a{
+    color: var(--color4)!important;
+}
+nav a:hover{
+    color: var(--color2)!important;
+}
+.navIcon i{
+    color: var(--color4);    
+}   
+.navIcon{
+    background: transparent;
+    border: none;
+    margin: 0px 5px;
+    font-size: 22px;
+}   
+.navbar-toggler{
+    background: var(--color4);
+    border: none;
+    box-shadow: none!important;
+    display: none;
+}
+#headerIndex{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+#side1{
+    clip-path: polygon(0 0, 0% 100%, 100% 100%);
+}
+#side2{
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+.header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(5,7,12, 0.60), rgba(5,7,12, 0.60)), url("../assets/acquerello.jpeg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    /* background-attachment: fixed; */
+    background-size: cover;
+    width: 100%;
+    min-height: 100vh;    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* clip-path: polygon(0 0, 0% 100%, 100% 100%); */
+}
+.header h1{
+    color: var(--color4);
+    
+}
+.header h3{
+    color: var(--color4);    
+    font-size: 5rem;    
+    text-align: center;
+    letter-spacing: 2rem;
+}
+.header button{
+    background: transparent;
+    border: 1px solid var(--color4);
+    padding: .2rem 1rem;
+}
+.header button span{
+    color: var(--color4);
+    font-family: var(--fontTitle1);
+    font-size: 2.3rem;
+}
+.specialSection{
+    background-image: linear-gradient(rgba(5,7,12, 0.60), rgba(5,7,12, 0.60)), url("../assets/acquerello.jpeg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    /* background-attachment: fixed; */
+    background-size: cover;
+    width: 100%;
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.specialSection h1{
+    color: var(--color1);
+}
+.specialSection h3{
+    color: var(--color4);    
+    line-height: 0;
+}
+
+
+/* scroll header start*/
+
+
+.welcome{    
+    background-image: linear-gradient(rgba(5,7,12, 0.85), rgba(5,7,12, 0.85)), url("../assets/dining-room.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment:  fixed;
+    background-size: cover;
+    width: 100%;
+    min-height: 100vh;
+}
+.welcomeDos{
+    height: 100vh; 
+    width: 100%;
+    margin-top: 100vh;        
+    padding: 50px;
+    background: transparent;
+}
+
+
+/* scroll header ends*/
+
+/*about us*/
+
+.aboutUs{        
+    height: 80vh; 
+    width: 100%;     
+    padding: 150px 50px 50px 50px;    
+}
+
+/* explore the menu*/
+.exploreMenu{    
+    background: var(--color3);
+    height: 60vh;
+    padding: 50px 0px;
+}
+.sectionDark{
+    background-image: linear-gradient(rgba(5,7,12, 0.75), rgba(5,7,12, 0.75)), url("../assets/pastatres.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment:  fixed;
+    background-size: cover;
+    height: 60vh;
+}
+.sectionDark h3{
+    color: var(--color4);
+}
+.sectionDark hr{
+    color: var(--color4);
+    font-weight: bolder;
+}
+
+/*footer*/
+footer{
+    background: black;
+    
+}
+.navlinks .nav-link{
+    color: var(--color4);
+}
+.navlinks .nav-link:hover{
+    color: var(--color1);
+}
+.iconFooter i{
+    color: var(--color4);
+}
+.iconFooter i:hover{
+    color: var(--color1);
+}
+
+/*order start*/
+.headerPages{
+    background-image: linear-gradient(rgba(5,7,12, 0.60), rgba(5,7,12, 0.60)), url("../assets/acquerello.jpeg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    /* background-attachment: fixed; */
+    background-size: cover;
+    width: 100%;
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.headerPages h1{
+    font-size: 5rem;    
+    color: var(--color4);
+}
+.headerPages h3{
+    font-size: 1.4rem;
+    letter-spacing: 1rem;
+    color: var(--color4);
+}
+
+.menuSection h3{ 
+    line-height: 0;
+    height: 50vh;    
+}
+.menuSection{
+    padding-top: 50px;
+}
+
+
+/* header panels*/
+.headerPagesPanel{
+    background-image: linear-gradient(rgba(5,7,12, 0.60), rgba(5,7,12, 0.60)), url("../assets/acquerello.jpeg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    /* background-attachment: fixed; */
+    background-size: cover;
+    width: 100%;
+    min-height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.headerPagesPanel h1{
+    font-size: 4rem;
+    margin-top: 3rem;
+    color: var(--color4);
+}
+.headerPagesPanel h3{
+    font-size: 1rem;
+    letter-spacing: .6rem;  
+    color: var(--color4);
+}
+
+
+/*login start*/
+.headerLogin{
+    background-image: linear-gradient(rgba(5,7,12, 0.60), rgba(5,7,12, 0.60)), url("../assets/acquerello.jpeg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    /* background-attachment: fixed; */
+    background-size: cover;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/*login end*/
+
+
+
+
+@media (max-width: 768px) {
+    h1 {
+        font-family: var(--fontTitle1);
+        font-size: 3.5rem;
+        color: var(--color1);
+        text-align: center;
+    }
+    h2 {
+        font-family: var(--fontTitle1);
+        font-size: 3.5rem;
+        color: var(--color1);
+        text-align: center;
+    }    
+    h3 {
+        font-family: var(--fontTitle2);
+        font-size: 1.3rem;
+        letter-spacing: .6rem;
+        text-transform: uppercase;
+        color: var(--color2);
+        text-align: center;    
+    }
+    .header h1{
+        color: var(--color4);
+        
+    }
+    .header h3{
+        color: var(--color4);    
+        font-size: 3rem;    
+        text-align: center;
+        letter-spacing: 1rem;
+    }
+    .navlinks{
+        display: none!important;
+    }
+    
+    .navbar-toggler{     
+        display: inline;
+    }
+    .aboutUs img{
+        width: 300px;
+    }
+}
+
+@media (max-width: 325px){
+    .containernav{        
+        justify-content: center!important;
+    }
+    .headerButtons{
+        display: flex;
+        flex-direction: column;
+        justify-content: center!important;        
+    }
+}

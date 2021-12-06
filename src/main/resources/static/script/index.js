@@ -26,6 +26,9 @@ const App = Vue.createApp({
         msg: "",
         correct: false,
       },
+
+      //
+      
     };
   },
   created() {},

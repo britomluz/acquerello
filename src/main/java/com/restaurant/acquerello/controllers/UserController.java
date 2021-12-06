@@ -22,4 +22,7 @@ public class UserController {
     public List<UserDTO> getAll() {
         return userRepository.findAll().stream().map(UserDTO::new).collect(Collectors.toList());
     }
+
+
+
 }
