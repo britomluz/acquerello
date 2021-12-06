@@ -21,6 +21,16 @@ const App = Vue.createApp({
         msg: "",
         correct: false,
       },
+      password_two:{
+        input: "",
+        msg: "",
+        correct: false,
+      },
+      email_two:{
+        input: "",
+        msg: "",
+        correct: false,
+      },
       phone: {
         input: "",
         msg: "",
@@ -85,7 +95,35 @@ const App = Vue.createApp({
         data.correct = true;
       }
     },
+    validator_emial_2(data) {
+      if (!data.input) {
+        data.msg = "field is empty";
+        data.correct = false;
+      } else if (
+        data.input.search(
+          /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
+        )
+      ) {
+        data.msg = "mail field is not formatted";
+        data.correct = false;
+      } else {
+        data.msg = "mail field is correct";
+        data.correct = true;
+      }
+    },
     validator_password(data) {
+      if (!data.input) {
+        data.msg = "field is empty";
+        data.correct = false;
+      } else if (data.input.search(/[A-Za-z0-9!?-]{8,20}/)) {
+        data.msg = "password must have between 8 and 20 characters";
+        data.correct = false;
+      } else {
+        data.msg = "password field is correct";
+        data.correct = true;
+      }
+    },
+    validator_password_2(data) {
       if (!data.input) {
         data.msg = "field is empty";
         data.correct = false;
@@ -127,6 +165,12 @@ const App = Vue.createApp({
       
       }
     },
+    login(){
+        axios.post("/api/login",`email=${this.email_two.input}&password=${this.password_two.input}`)
+        .then(response=>window.location.href="/web/myaccount.html")
+        .catch(err=>console.log(err))
+
+    }
   },
 });
 

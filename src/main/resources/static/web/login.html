@@ -105,20 +105,20 @@
               <!-- EMIAL -->
               <div class="email">     
                 <i class="bi bi-envelope-fill"></i>             
-                  <input id="mail" type="text" placeholder="Email" v-model.trim="email.input"
-                      v-on:input="validator_emial(email)">
-                  
+                  <input id="mailLogin" type="text" placeholder="Email" v-model="email_two.input"
+                      v-on:input="validator_emial_2(email_two)">
               </div>
-              <div v-if="email.correct == false">{{email.msg}}</div>
+              <div v-if="email_two.correct == false">{{email_two.msg}}</div>
               <!-- PASSWORD -->
               <div class="password">  
                 <i class="bi bi-lock-fill"></i>                
-                  <input id="password" type="password" v-model.trim="password.input" v-on:input="validator_password(password)" placeholder="Password">                 
+                  <input id="passwordLogin" type="password" v-model="password_two.input"
+                   v-on:input="validator_password_2(password_two)" placeholder="Password">                 
                   
               </div>            
-              <div v-if="password.correct == false">{{password.msg}}</div>
+              <div v-if="password_two.correct == false">{{password_two.msg}}</div>
               <!-- BTN -->
-              <button type="button" @click="send">
+              <button type="button" @click="login()">
                   Log in
               </button>
             </form>
@@ -130,7 +130,7 @@
               <!-- FIRSTNAME -->
               <div class="fname">
                 <i class="bi bi-person-fill"></i>
-                  <input  id="fname" type="text" placeholder="Firstname" v-model.trim="firstname.input"
+                  <input  id="fname" type="text" placeholder="Firstname" v-model="firstname.input"
                       v-on:input="validator_firstname(firstname)">
                                  
               </div>
@@ -150,7 +150,7 @@
               <!-- EMIAL -->
               <div class="email">   
                 <i class="bi bi-envelope-fill"></i>                
-                  <input  id="mail" type="text" placeholder="Email" v-model.trim="email.input"
+                  <input  id="mailRegister" type="text" placeholder="Email" v-model="email.input"
                       v-on:input="validator_emial(email)">
                                  
               </div>
@@ -160,7 +160,7 @@
               <!-- PASSWORD -->
               <div  class="password">
                 <i class="bi bi-lock-fill"></i>
-                  <input id="password" type="password" v-model.trim="password.input" v-on:input="validator_password(password)" placeholder="Password">
+                  <input id="passwordRegister" type="password" v-model="password.input" v-on:input="validator_password(password)" placeholder="Password">
                                 
               </div>
               <div v-if="password.correct == false">
@@ -169,14 +169,14 @@
               <!--PHONE -->
               <div class="phone">
                 <i class="bi bi-telephone-fill"></i>
-                  <input  id="phone" type="text" v-model.trim="phone.input" v-on:input="validator_phone(phone)"
+                  <input  id="phone" type="text" v-model="phone.input" v-on:input="validator_phone(phone)"
                       placeholder="Phone">                      
                                 
               </div>
               <div v-if="phone.correct == false">
                 <small class="errorForm">{{phone.msg}} </small>
             </div> 
-              <div><small>Eg. (123) 123 4566</small></div>
+              <div><small>Eg. 1231234566</small></div>
               <!-- BTN -->
               <button type="button" @click="send">
                   Sign up
@@ -193,35 +193,6 @@
     <main>
       
     </main>
-
-
-    <!-- 
-                <div class="prueba">
-                    <h1>
-                        formulario
-                    </h1>
-                    <form>
-                        <div :class="['form-group',(nombre.clase).trim() ? 'has-'+nombre.clase:'']">
-                            <label for="corre" :class="[(nombre.clase).trim() ? 'text-'nombre.clase]">nombre</label>
-                            <input type="text" :class="['form-control',(nombre.clase).trim()?'border border-'+nombre.clase:'']"
-                            placeholder="introduzca su nombre"
-                            v-model="nombre.input"
-                            v-on:keyup="validador_nombre(nombre)">
-                            <div :class="['invalid-feedback',(nombre.clase).trim() ? 'text-' +nombre.clase :'']"
-                            v-text="nombre.mensaje"></div>
-                        </div>
-                        <div :class="['form-group',(correo.class).trim()?'has-'+correo.clase:'']">
-                            <label for="corre" :class="[(correo.clase).trim()?'text-'+correo.clase:'']">email</label>
-                            <input type="text" :class="['form-control',(correo.clase).trim()?'border border-'+correo.clase:'']"
-                            placeholder="emai@email.com"
-                            v-model="correo.input"
-                            v-on:keyup="validador_correo(correo)">
-                            <div :class="['invalid-feedback',(correo.clase).trim()?'text-'+correo.clase:'']"
-                            v-text="correo.mensaje"></div>
-                        </div>
-                    </form>
-                </div> -->
-
   </div>
 
 
