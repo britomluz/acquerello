@@ -62,7 +62,7 @@
                 <div>
                     <label for="phone">Phone</label>
                     <input type="text" v-model.trim="phone.input" v-on:input="validator_phone(phone)"
-                        placeholder="(123) 123 4566">
+                        placeholder="1231234566">
                     <div v-if="phone.correct == false">
                         {{phone.msg}}
                     </div>
@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <!-- BTN -->
-                <button type="button" @click="send">
+                <button @click="send">
                     send
                 </button>
             </form>
@@ -83,7 +83,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="../script/index.js"></script>
+    <script src="../scripts/index.js"></script>
 
 </body>
 

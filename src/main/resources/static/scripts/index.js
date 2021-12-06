@@ -114,7 +114,8 @@ const App = Vue.createApp({
         data.correct = false;
       }
     },
-    send() {
+    send(e) {
+      e.preventDefault()
       if (
         this.firstname.correct == true &&
         this.lastname.correct == true &&
