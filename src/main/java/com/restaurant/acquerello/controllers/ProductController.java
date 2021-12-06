@@ -112,7 +112,7 @@ public class ProductController {
         Product product = productService.getById(id).orElse(null);
 
         if (!user.getType().equals(UserType.ADMIN)){
-            return new ResponseEntity<>("Don't have authority",HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Don't have authority",HttpStatus.UNAUTHORIZED);
         }
         if (product == null){
             return new ResponseEntity<>("Product doesn't exist",HttpStatus.FORBIDDEN);
