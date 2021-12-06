@@ -2,7 +2,7 @@ package com.restaurant.acquerello.configurations;
 
 import com.restaurant.acquerello.models.User;
 import com.restaurant.acquerello.models.UserType;
-import com.restaurant.acquerello.services.UserServices;
+import com.restaurant.acquerello.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
     @Autowired
-    UserServices userServices;
+    UserService userServices;
 
     @Bean
     public PasswordEncoder passwordEncoder() {

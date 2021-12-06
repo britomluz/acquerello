@@ -2,7 +2,7 @@ package com.restaurant.acquerello.services.impl;
 
 import com.restaurant.acquerello.models.ProductCategory;
 import com.restaurant.acquerello.repositories.ProductCategoryRepository;
-import com.restaurant.acquerello.services.ProductCategoryServices;
+import com.restaurant.acquerello.services.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.Set;
 //CREATED BY GABRIEL
 
 @Service
-public class ProductCategoryImpl implements ProductCategoryServices {
+public class ProductCategoryImpl implements ProductCategoryService {
 
     @Autowired
     private ProductCategoryRepository productCategoryRepository;

@@ -4,9 +4,9 @@ import com.restaurant.acquerello.dtos.CreateProductDTO;
 import com.restaurant.acquerello.dtos.ProductDTO;
 import com.restaurant.acquerello.models.*;
 import com.restaurant.acquerello.services.CategoryService;
-import com.restaurant.acquerello.services.ProductCategoryServices;
+import com.restaurant.acquerello.services.ProductCategoryService;
 import com.restaurant.acquerello.services.ProductService;
-import com.restaurant.acquerello.services.UserServices;
+import com.restaurant.acquerello.services.UserService;
 import com.restaurant.acquerello.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,13 +26,13 @@ public class ProductController {
     private ProductService productService;
 
     @Autowired
-    private UserServices userServices;
+    private UserService userServices;
 
     @Autowired
     private CategoryService categoryService;
 
     @Autowired
-    private ProductCategoryServices productCategoryServices;
+    private ProductCategoryService productCategoryServices;
 
     @GetMapping("/products")
     public ResponseEntity<?> getAllProducts(){

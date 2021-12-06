@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-public interface ProductCategoryServices {
+public interface ProductCategoryService {
     public ProductCategory save(ProductCategory productCategory);
     public List<ProductCategory> getAll();
     public void deleteProductCategory(Long id);

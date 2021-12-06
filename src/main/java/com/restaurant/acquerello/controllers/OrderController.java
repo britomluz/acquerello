@@ -10,8 +10,7 @@ import com.restaurant.acquerello.models.User;
 import com.restaurant.acquerello.repositories.OrderDetailsRepository;
 import com.restaurant.acquerello.repositories.OrderRepository;
 import com.restaurant.acquerello.repositories.UserRepository;
-import com.restaurant.acquerello.services.UserServices;
-import org.aspectj.weaver.ast.Or;
+import com.restaurant.acquerello.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +28,7 @@ public class OrderController {
     private UserRepository userRepository;
 
     @Autowired
-    private UserServices userServices;
+    private UserService userServices;
 
     @Autowired
     private OrderRepository orderRepository;

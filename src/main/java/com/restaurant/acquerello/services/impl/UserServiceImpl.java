@@ -3,14 +3,14 @@ package com.restaurant.acquerello.services.impl;
 
 import com.restaurant.acquerello.models.User;
 import com.restaurant.acquerello.repositories.UserRepository;
-import com.restaurant.acquerello.services.UserServices;
+import com.restaurant.acquerello.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 //CREATED BY BRIAN
 
 @Service
-public class UserServicesImpl implements UserServices {
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
