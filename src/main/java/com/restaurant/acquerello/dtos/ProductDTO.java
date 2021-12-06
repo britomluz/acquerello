@@ -15,7 +15,7 @@ public class ProductDTO {
     private String productImage;
     private Double price;
     private Integer stock;
-    private Set<ProductCategoryDTO> categories = new LinkedHashSet<>();
+
 
     public ProductDTO(Product product) {
         this.id = product.getId();
@@ -24,7 +24,6 @@ public class ProductDTO {
         this.productImage = product.getProductImage();
         this.price = product.getPrice();
         this.stock = product.getStock();
-        this.categories = product.getProductCategories().stream().map(ProductCategoryDTO::new).collect(Collectors.toSet());
     }
 
     public Long getId() {
@@ -75,11 +74,4 @@ public class ProductDTO {
         this.stock = stock;
     }
 
-    public Set<ProductCategoryDTO> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Set<ProductCategoryDTO> categories) {
-        this.categories = categories;
-    }
 }

@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 //CREATED BY GABRIEL
 
@@ -87,5 +88,9 @@ public class Product {
 
     public void setProductCategories(Set<ProductCategory> productCategories) {
         this.productCategories = productCategories;
+    }
+
+    public List<Category> getCategory(){
+        return productCategories.stream().map(ProductCategory::getCategory).collect(Collectors.toList());
     }
 }
