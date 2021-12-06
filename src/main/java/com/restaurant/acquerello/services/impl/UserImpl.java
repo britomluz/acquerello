@@ -1,6 +1,5 @@
 package com.restaurant.acquerello.services.impl;
 
-
 import com.restaurant.acquerello.models.User;
 import com.restaurant.acquerello.repositories.UserRepository;
 import com.restaurant.acquerello.services.UserService;
@@ -9,16 +8,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-//CREATED BY BRIAN
-
 @Service
-public class UserServiceImpl implements UserService {
+public class UserImpl implements UserService {
+
     @Autowired
-    private UserRepository userRepository;
+    public UserRepository userRepository;
 
     @Override
-    public User save(User user) {
-      return userRepository.save(user);
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 
     @Override
@@ -27,9 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public void save(User user) {
+        userRepository.save(user);
     }
-
-
 }

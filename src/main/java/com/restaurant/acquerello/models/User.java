@@ -28,6 +28,9 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Order> orders = new ArrayList<>();
 
+    @OneToMany(mappedBy = "userAdd")
+    private List<Address> address = new ArrayList<>();
+
 
     public User() {}
 
@@ -113,6 +116,20 @@ public class User {
         order.setUser(this);
         orders.add(order);
     }
+
+    public List<Address> getAddress() {
+        return address;
+    }
+
+    public void setAddress(List<Address> address) {
+        this.address = address;
+    }
+
+    public void addAddress(Address add) {
+        add.setUser(this);
+        address.add(add);
+    }
+
 
     @Override
     public String toString() {

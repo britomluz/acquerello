@@ -29,8 +29,13 @@ public class AcquerelloApplication {
 	@Bean
 	public CommandLineRunner initData(UserRepository userRepository, OrderRepository orderRepository, OrderDetailsRepository orderDetailsRepository, ProductRepository productRepository,
 									  CategoryRepository categoryRepository,
-									  ProductCategoryRepository productCategoryRepository) {
+									  ProductCategoryRepository productCategoryRepository, AddressRepository addressRepository) {
 		return (args) -> {
+
+			Address address1 = new Address("Bids Hills", 332, "HI-3232", "California", "A white house");
+			Address address2 = new Address("Bids Hills", 113, "HI-3110", "California", "A house gray");
+
+
 			// Brian: Create User and Order
 			User user1 = new User("Luigi", "number one", "admin@admin.com", passwordEncoder.encode("SafePassword1234"), 5554343L, UserType.ADMIN, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
 			User user2 = new User("Brian", "Cuenca", "correo@user.com", passwordEncoder.encode("muzarelle123"), 5551232L, UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
@@ -48,6 +53,9 @@ public class AcquerelloApplication {
 			orderDetails1.addOrders(order1);
 			orderDetails2.addOrders(order2);
 
+			user1.addAddress(address1);
+			user2.addAddress(address2);
+
 			// Brian: Adding orders to Users
 			user1.addOrder(order1);
 			user2.addOrder(order2);
@@ -60,6 +68,9 @@ public class AcquerelloApplication {
 
 			orderRepository.save(order1);
 			orderRepository.save(order2);
+
+			addressRepository.save(address1);
+			addressRepository.save(address2);
 
 			//GABRIEL: CREATE PRODUCTS TO TEST DE APP
 			Product product1 = new Product("Bruschetta", "Tomato Reduction base, Mozzarella, Torn Basil, Olive Oil", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/bruschetta_bbzjzr.jpg", 17D, 25);

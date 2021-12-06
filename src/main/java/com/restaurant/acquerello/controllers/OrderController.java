@@ -23,9 +23,6 @@ import java.util.stream.Collectors;
 public class OrderController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private UserService userServices;
 
     @Autowired

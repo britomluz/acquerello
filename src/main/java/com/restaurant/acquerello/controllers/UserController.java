@@ -6,13 +6,10 @@ import com.restaurant.acquerello.dtos.CreateUserDTO;
 import com.restaurant.acquerello.dtos.UserDTO;
 import com.restaurant.acquerello.models.User;
 import com.restaurant.acquerello.models.UserType;
-import com.restaurant.acquerello.repositories.UserRepository;
 import com.restaurant.acquerello.services.UserService;
-import com.restaurant.acquerello.services.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
