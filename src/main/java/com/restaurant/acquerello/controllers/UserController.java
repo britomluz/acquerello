@@ -10,6 +10,7 @@ import com.restaurant.acquerello.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/users")
     public List<UserDTO> getAll() {
@@ -36,7 +39,7 @@ public class UserController {
         if (userService.getByEmail(user.getEmail()) != null){
             return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
         }
-        User user1 = new User(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.getNumber(), UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
+        User user1 = new User(user.getFirstName(), user.getLastName(), user.getEmail(), passwordEncoder.encode(user.getPassword()), user.getNumber(), UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
         userService.save(user1);
         return new ResponseEntity<>("User created", HttpStatus.CREATED);
     }
