@@ -38,7 +38,9 @@ public class AddressController {
         }
 
         Address address = new Address(addressCreateDTO.getStreet(), addressCreateDTO.getNumber(), addressCreateDTO.getZip(), addressCreateDTO.getState(), addressCreateDTO.getReference());
-        System.out.println(address);
+        user.addAddress(address);
+
+        addressService.save(address);
 
         return new ResponseEntity<>("Address created", HttpStatus.CREATED);
     }
