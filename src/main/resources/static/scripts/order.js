@@ -134,7 +134,7 @@ const app = Vue.createApp({
 
       for (let i = 0; i < this.products.length; i++){
           if(this.products[i].id == id){            
-            // si no esta en el carrito lo agrega
+            // si no esta en el carrito lo agrega            
               if(!this.cart.includes(this.products[i])){
 
                   let obj={
@@ -144,7 +144,7 @@ const app = Vue.createApp({
                   this.cart.push(this.products[i])
 
               } else {
-                  // de lo contraria le suma +1 a la cantidad del producto                  
+                  // de lo contraria le suma +1 a la cantidad del producto 
                 this.products[i].quantity++
 
                console.log(this.products)
@@ -153,7 +153,6 @@ const app = Vue.createApp({
               this.totalQantity = this.totalQantity + 1
               
               }      
-              
       }
       
       console.log(this.cart)  

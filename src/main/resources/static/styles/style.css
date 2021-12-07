@@ -431,12 +431,7 @@ footer{
 
 
 /* ORDER PAGE*/
-.imgProduct {    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.imgProduct img{
+#img-product{
     object-fit: cover;
 }
 .cardProductOne{
