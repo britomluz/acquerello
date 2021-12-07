@@ -152,8 +152,7 @@ const App = Vue.createApp({
         data.correct = false;
       }
     },
-    send(e) {
-      e.preventDefault()
+    send() {
       if (
         this.firstname.correct == true &&
         this.lastname.correct == true &&
@@ -162,18 +161,20 @@ const App = Vue.createApp({
         this.phone.correct == true
       ) {
       axios.post("/api/users",{
-        firstname:this.firstname,
-        lastname:this.lastname,
-        email:this.email,
-        password:this.password,
-        number:this.phone,
+        firstName:this.firstname.input,
+        lastName:this.lastname.input,
+        email:this.email.input,
+        password:this.password.input,
+        number:this.phone.input,
       })
-      .then(response=>window.location.href="/web/myacount.html")
-      .catch(err=>console.log(err.response.data))
+      .then(response=>window.location.href="/web/myaccount.html")
+      .catch(err=>{
+        console.log(err.response.data)
+        console.log(this.firstname.input,this.lastname.input,this.email.input,this.password.input,this.phone.input,)
+      })
       }
     },
     login(){
-      
         axios.post("/api/login",`email=${this.email_two.input}&password=${this.password_two.input}`)
         .then(response=>window.location.href="/web/myaccount.html")
         .catch(err=>{console.log(err.response.data)
