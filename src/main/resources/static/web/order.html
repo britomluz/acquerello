@@ -86,19 +86,19 @@
         <div class="menuSection specials">
           <h1>Acquerello</h1>
           <h3>Specials</h3>
-          <div class="d-flex justify-content-center">
+          <div class="d-flex justify-content-center" v-for="special in specials">
             <div class="cardBorder d-flex justify-content-center align-items-center" style="width: 20rem;">
               <div class="card" style="width: 18rem;">
                 <div class="priceSpecials">
-                  <h5>$125</h5>
+                  <h5>${{special.price}}</h5>
                   <div class="cardFooter specialFooter">
                     <a href="#"><i class="bi bi-eye-fill"></i></a> 
                     <a href="#"><i class="bi bi-cart-fill px-2"></i></a>
                   </div>
                 </div>
-                <img src="https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/blue_cheese_oppto7.jpg" class="card-img-top" alt="...">
+                <img :src="special.productImage" class="card-img-top" alt="...">
                 <div class="card-body d-flex justify-content-center align-items-center">
-                  <h5 id="textChefPick" class="card-text">Lasagna</h5>
+                  <h5 id="textChefPick" class="card-text">{{special.name}}</h5>
                 <!-- <div class="cardFooter">
                   <a href="#"><i class="bi bi-eye"></i></a> 
                   <a href="#"><i class="bi bi-cart px-2"></i></a>
@@ -113,11 +113,11 @@
         <div class="specialSection">
           <h1 class="pt-5">Chef's Pick</h1>
           <h3>of the day</h3>
-          <div>
+          <div v-for="chefPick in chefPicks">
             <div class="card" style="width: 18rem;">
-              <img src="https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/lasagna_alla_gino_kpjovx.jpg" class="card-img-top" alt="...">
+              <img :src="chefPick.productImage" class="card-img-top" alt="...">
               <div class="card-body d-flex justify-content-between align-items-center">
-                <h5 id="textChefPick" class="card-text">Lasagna</h5>
+                <h5 id="textChefPick" class="card-text">{{chefPick.name}}</h5>
                 <div class="cardFooter">
                   <a href="#"><i class="bi bi-eye"></i></a> 
                   <a href="#"><i class="bi bi-cart px-2"></i></a>
@@ -132,22 +132,22 @@
         <div class="menuSection d-flex align-items-center flex-column justify-content-center" >
           <h1>Main Course</h1>
           <h3>Dishes</h3>
-          <div class="d-flex flex-wrap justify-content-around">
-            <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;">
+          <div class="d-flex flex-wrap justify-content-around" >
+            <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;" v-for="mainCourse in mainCourses">
               <div class="row g-0">
                 <div class="col-md-4">
                   <div class="imgProduct">
-                    <img src="../assets/pasta.png" class="img-fluid rounded-start" alt="...">
+                    <img :src="mainCourse.productImage" class="img-fluid rounded-start" alt="...">
                   </div>                  
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
                     <div class="cardHeader d-flex justify-content-between">
-                      <h5 class="card-title">name</h5>
-                      <h5><span>$28</span></h5>
+                      <h5 class="card-title">{{mainCourse.name}}</h5>
+                      <h5><span>${{mainCourse.price}}</span></h5>
                     </div>
                     <hr>
-                    <p class="card-text"></p>
+                    <p class="card-text">{{mainCourse.description}}</p>
                     <div class="cardFooter">
                       <a href="#"><i class="bi bi-eye"></i></a> 
                       <a href="#"><i class="bi bi-cart px-2"></i></a>
@@ -156,21 +156,27 @@
                 </div>
               </div>
             </div>
-            <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;">
+          </div>
+        </div>
+        <div class="menuSection d-flex align-items-center flex-column justify-content-center" >
+          <h1>Pasta</h1>
+          <h3>Dishes</h3>
+          <div class="d-flex flex-wrap justify-content-around" >
+            <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;" v-for="pasta in pastas">
               <div class="row g-0">
                 <div class="col-md-4">
                   <div class="imgProduct">
-                    <img src="../assets/pasta.png" class="img-fluid rounded-start" alt="...">
+                    <img :src="pasta.productImage" class="img-fluid rounded-start" alt="...">
                   </div>                  
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
                     <div class="cardHeader d-flex justify-content-between">
-                      <h5 class="card-title">Capresse</h5>
-                      <h5><span>$28</span></h5>
+                      <h5 class="card-title">{{pasta.name}}</h5>
+                      <h5><span>${{pasta.price}}</span></h5>
                     </div>
                     <hr>
-                    <p class="card-text">Escarole, Cannellini Beans, Meatballs, Parmigiano</p>
+                    <p class="card-text">{{pasta.description}}</p>
                     <div class="cardFooter">
                       <a href="#"><i class="bi bi-eye"></i></a> 
                       <a href="#"><i class="bi bi-cart px-2"></i></a>
@@ -185,21 +191,21 @@
           <h1>Soup & Salads</h1>
           <h3>Side dishes</h3>
           <div class="d-flex justify-content-around">
-            <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;">
+            <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;" v-for="soup in soups">
               <div class="row g-0">
                 <div class="col-md-4">
                   <div class="imgProduct">
-                    <img src="../assets/pasta.png" class="img-fluid rounded-start" alt="...">
+                    <img :src="soup.productImage" class="img-fluid rounded-start" alt="...">
                   </div>                  
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
                     <div class="cardHeader d-flex justify-content-between">
-                      <h5 class="card-title">Capresse</h5>
-                      <h5><span>$28</span></h5>
+                      <h5 class="card-title">{{soup.name}}</h5>
+                      <h5><span>${{soup.price}}</span></h5>
                     </div>
                     <hr>
-                    <p class="card-text">Escarole, Cannellini Beans, Meatballs, Parmigiano</p>
+                    <p class="card-text">{{soup.description}}</p>
                     <div class="cardFooter">
                       <a href="#"><i class="bi bi-eye"></i></a> 
                       <a href="#"><i class="bi bi-cart px-2"></i></a>
@@ -208,21 +214,21 @@
                 </div>
               </div>
             </div>
-            <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;">
+            <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;" v-for="salad in salads">
               <div class="row g-0">
                 <div class="col-md-4">
                   <div class="imgProduct">
-                    <img src="../assets/pasta.png" class="img-fluid rounded-start" alt="...">
+                    <img :src="salad.productImage" class="img-fluid rounded-start" alt="...">
                   </div>                  
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
                     <div class="cardHeader d-flex justify-content-between">
-                      <h5 class="card-title">Capresse</h5>
-                      <h5><span>$28</span></h5>
+                      <h5 class="card-title">{{salad.name}}</h5>
+                      <h5><span>${{salad.price}}</span></h5>
                     </div>
                     <hr>
-                    <p class="card-text">Escarole, Cannellini Beans, Meatballs, Parmigiano</p>
+                    <p class="card-text">{{salad.description}}</p>
                     <div class="cardFooter">
                       <a href="#"><i class="bi bi-eye"></i></a> 
                       <a href="#"><i class="bi bi-cart px-2"></i></a>
@@ -237,44 +243,21 @@
           <h1>Vegetarian</h1>
           <h3>food love</h3>
           <div class="d-flex justify-content-around">
-            <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;">
+            <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;" v-for="vegetarian in vegetarians">
               <div class="row g-0">
                 <div class="col-md-4">
                   <div class="imgProduct">
-                    <img src="../assets/pasta.png" class="img-fluid rounded-start" alt="...">
+                    <img :src="vegetarian.productImage" class="img-fluid rounded-start" alt="...">
                   </div>                  
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
                     <div class="cardHeader d-flex justify-content-between">
-                      <h5 class="card-title">Capresse</h5>
-                      <h5><span>$28</span></h5>
+                      <h5 class="card-title">{{vegetarian.name}}</h5>
+                      <h5><span>${{vegetarian.price}}</span></h5>
                     </div>
                     <hr>
-                    <p class="card-text">Escarole, Cannellini Beans, Meatballs, Parmigiano</p>
-                    <div class="cardFooter">
-                      <a href="#"><i class="bi bi-eye"></i></a> 
-                      <a href="#"><i class="bi bi-cart px-2"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <div class="imgProduct">
-                    <img src="../assets/pasta.png" class="img-fluid rounded-start" alt="...">
-                  </div>                  
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <div class="cardHeader d-flex justify-content-between">
-                      <h5 class="card-title">Capresse</h5>
-                      <h5><span>$28</span></h5>
-                    </div>
-                    <hr>
-                    <p class="card-text">Escarole, Cannellini Beans, Meatballs, Parmigiano</p>
+                    <p class="card-text">{{vegetarian.description}}</p>
                     <div class="cardFooter">
                       <a href="#"><i class="bi bi-eye"></i></a> 
                       <a href="#"><i class="bi bi-cart px-2"></i></a>
@@ -289,44 +272,21 @@
           <h1>Drinks</h1>
           <h3>fresh</h3>
           <div class="d-flex justify-content-around">
-            <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;">
+            <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;" v-for="drink in drinks">
               <div class="row g-0">
                 <div class="col-md-4">
                   <div class="imgProduct">
-                    <img src="../assets/pasta.png" class="img-fluid rounded-start" alt="...">
+                    <img :src="drink.productImage" class="img-fluid rounded-start" alt="...">
                   </div>                  
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
                     <div class="cardHeader d-flex justify-content-between">
-                      <h5 class="card-title">Capresse</h5>
-                      <h5><span>$28</span></h5>
+                      <h5 class="card-title">{{drink.name}}</h5>
+                      <h5><span>${{drink.price}}</span></h5>
                     </div>
                     <hr>
-                    <p class="card-text">Escarole, Cannellini Beans, Meatballs, Parmigiano</p>
-                    <div class="cardFooter">
-                      <a href="#"><i class="bi bi-eye"></i></a> 
-                      <a href="#"><i class="bi bi-cart px-2"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <div class="imgProduct">
-                    <img src="../assets/pasta.png" class="img-fluid rounded-start" alt="...">
-                  </div>                  
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <div class="cardHeader d-flex justify-content-between">
-                      <h5 class="card-title">Capresse</h5>
-                      <h5><span>$28</span></h5>
-                    </div>
-                    <hr>
-                    <p class="card-text">Escarole, Cannellini Beans, Meatballs, Parmigiano</p>
+                    <p class="card-text">{{drink.description}}</p>
                     <div class="cardFooter">
                       <a href="#"><i class="bi bi-eye"></i></a> 
                       <a href="#"><i class="bi bi-cart px-2"></i></a>
@@ -338,7 +298,6 @@
           </div>
         </div>
       </section>
-
     </main>
   </div>
 

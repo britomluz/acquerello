@@ -44,16 +44,15 @@ const app = Vue.createApp({
       axios.get('/api/categories')
       .then(response => {         
         this.categories = response.data.categories
-        this.entriesSnacks = [...this.categories.filter(categorie => categorie.name === "Entries & Snacks")]
-        this.specials = [...this.categories.filter(categorie => categorie.name === "Specials")]
-        this.chefPicks = [...this.categories.filter(categorie => categorie.name === "Chef Picks")]
-        this.mainCourses = [...this.categories.filter(categorie => categorie.name === "Main Course")]
-        let prueba = this.mainCourses.filter(product => product.products)
-        this.soups = [...this.categories.filter(categorie => categorie.name === "Soup")]
-        this.drinks = [...this.categories.filter(categorie => categorie.name === "Drinks")]
-        this.pastas = [...this.categories.filter(categorie => categorie.name === "Pasta")]
-        this.vegetarians = [...this.categories.filter(categorie => categorie.name === "Vegetarian")]
-        this.salads = [...this.categories.filter(categorie => categorie.name === "Salads")]
+        this.entriesSnacks = [...this.categories.filter(categorie => categorie.name === "Entries & Snacks")[0].products]
+        this.specials = [...this.categories.filter(categorie => categorie.name === "Specials")[0].products]
+        this.chefPicks = [...this.categories.filter(categorie => categorie.name === "Chef Picks")[0].products]
+        this.mainCourses = [...this.categories.filter(categorie => categorie.name === "Main Course")[0].products]
+        this.soups = [...this.categories.filter(categorie => categorie.name === "Soup")[0].products]
+        this.drinks = [...this.categories.filter(categorie => categorie.name === "Drinks")[0].products]
+        this.pastas = [...this.categories.filter(categorie => categorie.name === "Pasta")[0].products]
+        this.vegetarians = [...this.categories.filter(categorie => categorie.name === "Vegetarian")[0].products]
+        this.salads = [...this.categories.filter(categorie => categorie.name === "Salads")[0].products]
         console.log(this.categories)      
       })
      .catch(err => console.log(err.response.data))
