@@ -122,7 +122,7 @@
 
           <div class="containerSignup signup-form">
             <h1 class="fs-2">Sign up</h1>            
-            <form class="formIndex">
+            <form class="formIndex" @submit.prevent="send()">
               <!-- FIRSTNAME -->
               <div class="fname">
                 <i class="bi bi-person-fill"></i>
@@ -174,7 +174,7 @@
             </div> 
               <div><small>Eg. 1231234566</small></div>
               <!-- BTN -->
-              <button class="w-100" type="submit" @click="send">
+              <button class="w-100" type="submit">
                   Sign up
               </button>
             </form>

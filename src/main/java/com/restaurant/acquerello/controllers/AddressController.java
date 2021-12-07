@@ -61,17 +61,39 @@ public class AddressController {
             address.get(0).setStreet(addressCreateDTO.getStreet());
         }
 
-        if(addressCreateDTO.getStreet() != null) {
-            address.get(0).setStreet(addressCreateDTO.getStreet());
+        if(addressCreateDTO.getNumber() != null) {
+            address.get(0).setNumber(addressCreateDTO.getNumber());
         }
 
-        if(addressCreateDTO.getStreet() != null) {
-            address.get(0).setStreet(addressCreateDTO.getStreet());
+        if(addressCreateDTO.getZip() != null) {
+            address.get(0).setZip(addressCreateDTO.getZip());
         }
 
-        System.out.println(address);
+        if(addressCreateDTO.getState() != null) {
+            address.get(0).setZip(addressCreateDTO.getState());
+        }
+
+        if(addressCreateDTO.getReference() != null) {
+            address.get(0).setZip(addressCreateDTO.getReference());
+        }
+
+        addressService.save(address.get(0));
 
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    @RequestMapping(value = "/address/delete", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteAddress(Authentication authentication, @RequestParam Long id) {
+
+        User user = userService.getByEmail(authentication.getName());
+
+        if(user.getType().equals(UserType.ADMIN)) {
+            return new ResponseEntity<>("Only user can delete his address", HttpStatus.FORBIDDEN);
+        }
+
+        addressService.deleteById(id);
+
+        return new ResponseEntity<>("Address deleted", HttpStatus.ACCEPTED);
     }
 
 }

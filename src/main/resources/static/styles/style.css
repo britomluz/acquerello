@@ -501,6 +501,11 @@ footer{
     background: rgba(0, 0, 0, 0.205);   
 }
 
+/* MAP */
+#map {
+    height: 600px;
+  }
+
 
 /* QUERIES*/
 @media (max-width: 768px) {

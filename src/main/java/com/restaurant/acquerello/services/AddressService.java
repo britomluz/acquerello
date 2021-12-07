@@ -11,4 +11,5 @@ public interface AddressService {
     public List<Address> getAll();
     public Address save(Address address);
     public Optional<Address> getById(Long id);
+    public void deleteById(Long id);
 }
