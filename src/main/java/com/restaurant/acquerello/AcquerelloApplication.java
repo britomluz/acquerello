@@ -6,6 +6,7 @@ import com.restaurant.acquerello.models.User;
 import com.restaurant.acquerello.models.UserType;
 import com.restaurant.acquerello.repositories.*;
 import com.restaurant.acquerello.models.*;
+import com.restaurant.acquerello.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -27,9 +28,10 @@ public class AcquerelloApplication {
 	}
 
 	@Bean
-	public CommandLineRunner initData(UserRepository userRepository, OrderRepository orderRepository, OrderDetailsRepository orderDetailsRepository, ProductRepository productRepository,
-									  CategoryRepository categoryRepository,
-									  ProductCategoryRepository productCategoryRepository, AddressRepository addressRepository) {
+	public CommandLineRunner initData(UserRepository userRepository, OrderRepository orderRepository,
+									  OrderDetailsRepository orderDetailsRepository, ProductRepository productRepository,
+									  CategoryRepository categoryRepository, ProductCategoryRepository productCategoryRepository,
+									  AddressRepository addressRepository, CardRepository cardRepository) {
 		return (args) -> {
 
 			Address address1 = new Address("Bids Hills", 332, "HI-3232", "California", "A white house");
@@ -37,8 +39,8 @@ public class AcquerelloApplication {
 
 
 			// Brian: Create User and Order
-			User user1 = new User("Luigi", "number one", "admin@admin.com", passwordEncoder.encode("SafePassword1234"), 5554343L, UserType.ADMIN, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
-			User user2 = new User("Brian", "Cuenca", "correo@user.com", passwordEncoder.encode("muzarelle123"), 5551232L, UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
+			User user1 = new User("Luigi", "number one", "admin@admin.com", passwordEncoder.encode("admin1234"), 5554343L, UserType.ADMIN, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
+			User user2 = new User("Brian", "Cuenca", "correo@user.com", passwordEncoder.encode("user1234"), 5551232L, UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
 
 
 			// Brian: Creating orders
@@ -72,7 +74,11 @@ public class AcquerelloApplication {
 			addressRepository.save(address1);
 			addressRepository.save(address2);
 
-			//GABRIEL: CREATE PRODUCTS TO TEST DE APP
+			//GABRIEL: CREATE CARDS TO TEST THE APP
+			Card card1 = new Card("1234-5654-9874-6321", 315, LocalDateTime.now(), 100D, 20, 1, CardType.ACTIVE, user2);
+			cardRepository.save(card1);
+
+			//GABRIEL: CREATE PRODUCTS TO TEST THE APP
 			Product product1 = new Product("Bruschetta", "Tomato Reduction base, Mozzarella, Torn Basil, Olive Oil", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/bruschetta_bbzjzr.jpg", 17D, 25);
 			productRepository.save(product1);
 			Product product2 = new Product("Capresse", "Escarole, Cannellini Beans, Meatballs, Parmigiano", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/capresse_jp0bcd.jpg", 23D, 25);
@@ -153,7 +159,7 @@ public class AcquerelloApplication {
 			productRepository.save(product39);
 
 
-			//GABRIEL: CREATE CATEGORIES TO TEST DE APP
+			//GABRIEL: CREATE CATEGORIES TO TEST THEE APP
 			Category category1 = new Category("Entries & Snacks", "Whether you need healthy snacks that are gluten free, low calorie, low sugar, high protein, vegan, or more, there's something on this list for you.", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/linguine_veodru.jpg");
 			categoryRepository.save(category1);
 			Category category2 = new Category("Specials", "xxxxxxx", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/lasagna_alla_gino_kpjovx.jpg");
@@ -173,7 +179,7 @@ public class AcquerelloApplication {
 			Category category9 = new Category("Salads", "xxxxxxxxx", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/rapini_pgxvot.jpg");
 			categoryRepository.save(category9);
 
-			//GABRIEL: CREATE PRODUCTS/CATEGORIES (MANY TO MANY) TO TEST DE APP
+			//GABRIEL: CREATE PRODUCTS/CATEGORIES (MANY TO MANY) TO TEST THE APP
 			ProductCategory productCategory1 = new ProductCategory(product1, category1);
 			productCategoryRepository.save(productCategory1);
 			ProductCategory productCategory2 = new ProductCategory(product2, category4);
