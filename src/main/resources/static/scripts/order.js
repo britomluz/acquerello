@@ -14,14 +14,14 @@ const app = Vue.createApp({
       categories:[],
 
       //product categories
-      mainCourse:[],
+      mainCourses:[],
       entriesSnacks:[],
       specials:[],
       chefPicks:[],
-      soup:[],
+      soups:[],
       drinks:[],
-      pasta:[],      
-      vegetarian:[],
+      pastas:[],      
+      vegetarians:[],
       salads:[],
     }
   },
@@ -43,7 +43,17 @@ const app = Vue.createApp({
     loadCategories(){
       axios.get('/api/categories')
       .then(response => {         
-        this.categories = response.data.categories  
+        this.categories = response.data.categories
+        this.entriesSnacks = [...this.categories.filter(categorie => categorie.name === "Entries & Snacks")]
+        this.specials = [...this.categories.filter(categorie => categorie.name === "Specials")]
+        this.chefPicks = [...this.categories.filter(categorie => categorie.name === "Chef Picks")]
+        this.mainCourses = [...this.categories.filter(categorie => categorie.name === "Main Course")]
+        let prueba = this.mainCourses.filter(product => product.products)
+        this.soups = [...this.categories.filter(categorie => categorie.name === "Soup")]
+        this.drinks = [...this.categories.filter(categorie => categorie.name === "Drinks")]
+        this.pastas = [...this.categories.filter(categorie => categorie.name === "Pasta")]
+        this.vegetarians = [...this.categories.filter(categorie => categorie.name === "Vegetarian")]
+        this.salads = [...this.categories.filter(categorie => categorie.name === "Salads")]
         console.log(this.categories)      
       })
      .catch(err => console.log(err.response.data))
