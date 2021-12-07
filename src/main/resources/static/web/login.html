@@ -21,7 +21,7 @@
           <img src="../assets/acquerello.png" alt="" width="150">
         </a>
 
-        <div class="d-flex">
+        <div class="d-flex navlinks">
           <a class="nav-link" href="#">HOME</a>
           <a class="nav-link" href="#">ORDER NOW</a>
           <a class="nav-link" href="#">BOOKING</a>
@@ -81,25 +81,16 @@
 
     <main class="mainLogin d-flex align-items-center">
       <div class="glass d-flex flex-column justify-content-center align-items-center">
-        
-        <!-- <div class="backContainer d-flex">
-          <div class="">
-            <h3>Already have an account</h3>
-            <h4>Log in with your account</h4>
-            <button>Log in</button>
-          </div>
-          <div class="">          
-            <h3>Don't have an account yet?</h3>
-            <h4>Register a new account</h4>
-            <button>Sign up</button>
-          </div>
-        </div> -->
+        <input type="checkbox" id="flip">
+        <div class="cover">
+            <div class="front">
+                <img src="../assets/dinning-room2.jpg" alt="">               
+            </div>            
+        </div>
 
-        <div class="formsIndex d-flex">
-
-          <div class="containerLogin">
-            <h1>Log in</h1>
-            <h3>Italian Food</h3>
+        <div class="formsIndex d-flex">          
+          <div class="containerLogin login-form">
+            <h1 class="fs-2">Log in</h1>            
             <form class="formIndex">
                           
               <!-- EMIAL -->
@@ -118,14 +109,19 @@
               </div>            
               <div v-if="password_two.correct == false">{{password_two.msg}}</div>
               <!-- BTN -->
-              <button type="button" @click="login()">
+              <button class="w-100" type="submit" @click="login()">
                   Log in
               </button>
             </form>
+            <div class="login">
+              <p class="pt-3">
+              Don't have an account? <label for="flip">Sign up now</label>
+            </p>
+            </div>
           </div>
-          <div class="containerSignup">
-            <h1>Sign up</h1>
-            <h3>Italian Food</h3>
+
+          <div class="containerSignup signup-form">
+            <h1 class="fs-2">Sign up</h1>            
             <form class="formIndex">
               <!-- FIRSTNAME -->
               <div class="fname">
@@ -178,14 +174,21 @@
             </div> 
               <div><small>Eg. 1231234566</small></div>
               <!-- BTN -->
-              <button type="button" @click="send">
+              <button class="w-100" type="submit" @click="send">
                   Sign up
               </button>
             </form>
+            <div class="have-signup">
+              <p class="pt-3 h">
+              Already have an account? <label for="flip">Login now</label>
+            </p>
+            </div>
           </div>
-
-
+  
+  
         </div>
+        
+        
 
       </div>
     </main>

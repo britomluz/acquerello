@@ -240,13 +240,15 @@ footer{
 }
 
 .menuSection h3{ 
-    line-height: 0;
-    height: 50vh;    
+    line-height: 0;    
+    /* height: 50vh;     */
 }
 .menuSection{
-    padding-top: 50px;
+    padding-top: 50px;    
 }
-
+.cardProductOne{
+    margin: 10px;
+}
 
 /* header panels*/
 .headerPagesPanel{
@@ -289,8 +291,55 @@ footer{
     align-items: center;    
 }
 .glass{        
-    background: rgba(0, 0, 0, 0.438);
-    backdrop-filter: blur(8px);    
+    position: relative;  
+    background: rgba(105, 105, 105, 0.034);
+    backdrop-filter: blur(8px);  
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.938);
+    perspective: 2700px;
+}
+.glass #flip:checked ~ .cover{
+    transform: rotateY(-180deg);
+}
+.glass #flip{
+    display: none;
+}
+.have-signup p,
+.login p{
+    color: var(--color1);
+}
+.have-signup label,
+.login label{
+    color: var(--color4);  
+    text-decoration: underline;  
+}
+.glass .cover{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: 50%;
+    transition: all 1s ease-in;
+    transform-origin: left;
+    transform-style: preserve-3d;       
+}
+.glass .cover::before{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.205);
+    opacity: 0.9;
+    backdrop-filter: blur(.5px);
+    z-index: 100;
+    backface-visibility: hidden;
+}
+.glass .cover img{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: 50;
+    backface-visibility: hidden;
 }
 .containerLogin{
     padding: 50px;
@@ -298,6 +347,9 @@ footer{
 .containerSignup{
     padding: 50px;
 }
+/* .formsIndex{
+    position: relative;
+} */
 .formIndex input{
     background: rgba(255, 255, 255, 0.15);
     border: none;
@@ -345,8 +397,6 @@ footer{
     border: 1px solid var(--color4);    
 }
 
-/*login end*/
-
 .formsIndex input{    
     background: transparent;
 }
@@ -355,7 +405,7 @@ footer{
 .formsIndex .phone,
 .formsIndex .fname,
 .formsIndex .lname{
-    border-bottom: 2px solid var(--color4);
+    border-bottom: 2px solid white;
     margin: 5px 0px;
     display: flex;
     align-items: center;    
@@ -366,6 +416,93 @@ footer{
 }
 
 
+/*login end*/
+
+
+/* ORDER PAGE*/
+.imgProduct {    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.imgProduct img{
+    object-fit: cover;
+}
+.cardProductOne{
+    border: none;
+}
+.cardProductOne h5,
+.cardProductOne h5 span{
+    color: var(--color2);
+    line-height: 1;
+}
+.cardProductOne p{
+    line-height: 1.1;
+}
+.cardFooter i{
+    font-size: 25px;
+    font-weight: bolder;
+    color: var(--color1);
+    padding: 5px;
+    transition: all 1s ease;
+    border-radius: 30px;
+}
+.cardFooter i:hover{
+    font-weight: bolder;
+    color: var(--color4);    
+    background: var(--color2);
+
+}
+
+/*chef picks card*/
+
+.specialSection .card{
+    background: transparent;
+    margin: 30px 20px;
+}
+.specialSection .card-body{
+    background: transparent;
+}
+.specialSection h5{    
+    color: var(--color4);
+}
+.specialSection i{
+    color: var(--color4);
+    padding: 20px;
+}
+
+/*acquerello specials*/
+.cardBorder .card{
+    border: none;
+}
+.cardBorder{
+    margin: 50px 0px;
+}
+.cardBorder {
+    border: 1.8px solid var(--color1);
+    padding: 25px;
+}
+.cardBorder h5{
+    color: var(--color1);
+}
+.priceSpecials h5{
+    background: var(--color4);
+    display: inline-block;    
+    padding: 8px 16px;
+    position: absolute;
+    margin-top: 40px;
+    color: var(--color2);
+}
+.specialFooter{
+    position: absolute;
+    bottom: 80px;
+}
+.specialFooter i{
+    background: rgba(0, 0, 0, 0.205);   
+}
+
+
+/* QUERIES*/
 @media (max-width: 768px) {
     h1 {
         font-family: var(--fontTitle1);
