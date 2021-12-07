@@ -161,15 +161,25 @@ const App = Vue.createApp({
         this.password.correct == true &&
         this.phone.correct == true
       ) {
-      //here sweet alert pls because I don't know how to use it
-      
+      axios.post("/api/users",{
+        firstname:this.firstname,
+        lastname:this.lastname,
+        email:this.email,
+        password:this.password,
+        number:this.phone,
+      })
+      .then(response=>window.location.href="/web/myacount.html")
+      .catch(err=>console.log(err.response.data))
       }
     },
     login(){
-        axios.post("/api/login",`email=${this.email_two.input}&password=${this.password_two.input}`)//aaa
+      
+        axios.post("/api/login",`email=${this.email_two.input}&password=${this.password_two.input}`)
         .then(response=>window.location.href="/web/myaccount.html")
-        .catch(err=>console.log(err))
-
+        .catch(err=>{console.log(err.response.data)
+        console.log(this.email_two.input,this.password_two.input)
+      
+      }) 
     }
   },
 });

@@ -91,7 +91,7 @@
         <div class="formsIndex d-flex">          
           <div class="containerLogin login-form">
             <h1 class="fs-2">Log in</h1>            
-            <form class="formIndex">
+            <form class="formIndex" @submit.prevent="login()">
                           
               <!-- EMIAL -->
               <div class="email">     
@@ -109,7 +109,7 @@
               </div>            
               <div v-if="password_two.correct == false">{{password_two.msg}}</div>
               <!-- BTN -->
-              <button class="w-100" type="submit" @click="login()">
+              <button class="w-100" type="submit">
                   Log in
               </button>
             </form>
