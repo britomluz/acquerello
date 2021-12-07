@@ -1,13 +1,26 @@
 const App = Vue.createApp({
   data() {
-    return {};
+    return {
+      street:"",
+      numbetAddres:0,
+      zip:"",
+      state:"",
+      reference:"",
+    };
   },
   created() {},
   methods: {
-    send_address() {
+    send_address(e) {
+      e.preventDefault()
       axios
-        .post()
-        .then((response) => console.log(response))
+        .post("/address/create", {
+          street: this.street,
+          number: this.numbetAddres,
+          zip: this.zip,
+          state: this.state,
+          reference:this.reference,
+        })
+        .then((response) => alert(response.data))
         .catch((err) => console.log(err));
     },
     edit_address() {
