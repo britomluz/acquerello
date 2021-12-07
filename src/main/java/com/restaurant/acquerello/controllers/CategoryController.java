@@ -45,7 +45,7 @@ public class CategoryController {
     }
 
     @PostMapping("/categories/create")
-    public ResponseEntity<?> cretaCategory(Authentication authentication, @RequestBody CreateCategoryDTO category){
+    public ResponseEntity<?> createCategory(Authentication authentication, @RequestBody CreateCategoryDTO category){
         User user = userService.getByEmail(authentication.getName());
         if (!user.getType().equals(UserType.ADMIN)){
             return new ResponseEntity<>("Don't have authority",HttpStatus.FORBIDDEN);

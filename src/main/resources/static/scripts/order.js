@@ -53,7 +53,7 @@ const app = Vue.createApp({
         this.pastas = [...this.categories.filter(categorie => categorie.name === "Pasta")[0].products]
         this.vegetarians = [...this.categories.filter(categorie => categorie.name === "Vegetarian")[0].products]
         this.salads = [...this.categories.filter(categorie => categorie.name === "Salads")[0].products]
-        console.log(this.categories)      
+        console.log(this.mainCourses, prueba)      
       })
      .catch(err => console.log(err.response.data))
     },
