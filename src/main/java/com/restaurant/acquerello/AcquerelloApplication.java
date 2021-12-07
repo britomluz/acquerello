@@ -210,9 +210,9 @@ public class AcquerelloApplication {
 			productCategoryRepository.save(productCategory17);
 			ProductCategory productCategory18 = new ProductCategory(product14, category4);
 			productCategoryRepository.save(productCategory18);
-			ProductCategory productCategory19 = new ProductCategory(product14, category2);
+			ProductCategory productCategory19 = new ProductCategory(product14, category7);
 			productCategoryRepository.save(productCategory19);
-			ProductCategory productCategory20 = new ProductCategory(product15,category4);
+			ProductCategory productCategory20 = new ProductCategory(product15,category7);
 			productCategoryRepository.save(productCategory20);
 			ProductCategory productCategory21 = new ProductCategory(product15, category2);
 			productCategoryRepository.save(productCategory21);

@@ -11,10 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 // Created by Brian
 
@@ -28,7 +29,7 @@ public class AddressController {
     @Autowired
     public AddressService addressService;
 
-    @RequestMapping(value = "/create/address", method = RequestMethod.POST)
+    @RequestMapping(value = "/address/create", method = RequestMethod.POST)
     public ResponseEntity<?> createAddress(Authentication authentication, @RequestBody AddressCreateDTO addressCreateDTO) {
 
         User user = userService.getByEmail(authentication.getName());
@@ -43,6 +44,34 @@ public class AddressController {
         addressService.save(address);
 
         return new ResponseEntity<>("Address created", HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/address/edit", method = RequestMethod.PATCH)
+    public ResponseEntity<?> editAddress(Authentication authentication, @RequestParam Long id, @RequestBody AddressCreateDTO addressCreateDTO) {
+
+        User user = userService.getByEmail(authentication.getName());
+
+        if(user.getType().equals(UserType.ADMIN)) {
+            return new ResponseEntity<>( "Admin cannot edit a personal address of a user",HttpStatus.FORBIDDEN);
+        }
+
+        List<Address> address = addressService.getById(id).stream().collect(Collectors.toList());
+
+        if(addressCreateDTO.getStreet() != null) {
+            address.get(0).setStreet(addressCreateDTO.getStreet());
+        }
+
+        if(addressCreateDTO.getStreet() != null) {
+            address.get(0).setStreet(addressCreateDTO.getStreet());
+        }
+
+        if(addressCreateDTO.getStreet() != null) {
+            address.get(0).setStreet(addressCreateDTO.getStreet());
+        }
+
+        System.out.println(address);
+
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
 }
