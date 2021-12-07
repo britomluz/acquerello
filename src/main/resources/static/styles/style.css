@@ -70,6 +70,17 @@ nav a:hover{
     box-shadow: none!important;
     display: none;
 }
+#offcanvasNavbar{
+    background: black!important;    
+}
+.offcanvas-header button{    
+    background: var(--color4);
+    opacity: 1;
+}
+.offcanvas-header button h5{    
+    color: black;
+    line-height: 0;
+}
 #headerIndex{
     position: fixed;
     top: 0;

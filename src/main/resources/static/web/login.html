@@ -22,10 +22,10 @@
         </a>
 
         <div class="d-flex navlinks">
-          <a class="nav-link" href="#">HOME</a>
-          <a class="nav-link" href="#">ORDER NOW</a>
-          <a class="nav-link" href="#">BOOKING</a>
-          <a class="nav-link" href="#">CONTACT</a>
+          <a class="nav-link" href="index.html">HOME</a>
+          <a class="nav-link" href="order.html">ORDER NOW</a>
+          <a class="nav-link" href="booking.html">BOOKING</a>
+          <a class="nav-link" href="contact.html">CONTACT</a>
         </div>
 
         <div>
@@ -35,8 +35,9 @@
           </button>
 
           <button class="navIcon"><i class="bi bi-search"></i></button>
-          <button class="navIcon"><i class="bi bi-person-fill"></i></button>
-          <button class="navIcon"><i class="bi bi-cart-fill"></i></button>
+          <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+          <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
+              class="bi bi-cart-fill"></i></button>
 
 
         </div>
@@ -50,24 +51,18 @@
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="home.html">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="order.html">Order Now</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button"
-                  data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li>
-                    <hr class="dropdown-divider">
-                  </li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+              <li class="nav-item">
+                <a class="nav-link" href="booking.html">Bookings</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact</a>
+              </li>
+            </ul>
               </li>
             </ul>
             <form class="d-flex">
@@ -83,118 +78,120 @@
       <div class="glass d-flex flex-column justify-content-center align-items-center">
         <input type="checkbox" id="flip">
         <div class="cover">
-            <div class="front">
-                <img src="../assets/dinning-room2.jpg" alt="">               
-            </div>            
+          <div class="front">
+            <img src="../assets/dinning-room2.jpg" alt="">
+          </div>
         </div>
 
-        <div class="formsIndex d-flex">          
+        <div class="formsIndex d-flex">
           <div class="containerLogin login-form">
-            <h1 class="fs-2">Log in</h1>            
+            <h1 class="fs-2">Log in</h1>
             <form class="formIndex" @submit.prevent="login()">
-                          
+
               <!-- EMIAL -->
-              <div class="email">     
-                <i class="bi bi-envelope-fill"></i>             
-                  <input id="mailLogin" type="text" placeholder="Email" v-model="email_two.input"
-                      v-on:input="validator_emial_2(email_two)">
+              <div class="email">
+                <i class="bi bi-envelope-fill"></i>
+                <input id="mailLogin" type="text" placeholder="Email" v-model="email_two.input"
+                  v-on:input="validator_emial_2(email_two)">
               </div>
               <div v-if="email_two.correct == false">{{email_two.msg}}</div>
               <!-- PASSWORD -->
-              <div class="password">  
-                <i class="bi bi-lock-fill"></i>                
-                  <input id="passwordLogin" type="password" v-model="password_two.input"
-                   v-on:input="validator_password_2(password_two)" placeholder="Password">                 
-                  
-              </div>            
+              <div class="password">
+                <i class="bi bi-lock-fill"></i>
+                <input id="passwordLogin" type="password" v-model="password_two.input"
+                  v-on:input="validator_password_2(password_two)" placeholder="Password">
+
+              </div>
               <div v-if="password_two.correct == false">{{password_two.msg}}</div>
               <!-- BTN -->
               <button class="w-100" type="submit">
-                  Log in
+                Log in
               </button>
             </form>
             <div class="login">
               <p class="pt-3">
-              Don't have an account? <label for="flip">Sign up now</label>
-            </p>
+                Don't have an account? <label for="flip">Sign up now</label>
+              </p>
             </div>
           </div>
 
           <div class="containerSignup signup-form">
-            <h1 class="fs-2">Sign up</h1>            
+            <h1 class="fs-2">Sign up</h1>
             <form class="formIndex" @submit.prevent="send()">
               <!-- FIRSTNAME -->
               <div class="fname">
                 <i class="bi bi-person-fill"></i>
-                  <input  id="fname" type="text" placeholder="Firstname" v-model="firstname.input"
-                      v-on:input="validator_firstname(firstname)">
-                                 
+                <input id="fname" type="text" placeholder="Firstname" v-model="firstname.input"
+                  v-on:input="validator_firstname(firstname)">
+
               </div>
-              <div  v-if="firstname.correct == false">
+              <div v-if="firstname.correct == false">
                 <small class="errorForm"> {{firstname.msg}} </small>
-             </div>
+              </div>
               <!-- LASTNAME -->
-              <div class="lname" >
+              <div class="lname">
                 <i class="bi bi-person-fill"></i>
-                  <input id="lname" type="text" placeholder="Lastname" v-model="lastname.input"
-                      v-on:input="validator_lastname(lastname)">
-                                 
+                <input id="lname" type="text" placeholder="Lastname" v-model="lastname.input"
+                  v-on:input="validator_lastname(lastname)">
+
               </div>
               <div v-if="lastname.correct==false">
                 <small class="errorForm"> {{lastname.msg}} </small>
-             </div> 
-              <!-- EMIAL -->
-              <div class="email">   
-                <i class="bi bi-envelope-fill"></i>                
-                  <input  id="mailRegister" type="text" placeholder="Email" v-model="email.input"
-                      v-on:input="validator_emial(email)">
-                                 <!-- aaaa -->
               </div>
-              <div  v-if="email.correct == false">
+              <!-- EMIAL -->
+              <div class="email">
+                <i class="bi bi-envelope-fill"></i>
+                <input id="mailRegister" type="text" placeholder="Email" v-model="email.input"
+                  v-on:input="validator_emial(email)">
+                <!-- aaaa -->
+              </div>
+              <div v-if="email.correct == false">
                 <small class="errorForm">{{email.msg}} </small>
-              </div> 
+              </div>
               <!-- PASSWORD -->
-              <div  class="password">
+              <div class="password">
                 <i class="bi bi-lock-fill"></i>
-                  <input id="passwordRegister" type="password" v-model="password.input" v-on:input="validator_password(password)" placeholder="Password">
-                                
+                <input id="passwordRegister" type="password" v-model="password.input"
+                  v-on:input="validator_password(password)" placeholder="Password">
+
               </div>
               <div v-if="password.correct == false">
                 <small class="errorForm">
-                {{password.msg}}</small></div>  
+                  {{password.msg}}</small>
+              </div>
               <!--PHONE -->
               <div class="phone">
                 <i class="bi bi-telephone-fill"></i>
-                  <input  id="phone" type="text" v-model="phone.input" v-on:input="validator_phone(phone)"
-                      placeholder="Phone">                      
-                                
+                <input id="phone" type="text" v-model="phone.input" v-on:input="validator_phone(phone)"
+                  placeholder="Phone">
+
               </div>
               <div v-if="phone.correct == false">
                 <small class="errorForm">{{phone.msg}} </small>
-            </div> 
+              </div>
               <div><small>Eg. 1231234566</small></div>
               <!-- BTN -->
               <button class="w-100" type="submit">
-                  Sign up
+                Sign up
               </button>
             </form>
             <div class="have-signup">
               <p class="pt-3 h">
-              Already have an account? <label for="flip">Login now</label>
-            </p>
+                Already have an account? <label for="flip">Login now</label>
+              </p>
             </div>
           </div>
-  
-  
+
+
         </div>
-        
-        
+
+
 
       </div>
     </main>
 
     <main>
-      
+
     </main>
   </div>
 
