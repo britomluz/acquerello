@@ -8,11 +8,11 @@ import java.time.LocalDate;
 
 public class BookingDTO {
     private Long id;
-    private LocalDate date;
+    private LocalDate dateBooking;
     private Integer bookingHour;
     private Integer endBooking;
     private SectorTables sector;
-    private Integer table;
+    private Integer tableNumber;
     private Integer quantity;
     private TableState state;
 
@@ -20,11 +20,11 @@ public class BookingDTO {
 
     public  BookingDTO(Booking booking) {
         this.id = booking.getId();
-        this.date = booking.getDate();
+        this.dateBooking = booking.getDate();
         this.bookingHour = booking.getBookingHour();
         this.endBooking = booking.getEndBooking();
         this.sector = booking.getSector();
-        this.table = booking.getTable();
+        this.tableNumber = booking.getTable();
         this.quantity = booking.getQuantity();
         this.state = booking.getState();
     }
@@ -38,11 +38,11 @@ public class BookingDTO {
     }
 
     public LocalDate getDate() {
-        return date;
+        return dateBooking;
     }
 
     public void setDate(LocalDate date) {
-        this.date = date;
+        this.dateBooking = date;
     }
 
     public Integer getBookingHour() {
@@ -70,11 +70,11 @@ public class BookingDTO {
     }
 
     public Integer getTable() {
-        return table;
+        return tableNumber;
     }
 
     public void setTable(Integer table) {
-        this.table = table;
+        this.tableNumber = table;
     }
 
     public Integer getQuantity() {

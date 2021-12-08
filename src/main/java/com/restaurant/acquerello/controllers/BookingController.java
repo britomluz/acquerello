@@ -1,6 +1,7 @@
 package com.restaurant.acquerello.controllers;
 
 import com.restaurant.acquerello.dtos.BookingCreateDTO;
+import com.restaurant.acquerello.repositories.BookingRepository;
 import com.restaurant.acquerello.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class BookingController {
+
+    @Autowired
+    public BookingRepository bookingRepository;
 
     @Autowired
     public BookingService bookingService;

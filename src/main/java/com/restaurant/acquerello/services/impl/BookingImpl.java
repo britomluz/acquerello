@@ -20,11 +20,6 @@ public class BookingImpl implements BookingService {
     }
 
     @Override
-    public Booking getBookingById(Long id) {
-        return bookingRepository.getBydId(id);
-    }
-
-    @Override
     public void save(Booking booking) {
         bookingRepository.save(booking);
     }

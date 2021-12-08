@@ -2,10 +2,7 @@ package com.restaurant.acquerello.models;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -14,22 +11,22 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
-    private LocalDate date;
+    private LocalDate dateBooking;
     private Integer bookingHour;
     private Integer endBooking;
     private SectorTables sector;
-    private Integer table;
+    private Integer tableNumber;
     private Integer quantity;
     private TableState state;
 
     public Booking() {}
 
     public Booking(LocalDate date, Integer bookingHour, Integer endBooking, SectorTables sector, Integer table, Integer quantity, TableState state) {
-        this.date = date;
+        this.dateBooking = date;
         this.bookingHour = bookingHour;
         this.endBooking = endBooking;
-        this. sector = sector;
-        this.table = table;
+        this.sector = sector;
+        this.tableNumber = table;
         this.quantity = quantity;
         this.state = state;
     }
@@ -39,11 +36,11 @@ public class Booking {
     }
 
     public LocalDate getDate() {
-        return date;
+        return dateBooking;
     }
 
     public void setDate(LocalDate date) {
-        this.date = date;
+        this.dateBooking = date;
     }
 
     public Integer getBookingHour() {
@@ -71,11 +68,11 @@ public class Booking {
     }
 
     public Integer getTable() {
-        return table;
+        return tableNumber;
     }
 
     public void setTable(Integer table) {
-        this.table = table;
+        this.tableNumber = table;
     }
 
     public Integer getQuantity() {
@@ -98,11 +95,11 @@ public class Booking {
     public String toString() {
         final StringBuffer sb = new StringBuffer("Booking{");
         sb.append("id=").append(id);
-        sb.append(", date=").append(date);
+        sb.append(", date=").append(dateBooking);
         sb.append(", bookingHour=").append(bookingHour);
         sb.append(", endBooking=").append(endBooking);
         sb.append(", sector=").append(sector);
-        sb.append(", table=").append(table);
+        sb.append(", table=").append(tableNumber);
         sb.append(", quantity=").append(quantity);
         sb.append(", state=").append(state);
         sb.append('}');
