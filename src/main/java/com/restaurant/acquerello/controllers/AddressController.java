@@ -4,6 +4,7 @@ import com.restaurant.acquerello.dtos.AddressCreateDTO;
 import com.restaurant.acquerello.models.Address;
 import com.restaurant.acquerello.models.User;
 import com.restaurant.acquerello.models.UserType;
+import com.restaurant.acquerello.repositories.AddressRepository;
 import com.restaurant.acquerello.repositories.UserRepository;
 import com.restaurant.acquerello.services.AddressService;
 import com.restaurant.acquerello.services.UserService;
@@ -22,6 +23,9 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api")
 public class AddressController {
+
+    @Autowired
+    public AddressRepository addressRepository;
 
     @Autowired
     public UserService userService;
@@ -55,29 +59,35 @@ public class AddressController {
             return new ResponseEntity<>( "Admin cannot edit a personal address of a user",HttpStatus.FORBIDDEN);
         }
 
-        List<Address> address = addressService.getById(id).stream().collect(Collectors.toList());
+        Address address = addressRepository.getById(id);
+
+        List<Address> verify = user.getAddress().stream().filter(add -> add.getId().equals(id)).collect(Collectors.toList());
+
+        if (verify.size() < 1) {
+            return new ResponseEntity<>("Invalid Address", HttpStatus.FORBIDDEN);
+        }
 
         if(addressCreateDTO.getStreet() != null) {
-            address.get(0).setStreet(addressCreateDTO.getStreet());
+            address.setStreet(addressCreateDTO.getStreet());
         }
 
         if(addressCreateDTO.getNumber() != null) {
-            address.get(0).setNumber(addressCreateDTO.getNumber());
+            address.setNumber(addressCreateDTO.getNumber());
         }
 
         if(addressCreateDTO.getZip() != null) {
-            address.get(0).setZip(addressCreateDTO.getZip());
+            address.setZip(addressCreateDTO.getZip());
         }
 
         if(addressCreateDTO.getState() != null) {
-            address.get(0).setZip(addressCreateDTO.getState());
+            address.setZip(addressCreateDTO.getState());
         }
 
         if(addressCreateDTO.getReference() != null) {
-            address.get(0).setZip(addressCreateDTO.getReference());
+            address.setZip(addressCreateDTO.getReference());
         }
 
-        addressService.save(address.get(0));
+        addressService.save(address);
 
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }

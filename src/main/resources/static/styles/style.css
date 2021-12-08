@@ -70,6 +70,17 @@ nav a:hover{
     box-shadow: none!important;
     display: none;
 }
+#offcanvasNavbar{
+    background: black!important;    
+}
+.offcanvas-header button{    
+    background: var(--color4);
+    opacity: 1;
+}
+.offcanvas-header button h5{    
+    color: black;
+    line-height: 0;
+}
 #headerIndex{
     position: fixed;
     top: 0;
@@ -420,12 +431,7 @@ footer{
 
 
 /* ORDER PAGE*/
-.imgProduct {    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.imgProduct img{
+#img-product{
     object-fit: cover;
 }
 .cardProductOne{
@@ -500,6 +506,11 @@ footer{
 .specialFooter i{
     background: rgba(0, 0, 0, 0.205);   
 }
+
+/* MAP */
+#map {
+    height: 600px;
+  }
 
 
 /* QUERIES*/

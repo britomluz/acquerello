@@ -2,10 +2,13 @@ package com.restaurant.acquerello.dtos;
 
 //CREATED BY BRIAN
 
+import com.restaurant.acquerello.models.Card;
 import com.restaurant.acquerello.models.User;
 import com.restaurant.acquerello.models.UserType;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserDTO {
     private Long id;
@@ -16,6 +19,8 @@ public class UserDTO {
     private Long number;
     private UserType type;
     private String img;
+    private List<AddressDTO> address = new ArrayList<>();
+    private Card card;
 
     public UserDTO(User user) {
         this.id = user.getId();
@@ -26,6 +31,9 @@ public class UserDTO {
         this.number = user.getNumber();
         this.type = user.getType();
         this.img = user.getImg();
+        this.address = user.getAddress().stream().map(AddressDTO::new).collect(Collectors.toList());
+        this.card = user.getCard();
+
     }
 
     public Long getId() {
@@ -92,4 +100,19 @@ public class UserDTO {
         this.img = img;
     }
 
+    public List<AddressDTO> getAddress() {
+        return address;
+    }
+
+    public void setAddress(List<AddressDTO> address) {
+        this.address = address;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
 }

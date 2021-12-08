@@ -104,7 +104,7 @@ public class OrderController {
 
         orderRepository.deleteById(id);
 
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>("Order deleted",HttpStatus.ACCEPTED);
     }
 
     @PatchMapping("/order/edit/{id}")
@@ -117,6 +117,10 @@ public class OrderController {
         }
 
         Order order = orderRepository.findOrderById(id);
+
+        if(order.getState().equals(orderState)) {
+            return new ResponseEntity<>("Cannot change by the same state", HttpStatus.FORBIDDEN);
+        }
 
         order.setState(orderState);
 

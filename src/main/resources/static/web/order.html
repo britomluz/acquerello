@@ -22,10 +22,10 @@
         </a>
 
         <div class="d-flex navlinks">
-          <a class="nav-link" href="#">HOME</a>
-          <a class="nav-link" href="#">ORDER NOW</a>
-          <a class="nav-link" href="#">BOOKING</a>
-          <a class="nav-link" href="#">CONTACT</a>
+          <a class="nav-link" href="index.html">HOME</a>
+          <a class="nav-link" href="order.html">ORDER NOW</a>
+          <a class="nav-link" href="booking.html">BOOKING</a>
+          <a class="nav-link" href="contact.html">CONTACT</a>
         </div>
 
         <div>
@@ -33,44 +33,36 @@
             aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <button class="navIcon"><i class="bi bi-search"></i></button>
-          <button class="navIcon"><i class="bi bi-person-fill"></i></button>
-          <button class="navIcon"><i class="bi bi-cart-fill"></i></button>
+          <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+          <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
+              class="bi bi-cart-fill"></i></button>
         </div>
 
-
+        <!-- MENU RESPONSIVE -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <a class="navbar-brand" href="#">
+              <img src="../assets/acquerello.png" alt="" width="150">
+            </a>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+              <h5>x</h5>
+            </button>
           </div>
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="home.html">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="order.html">Order Now</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button"
-                  data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li>
-                    <hr class="dropdown-divider">
-                  </li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+              <li class="nav-item">
+                <a class="nav-link" href="booking.html">Bookings</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact</a>
               </li>
             </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
           </div>
         </div>
       </div>
@@ -80,47 +72,45 @@
       <h1>Order Now</h1>
       <h3>FINE FOOD & DINING SINCE 1990</h3>
     </header>
-
-    <main class="d-flez flex-column align-items-center">
+    <!-- d-flex flex-column justify-content-around align-items-center
+        col-10 col-lg-8 d-flex flex-wrap justify-content-around -->
+    <!-- Specials Menu -->
+    <main class="d-flex flex-column justify-content-around align-items-center">
       <section>
-        <div class="menuSection specials">
+        <div class="menuSection specials d-flex flex-column justify-content-around align-items-center">
           <h1>Acquerello</h1>
           <h3>Specials</h3>
-          <div class="d-flex justify-content-center" v-for="special in specials">
-            <div class="cardBorder d-flex justify-content-center align-items-center" style="width: 20rem;">
+          <div class="col-10 col-lg-8 d-flex flex-wrap justify-content-around" >
+            <div class="cardBorder d-flex justify-content-center align-items-center" style="width: 20rem;" v-for="special in specials">
               <div class="card" style="width: 18rem;">
                 <div class="priceSpecials">
                   <h5>${{special.price}}</h5>
                   <div class="cardFooter specialFooter">
-                    <a href="#"><i class="bi bi-eye-fill"></i></a> 
+                    <a href="#"><i class="bi bi-eye-fill"></i></a>
                     <a href="#"><i class="bi bi-cart-fill px-2"></i></a>
                   </div>
                 </div>
-                <img :src="special.productImage" class="card-img-top" alt="...">
+                <img :src="special.productImage" class="card-img-top" alt="special.name">
                 <div class="card-body d-flex justify-content-center align-items-center">
-                  <h5 id="textChefPick" class="card-text">{{special.name}}</h5>
-                <!-- <div class="cardFooter">
-                  <a href="#"><i class="bi bi-eye"></i></a> 
-                  <a href="#"><i class="bi bi-cart px-2"></i></a>
-                </div> -->
+                  <h5 id="specials" class="card-text">{{special.name}}</h5>
                 </div>
               </div>
             </div>
           </div>
-          
         </div>
-
-        <div class="specialSection">
+        
+        <!-- Chefs Picks Menu -->
+        <div class="specialSection d-flex flex-column justify-content-around align-items-center">
           <h1 class="pt-5">Chef's Pick</h1>
           <h3>of the day</h3>
-          <div v-for="chefPick in chefPicks">
-            <div class="card" style="width: 18rem;">
-              <img :src="chefPick.productImage" class="card-img-top" alt="...">
+          <div class="d-flex flex-wrap justify-content-around" >
+            <div class="card" style="width: 18rem;" v-for="chefPick in chefPicks">
+              <img id="img-product" :src="chefPick.productImage" class="card-img-top" alt="chefPick.name">
               <div class="card-body d-flex justify-content-between align-items-center">
                 <h5 id="textChefPick" class="card-text">{{chefPick.name}}</h5>
                 <div class="cardFooter">
-                  <a href="#"><i class="bi bi-eye"></i></a> 
-                  <a href="#"><i class="bi bi-cart px-2"></i></a>
+                  <a @click="showModal(chefPick.productId)" :id="chefPick.productId"><i class="bi bi-eye"></i></a>
+                  <a @click="addToCart(chefPick.productId)" :id="chefPick.productId"><i class="bi bi-cart"></i></a>                  
                 </div>
               </div>
             </div>
@@ -129,17 +119,17 @@
 
           </div>
         </div>
-        <div class="menuSection d-flex align-items-center flex-column justify-content-center" >
-          <h1>Main Course</h1>
-          <h3>Dishes</h3>
-          <div class="d-flex flex-wrap justify-content-around" >
+        
+        <!-- Main Course Menu -->
+        <div class="menuSection d-flex flex-column justify-content-around align-items-center">
+          <div class="py-4">
+            <h1>Main Course</h1>
+            <h3>Dishes</h3>
+          </div>
+          <div class="col-10 col-lg-8 d-flex flex-wrap justify-content-around">
             <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;" v-for="mainCourse in mainCourses">
               <div class="row g-0">
-                <div class="col-md-4">
-                  <div class="imgProduct">
-                    <img :src="mainCourse.productImage" class="img-fluid rounded-start" alt="...">
-                  </div>                  
-                </div>
+                <img id="img-product" :src="mainCourse.productImage" class="col-md-4 img-fluid rounded-start" alt="mainCourse.name">
                 <div class="col-md-8">
                   <div class="card-body">
                     <div class="cardHeader d-flex justify-content-between">
@@ -149,8 +139,9 @@
                     <hr>
                     <p class="card-text">{{mainCourse.description}}</p>
                     <div class="cardFooter">
-                      <a href="#"><i class="bi bi-eye"></i></a> 
-                      <a href="#"><i class="bi bi-cart px-2"></i></a>
+                      <a type="button" data-bs-toggle="modal" data-bs-target="#productModal" @click="showModal(mainCourse.productId)"><i
+                          class="bi bi-eye"></i></a>
+                      <a @click="addToCart(mainCourse.productId)" :id="mainCourse.productId"><i class="bi bi-cart px-2"></i></a>
                     </div>
                   </div>
                 </div>
@@ -158,17 +149,17 @@
             </div>
           </div>
         </div>
-        <div class="menuSection d-flex align-items-center flex-column justify-content-center" >
-          <h1>Pasta</h1>
-          <h3>Dishes</h3>
-          <div class="d-flex flex-wrap justify-content-around" >
+        
+        <!-- Pastas Menu -->
+        <div class="menuSection d-flex flex-column justify-content-around align-items-center">          
+          <div class="py-4">                        
+            <h1>Pasta</h1>
+            <h3>Dishes</h3>            
+          </div>
+          <div class="col-10 col-lg-8 d-flex flex-wrap justify-content-around">
             <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;" v-for="pasta in pastas">
               <div class="row g-0">
-                <div class="col-md-4">
-                  <div class="imgProduct">
-                    <img :src="pasta.productImage" class="img-fluid rounded-start" alt="...">
-                  </div>                  
-                </div>
+                <img id="img-product" :src="pasta.productImage" class="col-md-4 img-fluid rounded-start" alt="pasta.name">                 
                 <div class="col-md-8">
                   <div class="card-body">
                     <div class="cardHeader d-flex justify-content-between">
@@ -178,8 +169,9 @@
                     <hr>
                     <p class="card-text">{{pasta.description}}</p>
                     <div class="cardFooter">
-                      <a href="#"><i class="bi bi-eye"></i></a> 
-                      <a href="#"><i class="bi bi-cart px-2"></i></a>
+                      <a type="button" data-bs-toggle="modal" data-bs-target="#productModal" @click="showModal(pasta.productId)"><i
+                          class="bi bi-eye"></i></a>
+                      <a @click="addToCart(pasta.productId)" :id="pasta.productId"><i class="bi bi-cart px-2"></i></a>
                     </div>
                   </div>
                 </div>
@@ -187,17 +179,18 @@
             </div>
           </div>
         </div>
-        <div class="menuSection">
-          <h1>Soup & Salads</h1>
-          <h3>Side dishes</h3>
-          <div class="d-flex justify-content-around">
+
+        <!-- Soups and Salads Menu -->
+        <div class="menuSection d-flex flex-column justify-content-around align-items-center">
+          <div class="py-4">
+            <h1>Soup & Salads</h1>
+            <h3>Side dishes</h3>
+          </div>
+          
+          <div class="col-10 col-lg-8 d-flex flex-wrap justify-content-around">
             <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;" v-for="soup in soups">
               <div class="row g-0">
-                <div class="col-md-4">
-                  <div class="imgProduct">
-                    <img :src="soup.productImage" class="img-fluid rounded-start" alt="...">
-                  </div>                  
-                </div>
+                <img id="img-product" :src="soup.productImage" class="col-md-4 img-fluid rounded-start" alt="soup.name">
                 <div class="col-md-8">
                   <div class="card-body">
                     <div class="cardHeader d-flex justify-content-between">
@@ -207,8 +200,9 @@
                     <hr>
                     <p class="card-text">{{soup.description}}</p>
                     <div class="cardFooter">
-                      <a href="#"><i class="bi bi-eye"></i></a> 
-                      <a href="#"><i class="bi bi-cart px-2"></i></a>
+                      <a type="button" data-bs-toggle="modal" data-bs-target="#productModal" @click="showModal(soup.productId)"><i
+                          class="bi bi-eye"></i></a>
+                      <a @click="addToCart(soup.productId)" :id="soup.productId"><i class="bi bi-cart px-2"></i></a>
                     </div>
                   </div>
                 </div>
@@ -216,11 +210,7 @@
             </div>
             <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;" v-for="salad in salads">
               <div class="row g-0">
-                <div class="col-md-4">
-                  <div class="imgProduct">
-                    <img :src="salad.productImage" class="img-fluid rounded-start" alt="...">
-                  </div>                  
-                </div>
+                 <img id="img-product" :src="salad.productImage" class="col-md-4 img-fluid rounded-start" alt="salad.name">
                 <div class="col-md-8">
                   <div class="card-body">
                     <div class="cardHeader d-flex justify-content-between">
@@ -230,8 +220,9 @@
                     <hr>
                     <p class="card-text">{{salad.description}}</p>
                     <div class="cardFooter">
-                      <a href="#"><i class="bi bi-eye"></i></a> 
-                      <a href="#"><i class="bi bi-cart px-2"></i></a>
+                      <a type="button" data-bs-toggle="modal" data-bs-target="#productModal" @click="showModal(salad.productId)"><i
+                          class="bi bi-eye"></i></a>
+                      <a @click="addToCart(salad.productId)" :id="salad.productId"><i class="bi bi-cart px-2"></i></a>
                     </div>
                   </div>
                 </div>
@@ -239,17 +230,19 @@
             </div>
           </div>
         </div>
-        <div class="menuSection">
-          <h1>Vegetarian</h1>
-          <h3>food love</h3>
-          <div class="d-flex justify-content-around">
-            <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;" v-for="vegetarian in vegetarians">
+        
+        <!-- Vegetarian Menu -->
+        <div class="menuSection d-flex flex-column justify-content-around align-items-center">
+          <div class="py-5">
+            <h1>Vegetarian</h1>
+            <h3>food love</h3>
+          </div>
+          
+          <div class="col-10 col-lg-8 d-flex flex-wrap justify-content-around">
+            <div class="card cardProductOne mb-3" style="max-width: 540px;" v-for="vegetarian in vegetarians">
               <div class="row g-0">
-                <div class="col-md-4">
-                  <div class="imgProduct">
-                    <img :src="vegetarian.productImage" class="img-fluid rounded-start" alt="...">
-                  </div>                  
-                </div>
+                    <img id="img-product" :src="vegetarian.productImage" class="col-md-4 img-fluid rounded-start" alt="vegetarian.name">
+                
                 <div class="col-md-8">
                   <div class="card-body">
                     <div class="cardHeader d-flex justify-content-between">
@@ -259,8 +252,9 @@
                     <hr>
                     <p class="card-text">{{vegetarian.description}}</p>
                     <div class="cardFooter">
-                      <a href="#"><i class="bi bi-eye"></i></a> 
-                      <a href="#"><i class="bi bi-cart px-2"></i></a>
+                      <a type="button" data-bs-toggle="modal" data-bs-target="#productModal" @click="showModal(vegetarian.productId)"><i
+                          class="bi bi-eye"></i></a>
+                      <a @click="addToCart(vegetarian.productId)" :id="vegetarian.productId"><i class="bi bi-cart px-2"></i></a>
                     </div>
                   </div>
                 </div>
@@ -268,17 +262,18 @@
             </div>
           </div>
         </div>
-        <div class="menuSection">
-          <h1>Drinks</h1>
-          <h3>fresh</h3>
-          <div class="d-flex justify-content-around">
-            <div class="card cardProductOne mb-3 py-4" style="max-width: 540px;" v-for="drink in drinks">
+
+        <!-- Drinks Menu -->
+        <div class="menuSection d-flex flex-column justify-content-around align-items-center">
+          <div class="py-5">
+            <h1>Drinks</h1>
+            <h3>fresh</h3>
+          </div>
+          
+          <div class="col-10 col-lg-8 d-flex flex-wrap justify-content-around">
+            <div class="card cardProductOne mb-3" style="max-width: 540px;" v-for="drink in drinks">
               <div class="row g-0">
-                <div class="col-md-4">
-                  <div class="imgProduct">
-                    <img :src="drink.productImage" class="img-fluid rounded-start" alt="...">
-                  </div>                  
-                </div>
+                <img id="img-product" :src="drink.productImage" class="col-md-4 img-fluid rounded-start" alt="drink.name">
                 <div class="col-md-8">
                   <div class="card-body">
                     <div class="cardHeader d-flex justify-content-between">
@@ -288,8 +283,9 @@
                     <hr>
                     <p class="card-text">{{drink.description}}</p>
                     <div class="cardFooter">
-                      <a href="#"><i class="bi bi-eye"></i></a> 
-                      <a href="#"><i class="bi bi-cart px-2"></i></a>
+                      <a type="button" data-bs-toggle="modal" data-bs-target="#productModal" @click="showModal(drink.productId)"><i
+                          class="bi bi-eye"></i></a>
+                      <a @click="addToCart(drink.productId)" :id="drink.productId"><i class="bi bi-cart px-2"></i></a>
                     </div>
                   </div>
                 </div>
@@ -299,8 +295,104 @@
         </div>
       </section>
     </main>
-  </div>
 
+    <!-- CART MODAL -->
+    <div id="canvasCart" class="offcanvas offcanvas-end" tabindex="-1" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 id="offcanvasRightLabel">Carrito de compras</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+          <h5>x</h5>
+        </button>
+      </div>
+      <div class="offcanvas-body">
+        <table class="table">
+          <thead>
+            <tr class="title-offcanvas">
+              <th scope="col" colspan="2">Producto</th>
+              <th scope="col">Cant.</th>
+              <th scope="col">Acción</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <!-- Template del carrito  -->
+          <tbody v-if="cart.length > 0" id="items">
+            <div>
+              <tr v-for="product in cart" :key="product.id" id="template-cart">
+                <td scope="row"><img class="img-fluid img-thumbnail" :src="product.productImage" :alt="product.name">
+                </td>
+                <td>{{product.name}}</td>
+                <td>1</td>
+                <td>
+                  <button class="btn btn-info btn-sm" @click=""> + </button>
+                  <button class="btn btn-danger btn-sm" @click=""> - </button>
+                </td>
+                <td class="off-canvas-priceTotal">${{product.price}}</td>
+              </tr>
+            </div>
+          </tbody>
+          <tfoot v-if="cart.length === 0">
+            <tr id="footer-cart">              
+              <td scope="row" colspan="5">Cart empty</td>
+            </tr>
+            <tr>
+              <!-- v-if="carrito.length === 0" -->
+              <td scope="row" colspan="5"><a href="order.html">ORDER NOW </a></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div v-if="cart.length > 0" id="template-footer">
+        <th scope="row" colspan="2">Total</th>
+        <td>{{totalQantity}}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" id="vaciar-carrito">
+            vaciar todo
+          </button>
+        </td>
+        <td class="font-weight-bold">$ <span>{{totalPrice}}</span></td>
+      </div>
+
+
+      <div class="canvas-bottom">
+        <button id="btn-seguir-comprando" type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+          aria-label="Close">
+          <p> Seguir comprando</p>
+        </button>
+        <button id="btn-finalizar-compra" type="button" class="btn-close" href="compra.html">
+          <p> Finalizar compra</p>
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- PRODUCT MODAL -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div v-for="producto of modal" :key="producto.productId">
+              <h3>{{producto.name}}</h3>
+            </div>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
 
   <footer class="d-flex flex-wrap justify-content-around align-items-center py-4">
     <div class="d-flex flex-column navlinks">

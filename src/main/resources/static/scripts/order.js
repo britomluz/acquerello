@@ -23,12 +23,25 @@ const app = Vue.createApp({
       pastas:[],      
       vegetarians:[],
       salads:[],
+
+      //cart
+      qantity: "",
+      totalQantity: "",
+      product:[],      
+      destacados:[],                
+      cart:[],
+      modal:[],
+      search:'',
+      quantity:[],
+      searchProducts: false
     }
   },
   created() {
     //this.Admin_accept_order()
     this.loadProducts()
     this.loadCategories()
+    this.addToCart()
+    this.showModal()
 
   },
   methods: {
@@ -36,6 +49,7 @@ const app = Vue.createApp({
       axios.get('/api/products')
         .then(response => {         
           this.products = response.data.products
+          console.log(this.products)
           //this.mainCourse = this.products.filter(product => product.categories)
         })
        .catch(err => console.log(err.response.data))
@@ -47,15 +61,16 @@ const app = Vue.createApp({
         this.entriesSnacks = [...this.categories.filter(categorie => categorie.name === "Entries & Snacks")[0].products]
         this.specials = [...this.categories.filter(categorie => categorie.name === "Specials")[0].products]
         this.chefPicks = [...this.categories.filter(categorie => categorie.name === "Chef Picks")[0].products]
+        console.log(this.chefPicks)
         this.mainCourses = [...this.categories.filter(categorie => categorie.name === "Main Course")[0].products]
         this.soups = [...this.categories.filter(categorie => categorie.name === "Soup")[0].products]
         this.drinks = [...this.categories.filter(categorie => categorie.name === "Drinks")[0].products]
         this.pastas = [...this.categories.filter(categorie => categorie.name === "Pasta")[0].products]
         this.vegetarians = [...this.categories.filter(categorie => categorie.name === "Vegetarian")[0].products]
         this.salads = [...this.categories.filter(categorie => categorie.name === "Salads")[0].products]
-        console.log(this.mainCourses, prueba)      
+        console.log(this.mainCourses)      
       })
-     .catch(err => console.log(err.response.data))
+     .catch(err => console.log(err))
     },
     createProduct() {
       axios.post('/api/products/create', idCategory = productId, {//ren, I added {} because I got an error 
@@ -111,7 +126,42 @@ const app = Vue.createApp({
       })
         .then(response => console.log(response))
         .catch(err => console.log(err))
-    }
+    },
+    addToCart(id){       
+      
+      this.totalPrice = 0
+      this.totalQantity = 0      
+
+      for (let i = 0; i < this.products.length; i++){
+          if(this.products[i].id == id){            
+            // si no esta en el carrito lo agrega            
+              if(!this.cart.includes(this.products[i])){
+
+                  let obj={
+                           quantity:1
+                          }
+                  let result = Object.assign(this.products[i],obj)
+                  this.cart.push(this.products[i])
+
+              } else {
+                  // de lo contraria le suma +1 a la cantidad del producto 
+                this.products[i].quantity++
+
+               console.log(this.products)
+              }
+              this.totalPrice =  this.totalPrice + this.products[i].price
+              this.totalQantity = this.totalQantity + 1
+              
+              }      
+      }
+      
+      console.log(this.cart)  
+       
+      },    
+      showModal(id){
+      let prod = this.products.filter(item => item.id == id)
+      this.modal = prod                
+      },
   }
 })
 app.mount("#app");

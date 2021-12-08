@@ -31,6 +31,9 @@ public class User {
     @OneToMany(mappedBy = "userAdd")
     private List<Address> address = new ArrayList<>();
 
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+    private Card card;
+
 
     public User() {}
 
@@ -130,6 +133,13 @@ public class User {
         address.add(add);
     }
 
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
 
     @Override
     public String toString() {
