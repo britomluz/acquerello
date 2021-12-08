@@ -49,6 +49,7 @@ const app = Vue.createApp({
       axios.get('/api/products')
         .then(response => {         
           this.products = response.data.products
+          // this.products = localStorage.getItem("products")? JSON.parse(localStorage.getItem("products")) : [...response.data.products]
           console.log(this.products)
           //this.mainCourse = this.products.filter(product => product.categories)
         })
@@ -58,6 +59,7 @@ const app = Vue.createApp({
       axios.get('/api/categories')
       .then(response => {         
         this.categories = response.data.categories
+        // this.categories = localStorage.getItem("categories")? JSON.parse(localStorage.getItem("categories")) : [...response.data.categories]
         this.entriesSnacks = [...this.categories.filter(categorie => categorie.name === "Entries & Snacks")[0].products]
         this.specials = [...this.categories.filter(categorie => categorie.name === "Specials")[0].products]
         this.chefPicks = [...this.categories.filter(categorie => categorie.name === "Chef Picks")[0].products]
@@ -165,11 +167,43 @@ const app = Vue.createApp({
       
       console.log(this.cart)  
        
+      },
+      deleteOne(clickEvent){
+        this.products.forEach(product => {
+            if(clickEvent === product.productId){
+                product.quantity --
+                product.stock ++
+            }
+        }) 
+        // localStorage.setItem("products", JSON.stringify(this.products))
+      },
+      addOne(clickEvent){
+        this.products.forEach(product => {
+          if(clickEvent === product.productId)
+            product.quantity ++
+            product.stock -- 
+        })
+        // localStorage.setItem("products", JSON.stringify(this.products))
       },    
       showModal(id){
       let prod = this.products.filter(item => item.id == id)
       this.modal = prod                
       },
-  }
+      calculateTotal(){
+        let total = 0
+        this.cart.forEach(product => {
+          total += product.price * product.quantity
+        })
+        return total;
+      },
+      emptyCart(){
+        this.cart.forEach(product => {
+          // localStorage.removeItem("products")
+          product.quantity = 0
+        })
+        location.reload()
+      }
+
+  },
 })
 app.mount("#app");
