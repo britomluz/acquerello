@@ -75,7 +75,7 @@ public class AcquerelloApplication {
 			addressRepository.save(address2);
 
 			//GABRIEL: CREATE CARDS TO TEST THE APP
-			Card card1 = new Card("1234-5654-9874-6321", 315, LocalDateTime.now(), 100D, 20, 1, CardType.ACTIVE, user2);
+			Card card1 = new Card("1234-5654-9874-6321", 315, LocalDateTime.now(), 0D, 20, 1, CardType.ACTIVE, user2);
 			cardRepository.save(card1);
 
 			//GABRIEL: CREATE PRODUCTS TO TEST THE APP
