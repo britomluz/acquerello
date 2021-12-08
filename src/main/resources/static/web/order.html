@@ -324,8 +324,8 @@
                 <td>{{product.name}}</td>
                 <td>{{product.quantity}}</td>
                 <td>
-                  <button class="btn btn-info btn-sm" @click="addOne()"> + </button>
-                  <button class="btn btn-danger btn-sm" @click="deleteOne()"> - </button>
+                  <button class="btn btn-info btn-sm" type="button" :id="product.id" @click="addOne"> + </button>
+                  <button class="btn btn-danger btn-sm" type="button" :id="product.id" @click="deleteOne"> - </button>
                 </td>
                 <td class="off-canvas-priceTotal">${{product.price * product.quantity}}</td>
               </tr>

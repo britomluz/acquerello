@@ -169,20 +169,21 @@ const app = Vue.createApp({
        
       },
       deleteOne(clickEvent){
-        this.products.forEach(product => {
-            if(clickEvent === product.productId){
+        this.cart.forEach(product => {
+            if(clickEvent.target.id == product.id){
                 product.quantity --
                 product.stock ++
             }
         }) 
         // localStorage.setItem("products", JSON.stringify(this.products))
       },
-      addOne(clickEvent){
-        this.products.forEach(product => {
-          if(clickEvent === product.productId)
+      addOne(clickEvent){ 
+        this.cart.forEach(product => {  
+          if(clickEvent.target.id == product.id)
             product.quantity ++
             product.stock -- 
         })
+
         // localStorage.setItem("products", JSON.stringify(this.products))
       },    
       showModal(id){
