@@ -19,6 +19,10 @@ public class Booking {
     private Integer quantity;
     private TableState state;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Booking() {}
 
     public Booking(LocalDate date, Integer bookingHour, Integer endBooking, SectorTables sector, Integer table, Integer quantity, TableState state) {
@@ -90,6 +94,32 @@ public class Booking {
     public void setState(TableState state) {
         this.state = state;
     }
+
+    public LocalDate getDateBooking() {
+        return dateBooking;
+    }
+
+    public void setDateBooking(LocalDate dateBooking) {
+        this.dateBooking = dateBooking;
+    }
+
+    public Integer getTableNumber() {
+        return tableNumber;
+    }
+
+    public void setTableNumber(Integer tableNumber) {
+        this.tableNumber = tableNumber;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
 
     @Override
     public String toString() {

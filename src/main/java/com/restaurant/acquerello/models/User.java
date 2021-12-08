@@ -36,6 +36,9 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Card> cards = new LinkedHashSet<>();
 
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+    private Booking booking;
+
 
     public User() {}
 
@@ -141,6 +144,10 @@ public class User {
 
     public void setCards(Set<Card> cards) {
         this.cards = cards;
+    }
+
+    public void addBooking(Booking booking) {
+        booking.setUser(this);
     }
 
     @Override

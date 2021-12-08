@@ -8,17 +8,15 @@ import java.time.LocalDate;
 public class BookingCreateDTO {
     private LocalDate date;
     private Integer bookingHour;
-    private Integer endBooking;
     private SectorTables sector;
     private Integer table;
     private Integer quantity;
 
     public BookingCreateDTO() {}
 
-    public BookingCreateDTO(LocalDate date, Integer bookingHour, Integer endBooking, SectorTables sector, Integer table, Integer quantity) {
+    public BookingCreateDTO(LocalDate date, Integer bookingHour, SectorTables sector, Integer table, Integer quantity) {
         this.date = date;
         this.bookingHour = bookingHour;
-        this.endBooking = endBooking;
         this.sector = sector;
         this.table = table;
         this.quantity = quantity;
@@ -38,14 +36,6 @@ public class BookingCreateDTO {
 
     public void setBookingHour(Integer bookingHour) {
         this.bookingHour = bookingHour;
-    }
-
-    public Integer getEndBooking() {
-        return endBooking;
-    }
-
-    public void setEndBooking(Integer endBooking) {
-        this.endBooking = endBooking;
     }
 
     public SectorTables getSector() {

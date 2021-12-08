@@ -66,6 +66,9 @@ public class AcquerelloApplication {
 			user1.addOrder(order1);
 			user2.addOrder(order2);
 
+			// Brian: Adding bookings to User
+			user2.addBooking(booking1);
+
 			userRepository.save(user1);
 			userRepository.save(user2);
 
