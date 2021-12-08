@@ -514,6 +514,215 @@ footer{
 /* ORDER PAGE end*/
 
 
+/*CHECKOUT*/
+.input-groupF input{
+    display: none;
+  } 
+  
+  /* .form  */
+  .input-groupF input:checked ~ label{  
+    border: 2px solid var(--main-color-primary1);   
+    background: white;  
+    color: var(--color1);  
+    box-shadow: none;
+    box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--color1);
+  }
+  /* .form  */
+  .input-groupF input:checked ~ label i{  
+    color: var(--color1);
+  }
+  /* .form  */
+  .input-groupF input:checked ~ .labelColor{  
+    box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--color1);
+  }
+  .width-50{
+    width: 50%;
+  }
+  .ml-auto{
+    margin-left: auto;
+  }
+  .formCard span,
+  .formCardLoan span{
+    color: var(--color1);
+  } 
+  .formCard b,
+  .formCardLoan b{
+    color: var(--color1);
+  }
+  /*progress bar start*/
+  .progressBar{
+    position: relative;
+    display: flex;
+    width: 500px;
+    justify-content: space-between;
+    margin: 60px 0px 40px 0px;
+    counter-reset: step;  
+  }
+   .progressBar::before, .progress{
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 4px;
+    width: 100%;    
+    background: var(--color2); 
+  } 
+  .progress {    
+    width: 0;
+    transition: 0.3s;
+  }
+  .progress-step{  
+    width: 4rem;
+    height: 3rem;  
+    border: 3px solid var(--color2); 
+    background: white;    
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color2);
+    transition: 1s;
+  }
+  
+  
+  .progress-step i{
+    color: var(--color2);
+    font-size: 25px;
+  }
+
+  .progress-step-active i{               
+    color: rgb(255, 255, 255)!important;  
+    /* transition: 1s;  */
+  }
+  .progress-step-active{      
+    background: var(--color1);
+    border: 3px solid var(--color1);  
+    color: rgb(255, 4, 4)!important;  
+    /* transition: 1s;  */
+  }
+  
+  /*progress bar ends*/
+  
+  /*steps form*/
+  
+  
+  /*form settings*/
+  .formCard{  
+    min-height: 720px;  
+    background: white;
+    border-radius: 10px;
+    border: none;
+    box-shadow: -5px 5px 10px rgb(212, 203, 195); 
+    position: relative;
+    /* border: 3px solid var(--main-color-primary4);  */
+      
+  }
+  .formCardLoan{  
+    min-height: 720px; 
+    background: white;
+    border-radius: 10px;
+    border: none;
+    box-shadow: -5px 5px 10px rgb(212, 203, 195); 
+    position: relative;
+    /* border: 3px solid var(--main-color-primary4);      */
+  }
+  .form{
+    width: 100%;  
+    min-height: 500px;  
+    margin: 0 auto;
+    /* border: 1px solid var(--main-color-primary4);   */
+    border-radius: 20px;
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: center;
+    align-items: stretch;
+    
+  }
+  .form-step{
+    display: none!important; 
+    justify-content: space-between;
+    align-items: stretch;
+    height: 500px; 
+    
+  }
+   
+  .form-step-active{
+    display: block!important;
+    
+  } 
+  .input-groupF label{  
+    padding: 30px 0px;    
+    background: linear-gradient(to top right, #d1037b, var(--main-color-primary4));
+    color: white;
+    border-radius: 20px; 
+    cursor: pointer;    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    font-size: 18px; 
+    box-shadow: -5px 5px 10px rgb(212, 203, 195); 
+  }
+  .form1 i,
+  .form2 i,
+  .form3 i {
+    font-size: 12px;  
+    color: white;
+  }
+ 
+  .transfer input{
+    display: none;
+  }  
+  
+  .btn{
+    width: 90%;
+    height: calc(100% + 5px);
+    border: none;
+    background: var(--color1);;
+    margin-top: 20px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: 0.5s ease;
+    box-shadow: 0px 5px 8px rgb(190, 178, 168)!important;   
+  }
+  
+  .btn:hover{
+    background: var(--color2);
+    color: white;
+  }
+  .btn-confirm{
+    background: #525a3e;
+  }
+  .btn-next{  
+    font-size: 12px;
+  }
+  .btn-prev{
+    margin-right: 8px;
+  }
+  .btn-group{
+    width: 100%;
+    /* height: 15px; */
+    /* margin: 45px 0; */
+    display: flex;
+    position: relative; 
+  }
+
+  /*FORM END*/ 
+  
+  
+  @media screen and (max-width:767px){
+  
+    .progressBar{
+      width: 300px;
+    }
+  
+  }
+
 
 /* MAP */
 #map {
