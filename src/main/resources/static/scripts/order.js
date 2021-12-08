@@ -81,7 +81,15 @@ const app = Vue.createApp({
         price: this.price,
         stock: this.stock
       })
-        .then(console.log("Product created"))
+        .then(res => {
+          console.log("Product created")
+          swal({
+            title: "Good job!",
+            text: "You clicked the button!",
+            icon: "success",
+            button: "Aww yiss!",
+          });
+        })
         .catch(err => console.log(err))
     },
     deleteProduct() {

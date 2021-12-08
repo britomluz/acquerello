@@ -18,6 +18,9 @@
     --fontTitle1: 'Great Vibes', cursive;
     --fontTitle2: 'Montserrat', Verdana, Tahoma, sans-serif;
 }
+body{
+    background: var(--color4);    
+}
 
 h1 {
     font-family: var(--fontTitle1);
@@ -430,7 +433,8 @@ footer{
 /*login end*/
 
 
-/* ORDER PAGE*/
+/* ORDER PAGE start*/
+/*default card*/
 #img-product{
     object-fit: cover;
 }
@@ -477,7 +481,7 @@ footer{
     padding: 20px;
 }
 
-/*acquerello specials*/
+/*acquerello specials card*/
 .cardBorder .card{
     border: none;
 }
@@ -506,6 +510,10 @@ footer{
 .specialFooter i{
     background: rgba(0, 0, 0, 0.205);   
 }
+
+/* ORDER PAGE end*/
+
+
 
 /* MAP */
 #map {
