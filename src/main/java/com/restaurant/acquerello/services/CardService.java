@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface CardService {
     public List<Card> getAll();
     public Card save(Card card);
-    public Optional<Card> getByID(Long id);
+    public Optional<Card> getById(Long id);
 }

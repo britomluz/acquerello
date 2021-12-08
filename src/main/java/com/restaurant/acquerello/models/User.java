@@ -5,7 +5,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 //CREATED BY BRIAN
 
@@ -31,8 +33,8 @@ public class User {
     @OneToMany(mappedBy = "userAdd")
     private List<Address> address = new ArrayList<>();
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
-    private Card card;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Card> cards = new LinkedHashSet<>();
 
 
     public User() {}
@@ -133,12 +135,12 @@ public class User {
         address.add(add);
     }
 
-    public Card getCard() {
-        return card;
+    public Set<Card> getCards() {
+        return cards;
     }
 
-    public void setCard(Card card) {
-        this.card = card;
+    public void setCards(Set<Card> cards) {
+        this.cards = cards;
     }
 
     @Override

@@ -47,7 +47,7 @@ public class ProductController {
     }
 
     @PostMapping("/products/create")
-    public ResponseEntity<?> creteProduct(Authentication authentication, @RequestBody CreateProductDTO createProductDTO){
+    public ResponseEntity<?> createProduct(Authentication authentication, @RequestBody CreateProductDTO createProductDTO){
         User user = userServices.getByEmail(authentication.getName());
         Category category = categoryService.getById(createProductDTO.getIdCategory()).orElse(null);
         if (!user.getType().equals(UserType.ADMIN)){

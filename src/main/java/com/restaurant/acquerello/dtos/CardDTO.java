@@ -28,6 +28,8 @@ public class CardDTO {
         this.type = card.getType();
     }
 
+
+
     public Long getId() {
         return id;
     }
@@ -100,5 +102,5 @@ public class CardDTO {
         this.type = type;
     }
 
-
 }
+

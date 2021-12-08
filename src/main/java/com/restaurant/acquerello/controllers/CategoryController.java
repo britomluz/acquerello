@@ -40,7 +40,7 @@ public class CategoryController {
         try {
             return new ResponseEntity<>(Util.makeDTO("categories", categoryService.getAll().stream().map(CategoryDTO::new).collect(Collectors.toList())), HttpStatus.OK);
         } catch (Exception e){
-            return new ResponseEntity<>("Error en solicitud",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Error in request",HttpStatus.BAD_REQUEST);
         }
     }
 

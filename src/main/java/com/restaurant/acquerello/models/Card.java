@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Entity
 public class Card {
@@ -21,7 +22,7 @@ public class Card {
     private Integer level;
     private CardType type;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -120,4 +121,5 @@ public class Card {
     public void setUser(User user) {
         this.user = user;
     }
+
 }

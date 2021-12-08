@@ -7,7 +7,9 @@ import com.restaurant.acquerello.models.User;
 import com.restaurant.acquerello.models.UserType;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class UserDTO {
@@ -20,7 +22,7 @@ public class UserDTO {
     private UserType type;
     private String img;
     private List<AddressDTO> address = new ArrayList<>();
-    private Card card;
+    private Set<CardDTO> card = new LinkedHashSet<>();
 
     public UserDTO(User user) {
         this.id = user.getId();
@@ -32,7 +34,7 @@ public class UserDTO {
         this.type = user.getType();
         this.img = user.getImg();
         this.address = user.getAddress().stream().map(AddressDTO::new).collect(Collectors.toList());
-        this.card = user.getCard();
+        this.card = user.getCards().stream().map(CardDTO::new).collect(Collectors.toSet());
 
     }
 
@@ -108,11 +110,11 @@ public class UserDTO {
         this.address = address;
     }
 
-    public Card getCard() {
+    public Set<CardDTO> getCard() {
         return card;
     }
 
-    public void setCard(Card card) {
+    public void setCard(Set<CardDTO> card) {
         this.card = card;
     }
 }
