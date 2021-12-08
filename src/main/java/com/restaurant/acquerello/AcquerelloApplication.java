@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class AcquerelloApplication {
 	public CommandLineRunner initData(UserRepository userRepository, OrderRepository orderRepository,
 									  OrderDetailsRepository orderDetailsRepository, ProductRepository productRepository,
 									  CategoryRepository categoryRepository, ProductCategoryRepository productCategoryRepository,
-									  AddressRepository addressRepository, CardRepository cardRepository) {
+									  AddressRepository addressRepository, CardRepository cardRepository, BookingRepository bookingRepository) {
 		return (args) -> {
 
 			Address address1 = new Address("Bids Hills", 332, "HI-3232", "California", "A white house");
@@ -46,6 +47,9 @@ public class AcquerelloApplication {
 			// Brian: Creating orders
 			Order order1 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.IN_PROCESS, 32.43);
 			Order order2 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.IN_PROCESS, 11.43);
+
+			// Brian: Creating bookings
+			Booking booking1 = new Booking(LocalDate.now(), LocalDateTime.now().getHour(), LocalDateTime.now().plusHours(4).getHour(), SectorTables.GOLDEN, 2, 2, TableState.PENDING);
 
 			// Brian : Creating order details
 			OrderDetails orderDetails1 = new OrderDetails("Pancho a la muzarelle", 1, 15.99, 15.99);
@@ -73,6 +77,8 @@ public class AcquerelloApplication {
 
 			addressRepository.save(address1);
 			addressRepository.save(address2);
+
+			bookingRepository.save(booking1);
 
 			//GABRIEL: CREATE CARDS TO TEST THE APP
 			Card card1 = new Card("1234-5654-9874-6321", 315, LocalDateTime.now(), 100D, 20, 1, CardType.ACTIVE, user2);
