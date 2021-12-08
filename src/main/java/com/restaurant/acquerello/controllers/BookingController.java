@@ -58,7 +58,7 @@ public class BookingController {
         return new ResponseEntity<>("Booking canceled", HttpStatus.ACCEPTED);
     }
 
-    @RequestMapping(value = "/booking/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/booking/edit", method = RequestMethod.PATCH)
     public ResponseEntity<?> editBooking(Authentication authentication, @RequestParam Long id, @RequestBody BookingCreateDTO bookingCreateDTO) {
         User user = userService.getByEmail(authentication.getName());
         Booking booking = bookingRepository.getById(id);
