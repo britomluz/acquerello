@@ -115,13 +115,12 @@
               </div>
               <div class="title mt-3 ">
                 <h4>Where do you want your order?</h4>
-                <select class="w-100" v-model="" name="cuentas" id="" placeholder="">
-                  <option value="" selected>Select adress</option>
-                  <option value="" selected>[array adress]</option>
-                  <option value="newAdress" selected>Add new adress</option>
-
+                <select class="w-100" name="cuentas" @change="show_address" id="" placeholder="">
+                  <option value="" >Select adress</option>
+                  <option value="" >[array adress]</option>
+                  <option value="newAdress" >Add new adress</option>
                 </select>
-                <div>
+                <div v-if="show">
                   <div>
                     <form class="d-flex flex-column">
                       <div class=" d-flex flex-column">
@@ -217,14 +216,14 @@
                   <!-- <p> @click="nextProgressBar(this.$refs.submit, this.$refs.progressStep3)"</p> NO SE QUE FUNCION CUMPLE-->
                 </div>
               </div>
-              <div v-if="errorLoan" id="advertencia" class="d-flex justify-content-center align-items-center pt-4"
+              <!-- <div v-if="errorLoan" id="advertencia" class="d-flex justify-content-center align-items-center pt-4"
                 v-cloak>
                 <div class="d-flex align-items-center er">
                   <div class="barraError"></div>
                   <div class="circleError"><i class="bi bi-exclamation"></i></div>
                 </div>
                 <small class="text-danger">{{error_newLoan}}</small>
-              </div>
+              </div> -->
             </div>
           </form>
         </div>
