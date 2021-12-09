@@ -49,7 +49,7 @@ public class OrderController {
         Order order = orderService.getById(id).orElse(null);
 
         if(!user.getOrders().contains(order)){
-            return new ResponseEntity<>("El pedido que desea ver es incorrecto",HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Order incorrect",HttpStatus.FORBIDDEN);
         }
         return new ResponseEntity<>(orderService.getById(id).map(OrderTypeDTO::new).orElse(null), HttpStatus.CREATED);
     }

@@ -47,14 +47,14 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/user/current/admin/{id}")
+    @GetMapping("/user/current/products/{id}")
     public ResponseEntity<Object> getOrders(Authentication authentication, @PathVariable Long id){
 
         User user = userServices.getByEmail(authentication.getName());
         Product product = productService.getById(id).orElse(null);
 
         if(!user.getType().equals(UserType.ADMIN)){
-            return new ResponseEntity<>("Permisos insuficientes", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Don't hace permissions", HttpStatus.FORBIDDEN);
         }
 
         return new ResponseEntity<>(productService.getById(id).map(ProductDTO::new).orElse(null), HttpStatus.CREATED);
