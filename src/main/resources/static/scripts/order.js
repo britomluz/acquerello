@@ -322,7 +322,7 @@ const app = Vue.createApp({
         this.show = false;
       }
     },
-    send_address() {
+    send_address() {//zzzzz
       axios
         .post("/api/address/create", {
           street: this.street,
