@@ -42,7 +42,19 @@ public class PaymentsController {
         if (card.getBalance() < amount){
             return new ResponseEntity<>("Don't have enough balance",HttpStatus.FORBIDDEN);
         }
-
+        card.setPoints((int) (card.getPoints() + (amount/10)));
+        if (card.getPoints() >= 100 && card.getPoints() < 200){
+            card.setLevel(2);
+        }
+        if (card.getPoints() >= 200 && card.getPoints() < 300){
+            card.setLevel(3);
+        }
+        if (card.getPoints() >= 300 && card.getPoints() < 400){
+            card.setLevel(4);
+        }
+        if (card.getPoints() >= 400){
+            card.setLevel(5);
+        }
         card.setBalance(card.getBalance() - amount);
         cardService.save(card);
         return new ResponseEntity<>("Payment successful", HttpStatus.CREATED);

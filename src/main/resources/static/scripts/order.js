@@ -66,8 +66,12 @@ const app = Vue.createApp({
     //this.Admin_accept_order()
     this.loadProducts()
     this.loadCategories()
-    this.addToCart()
+
     this.showModal()
+    if (localStorage.getItem('cart')) {
+      this.cart = JSON.parse(localStorage.getItem('cart'))
+      this.addToCart()
+    }
 
   },
   methods: {
@@ -182,17 +186,13 @@ const app = Vue.createApp({
               } else {
                   // de lo contraria le suma +1 a la cantidad del producto 
                 this.products[i].quantity++
-
-               console.log(this.products)
               }
               this.totalPrice =  this.totalPrice + this.products[i].price
               this.totalQantity = this.totalQantity + 1
-              
               }      
       }
-      
-      console.log(this.cart)  
-       
+      localStorage.setItem('cart', JSON.stringify(this.cart))
+
       },
       deleteOne(clickEvent){
         this.cart.forEach(product => {
@@ -200,7 +200,13 @@ const app = Vue.createApp({
                 product.quantity --
                 product.stock ++
             }
-        }) 
+        })
+        this.cart.forEach((product, i) =>{
+        if (product.quantity == 0) {
+          this.cart.splice(i, 1)
+        }
+      })
+      localStorage.setItem('cart', JSON.stringify(this.cart))
         // localStorage.setItem("products", JSON.stringify(this.products))
       },
       addOne(clickEvent){ 
@@ -210,8 +216,9 @@ const app = Vue.createApp({
             product.stock -- 
         })
 
-        // localStorage.setItem("products", JSON.stringify(this.products))
-      },    
+      console.log(this.cart);
+    },
+       
       showModal(id){
       let prod = this.products.filter(item => item.id == id)
       this.modal = prod                
@@ -234,7 +241,6 @@ const app = Vue.createApp({
       updateForms(btn, form1, form2, step){
         this.nextStep(btn, form1, form2);
         this.nextProgressBar(btn, step);
-
         
      },
     backForms(btn, form1, form2, step){

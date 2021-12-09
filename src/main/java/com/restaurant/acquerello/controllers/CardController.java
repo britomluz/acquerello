@@ -56,7 +56,7 @@ public class CardController {
             cardNumber = Util.cardNumber();
         }
 
-        Card newCard = new Card(cardNumber, Util.cvvCard(), LocalDateTime.now(), 0D, 250, 1, CardType.ACTIVE, user);
+        Card newCard = new Card(cardNumber, Util.cvvCard(), LocalDateTime.now(), 0D, 25, 1, CardType.ACTIVE, user);
         cardService.save(newCard);
         return new ResponseEntity<>("Card created",HttpStatus.CREATED);
     }
@@ -103,10 +103,13 @@ public class CardController {
         if (!card.getType().equals(CardType.ACTIVE)){
             return new ResponseEntity<>("Inactive card",HttpStatus.FORBIDDEN);
         }
+        if(card.getBalance() == 0 && amount >= 100){
+            card.setPoints(card.getPoints() + 10);
+        }
 
         card.setBalance(card.getBalance() + amount);
         cardService.save(card);
-        return new ResponseEntity<>("Card deleted",HttpStatus.OK);
+        return new ResponseEntity<>("Add balance OK",HttpStatus.OK);
     }
 
 }
