@@ -9,6 +9,7 @@ import com.restaurant.acquerello.repositories.OrderRepository;
 import com.restaurant.acquerello.repositories.UserRepository;
 import com.restaurant.acquerello.services.OrderService;
 import com.restaurant.acquerello.services.UserService;
+import com.restaurant.acquerello.services.impl.OrderDetailsImpl;
 import com.restaurant.acquerello.services.impl.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,27 +37,37 @@ public class OrderController {
     @Autowired
     private OrderServiceImpl orderService;
 
+    @Autowired
+    private OrderDetailsImpl orderDetailsService;
+
 
     @GetMapping("/order")
     public List<OrderTypeDTO> getAllOrders() {
         return orderRepository.findAll().stream().map(OrderTypeDTO::new).collect(Collectors.toList());
     }
 
-    @GetMapping("/user/current/orders/{id}")
+    @GetMapping("/order/{id}")
     public ResponseEntity<Object> getOrders(Authentication authentication, @PathVariable Long id){
 
         User user = userServices.getByEmail(authentication.getName());
         Order order = orderService.getById(id).orElse(null);
 
+        /*
         if(!user.getOrders().contains(order)){
             return new ResponseEntity<>("Order incorrect",HttpStatus.FORBIDDEN);
-        }
+        }*/
         return new ResponseEntity<>(orderService.getById(id).map(OrderTypeDTO::new).orElse(null), HttpStatus.CREATED);
     }
 
 
     @GetMapping("/order/details")
     public List<OrderDetailsDTO> getAllOrderDetails() {
+        return orderDetailsRepository.findAll().stream().map(OrderDetailsDTO::new).collect(Collectors.toList());
+    }
+
+
+    @GetMapping("/order/details/{id}")
+    public List<OrderDetailsDTO> getAllOrderDetailsById() {
         return orderDetailsRepository.findAll().stream().map(OrderDetailsDTO::new).collect(Collectors.toList());
     }
 
@@ -146,4 +157,7 @@ public class OrderController {
 
         return new ResponseEntity<>("Order edited", HttpStatus.ACCEPTED);
     }
+
+
+
 }
