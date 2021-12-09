@@ -284,6 +284,10 @@ footer{
 .menuSection{
     padding-top: 50px;    
 }
+.card{
+    background: transparent;
+    border: none;
+}
 .cardProductOne{
     margin: 10px;
 }
