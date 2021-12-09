@@ -42,7 +42,6 @@ public class OrderController {
         return orderRepository.findAll().stream().map(OrderTypeDTO::new).collect(Collectors.toList());
     }
 
-
     @GetMapping("/user/current/orders/{id}")
     public ResponseEntity<Object> getOrders(Authentication authentication, @PathVariable Long id){
 
