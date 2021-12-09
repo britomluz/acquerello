@@ -5,12 +5,13 @@ import com.restaurant.acquerello.models.SectorTables;
 import com.restaurant.acquerello.models.TableState;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class BookingDTO {
     private Long id;
     private LocalDate dateBooking;
-    private Integer bookingHour;
-    private Integer endBooking;
+    private LocalTime bookingHour;
+    private LocalTime endBooking;
     private SectorTables sector;
     private Integer tableNumber;
     private Integer quantity;
@@ -45,19 +46,19 @@ public class BookingDTO {
         this.dateBooking = date;
     }
 
-    public Integer getBookingHour() {
+    public LocalTime getBookingHour() {
         return bookingHour;
     }
 
-    public void setBookingHour(Integer bookingHour) {
+    public void setBookingHour(LocalTime bookingHour) {
         this.bookingHour = bookingHour;
     }
 
-    public Integer getEndBooking() {
+    public LocalTime getEndBooking() {
         return endBooking;
     }
 
-    public void setEndBooking(Integer endBooking) {
+    public void setEndBooking(LocalTime endBooking) {
         this.endBooking = endBooking;
     }
 

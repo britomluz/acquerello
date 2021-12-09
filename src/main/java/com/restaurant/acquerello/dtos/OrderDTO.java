@@ -1,22 +1,16 @@
 package com.restaurant.acquerello.dtos;
 
-import com.restaurant.acquerello.models.OrderDetails;
-
-import java.util.List;
-
 public class OrderDTO {
     private String name;
     private Integer quantity;
     private Double price;
     private Double total;
-    private List<OrderDetails> orders;
 
-    public OrderDTO(String name, Integer quantity, Double price, Double total, List<OrderDetails> orders) {
+    public OrderDTO(String name, Integer quantity, Double price, Double total) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.total = total;
-        this.orders = orders;
     }
 
     public String getName() {
@@ -49,13 +43,5 @@ public class OrderDTO {
 
     public void setTotal(Double total) {
         this.total = total;
-    }
-
-    public List<OrderDetails> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<OrderDetails> orders) {
-        this.orders = orders;
     }
 }

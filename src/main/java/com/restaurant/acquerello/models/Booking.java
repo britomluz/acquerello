@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 public class Booking {
@@ -12,8 +13,8 @@ public class Booking {
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
     private LocalDate dateBooking;
-    private Integer bookingHour;
-    private Integer endBooking;
+    private LocalTime bookingHour;
+    private LocalTime endBooking;
     private SectorTables sector;
     private Integer tableNumber;
     private Integer quantity;
@@ -25,7 +26,7 @@ public class Booking {
 
     public Booking() {}
 
-    public Booking(LocalDate date, Integer bookingHour, Integer endBooking, SectorTables sector, Integer table, Integer quantity, TableState state) {
+    public Booking(LocalDate date, LocalTime bookingHour, LocalTime endBooking, SectorTables sector, Integer table, Integer quantity, TableState state) {
         this.dateBooking = date;
         this.bookingHour = bookingHour;
         this.endBooking = endBooking;
@@ -47,19 +48,19 @@ public class Booking {
         this.dateBooking = date;
     }
 
-    public Integer getBookingHour() {
+    public LocalTime getBookingHour() {
         return bookingHour;
     }
 
-    public void setBookingHour(Integer bookingHour) {
+    public void setBookingHour(LocalTime bookingHour) {
         this.bookingHour = bookingHour;
     }
 
-    public Integer getEndBooking() {
+    public LocalTime getEndBooking() {
         return endBooking;
     }
 
-    public void setEndBooking(Integer endBooking) {
+    public void setEndBooking(LocalTime endBooking) {
         this.endBooking = endBooking;
     }
 
