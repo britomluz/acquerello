@@ -18,21 +18,47 @@
             <h1>
                 form
             </h1>
-            <form>
+            <!--ADD ADDRESS -->
+            <form @submit.prevent="send_address()">
                 <label>street</label>
                 <input type="text" v-model="street">
-                <label>numbetAddres</label>
-                <input type="number" name="" v-model="numbetAddres" id="">
+                <label>numberAddres</label>
+                <input type="number" name="" v-model="numberAddres" id="">
                 <label>  zip</label>
-                <input type="number" name="" v-model="  zip" id="">
+                <input type="text" name="" v-model="zip" id="">
                 <label>state</label>
                 <input type="text" name="" v-model="state" id="">
                 <label for="">reference</label>
                 <input type="text" v-model=" reference" name="" id="">
-                <button @click="send_address">
+                <button>
                     send
                 </button>
             </form>
+        </div>
+        <!-- EDIT ADDRESS -->
+        <div>
+            <h2>EDIT</h2>
+            <form @submit.prevent="edit_address()">
+                <label for="">street</label>
+                <input type="text" name="" v-model="addstreet" id="">
+                <label for="">number</label>
+                <input type="number" name="" v-model="addnumber" id="">
+                <label for="">zip</label>
+                <input type="text" name="" id="" v-model="addzip">
+                <label for="">state</label>
+                <input type="text" name="" id="" v-model="addstate">
+                <label for="">reference</label>
+                <input type="text" name="" v-model="addrefence" id="">
+                <button>
+                    send
+                </button>
+            </form>
+        </div>
+        <!-- DELETE -->
+        <div>   
+            <button type="button" @click="deLete_address">
+                delete
+            </button>
         </div>
         
     </div>
