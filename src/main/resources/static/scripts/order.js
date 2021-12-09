@@ -189,6 +189,7 @@ const app = Vue.createApp({
           this.cart.splice(i, 1)
         }
       })
+      localStorage.setItem('cart', JSON.stringify(this.cart))
         // localStorage.setItem("products", JSON.stringify(this.products))
       },
       addOne(clickEvent){ 
@@ -200,15 +201,7 @@ const app = Vue.createApp({
 
       console.log(this.cart);
     },
-    
-    addOne(clickEvent) {
-      this.cart.forEach((product) => {
-        if (clickEvent.target.id == product.id) product.quantity++;
-        product.stock--;
-      });
-
-        // localStorage.setItem("products", JSON.stringify(this.products))
-      },    
+       
       showModal(id){
       let prod = this.products.filter(item => item.id == id)
       this.modal = prod                
