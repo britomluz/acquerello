@@ -64,12 +64,9 @@ const app = Vue.createApp({
   },
   methods: {
     loadProducts() {
-      axios
-        .get("/api/products")
-        .then((response) => {
-          this.products = response.data.products;
-          // this.products = localStorage.getItem("products")? JSON.parse(localStorage.getItem("products")) : [...response.data.products]
-          console.log(this.products);
+      axios.get('/api/products')
+        .then(response => {         
+          this.products = response.data.products
           //this.mainCourse = this.products.filter(product => product.categories)
         })
         .catch((err) => console.log(err.response.data));
@@ -235,52 +232,43 @@ const app = Vue.createApp({
         if (product.quantity == 0) {
           this.cart.splice(i, 1);
         }
-      });
-      // localStorage.setItem("products", JSON.stringify(this.products))
+      })
+      localStorage.setItem('cart', JSON.stringify(this.cart))
+      },
+      addOne(clickEvent){
+        this.cart.forEach(product => {
+          if(clickEvent.target.id == product.id)
+            product.quantity ++
+            product.stock --
+        })
+        localStorage.setItem('cart', JSON.stringify(this.cart))
     },
-    addOne(clickEvent) {
-      this.cart.forEach((product) => {
-        if (clickEvent.target.id == product.id) product.quantity++;
-        product.stock--;
-      });
+       
+      showModal(id){
+      let prod = this.products.filter(item => item.id == id)
+      this.modal = prod                
+      },
+      calculateTotal(){
+        let total = 0
+        this.cart.forEach(product => {
+          total += product.price * product.quantity
+        })
+        return total;
+      },
+      emptyCart(){
+        this.cart = []
+        localStorage.setItem('cart', JSON.stringify(this.cart))
 
-      console.log(this.cart);
-    },
-
-    addOne(clickEvent) {
-      this.cart.forEach((product) => {
-        if (clickEvent.target.id == product.id) product.quantity++;
-        product.stock--;
-      });
-
-      // localStorage.setItem("products", JSON.stringify(this.products))
-    },
-    showModal(id) {
-      let prod = this.products.filter((item) => item.id == id);
-      this.modal = prod;
-    },
-    calculateTotal() {
-      let total = 0;
-      this.cart.forEach((product) => {
-        total += product.price * product.quantity;
-      });
-      return total;
-    },
-    emptyCart() {
-      this.cart.forEach((product) => {
-        // localStorage.removeItem("products")
-        product.quantity = 0;
-      });
-      location.reload();
-    },
-    //multistep form
-    updateForms(btn, form1, form2, step) {
-      this.nextStep(btn, form1, form2);
-      this.nextProgressBar(btn, step);
-    },
-    backForms(btn, form1, form2, step) {
-      this.prevStep(btn, form1, form2);
-      this.prevProgressBar(btn, step);
+      },
+      //multistep form
+      updateForms(btn, form1, form2, step){
+        this.nextStep(btn, form1, form2);
+        this.nextProgressBar(btn, step);
+        
+     },
+    backForms(btn, form1, form2, step){
+        this.prevStep(btn, form1, form2);
+        this.prevProgressBar(btn, step);          
     },
     nextStep(btn, form1, form2) {
       //this.paymentsList()
