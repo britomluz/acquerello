@@ -290,9 +290,28 @@ const app = Vue.createApp({
        // this.errorLoan = false
   }, 
   sendForm(e) {
-
+    
   }
 
+  },
+  show_address(e) {
+    if (e.target.value == "newAdress") {
+      this.show = true;
+    } else {
+      this.show = false;
+    }
+  },
+  send_address() {//zzzzz
+    axios
+      .post("/api/address/create", {
+        street: this.street,
+        number: this.numberAddress,
+        zip: this.zip,
+        state: "califormia",
+        reference: this.reference,
+      })
+      .then((response) => alert(response.data))
+      .catch((err) => console.log(err.response.data));
   },
 })
 app.mount("#app");
