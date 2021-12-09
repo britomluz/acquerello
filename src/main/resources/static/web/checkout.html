@@ -102,15 +102,15 @@
               <div class="">
                 <div class=" d-flex flex-column">
                   <label for="firstName">Firstname</label>
-                  <input type="text" id="firstName">
+                  <input type="text" id="firstName" v-model="firstName">
                 </div>
                 <div class="d-flex flex-column">
                   <label for="lastName">Lastname</label>
-                  <input type="text" id="lastName">
+                  <input type="text" id="lastName" v-model="lastName">
                 </div>
                 <div class="d-flex flex-column">
                   <label for="phone">Phone</label>
-                  <input type="text" id="lastName">
+                  <input type="text" id="phone" v-model="phone">
                 </div>
               </div>
               <div class="title mt-3 ">
@@ -127,31 +127,31 @@
                       <div class=" d-flex flex-column">
                         <div class="d-flex align-items-center justify-content-around">
                           <div class="d-flex flex-column w-100">
-                            <label for="firstName">*Street</label>
-                            <input type="text" id="firstName" required>
+                            <label for="street">*Street</label>
+                            <input type="text" id="street" v-model="street" required>
                           </div>
                         </div>
                         <div class=" d-flex flex-column">
                           <div class="d-flex align-items-center justify-content-around">
 
                             <div class="d-flex flex-column">
-                              <label for="firstName">*Nº</label>
-                              <input type="text" id="firstName" required>
+                              <label for="number">*Nº</label>
+                              <input type="text" id="number" v-model="number" required>
                             </div>
                             <div class="d-flex flex-column">
-                              <label for="firstName">Zip Code</label>
-                              <input type="text" id="firstName">
+                              <label for="zip">Zip Code</label>
+                              <input type="text" id="zip" v-model="zip">
                             </div>
                           </div>
                           <div>
                             <label for="reference">Reference</label>
-                            <textarea name="" id="reference" cols="30" rows="3" class="col-12"></textarea>
+                            <textarea name="" id="reference" cols="30" rows="3" class="col-12" v-model="reference"></textarea>
                           </div>
                         </div>
                       </div>
                     </form>
                   </div>
-                </div>                
+                </div>             
               </div>
               <div class="mt-2">
                 <a ref="next1"
@@ -169,19 +169,19 @@
                 <div class=" d-flex flex-column">
                   <label for="ccn">Card Number</label>
                   <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,16}" autocomplete="cc-number"
-                    maxlength="16" placeholder="xxxxxxxxxxxxxxxx">
+                    maxlength="16" placeholder="xxxxxxxxxxxxxxxx" v-model="numberCard">
                 </div>
               </div>
               <div class="d-flex justify-content-between">
                 <div class=" d-flex flex-column">
                   <label for="ccn">CVV</label>
                   <input id="ccn" type="tel" inputmode="numeric" autocomplete="cc-number" maxlength="3"
-                    placeholder="xxx">
+                    placeholder="xxx" v-model="cvv">
                 </div>
                 <div class=" d-flex flex-column">
                   <label for="ccn">Vec.</label>
                   <input id="ccn" type="tel" inputmode="text" autocomplete="cc-number" maxlength="5"
-                    placeholder="yy/mm">
+                    placeholder="yy/mm" v-model="vec">
                 </div>
               </div>
               <div class="btn-group mt-3">

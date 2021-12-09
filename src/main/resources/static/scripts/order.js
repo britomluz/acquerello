@@ -43,6 +43,23 @@ const app = Vue.createApp({
             progressSteps: [],             
             progressActive:'',
 
+      // save orders step by step
+
+        firstName: "",
+        lastName: "",
+        phone: "",
+
+      addessSelected: [],
+
+        street: "",
+        number: "",
+        zip: "",
+        reference: "",
+
+
+        numberCard: "",
+        cvv: "",
+        vec: ""
     }
   },
   created() {
@@ -217,6 +234,10 @@ const app = Vue.createApp({
       updateForms(btn, form1, form2, step){
         this.nextStep(btn, form1, form2);
         this.nextProgressBar(btn, step);
+
+        console.log(this.numberCard)
+        console.log(this.cvv)
+        console.log(this.vec)
         
      },
     backForms(btn, form1, form2, step){
