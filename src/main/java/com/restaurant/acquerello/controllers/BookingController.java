@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
+
 @RestController
 @RequestMapping("/api")
 public class BookingController {
@@ -35,7 +37,7 @@ public class BookingController {
             return new ResponseEntity<>("The field date is empty", HttpStatus.FORBIDDEN);
         }
 
-        int plus = bookingCreateDTO.getBookingHour() + 4;
+        LocalTime plus = bookingCreateDTO.getBookingHour().plusHours(4);
 
         Booking booking = new Booking(bookingCreateDTO.getDate(), bookingCreateDTO.getBookingHour(), plus, bookingCreateDTO.getSector(), 2, 2, TableState.PENDING);
 

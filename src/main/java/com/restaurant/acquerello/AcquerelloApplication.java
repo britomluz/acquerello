@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @SpringBootApplication
@@ -49,7 +50,7 @@ public class AcquerelloApplication {
 			Order order2 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.IN_PROCESS, 11.43);
 
 			// Brian: Creating bookings
-			Booking booking1 = new Booking(LocalDate.now(), LocalDateTime.now().getHour(), LocalDateTime.now().plusHours(4).getHour(), SectorTables.GOLDEN, 2, 2, TableState.PENDING);
+			Booking booking1 = new Booking(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(4), SectorTables.GOLDEN, 2, 2, TableState.PENDING);
 
 			// Brian : Creating order details
 			OrderDetails orderDetails1 = new OrderDetails("Pancho a la muzarelle", 1, 15.99, 15.99);
