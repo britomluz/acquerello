@@ -61,11 +61,11 @@ public class AddressController {
 
         Address address = addressRepository.getById(id);
 
-        List<Address> verify = user.getAddress().stream().filter(add -> add.getId().equals(id)).collect(Collectors.toList());
+        /*List<Address> verify = user.getAddress().stream().filter(add -> add.getId().equals(id)).collect(Collectors.toList());
 
         if (verify.size() < 1) {
             return new ResponseEntity<>("Invalid Address", HttpStatus.FORBIDDEN);
-        }
+        }*/
 
         if(addressCreateDTO.getStreet() != null) {
             address.setStreet(addressCreateDTO.getStreet());
@@ -80,11 +80,11 @@ public class AddressController {
         }
 
         if(addressCreateDTO.getState() != null) {
-            address.setZip(addressCreateDTO.getState());
+            address.setState(addressCreateDTO.getState());
         }
 
         if(addressCreateDTO.getReference() != null) {
-            address.setZip(addressCreateDTO.getReference());
+            address.setReference(addressCreateDTO.getReference());
         }
 
         addressService.save(address);
