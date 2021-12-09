@@ -32,28 +32,48 @@ const App = Vue.createApp({
     });
     this.loadcreate();
     this.loadDataOrders()
+
   },
   methods: {
-    showOrder(e){
-      let id = e.target.id
-      window.location.href = `./orders.html?id=${id}`
-       console.log(id)
-  },
-  loadDataOrders(){
+    showOrder(e) {
+
+      let id = e.target.parentElement.id
+      window.location.href = `./order-details.html?id=${id}`
+
+    },
+    loadDataOrders() {
       const urlParam = new URLSearchParams(window.location.search);
       const id = urlParam.get('id');
-      
-      axios.get(`/api/clients/current/cards/${id}`)
-            .then(res => {                
-              this.order = res.data.sort((a,b) => parseInt(b.id - a.id))
-              console.log(this.order)
-              
-          })
-            .catch(err => err.message)
-      },
+
+      axios.get(`/api/order/${id}`)
+        .then(res => {
+          this.order = res.data
+          //.sort((a,b) => parseInt(b.id - a.id))
+
+
+        })
+        .catch(err => err.message)
+    },
+    showOrderDetails(e) {
+      let id = e.target.parentElement.id
+      window.location.href = `./order-details.html?id=${id}`
+
+    },
+    loadDataOrdersDetails() {
+      const urlParam = new URLSearchParams(window.location.search);
+      const id = urlParam.get('id');
+
+      axios.get(`/api/order/${id}`)
+        .then(res => {
+          this.order = res.data
+          //.sort((a,b) => parseInt(b.id - a.id))
+
+
+        })
+        .catch(err => err.message)
+    },
     loadcreate() {
-      axios
-        .get(`/api/order`)
+      axios.get(`/api/order`)
         .then((response) => {
           this.orders = response.data;
           console.log(this.orders)
@@ -68,15 +88,14 @@ const App = Vue.createApp({
     product_add() {
       // const fd = new FormData;
       // fd.append('image',this.productsimg,this.productimg.name)
-      axios
-        .post("/api/products/create", {
-          idCategory: this.idcategory,
-          name: this.nameproducts,
-          description: this.descriptionproducts,
-          productImage: this.productsimg,
-          price: this.priceproduct,
-          stock: this.stockproduct,
-        })
+      axios.post("/api/products/create", {
+        idCategory: this.idcategory,
+        name: this.nameproducts,
+        description: this.descriptionproducts,
+        productImage: this.productsimg,
+        price: this.priceproduct,
+        stock: this.stockproduct,
+      })
         .then(response => console.log(response))
         .catch(err => {
           console.log(err.response.data)
@@ -84,8 +103,7 @@ const App = Vue.createApp({
         })
     },
     deleteProduct() {
-      axios
-        .delete(`/api/products/delete/${this.idproducts}`)
+      axios.delete(`/api/products/delete/${this.idproducts}`)
         .then((response) => console.log(response.data))
         .catch((err) => console.log(err));
     },
