@@ -7,7 +7,9 @@ import com.restaurant.acquerello.models.*;
 import com.restaurant.acquerello.repositories.OrderDetailsRepository;
 import com.restaurant.acquerello.repositories.OrderRepository;
 import com.restaurant.acquerello.repositories.UserRepository;
+import com.restaurant.acquerello.services.OrderService;
 import com.restaurant.acquerello.services.UserService;
+import com.restaurant.acquerello.services.impl.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,10 +33,27 @@ public class OrderController {
     @Autowired
     private OrderDetailsRepository orderDetailsRepository;
 
+    @Autowired
+    private OrderServiceImpl orderService;
+
+
     @GetMapping("/order")
     public List<OrderTypeDTO> getAllOrders() {
         return orderRepository.findAll().stream().map(OrderTypeDTO::new).collect(Collectors.toList());
     }
+
+    @GetMapping("/user/current/orders/{id}")
+    public ResponseEntity<Object> getOrders(Authentication authentication, @PathVariable Long id){
+
+        User user = userServices.getByEmail(authentication.getName());
+        Order order = orderService.getById(id).orElse(null);
+
+        if(!user.getOrders().contains(order)){
+            return new ResponseEntity<>("El pedido que desea ver es incorrecto",HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<>(orderService.getById(id).map(OrderTypeDTO::new).orElse(null), HttpStatus.CREATED);
+    }
+
 
     @GetMapping("/order/details")
     public List<OrderDetailsDTO> getAllOrderDetails() {
@@ -101,7 +120,6 @@ public class OrderController {
         User user = userServices.getByEmail(authentication.getName());
 
         // delete the order by id
-
         orderRepository.deleteById(id);
 
         return new ResponseEntity<>("Order deleted",HttpStatus.ACCEPTED);

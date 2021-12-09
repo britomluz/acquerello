@@ -2,6 +2,7 @@ package com.restaurant.acquerello.controllers;
 
 import com.restaurant.acquerello.dtos.CreateProductDTO;
 import com.restaurant.acquerello.dtos.ModifyProductDTO;
+import com.restaurant.acquerello.dtos.OrderTypeDTO;
 import com.restaurant.acquerello.dtos.ProductDTO;
 import com.restaurant.acquerello.models.*;
 import com.restaurant.acquerello.services.CategoryService;
@@ -45,6 +46,20 @@ public class ProductController {
             return new ResponseEntity<>("Error in request",HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/user/current/admin/{id}")
+    public ResponseEntity<Object> getOrders(Authentication authentication, @PathVariable Long id){
+
+        User user = userServices.getByEmail(authentication.getName());
+        Product product = productService.getById(id).orElse(null);
+
+        if(!user.getType().equals(UserType.ADMIN)){
+            return new ResponseEntity<>("Permisos insuficientes", HttpStatus.FORBIDDEN);
+        }
+
+        return new ResponseEntity<>(productService.getById(id).map(ProductDTO::new).orElse(null), HttpStatus.CREATED);
+    }
+
 
     @PostMapping("/products/create")
     public ResponseEntity<?> createProduct(Authentication authentication, @RequestBody CreateProductDTO createProductDTO){
