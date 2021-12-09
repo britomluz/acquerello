@@ -213,7 +213,7 @@
                     class="btn btn-prev"><i class="bi bi-arrow-left"></i>
                     Go back</a>
                   <button ref="submit" type="submit" value="submit" class="btn btn-confirm"
-                    :disabled="btnDisabledLoan">Confirm <i class="bi bi-check-lg"></i></button>
+                    :disabled="btnDisabledLoan" @click="sendForm">Confirm <i class="bi bi-check-lg"></i></button>
                   <!-- <p> @click="nextProgressBar(this.$refs.submit, this.$refs.progressStep3)"</p> NO SE QUE FUNCION CUMPLE-->
                 </div>
               </div>

@@ -289,6 +289,9 @@ const app = Vue.createApp({
 
        // this.errorLoan = false
   }, 
+  sendForm(e) {
+    console.log(e.target)
+  }
 
   },
 })
