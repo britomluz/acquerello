@@ -21,12 +21,12 @@ const App = Vue.createApp({
         msg: "",
         correct: false,
       },
-      password_two:{
+      password_two: {
         input: "",
         msg: "",
         correct: false,
       },
-      email_two:{
+      email_two: {
         input: "",
         msg: "",
         correct: false,
@@ -37,11 +37,24 @@ const App = Vue.createApp({
         correct: false,
       },
 
-      //
-      
+      //filter orders admin
+      filterDescription: '',
+      filterType: [],
+      filterRange: 50000,
+      filterDay: '',
+      filterMonth: '',
+      filterYear: '',
+
+      //filter orders user
+      filterDescriptionUser: '',
+      filterTypeUser: [],
+      filterRangeUser: 50000,
+      filterDayUser: '',
+      filterMonthUser: '',
+      filterYearUser: '',
     };
   },
-  created() {},
+  created() { },
   methods: {
     validator_firstname(data) {
       if (!data.input) {
@@ -160,29 +173,48 @@ const App = Vue.createApp({
         this.password.correct == true &&
         this.phone.correct == true
       ) {
-      axios.post("/api/users",{
-        firstName:this.firstname.input,
-        lastName:this.lastname.input,
-        email:this.email.input,
-        password:this.password.input,
-        number:this.phone.input,
-      })
-      .then(response=>window.location.href="/web/myaccount.html")
-      .catch(err=>{
-        console.log(err.response.data)
-        console.log(this.firstname.input,this.lastname.input,this.email.input,this.password.input,this.phone.input,)
-      })
+        axios.post("/api/users", {
+          firstName: this.firstname.input,
+          lastName: this.lastname.input,
+          email: this.email.input,
+          password: this.password.input,
+          number: this.phone.input,
+        })
+          .then(response => window.location.href = "/web/myaccount.html")
+          .catch(err => {
+            console.log(err.response.data)
+            console.log(this.firstname.input, this.lastname.input, this.email.input, this.password.input, this.phone.input,)
+          })
       }
     },
-    login(){
-        axios.post("/api/login",`email=${this.email_two.input}&password=${this.password_two.input}`)
-        .then(response=>window.location.href="/web/myaccount.html")
-        .catch(err=>{console.log(err.response.data)
-        console.log(this.email_two.input,this.password_two.input)
-      
-      }) 
+    login() {
+      axios.post("/api/login", `email=${this.email_two.input}&password=${this.password_two.input}`)
+        .then(response => window.location.href = "/web/myaccount.html")
+        .catch(err => {
+          console.log(err.response.data)
+          console.log(this.email_two.input, this.password_two.input)
+
+        })
     }
   },
+  computed: {
+    filterOrdersAdmin() {
+      this.orders.filter(order => order.description.toLowerCase().match(this.filterDescription.toLowerCase()))
+        .filter(order => this.filterType.includes(order.type) || this.filterType.length === 0)
+        .filter(order => order.amount <= this.filterRange)
+        .filter(order => order.date.slice(0, 2).match(this.filterDay))
+        .filter(order => order.date.slice(3, 5).match(this.filterMonth))
+        .filter(order => order.date.slice(6, 10).match(this.filterYear))
+    },
+    filterOrdersUser() {
+      this.ordersUser.filter(order => order.description.toLowerCase().match(this.filterDescriptionUser.toLowerCase()))
+                .filter(order => this.filterTypeUser.includes(order.type) || this.filterTypeUser.length === 0)
+                .filter(order => order.amount <= this.filterRangeUser)
+                .filter(order => order.date.slice(0, 2).match(this.filterDayUser))
+                .filter(order => order.date.slice(3, 5).match(this.filterMonthUser))
+                .filter(order => order.date.slice(6, 10).match(this.filterYearUser))
+    },
+  }
 });
 
 App.mount("#app");
