@@ -77,7 +77,14 @@ const app = Vue.createApp({
         requests: {
           createUser: false,
           createAddress: false
-        }
+        },
+        // edit product
+        nameeditproduct:"",
+        descriptionproduc:"",
+        productimg:"",
+        priceedit:0,
+        stockedit:0,
+        showbtn:false
 
     }
   },
@@ -432,6 +439,27 @@ const app = Vue.createApp({
         let id = e.target.parentElement.id
         window.location.href = `./product-details.html?id=${id}`
       },
+      // edit products
+      pacth_product(){
+        this.productimg = this.product.productImage
+        axios.patch(`/api/products/edit/${this.product.id}`,{
+          name:this.nameeditproduct,
+          description:this.descriptionproduc,
+          productImage:this.productimg,
+          price:this.priceedit,
+          stock:this.stockedit
+        })
+        .then(response=>{
+          setTimeout(() => {
+            window.location.reload()
+          }, 500);
+        })
+        .catch(err=>console.log(err.response))
+      },
+      // show btn in pag product-details
+      show_btn(){
+        this.showbtn=!this.showbtn
+      }
   },
   computed:{
     filterProducts(){
