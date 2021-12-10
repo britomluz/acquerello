@@ -2,148 +2,155 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../styles/style.css">    
-    <link rel="stylesheet" href="../styles/account.css">
-    <link rel="shortcut icon" href="../assets/favicon.png">    
-    <title>Acquerello</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="stylesheet" href="../styles/account.css">
+  <link rel="shortcut icon" href="../assets/favicon.png">
+  <title>Acquerello</title>
 </head>
 
 <body>
-    <div id="app">
+  <div id="app">
 
-        <nav id="navbar" class="navbar fondoBlack fixed-top">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <img src="../assets/acquerello.png" alt="" width="150">
-                </a>
+    <nav id="navbar" class="navbar fondoBlack fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="../assets/acquerello.png" alt="" width="150">
+        </a>
 
-            <div class="d-flex">
-              <a class="nav-link" href="index.html">HOME</a>
-              <a class="nav-link" href="order.html">ORDER NOW</a>
-              <a class="nav-link" href="booking.html">BOOKING</a>
-              <a class="nav-link" href="contact.html">CONTACT</a>                  
-            </div>  
+        <div class="d-flex">
+          <a class="nav-link" href="index.html">HOME</a>
+          <a class="nav-link" href="order.html">ORDER NOW</a>
+          <a class="nav-link" href="booking.html">BOOKING</a>
+          <a class="nav-link" href="contact.html">CONTACT</a>
+        </div>
 
-            <div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  
-                    <button class="navIcon"><i class="bi bi-search"></i></button>
-                    <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
-                    <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i class="bi bi-cart-fill"></i></button>          
-            </div>
+        <div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-              
-              <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                  <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-                  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                  <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="home.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="order.html">Order Now</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="booking.html">Bookings</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                  </ul>
-                  <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </nav>
+          <button class="navIcon"><i class="bi bi-search"></i></button>
+          <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+          <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
+              class="bi bi-cart-fill"></i></button>
+        </div>
 
-          <header class="headerPagesPanel d-flex align-items-center">
-              <h1>Admin panel</h1>                 
-              
-          </header>
 
-          <main>
-            <div class="mt-1">
-              <a href="admin.html" class="btn-green"><i class="bi bi-arrow-left text-light"></i> Admin Panel</a>
-            </div>
-            <h3 class="py-4 fs-5 text-green">Product details</h3>
-              
-            <div class="row d-flex justify-content-center mb-5">
-              <h3>Product Nº {{product.id}}</h3>
-              <div class="col-12 col-md-4 mt-5">
-                  
-                  <div>
-                    <img :src="product.productImage" class="w-100" alt="product.name">
-                  </div>
-              </div>
-              <div class="col-12 col-md-4 mt-5">
-                  <h3 class="mb-4">{{product.name}}</h3>
-                  <p><b>Description: </b>{{product.description}}</p>
-                  <p><b>Price: </b>{{product.price}}</p>
-                  <p><b>Stock: </b>{{product.stock}}</p>
-              </div>
-            </div>
-            <div>
-              <form @submit.prevent=" path_product()">
-                <select v-model="idpatch">
-                    <option v-for="producto in products" :value="producto.id">
-                        {{producto.id}} - {{producto.name}}
-                    </option>
-                </select>
-                <label>name</label>
-                <input type="text" v-model="namepatch">
-                <label>description</label>
-                <input type="text" v-model="descriptionpatch">
-                <label>img</label>
-                <input type="file">
-                <label>price</label>
-                <input type="number" v-model=" pricepatch">
-                <label> stock</label>
-                <input type="number" v-model=" stockpatch">
-                <button>
-                    send
-                </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="order.html">Order Now</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="booking.html">Bookings</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-            </div>
-          </main>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <header class="headerPagesPanel d-flex align-items-center">
+      <h1>Admin panel</h1>
+
+    </header>
+
+    <main>
+      <div class="mt-1">
+        <a href="admin.html" class="btn-green"><i class="bi bi-arrow-left text-light"></i> Admin Panel</a>
+      </div>
+      <h3 class="py-4 fs-5 text-green">Product details</h3>
+
+      <div class="row d-flex justify-content-center mb-5">
+        <h3>Product Nº {{product.id}}</h3>
+        <button @click="show_btn" class="btn btn-danger">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"
+            viewBox="0 0 16 16">
+            <path
+              d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+          </svg>
+        </button>
+        <div class="col-12 col-md-4 mt-5">
+
+          <div>
+            <img :src="product.productImage" class="w-100" alt="product.name">
+          </div>
+        </div>
+        <div class="col-12 col-md-4 mt-5">
+
+          <div v-if="showbtn">
+            <form @submit.prevent="pacth_product">
+              <label for="">name</label>
+              <input type="text" v-model="nameeditproduct">
+              <label for="">description</label>
+              <input type="text" name="" v-model="descriptionproduc" id="">
+              <label for="">price</label>
+              <input type="number" name="" v-model="priceedit" id="">
+              <label for="">stock</label>
+              <input type="number" name="" v-model="stockedit" id="">
+              <button>
+                edit
+              </button>
+            </form>
+          </div>
+          <div v-else>
+            <h3 class="mb-4">{{product.name}}</h3>
+            <p><b>Description: </b>{{product.description}}</p>
+            <p><b>Price: </b>{{product.price}}</p>
+            <p><b>Stock: </b>{{product.stock}}</p>
+          </div>
+        </div>
+      </div>
+      <div>
+      </div>
+    </main>
 
 
-                
-    </div>
+
+  </div>
 
 
-    <script>
-      let menu = document.getElementById('navbar')
-      window.addEventListener('scroll', function () {
-        // navbar.style.background = 'black'
-        menu.classList.toggle('fondoBlack', window.scrollY > 0)
-  
-      })
-    </script>
+  <script>
+    let menu = document.getElementById('navbar')
+    window.addEventListener('scroll', function () {
+      // navbar.style.background = 'black'
+      menu.classList.toggle('fondoBlack', window.scrollY > 0)
+
+    })
+  </script>
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-        crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/vue@next"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="../scripts/order.js"></script>
-    
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="../scripts/order.js"></script>
+
 
 </body>
 
