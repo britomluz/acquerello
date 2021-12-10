@@ -102,8 +102,8 @@
     </div>
     <main class="d-flex flex-column mb-5">
       <div class="row mt-5">
-        <h4 class="text-center">Firstname</h4>
-        <p class="text-center">email@email.com</p>
+        <h4 class="text-center">{{user.firstName}}</h4>
+        <p class="text-center">{{user.email}}</p>
         <div class="row mt-2 d-flex justify-content-center myAccount">
 
           <div class="firstCol col-10 col-lg-5 info mt-3 d-flex flex-column justify-content-start">
@@ -113,11 +113,11 @@
                 <h2 class="fs-1 text-start">Information</h2>
                 <div>
                   <small>Firstname</small>
-                  <h5>User name</h5>
+                  <h5>{{user.firstName}}</h5>
                 </div>
                 <div>
                   <small>Lastname</small>
-                  <h5>User lastname</h5>
+                  <h5>{{user.lastName}}</h5>
                 </div>
               </div>
             </div>
@@ -127,10 +127,10 @@
                 <h2 class="fs-1 text-start">My adresses</h2>
                 <table class="table">
                   <tbody>
-                    <tr>
-                      <td class="text-start">Street</td>
-                      <td class="text-start">Number</td>
-                      <td class="text-start">ZIP</td>
+                    <tr v-for="addr in myaddress">
+                      <td class="text-start">{{addr.street}}</td>
+                      <td class="text-start">{{addr.number}}</td>
+                      <td class="text-start">{{addr.zip}}</td>
                       <td class="text-start"><button type="button" class="btn-i"><i
                             class="bi .cRed bi-pencil cRed"></i></button></td>
                     </tr>
@@ -138,7 +138,8 @@
                 </table>
               </div>
               <div>
-                <button type="button" class="btn-green mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Add new adress</button>
+                <button type="button" class="btn-green mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Add
+                  new adress</button>
               </div>
             </div>
 
@@ -148,23 +149,23 @@
           <div class="firstCol col-10 col-lg-5 info mt-3 d-flex flex-column justify-content-center">
 
             <div class="row a ">
-              <div class="">
+              <div class="" v-for="card in card">
                 <h2 class="fs-1 text-start">Card Acquerello</h2>
                 <div>
                   <small>Level</small>
-                  <h5>Level user</h5>
+                  <h5>{{card.level}}</h5>
                 </div>
                 <div>
                   <small>Points</small>
-                  <h5>Qantity points</h5>
+                  <h5>{{card.points}}</h5>
                 </div>
               </div>
             </div>
 
             <div class="row a mt-5">
-              <div class="">
+              <!-- <div class="">
                 <img class="img-fluid" src="../assets/card.png" alt="">
-              </div>
+              </div> -->
             </div>
 
 
@@ -174,29 +175,40 @@
 
       </div>
 
-  </div>
 
-  </main>
 
-  <!-- modal new adress -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn-green" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn-green">Save changes</button>
+    </main>
+    <!-- modal new adress -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <label for="">street</label>
+              <input type="text" name="" v-model="street" id="">
+              <label for="">number</label>
+              <input type="number" name="" v-model="numberAddress" id="">
+              <label for="">zip</label>
+              <input type="text" name="" v-model="zip" id="">
+              <label for="">state</label>
+              <input type="text" name="" v-model="state" id="">
+              <label for="">reference</label>
+              <input type="text" name="" v-model="reference" id=""> 
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-green" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn-green" @click="send_address">Save changes</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  </div>
+
 
 
   <script>
@@ -216,7 +228,7 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://unpkg.com/vue@next"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="./scripts/order.js"></script>
+  <script src="../scripts/myaccount.js"></script>
 
 </body>
 
