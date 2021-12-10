@@ -58,6 +58,16 @@ public class OrderController {
         }*/
         return new ResponseEntity<>(orderService.getById(id).map(OrderTypeDTO::new).orElse(null), HttpStatus.CREATED);
     }
+    @GetMapping("/order/current/")
+    public ResponseEntity<Object> getOrderUser(Authentication authentication){
+
+        User user = userServices.getByEmail(authentication.getName());
+        /*
+        if(!user.getOrders().contains(order)){
+            return new ResponseEntity<>("Order incorrect",HttpStatus.FORBIDDEN);
+        }*/
+        return new ResponseEntity<>( user.getOrders().stream().map(OrderTypeDTO::new).collect(Collectors.toList()), HttpStatus.CREATED);
+    }
 
 
     @GetMapping("/order/details")
