@@ -82,7 +82,7 @@ public class ProductController {
         if (createProductDTO.getStock() <= 0){
             return new ResponseEntity<>("Stock cannot be 0 or less",HttpStatus.FORBIDDEN);
         }
-        Product product = new Product(createProductDTO.getName(), createProductDTO.getDescription(), createProductDTO.getProductImage(), createProductDTO.getPrice(), createProductDTO.getStock());
+        Product product = new Product(createProductDTO.getName(), 0, createProductDTO.getDescription(), createProductDTO.getProductImage(), createProductDTO.getPrice(), createProductDTO.getStock());
         productService.save(product);
         ProductCategory productCategory = new ProductCategory(product, category);
         productCategoryServices.save(productCategory);

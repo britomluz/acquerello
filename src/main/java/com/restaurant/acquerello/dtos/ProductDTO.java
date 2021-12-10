@@ -1,6 +1,7 @@
 package com.restaurant.acquerello.dtos;
 
 import com.restaurant.acquerello.models.Product;
+import com.restaurant.acquerello.models.ProductCategory;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -11,19 +12,23 @@ import java.util.stream.Collectors;
 public class ProductDTO {
     private Long id;
     private String name;
+    private Integer quantity;
     private String description;
     private String productImage;
     private Double price;
     private Integer stock;
+    private Set<ProductCategoryDTO> productCategories = new LinkedHashSet<>();
 
 
     public ProductDTO(Product product) {
         this.id = product.getId();
         this.name = product.getName();
+        this.quantity = product.getQuantity();
         this.description = product.getDescription();
         this.productImage = product.getProductImage();
         this.price = product.getPrice();
         this.stock = product.getStock();
+        this.productCategories = product.getProductCategories().stream().map(ProductCategoryDTO::new).collect(Collectors.toSet());
     }
 
     public Long getId() {
@@ -40,6 +45,14 @@ public class ProductDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public String getDescription() {
@@ -74,4 +87,11 @@ public class ProductDTO {
         this.stock = stock;
     }
 
+    public Set<ProductCategoryDTO> getProductCategories() {
+        return productCategories;
+    }
+
+    public void setProductCategories(Set<ProductCategoryDTO> productCategories) {
+        this.productCategories = productCategories;
+    }
 }

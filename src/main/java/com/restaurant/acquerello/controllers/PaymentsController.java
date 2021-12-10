@@ -1,8 +1,11 @@
 package com.restaurant.acquerello.controllers;
 
 import com.restaurant.acquerello.models.Card;
+import com.restaurant.acquerello.models.Order;
 import com.restaurant.acquerello.models.User;
 import com.restaurant.acquerello.services.CardService;
+import com.restaurant.acquerello.services.MailService;
+import com.restaurant.acquerello.services.OrderService;
 import com.restaurant.acquerello.services.UserService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @Transactional
 @RestController
@@ -22,6 +27,12 @@ public class PaymentsController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private MailService mailService;
 
     @PostMapping("/payments/{id}")
     public ResponseEntity<?> registerPayment(Authentication authentication, @PathVariable("id") Long id, @NotNull @RequestParam Double amount){
@@ -59,5 +70,29 @@ public class PaymentsController {
         cardService.save(card);
         return new ResponseEntity<>("Payment successful", HttpStatus.CREATED);
     }
+
+    @PostMapping("/sendMail")
+    public ResponseEntity<?> sendMail(Authentication authentication, @RequestParam Long id){
+        User user = userService.getByEmail(authentication.getName());
+        Order order = orderService.getById(id).orElse(null);
+        assert order != null;
+        String body = "Hey "+user.getFirstName()+" "+"\n\n Status: "+order.getState()+"\n\n Total: "+order.getTotal();
+        mailService.sendMail(user,order,body);
+        return new ResponseEntity<>("Send", HttpStatus.OK);
+    }
+
+    @GetMapping("/")
+    public String index(){
+        return "send_mail_view";
+    }
+
+   /* @PostMapping("/sendMailTo")
+    public String sendMail(@RequestParam("name") String name, @RequestParam("mail") String mail, @RequestParam("subject") String subject, @RequestParam("body") String body){
+
+        String message = body +"\n\n\nDatos de contacto: " + "\nNombre: " + name + "\nE-mail: " + mail;
+        mailService.sendMailTo(mail, subject, message);
+
+        return "send_mail_view";
+    }*/
 
 }
