@@ -1,7 +1,8 @@
 package com.restaurant.acquerello.models;
 
-import org.apache.logging.log4j.util.Strings;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,7 +28,8 @@ public class User {
     private String img;
 
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Order> orders = new ArrayList<>();
 
     @OneToMany(mappedBy = "userAdd")
@@ -116,8 +118,8 @@ public class User {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setOrders(List<Order> order) {
+        this.orders = order;
     }
 
     public void addOrder(Order order) {

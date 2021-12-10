@@ -3,8 +3,7 @@ package com.restaurant.acquerello.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
 public class OrderDetails {
@@ -15,22 +14,37 @@ public class OrderDetails {
     private String name;
     private Integer quantity;
     private Double price;
-    private Double total;
+    private Double totalProduct;
+    private LocalDateTime creationDate;
+    private OrderState state;
+    private Double totalOrder;
 
-    @OneToMany(mappedBy = "orderDetails")
-    private List<Order> orders = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     public OrderDetails() {}
 
-    public OrderDetails(String name, Integer quantity, Double price, Double total) {
-        this.name = name;
+    public OrderDetails(Integer quantity, Product product, Order order) {
+        this.name = product.getName();
         this.quantity = quantity;
-        this.price = price;
-        this.total = total;
+        this.price = product.getPrice();
+        this.totalProduct = product.getPrice() * quantity;
+        this.creationDate = order.getCreationDate();
+        this.state = order.getState();
+        this.totalOrder = order.getTotal();
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -57,36 +71,51 @@ public class OrderDetails {
         this.price = price;
     }
 
-    public Double getTotal() {
-        return total;
+    public Double getTotalProduct() {
+        return totalProduct;
     }
 
-    public void setTotal(Double total) {
-        this.total = total;
+    public void setTotalProduct(Double totalProduct) {
+        this.totalProduct = totalProduct;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public LocalDateTime getCreationDate() {
+        return creationDate;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public void addOrders(Order order) {
-        order.setOrderDetails(this);
-        orders.add(order);
+    public OrderState getState() {
+        return state;
     }
 
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("OrderDetails{");
-        sb.append("id=").append(id);
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", quantity=").append(quantity);
-        sb.append(", price=").append(price);
-        sb.append(", total=").append(total);
-        sb.append('}');
-        return sb.toString();
+    public void setState(OrderState state) {
+        this.state = state;
+    }
+
+    public Double getTotalOrder() {
+        return totalOrder;
+    }
+
+    public void setTotalOrder(Double totalOrder) {
+        this.totalOrder = totalOrder;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

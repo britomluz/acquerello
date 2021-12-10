@@ -1,14 +1,13 @@
 package com.restaurant.acquerello.controllers;
 
 import com.restaurant.acquerello.dtos.OrderDTO;
+import com.restaurant.acquerello.dtos.OrderToBuyDTO;
 import com.restaurant.acquerello.dtos.OrderDetailsDTO;
 import com.restaurant.acquerello.dtos.OrderTypeDTO;
-import com.restaurant.acquerello.dtos.UserDTO;
 import com.restaurant.acquerello.models.*;
 import com.restaurant.acquerello.repositories.OrderDetailsRepository;
 import com.restaurant.acquerello.repositories.OrderRepository;
-import com.restaurant.acquerello.repositories.UserRepository;
-import com.restaurant.acquerello.services.OrderService;
+import com.restaurant.acquerello.services.ProductService;
 import com.restaurant.acquerello.services.UserService;
 import com.restaurant.acquerello.services.impl.OrderDetailsImpl;
 import com.restaurant.acquerello.services.impl.OrderServiceImpl;
@@ -19,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,10 +41,13 @@ public class OrderController {
     @Autowired
     private OrderDetailsImpl orderDetailsService;
 
+    @Autowired
+    private ProductService productService;
+
 
     @GetMapping("/order")
-    public List<OrderTypeDTO> getAllOrders() {
-        return orderRepository.findAll().stream().map(OrderTypeDTO::new).collect(Collectors.toList());
+    public List<OrderDTO> getAllOrders() {
+        return orderRepository.findAll().stream().map(OrderDTO::new).collect(Collectors.toList());
     }
     @GetMapping("/order/{id}")
     public ResponseEntity<Object> getOrders(Authentication authentication, @PathVariable Long id){
@@ -53,20 +56,20 @@ public class OrderController {
         Order order = orderService.getById(id).orElse(null);
 
         /*
-        if(!user.getOrders().contains(order)){
+        if(!user.getOrder().contains(order)){
             return new ResponseEntity<>("Order incorrect",HttpStatus.FORBIDDEN);
         }*/
-        return new ResponseEntity<>(orderService.getById(id).map(OrderTypeDTO::new).orElse(null), HttpStatus.CREATED);
+        return new ResponseEntity<>(orderService.getById(id).map(OrderDTO::new).orElse(null), HttpStatus.CREATED);
     }
     @GetMapping("/order/current")
     public ResponseEntity<Object> getOrderUser(Authentication authentication){
 
         User user = userServices.getByEmail(authentication.getName());
         /*
-        if(!user.getOrders().contains(order)){
+        if(!user.getOrder().contains(order)){
             return new ResponseEntity<>("Order incorrect",HttpStatus.FORBIDDEN);
         }*/
-        return new ResponseEntity<>( user.getOrders().stream().map(OrderTypeDTO::new).collect(Collectors.toList()), HttpStatus.CREATED);
+        return new ResponseEntity<>( user.getOrders().stream().map(OrderDTO::new).collect(Collectors.toList()), HttpStatus.CREATED);
     }
 
 
@@ -82,41 +85,37 @@ public class OrderController {
     }
 
     @PostMapping("/order/buy")
-    public ResponseEntity<?> editOrder(Authentication authentication, @RequestBody OrderDTO orderDTO) {
+    public ResponseEntity<?> editOrder(Authentication authentication, @RequestBody OrderToBuyDTO orderToBuyDTO) {
 
         User user = userServices.getByEmail(authentication.getName());
+        if (user == null){
+            return new ResponseEntity<>("User doesn't exist", HttpStatus.FORBIDDEN);
+        }
+        if (!user.getType().equals(UserType.USER)){
+            return new ResponseEntity<>("Don't have authority", HttpStatus.FORBIDDEN);
+        }
 
-        if(orderDTO.getName() == null || orderDTO.getName().isEmpty()) {
+        if(orderToBuyDTO.getTotal() == null || orderToBuyDTO.getTotal() < 1) {
             return new ResponseEntity<>("Fields cannot are empty", HttpStatus.FORBIDDEN);
         }
 
-        if(orderDTO.getQuantity() == null || orderDTO.getQuantity() < 1) {
-            return new ResponseEntity<>("Fields cannot are empty", HttpStatus.FORBIDDEN);
-        }
-
-        if(orderDTO.getPrice() == null || orderDTO.getPrice() < 1) {
-            return new ResponseEntity<>("Fields cannot are empty", HttpStatus.FORBIDDEN);
-        }
-
-        if(orderDTO.getTotal() == null || orderDTO.getTotal() < 1) {
-            return new ResponseEntity<>("Fields cannot are empty", HttpStatus.FORBIDDEN);
-        }
-
-        OrderDetails orderDetails = new OrderDetails(orderDTO.getName(), orderDTO.getQuantity(), orderDTO.getPrice(), orderDTO.getTotal());
-        Order order = new Order(LocalDateTime.now(), LocalDateTime.now(), OrderState.PENDING, orderDTO.getTotal());
-
-        orderDetails.addOrders(order);
-
+        Order order = new Order(LocalDateTime.now(), LocalDateTime.now(), OrderState.PENDING, orderToBuyDTO.getTotal());
         user.addOrder(order);
-
-        orderDetailsRepository.save(orderDetails);
         orderRepository.save(order);
 
+        for (Product product : orderToBuyDTO.getProducts()){
+           Integer quantity = product.getQuantity();
+           Long idProduct = product.getId();
+           Product product1 = productService.getById(idProduct).orElse(null);
+           assert product1 != null;
+           OrderDetails orderDetails = new OrderDetails(quantity,product1,order);
+           orderDetailsRepository.save(orderDetails);
+        }
 
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/order/confirm/{id}")
+   /* @GetMapping("/order/confirm/{id}")
     public ResponseEntity<?> confirmOrder(Authentication authentication, @PathVariable Long id) {
 
         User user = userServices.getByEmail(authentication.getName());
@@ -144,7 +143,7 @@ public class OrderController {
         orderRepository.deleteById(id);
 
         return new ResponseEntity<>("Order deleted",HttpStatus.ACCEPTED);
-    }
+    }*/
 
     @PatchMapping("/order/edit/{id}")
     public ResponseEntity<?> editOrder(Authentication authentication, @RequestParam OrderState orderState, @PathVariable Long id) {
@@ -168,7 +167,7 @@ public class OrderController {
         return new ResponseEntity<>("Order edited", HttpStatus.ACCEPTED);
     }
 
-    @PatchMapping("/admin/orders/edit")
+    @PatchMapping("/admin/order/edit")
     public ResponseEntity<Object> edit( Authentication authentication,
                                              @RequestParam Long id,
                                              @RequestParam String type ) {
@@ -177,15 +176,17 @@ public class OrderController {
         Order order = orderService.getById(id).orElse(null);
         OrderState orderType = OrderState.valueOf(type);
 
-        /*
-        if(user.getType().equals(UserType.ADMIN)) {
+
+        if(!user.getType().equals(UserType.ADMIN)) {
             return new ResponseEntity<>("Access denied", HttpStatus.FORBIDDEN);
-        }*/
+        }
 
         if (type.isEmpty()) {
             return new ResponseEntity<>("Order don't have any type", HttpStatus.BAD_REQUEST);
         }
-
+        if (order == null){
+            return new ResponseEntity<>("Order doesn't exist", HttpStatus.FORBIDDEN);
+        }
         order.setState(orderType);
         orderService.save(order);
 

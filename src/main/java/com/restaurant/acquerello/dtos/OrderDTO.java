@@ -1,40 +1,55 @@
 package com.restaurant.acquerello.dtos;
 
+import com.restaurant.acquerello.models.Order;
+import com.restaurant.acquerello.models.OrderState;
+
+import java.time.LocalDateTime;
+
 public class OrderDTO {
-    private String name;
-    private Integer quantity;
-    private Double price;
+    private Long id;
+    private LocalDateTime creationDate;
+    private LocalDateTime aceptedDate;
+    private OrderState state;
     private Double total;
 
-    public OrderDTO(String name, Integer quantity, Double price, Double total) {
-        this.name = name;
-        this.quantity = quantity;
-        this.price = price;
-        this.total = total;
+    public OrderDTO(Order order) {
+        this.id = order.getId();
+        this.creationDate = order.getCreationDate();
+        this.aceptedDate = order.getAceptedDate();
+        this.state = order.getState();
+        this.total = order.getTotal();
     }
 
-    public String getName() {
-        return name;
+    public Long getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public LocalDateTime getCreationDate() {
+        return creationDate;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public Double getPrice() {
-        return price;
+    public LocalDateTime getAceptedDate() {
+        return aceptedDate;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setAceptedDate(LocalDateTime aceptedDate) {
+        this.aceptedDate = aceptedDate;
+    }
+
+    public OrderState getState() {
+        return state;
+    }
+
+    public void setState(OrderState state) {
+        this.state = state;
     }
 
     public Double getTotal() {

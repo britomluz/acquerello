@@ -23,6 +23,7 @@ public class UserDTO {
     private String img;
     private List<AddressDTO> address = new ArrayList<>();
     private Set<CardDTO> card = new LinkedHashSet<>();
+    private List<OrderDTO> orders = new ArrayList<>();
 
     public UserDTO(User user) {
         this.id = user.getId();
@@ -35,6 +36,7 @@ public class UserDTO {
         this.img = user.getImg();
         this.address = user.getAddress().stream().map(AddressDTO::new).collect(Collectors.toList());
         this.card = user.getCards().stream().map(CardDTO::new).collect(Collectors.toSet());
+        this.orders = user.getOrders().stream().map(OrderDTO::new).collect(Collectors.toList());
 
     }
 
@@ -116,5 +118,13 @@ public class UserDTO {
 
     public void setCard(Set<CardDTO> card) {
         this.card = card;
+    }
+
+    public List<OrderDTO> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrderDTO> orders) {
+        this.orders = orders;
     }
 }

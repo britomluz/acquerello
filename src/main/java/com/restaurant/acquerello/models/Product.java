@@ -24,6 +24,9 @@ public class Product {
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private Set<ProductCategory> productCategories = new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    private List<OrderDetails> orderDetails = new ArrayList<>();
+
     public Product() {
     }
 
@@ -102,5 +105,13 @@ public class Product {
 
     public List<Category> getCategory(){
         return productCategories.stream().map(ProductCategory::getCategory).collect(Collectors.toList());
+    }
+
+    public List<OrderDetails> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetails> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 }

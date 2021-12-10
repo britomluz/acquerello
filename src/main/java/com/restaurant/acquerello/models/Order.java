@@ -21,9 +21,8 @@ public class Order {
     @JoinColumn(name = "user_oder")
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_detail")
-    private OrderDetails orderDetails;
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    private List<OrderDetails> orderDetails = new ArrayList<>();
 
     public Order() {}
 
@@ -78,11 +77,11 @@ public class Order {
         this.user = user;
     }
 
-    public OrderDetails getOrderDetails() {
+    public List<OrderDetails> getOrderDetails() {
         return orderDetails;
     }
 
-    public void setOrderDetails(OrderDetails orderDetails) {
+    public void setOrderDetails(List<OrderDetails> orderDetails) {
         this.orderDetails = orderDetails;
     }
 

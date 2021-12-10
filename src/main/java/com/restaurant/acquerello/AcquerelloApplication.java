@@ -45,39 +45,18 @@ public class AcquerelloApplication {
 			User user2 = new User("Brian", "Cuenca", "gabriel.torrealba33@gmail.com", passwordEncoder.encode("user1234"), 5551232L, UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
 
 
-			// Brian: Creating orders
-			Order order1 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.PENDING, 32.43);
-			Order order2 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.PENDING, 11.43);
 
 			// Brian: Creating bookings
 			Booking booking1 = new Booking(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(4), SectorTables.GOLDEN, 2, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
 
-			// Brian : Creating order details
-			OrderDetails orderDetails1 = new OrderDetails("Pancho a la muzarelle", 1, 15.99, 15.99);
-			OrderDetails orderDetails2 = new OrderDetails("Champiñone en caja", 2, 29.99, 29.99);
-
-			// Brian : Adding order details to orders
-			orderDetails1.addOrders(order1);
-			orderDetails2.addOrders(order2);
-
 			user1.addAddress(address1);
 			user2.addAddress(address2);
-
-			// Brian: Adding orders to Users
-			user1.addOrder(order1);
-			user2.addOrder(order2);
 
 			// Brian: Adding bookings to User
 			user2.addBooking(booking1);
 
 			userRepository.save(user1);
 			userRepository.save(user2);
-
-			orderDetailsRepository.save(orderDetails1);
-			orderDetailsRepository.save(orderDetails2);
-
-			orderRepository.save(order1);
-			orderRepository.save(order2);
 
 			addressRepository.save(address1);
 			addressRepository.save(address2);
@@ -89,13 +68,13 @@ public class AcquerelloApplication {
 			cardRepository.save(card1);
 
 			//GABRIEL: CREATE PRODUCTS TO TEST THE APP
-			Product product1 = new Product("Bruschetta", 0, "Tomato Reduction base, Mozzarella, Torn Basil, Olive Oil", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/bruschetta_bbzjzr.jpg", 17D, 25);
+			Product product1 = new Product("Bruschetta", 2, "Tomato Reduction base, Mozzarella, Torn Basil, Olive Oil", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/bruschetta_bbzjzr.jpg", 17D, 25);
 			productRepository.save(product1);
-			Product product2 = new Product("Capresse", 0, "Escarole, Cannellini Beans, Meatballs, Parmigiano", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/capresse_jp0bcd.jpg", 23D, 25);
+			Product product2 = new Product("Capresse", 3, "Escarole, Cannellini Beans, Meatballs, Parmigiano", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/capresse_jp0bcd.jpg", 23D, 25);
 			productRepository.save(product2);
-			Product product3 = new Product("Vitello Tonato", 0, "Mushrooms, Ruccola, Pomodoro, Mozzarella, Olives", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/vitello_tonato_hlwouz.jpg", 22D, 25);
+			Product product3 = new Product("Vitello Tonato", 4, "Mushrooms, Ruccola, Pomodoro, Mozzarella, Olives", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/vitello_tonato_hlwouz.jpg", 22D, 25);
 			productRepository.save(product3);
-			Product product4 = new Product("AntiPasti Mixed", 0, "Mixed Greens, peppers, Anchoivies, Mozzarella, Artichokes","https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/antipasti_s7jfku.jpg", 23D, 25);
+			Product product4 = new Product("AntiPasti Mixed", 5, "Mixed Greens, peppers, Anchoivies, Mozzarella, Artichokes","https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/antipasti_s7jfku.jpg", 23D, 25);
 			productRepository.save(product4);
 			Product product5 = new Product("Insalata Rucula", 0, "Tuscan Fried Chicken, Spicy Honey Butter","https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/insalataRusa_xakkbm.jpg", 12D, 25);
 			productRepository.save(product5);
@@ -115,7 +94,7 @@ public class AcquerelloApplication {
 			productRepository.save(product12);
 			Product product13 = new Product("Linguine con Granchio", 0, "Mushrooms, Ruccola, Pomodoro, Mozzarella, Olives", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/linguine_veodru.jpg", 23D, 25);
 			productRepository.save(product13);
-			Product product14 = new Product("Risotto Verde", 0, "Fresh Basil, 0, Beans, Onion, Extra Virgin Olive Oil", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/risotto_verde_jwbrn5.jpg", 25D, 25);
+			Product product14 = new Product("Risotto Verde", 0, "Fresh Basil, Beans, Onion, Extra Virgin Olive Oil", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/risotto_verde_jwbrn5.jpg", 25D, 25);
 			productRepository.save(product14);
 			Product product15 = new Product("Panzotti", 0, "Onion, Carrot, Stick of Celery, Unsalted Butter, Beef", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/panzotti_rrpets.jpg", 15D, 25);
 			productRepository.save(product15);
@@ -279,6 +258,26 @@ public class AcquerelloApplication {
 			ProductCategory productCategory51 = new ProductCategory(product39, category8);
 			productCategoryRepository.save(productCategory51);
 
+			// Brian: Creating order
+			Order order1 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.PENDING, 32.43);
+			Order order2 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.PENDING, 11.43);
+			// Brian: Adding order to Users
+			user1.addOrder(order1);
+			user2.addOrder(order2);
+			orderRepository.save(order1);
+			orderRepository.save(order2);
+			userRepository.save(user1);
+			userRepository.save(user2);
+
+			// Brian : Creating order details
+			OrderDetails orderDetails1 = new OrderDetails(2,product1,order1);
+			OrderDetails orderDetails2 = new OrderDetails(3,product2,order1);
+			OrderDetails orderDetails3 = new OrderDetails(4,product3,order2);
+			OrderDetails orderDetails4 = new OrderDetails(5,product4,order2);
+			orderDetailsRepository.save(orderDetails1);
+			orderDetailsRepository.save(orderDetails2);
+			orderDetailsRepository.save(orderDetails3);
+			orderDetailsRepository.save(orderDetails4);
 		};
 	}
 }

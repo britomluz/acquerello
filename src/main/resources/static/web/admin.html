@@ -121,7 +121,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="order in orders">
+                          <tr v-for="order in order">
                             <th scope="row" class="text-center">{{order.id}}</th>
                             <td class="text-center">{{order.creationDate.slice(5,10)}} - {{order.creationDate.slice(11,16)}}</td>
                             <td class="text-center">{{order.orderState}}</td>
@@ -137,7 +137,7 @@
                                 </form>
                                 
                             </td>
-                            <td class="text-center">$ {{order.total}}</td>
+                            <td class="text-center">$ {{order.totalProduct}}</td>
                             <td class="d-flex justify-content-center">
                                 <button :id="order.id" type="button" @click="showOrder"><i class="bi bi-pencil-square"></i></button>
                             </td>
@@ -226,7 +226,7 @@
             <label for="order">Select Order: </label>
             <select id="order" v-model="idOrder">
                 <option value="">Select</option>
-                <option v-for="order in orders" :value="order.id">{{order.id}}</option>
+                <option v-for="order in order" :value="order.id">{{order.id}}</option>
             </select>
             <input type="button" value="Send" @click="getOrderState">
         </form>
@@ -243,7 +243,7 @@
             <label for="order">Delete Order: </label>
             <select id="order" v-model="idOrderDelete">
                 <option value="">Select</option>
-                <option v-for="order in orders" :value="order.id">{{order.id}}</option>
+                <option v-for="order in order" :value="order.id">{{order.id}}</option>
             </select>
             <input type="button" value="Send" @click="deleteOrder">
         </form>

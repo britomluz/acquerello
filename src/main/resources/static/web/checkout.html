@@ -231,7 +231,7 @@
                 <!-- asasasa -->
                 <p v-if="cart != ''">Products: <b v-for="c in cart"> {{c.name}}, </b> </p>
                 <p v-else> Products: <span>You don't have products yet</span> </p>
-                <p v-if="cart != ''">Total price: <b>${{total}}</b> </p>
+                <p v-if="cart != ''">Total price: <b>${{totalProduct}}</b> </p>
                 <p>Register your Account:</p>
                 <label for="email">Email: </label>
                 <input type="email" v-model="email" id="email" @input="register" placeholder="correo@user.com">
