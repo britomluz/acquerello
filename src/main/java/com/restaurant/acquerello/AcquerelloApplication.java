@@ -46,8 +46,8 @@ public class AcquerelloApplication {
 
 
 			// Brian: Creating orders
-			Order order1 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.IN_PROCESS, 32.43);
-			Order order2 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.IN_PROCESS, 11.43);
+			Order order1 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.PENDING, 32.43);
+			Order order2 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.PENDING, 11.43);
 
 			// Brian: Creating bookings
 			Booking booking1 = new Booking(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(4), SectorTables.GOLDEN, 2, 2, TableState.PENDING);

@@ -2,6 +2,7 @@ const app = Vue.createApp({
   data() {
     return {
       products: [],
+      product:[],
       productId: "",
       productName: "",
       productImage: "",
@@ -62,13 +63,17 @@ const app = Vue.createApp({
 
         numberCard: "",
         cvv: "",
-        vec: ""
+        vec: "",
+
+        // filter products
+        filterNameProduct:"",
     }
   },
   created() {
     //this.Admin_accept_order()
     this.loadProducts();
     this.loadCategories();
+    this.loadDataProduct()
 
     this.showModal();
     if (localStorage.getItem("cart")) {
@@ -78,16 +83,15 @@ const app = Vue.createApp({
   },
   methods: {    
     loadProducts() {
-      axios
-        .get("/api/products")
+      axios.get("/api/products")
         .then((response) => {
           this.products = response.data.products;
+          console.log(this.products)
         })
         .catch((err) => console.log(err.response.data));
     },
     loadCategories() {
-      axios
-        .get("/api/categories")
+      axios.get("/api/categories")
         .then((response) => {
           this.categories = response.data.categories;
           this.entriesSnacks = [
@@ -105,7 +109,7 @@ const app = Vue.createApp({
               (categorie) => categorie.name === "Chef Picks"
             )[0].products,
           ];
-          console.log(this.chefPicks);
+          
           this.mainCourses = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Main Course"
@@ -136,7 +140,7 @@ const app = Vue.createApp({
               (categorie) => categorie.name === "Salads"
             )[0].products,
           ];
-          console.log(this.mainCourses);
+          
         })
         .catch((err) => console.log(err));
     },
@@ -375,7 +379,29 @@ const app = Vue.createApp({
         }
         break;
       }
-    }
+    },
+    loadDataProduct(){
+      const urlParam = new URLSearchParams(window.location.search);
+      const id = urlParam.get('id');        
+      
+      axios.get(`/api/user/current/products/${id}`)
+            .then(res => {                
+              this.product = res.data                        
+              console.log(this.product)
+              
+          })
+            .catch(err => err.message)
+      },
+      showProduct(e){
+        
+        let id = e.target.parentElement.id
+        window.location.href = `./product-details.html?id=${id}`
+      },
   },
+  computed:{
+    filterProducts(){
+      return this.products.filter(product => product.name.toLowerCase().match(this.filterNameProduct.toLowerCase()))
+    }
+  }
 })
 app.mount("#app");

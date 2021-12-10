@@ -148,6 +148,26 @@ const App = Vue.createApp({
         div.innerText = err.response.data
       })
     },
+    editOrderState(e){
+      //console.log(e.target)
+
+      console.log(e.target.firstChild)
+      
+      
+
+      let orderId = e.target.firstChild.id
+      let orderState = e.target.firstChild.value
+      console.log(orderId)
+      console.log(orderState)
+
+      axios.patch('/api/admin/orders/edit',`id=${orderId}&type=${orderState}`)
+      .then(res => {
+        console.log(res)
+        window.location.reload();
+      }).catch(err => {
+        console.log(err.data)
+      })
+    },
   },
 });
 App.mount("#app");
