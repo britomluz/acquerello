@@ -62,7 +62,19 @@ const app = Vue.createApp({
 
         numberCard: "",
         cvv: "",
-        vec: ""
+        vec: "",
+
+        total: 0,
+
+        deliver: false,
+
+        // conteo de peticiones exitosas
+
+        requests: {
+          createUser: false,
+          createAddress: false
+        }
+
     }
   },
   created() {
@@ -75,6 +87,10 @@ const app = Vue.createApp({
       this.cart = JSON.parse(localStorage.getItem("cart"));
       this.addToCart();
     }
+
+    this.cart.forEach(c => {
+      this.total += c.price * c.quantity
+    })
   },
   methods: {
     loadProducts() {
@@ -349,8 +365,13 @@ const app = Vue.createApp({
     },
     sendForm(e) {
       let tel = Number(this.phone);
+      let number = Number(this.number)
+
+      console.log(number)
+
       axios.post("/api/users/create", {firstName: this.firstName, lastName: this.lastName, email: this.email, password: this.password, number: tel}).then(res => {
         console.log(res)
+        localStorage.clear()
       }).catch(err => {
         console.log(err.response)
       })
@@ -373,6 +394,19 @@ const app = Vue.createApp({
         } else {
           button.disabled = true;
         }
+        break;
+      }
+    },
+    selectRadio(e) {
+      switch(e.target.value) {
+        case "delivery":
+          this.deliver = true;
+        break;
+        case "in":
+          this.deliver = false;
+        break;
+        case "withdraw":
+          this.deliver = false;
         break;
       }
     }

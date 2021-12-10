@@ -822,3 +822,15 @@ footer{
 .flex-a-items-center {
     align-items: center;
 }
+
+.f-justify-c-space-b {
+    justify-content: space-between;
+}
+
+.f-justify-c-center {
+    justify-content: center;
+}
+
+.radio input {
+    width: 30px;
+}
