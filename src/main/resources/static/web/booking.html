@@ -73,16 +73,19 @@
     </header>
 
     <main class="d-flex flex-column align-items-center justify-content-center">
-      
+
       <div class="d-flex flex-column justify-content-center">
         <h3 class="mt-5 py-4">Plan your day with us</h3>
         <div>
           <h4 class="text-center mb-2">Select day and time</h4>
           <div class="d-flex justify-content-center">
-            <input class="px-2 m-2" type="date" name="" id="">
-            <input class="px-2 m-2" type="time" name="" id="">
+            <input class="px-2 m-2" type="date" v-model="datetime" name="" id="">
+            <input class="px-2 m-2" type="time" name="" v-model=" bookingHour" id="">
           </div>
-
+          <!--  quantity -->
+          <div>
+            <input type="number" max="6" min="1" v-model="quantitytime" name="" id="">
+          </div>
         </div>
       </div>
 
@@ -112,7 +115,7 @@
 
                 <div class="container tableContainer">
                   <div class="table table1 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="1" value="1">
+                    <input type="radio" name="mesa" v-model="table" id="1" value="1">
                     <label for="1" class="label">
                       <img src="../assets/mesa2.svg" class="w-100 disabled" alt="">
                     </label>
@@ -123,7 +126,7 @@
                   <div class="table table2 container2">
                     <div class="table table13 d-flex align-items-end">
                       <small class="indiv p-1">10</small>
-                      <input type="checkbox" name="mesa" id="10" value="10">
+                      <input type="checkbox" name="mesa" v-model="table" id="10" value="10">
                       <label for="10" class="label">
                         <img src="../assets/mesa1.svg" class="w-100 p-0" alt="">
                       </label>
@@ -133,7 +136,7 @@
 
                     <div class="table table13  d-flex align-items-end">
                       <small class="indiv p-1">19</small>
-                      <input type="checkbox" name="mesa" id="19" value="19">
+                      <input type="checkbox" name="mesa" v-model="table" id="19" value="19">
                       <label for="19" class="label">
                         <img src="../assets/mesa1.svg" class="w-100 p-0" alt="">
                       </label>
@@ -142,7 +145,7 @@
 
                     <div class="table table13 ">
                       <small class="indiv p-1">11</small>
-                      <input type="checkbox" name="mesa" id="11" value="11">
+                      <input type="checkbox" name="mesa" v-model="table" id="11" value="11">
                       <label for="11" class="label">
                         <img src="../assets/mesa1.svg" class="w-100 p-0" alt="">
                       </label>
@@ -150,7 +153,7 @@
 
                     <div class="table table13">
                       <small class="indiv p-1">12</small>
-                      <input type="checkbox" name="mesa" id="12" value="12">
+                      <input type="checkbox" name="mesa" v-model="table" id="12" value="12">
                       <label for="12" class="label">
                         <img src="../assets/mesa1.svg" class="w-100 p-0" alt="">
                       </label>
@@ -158,7 +161,7 @@
 
                     <div class="table table13">
                       <small class="indiv p-1">13</small>
-                      <input type="checkbox" name="mesa" id="13" value="13">
+                      <input type="checkbox" name="mesa" v-model="table" id="13" value="13">
                       <label for="13" class="label">
                         <img src="../assets/mesa1.svg" class="w-100 p-0" alt="">
                       </label>
@@ -166,7 +169,7 @@
 
                     <div class="table table13">
                       <small class="indiv p-1">14</small>
-                      <input type="checkbox" name="mesa" id="14" value="14">
+                      <input type="checkbox" name="mesa" v-model="table" id="14" value="14">
                       <label for="14" class="label">
                         <img src="../assets/mesa1.svg" class="w-100 p-0" alt="">
                       </label>
@@ -174,7 +177,7 @@
 
                     <div class="table table13">
                       <small class="indiv p-1">15</small>
-                      <input type="checkbox" name="mesa" id="15" value="15">
+                      <input type="checkbox" name="mesa" v-model="table" id="15" value="15">
                       <label for="15" class="label">
                         <img src="../assets/mesa1.svg" class="w-100 p-0" alt="">
                       </label>
@@ -182,7 +185,7 @@
 
                     <div class="table table13">
                       <small class="indiv p-1">16</small>
-                      <input type="checkbox" name="mesa" id="16" value="16">
+                      <input type="checkbox" name="mesa" v-model="table" id="16" value="16">
                       <label for="16" class="label">
                         <img src="../assets/mesa1.svg" class="w-100 p-0" alt="">
                       </label>
@@ -190,7 +193,7 @@
 
                     <div class="table table13">
                       <small class="indiv p-1">17</small>
-                      <input type="checkbox" name="mesa" id="17" value="17">
+                      <input type="checkbox" name="mesa" v-model="table" id="17" value="17">
                       <label for="17" class="label">
                         <img src="../assets/mesa1.svg" class="w-100 p-0" alt="">
                       </label>
@@ -198,7 +201,7 @@
 
                     <div class="table table13">
                       <small class="indiv p-1">18</small>
-                      <input type="checkbox" name="mesa" id="18" value="18">
+                      <input type="checkbox" name="mesa" v-model="table" id="18" value="18">
                       <label for="18" class="label">
                         <img src="../assets/mesa1.svg" class="w-100 p-0" alt="">
                       </label>
@@ -209,163 +212,158 @@
 
                   <!-- TABLES 2 TO 6 -->
                   <div class="table table3 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="2" value="2">
+                    <input type="radio" name="mesa" v-model="table" id="2" value="2">
                     <label for="2" class="label">
                       <img src="../assets/mesa2.svg" class="w-100" alt="">
                     </label>
                     <small> 2 </small>
                   </div>
                   <div class="table table4 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="5" value="5">
+                    <input type="radio" name="mesa" id="5" v-model="table" value="5">
                     <label for="5" class="label">
                       <img src="../assets/mesa2.svg" class="w-100" alt="">
                     </label>
                     <small> 5 </small>
                   </div>
                   <div class="table table5 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="4" value="4">
+                    <input type="radio" name="mesa" id="4" v-model="table" value="4">
                     <label for="4" class="label">
                       <img src="../assets/mesa2.svg" class="w-100" alt="">
                     </label>
                     <small> 4 </small>
                   </div>
                   <div class="table table6 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="3" value="3">
+                    <input type="radio" name="mesa" id="3" v-model="table" value="3">
                     <label for="3" class="label">
                       <img src="../assets/mesa4.svg" class="w-100" alt="">
                     </label>
                     <small> 3 </small>
                   </div>
                   <div class="table table7 d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="9" value="9">
+                    <input type="radio" name="mesa" id="9" v-model="table" value="9">
                     <label for="9" class="label">
                       <img src="../assets/mesa6.svg" class="w-100" alt="">
                     </label>
                     <small> 9 </small>
                   </div>
                   <div class="table table8 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="6" value="6">
+                    <input type="radio" name="mesa" id="6" v-model="table" value="6">
                     <label for="6" class="label">
                       <img src="../assets/mesa4.svg" class="w-100" alt="">
                     </label>
                     <small> 6 </small>
                   </div>
                   <div class="table table9 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="7" value="7">
+                    <input type="radio" name="mesa" id="7" v-model="table" value="7">
                     <label for="7" class="label">
                       <img src="../assets/mesa4.svg" class="w-100" alt="">
                     </label>
                     <small> 7 </small>
                   </div>
                   <div class="table table10 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="8" value="8">
+                    <input type="radio" name="mesa" id="8" v-model="table" value="8">
                     <label for="8" class="label">
                       <img src="../assets/mesa4.svg" class="w-100" alt="">
                     </label>
                     <small> 8 </small>
                   </div>
                 </div>
-                <div class="d-flex justify-content-center">
-                  <button type="submit">Book table</button>
-                </div>
+
 
               </div>
             </div>
           </div>
-
           <div class="tab-pane fade garden" id="garden" role="tabpanel" aria-labelledby="nav-profile-tab" v-cloak>
             <div class=" d-flex justify-content-center">
               <div class="py-5 col-12 col-lg-8">
 
                 <div class="container tableContainer">
                   <div class="table table4 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="20" value="20">
+                    <input type="radio" name="mesa" id="20" v-model="table" value="20">
                     <label for="20" class="label">
                       <img src="../assets/mesa2.svg" class="w-100" alt="">
                     </label>
                     <small> 20 </small>
                   </div>
                   <div class="table table5 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="21" value="21">
+                    <input type="radio" name="mesa" id="21" v-model="table" value="21">
                     <label for="21" class="label">
                       <img src="../assets/mesa2.svg" class="w-100" alt="">
                     </label>
                     <small> 21 </small>
                   </div>
                   <div class="table table4 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="22" value="22">
+                    <input type="radio" name="mesa" id="22" v-model="table" value="22">
                     <label for="22" class="label">
                       <img src="../assets/mesa2.svg" class="w-100" alt="">
                     </label>
                     <small> 22 </small>
                   </div>
                   <div class="table table5 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="23" value="23">
+                    <input type="radio" name="mesa" id="23" v-model="table" value="23">
                     <label for="23" class="label">
                       <img src="../assets/mesa2.svg" class="w-100" alt="">
                     </label>
                     <small> 23 </small>
                   </div>
                   <div class="table table6 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="24" value="24">
+                    <input type="radio" name="mesa" id="24" v-model="table" value="24">
                     <label for="24" class="label">
                       <img src="../assets/mesa4.svg" class="w-100" alt="">
                     </label>
                     <small> 24 </small>
-                  </div>                  
+                  </div>
                   <div class="table table8 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="25" value="25">
+                    <input type="radio" name="mesa" id="25" v-model="table" value="25">
                     <label for="25" class="label">
                       <img src="../assets/mesa4.svg" class="w-100" alt="">
                     </label>
                     <small> 25 </small>
                   </div>
                   <div class="table table9 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="26" value="26">
+                    <input type="radio" name="mesa" id="26" v-model="table" value="26">
                     <label for="26" class="label">
                       <img src="../assets/mesa4.svg" class="w-100" alt="">
                     </label>
                     <small> 26 </small>
                   </div>
                   <div class="table table10 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="27" value="27">
+                    <input type="radio" name="mesa" id="27" v-model="table" value="27">
                     <label for="27" class="label">
                       <img src="../assets/mesa4.svg" class="w-100" alt="">
                     </label>
                     <small> 27 </small>
                   </div>
                   <div class="table table10 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="28" value="28">
+                    <input type="radio" name="mesa" id="28" v-model="table" value="28">
                     <label for="28" class="label">
                       <img src="../assets/mesa4.svg" class="w-100" alt="">
                     </label>
                     <small> 28 </small>
                   </div>
                   <div class="table table4 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="29" value="29">
+                    <input type="radio" name="mesa" id="29" v-model="table" value="29">
                     <label for="29" class="label">
                       <img src="../assets/mesa2.svg" class="w-100" alt="">
                     </label>
                     <small> 29 </small>
                   </div>
                   <div class="table table5 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="30" value="30">
+                    <input type="radio" name="mesa" id="30" v-model="table" value="30">
                     <label for="30" class="label">
                       <img src="../assets/mesa2.svg" class="w-100" alt="">
                     </label>
                     <small> 30 </small>
                   </div>
                   <div class="table table10 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="31" value="31">
+                    <input type="radio" name="mesa" id="31" v-model="table" value="31">
                     <label for="31" class="label">
                       <img src="../assets/mesa4.svg" class="w-100" alt="">
                     </label>
                     <small> 31 </small>
                   </div>
                 </div>
-                <div class="d-flex justify-content-center">
-                  <button type="submit">Book table</button>
-                </div>
+               
 
               </div>
             </div>
@@ -375,28 +373,28 @@
             <div class=" d-flex justify-content-center">
               <div class=" d-flex justify-content-center">
                 <div class="py-5 col-12 col-lg-8">
-  
-                  <div class="container tableContainer vipContainer">                    
+
+                  <div class="container tableContainer vipContainer">
                     <div class="table table10 tablevip tbp d-flex align-items-center justify-content-center">
-                      <input type="radio" name="mesa" id="32" value="32">
+                      <input type="radio" name="mesa" id="32" v-model="table" value="32">
                       <label for="32" class="label">
                         <img src="../assets/mesagolden.svg" class="w-100" alt="">
                       </label>
                       <!-- <small> 31 </small> -->
                     </div>
                   </div>
-                  <div class="d-flex justify-content-center">
-                    <button type="submit">Book table</button>
-                  </div>
-  
+                 
+
                 </div>
-              </div>              
+              </div>
             </div>
 
           </div>
 
         </div>
-
+        <div class="d-flex justify-content-center">
+          <button type="submit" @click="create_booking">Book table</button>
+        </div>
 
 
       </div>
@@ -420,7 +418,7 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://unpkg.com/vue@next"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="./scripts/index.js"></script>
+  <script src="../scripts/booking.js"></script>
 
 </body>
 

@@ -49,6 +49,22 @@ const app = Vue.createApp({
       numberAddress: 0,
       zip: "",
       reference: "",
+      // save orders step by step
+
+      firstName: "",
+      lastName: "",
+      phone: "",
+
+      addessSelected: [],
+
+      street: "",
+      number: "",
+      zip: "",
+      reference: "",
+
+      numberCard: "",
+      cvv: "",
+      vec: "",
     };
   },
   created() {
