@@ -81,10 +81,15 @@
         <div>
           <h4 class="text-center mb-2">Select day and time</h4>
           <div class="d-flex justify-content-center">
-            <input class="px-2 m-2" type="date" name="" id="">
-            <input class="px-2 m-2" type="time" name="" id="">
+            <input class="px-2 m-2" type="date" name="" id="" v-model="datetime">
+            <input class="px-2 m-2" type="time" name="" id="" v-model="bookingHour">
           </div>
-
+            <div>
+              <h4>How many are you?</h4>
+              <div>
+                <input type="number" max="10" min="1" v-model="quantitytime" name="" id="">
+              </div>
+            </div>
         </div>
       </div>
 
@@ -114,7 +119,7 @@
 
                 <div class="container tableContainer">
                   <div class="table table1 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="1" value="1">
+                    <input type="radio" name="mesa" id="1" value="1" v-model="table">
                     <label for="1" class="label">
                       <img src="../assets/mesa2.svg" class="w-100 disabled" alt="">
                     </label>
@@ -232,7 +237,7 @@
                     <small> 4 </small>
                   </div>
                   <div class="table table6 tbp d-flex align-items-center justify-content-center">
-                    <input type="radio" name="mesa" id="3" value="3">
+                    <input type="radio" name="mesa" id="3" value="3" v-model="table">
                     <label for="3" class="label">
                       <img src="../assets/mesa4.svg" class="w-100" alt="">
                     </label>
@@ -266,10 +271,7 @@
                     </label>
                     <small> 8 </small>
                   </div>
-                </div>
-                <div class="d-flex justify-content-center">
-                  <button type="submit">Book table</button>
-                </div>
+                </div>                
 
               </div>
             </div>
@@ -365,9 +367,7 @@
                     <small> 31 </small>
                   </div>
                 </div>
-                <div class="d-flex justify-content-center">
-                  <button type="submit">Book table</button>
-                </div>
+                
 
               </div>
             </div>
@@ -387,16 +387,15 @@
                       <!-- <small> 31 </small> -->
                     </div>
                   </div>
-                  <div class="d-flex justify-content-center">
-                    <button type="submit">Book table</button>
-                  </div>
 
                 </div>
               </div>
             </div>
 
           </div>
-
+          <div class="d-flex justify-content-center">
+            <button type="submit" @click="create_booking">Book table</button>
+          </div>
         </div>
 
 
@@ -469,7 +468,7 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://unpkg.com/vue@next"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="../scripts/index.js"></script>
+  <script src="../scripts/booking.js"></script>
   <script src="../scripts/bootstrap.bundle.min.js"></script>
 
 </body>

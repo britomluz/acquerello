@@ -76,7 +76,7 @@ const app = Vue.createApp({
       this.addToCart();
     }
   },
-  methods: {
+  methods: {    
     loadProducts() {
       axios
         .get("/api/products")

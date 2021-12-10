@@ -1,4 +1,11 @@
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;  
+  text-decoration: none;
+  transition: all .2s linear;
+  color: var(--color5);  
+}
 :root{
     --color1: #9dab86;
     --color2: #b61a1a;
@@ -9,16 +16,131 @@
     --fontTitle2: 'Montserrat', Verdana, Tahoma, sans-serif;
 }
 
+a{
+  text-decoration: none;
+}
 body{
-    background: bisque;
+    background: var(--color4);
+}
+.btn-green{
+  background: var(--color1);
+  color: var(--color4);
+  padding: 5px 25px;
+  border: none;
+}
+.btn-green:hover{
+  background: var(--color2);
+  color: var(--color4);
+  padding: 5px 25px;
+  border: none;
+}
+
+/*nav my account*/
+.containers,
+.list,
+.item-link,
+.item-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.containers {
+  width: 100%;
+  height: 100vh;
+
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 5px;
+}
+
+.list {
+  width: 100%;
+  /* max-width: 600px; */
+  height: 100px;
+  padding: 10px;
+/* gap: 5px; */  
+  background: var(--color4);
+  box-shadow: 0px 3px 15px  rgb(209, 208, 208);
+  border-bottom: 3px solid var(--color1);
+}
+.list p{
+  line-height: 0;
+  color: var(--color1);
+}
+.list i {
+  color: var(--color1);
+}
+.item-list {
+  position: relative;
+  flex: 1 1;
+  padding: 5px;
+}
+
+.item-link {
+  position: relative;
+
+  gap: 5px;
+  color: #999;
+}
+
+.icon {
+  font-size: 18px;
+  transition: 0.3s ease;
 }
 
 
+.item-link.l5 {
+  display: grid;
+  place-content: center;
+  transition: 0.3s ease;  
+}
+
+.item-link.l4, .item-link.l5{
+  position: relative;
+  text-align: center;
+  transition: .2s;  
+}
+
+.item-link.l4:hover, .item-link.l5:hover{
+  color: var(--color1);
+}
+
+.item-link.l5::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;  
+  width: 0%;
+  height: 5px;  
+  background-color: transparent;
+  transform: translatex(-60px);  
+  transition: .5s;
+}
+
+.item-list:hover .item-link.l5::before{
+  width: 80px;
+  height: 5px;
+  
+  left: 50%;
+  
+  border-radius: 5px;
+  background-color: var(--color1);
+  transform: translatex(-50%);
+}
+
+
+
+
+
+/*nav my account*/
+
 /* BOOK TABLE START */
 .nav-tabs .nav-link.active {
-  color: #ffffff;
-  background-color: var(--color1);
-  border-color: var(--color1);
+  color: #ffffff!important;
+  background-color: var(--color1)!important;
+  border-color: var(--color1)!important;
 }
 .nav-tabs .nav-link {
   margin-bottom: -1px;
@@ -75,7 +197,7 @@ body{
   margin-right: 0px!important;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr ;
 }
 .container2{
   display: grid;
@@ -83,6 +205,8 @@ body{
   grid-template-rows: 1fr 1fr;
   column-gap: 3px;
   row-gap: 3px;
+  margin: 0;
+  padding: 0;
 }
 .vipContainer{
   margin-left: 0px!important;
@@ -129,7 +253,6 @@ body{
   font-size: 1.2em;  
   user-select: none;
   z-index: -1;  
-  font-weight: 500;
 }
 .container .table1 small,
 .container .table3 small{
@@ -140,7 +263,6 @@ body{
   font-size: 1.2em;  
   user-select: none;
   z-index: -1;
-  font-weight: 500;
 }
 .table13{
   padding: 1px;
@@ -152,7 +274,6 @@ body{
   text-align: center;
   user-select: none;
   /* z-index: -1;   */  
-  font-weight: 500;
 }
 .container label{
   cursor: pointer;
@@ -185,6 +306,21 @@ body{
 }
 }
 
+/*MY ACCOUNT*/
+
+.myAccount .info,
+.myAccount .card{
+  /* border: 2px solid var(--color1); */
+  padding: 20px;
+}
+
+.firstCol{
+  margin: 0;
+  padding: 0;
+}
+.myAccount h2{
+  color: var(--color1);  
+}
 @media (max-width: 425px){
   .tbp {
     padding: 10px;
