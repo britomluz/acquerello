@@ -85,7 +85,12 @@ const app = Vue.createApp({
       stockedit: 0,
       showbtn: false,
       // add product
-      products_img: "",
+      products_img:"https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgDefault_qbhg4k.jpg",
+      nameproducts:"",
+      descriptionproducts:"",
+      priceproduct:0,
+      stockproduct:0,
+      id_addproduct:0
     };
   },
   created() {
@@ -119,6 +124,8 @@ const app = Vue.createApp({
         .get("/api/categories")
         .then((response) => {
           this.categories = response.data.categories;
+          console.log(this.entriesSnacks)
+          console.log(this.categories)
           this.entriesSnacks = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Entries & Snacks"
@@ -443,7 +450,6 @@ const app = Vue.createApp({
     // edit products
     pacth_product() {
       this.productimg = this.product.productImage;
-      console.log(this.product)
       axios
         .patch(`/api/products/edit/${this.product.id}`, {
           name: this.nameeditproduct,
@@ -470,20 +476,26 @@ const app = Vue.createApp({
     },
     // product add
     product_add() {
+      // console.log(this.id_addproduct,this.nameproducts,this.descriptionproduc,this.products_img,this.priceproduct,this.stockproduct)
       axios
         .post("/api/products/create", {
-          idCategory: this.idcategory,
+          idCategory: this.id_addproduct,
           name: this.nameproducts,
           description: this.descriptionproducts,
           productImage: this.products_img,
           price: this.priceproduct,
           stock: this.stockproduct,
         })
-        .then((response) => console.log(response))
+        .then((response) => {
+          setTimeout(() => {
+            window.location.reload()
+          }, 500);
+          alert(response.data)
+        })
         .catch((err) => {
           console.log(err.response.data);
           console.log(
-            this.idcategory,
+            this.id_addproduct,
             this.nameproducts,
             this.descriptionproducts,
             this.products_img,
