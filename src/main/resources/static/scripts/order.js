@@ -3,7 +3,7 @@ const app = Vue.createApp({
     return {
       products: [],
       productId: "",
-      product:[],
+      product: [],
       productName: "",
       productImage: "",
       price: "",
@@ -26,7 +26,7 @@ const app = Vue.createApp({
       salads: [],
 
       // filter products
-      filterNameProduct:"",
+      filterNameProduct: "",
 
       //cart
       qantity: "",
@@ -42,57 +42,57 @@ const app = Vue.createApp({
 
       //multistep form
       prevBtns: "",
-            nextBtns: "",
-            progress: "",
-            formSteps: "",
-            progressSteps: [],             
-            progressActive:'',
+      nextBtns: "",
+      progress: "",
+      formSteps: "",
+      progressSteps: [],
+      progressActive: "",
 
       // save orders step by step
 
-        firstName: "",
-        lastName: "",
-        phone: "",
-        email: "",
-        password: "",
+      firstName: "",
+      lastName: "",
+      phone: "",
+      email: "",
+      password: "",
 
       addessSelected: [],
 
-        street: "",
-        number: "",
-        zip: "",
-        reference: "",
+      street: "",
+      number: "",
+      zip: "",
+      reference: "",
 
+      numberCard: "",
+      cvv: "",
+      vec: "",
 
-        numberCard: "",
-        cvv: "",
-        vec: "",
+      total: 0,
 
-        total: 0,
+      deliver: false,
 
-        deliver: false,
+      // conteo de peticiones exitosas
 
-        // conteo de peticiones exitosas
-
-        requests: {
-          createUser: false,
-          createAddress: false
-        },
-        // edit product
-        nameeditproduct:"",
-        descriptionproduc:"",
-        productimg:"",
-        priceedit:0,
-        stockedit:0,
-        showbtn:false
-
-    }
+      requests: {
+        createUser: false,
+        createAddress: false,
+      },
+      // edit product
+      nameeditproduct: "",
+      descriptionproduc: "",
+      productimg: "",
+      priceedit: 0,
+      stockedit: 0,
+      showbtn: false,
+      // add product
+      products_img: "",
+    };
   },
   created() {
     //this.Admin_accept_order()
     this.loadProducts();
     this.loadCategories();
-    this.loadDataProduct()
+    this.loadDataProduct();
 
     this.showModal();
     if (localStorage.getItem("cart")) {
@@ -100,11 +100,12 @@ const app = Vue.createApp({
       this.addToCart();
     }
 
-    this.cart.forEach(c => {
-      this.total += c.price * c.quantity
-    })
+    this.cart.forEach((c) => {
+      this.total += c.price * c.quantity;
+    });
+    this.nameeditproduct = this.product.name;
   },
-  methods: {    
+  methods: {
     loadProducts() {
       axios
         .get("/api/products")
@@ -133,7 +134,6 @@ const app = Vue.createApp({
               (categorie) => categorie.name === "Chef Picks"
             )[0].products,
           ];
-          console.log(this.chefPicks);
           this.mainCourses = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Main Course"
@@ -164,7 +164,6 @@ const app = Vue.createApp({
               (categorie) => categorie.name === "Salads"
             )[0].products,
           ];
-          console.log(this.mainCourses);
         })
         .catch((err) => console.log(err));
     },
@@ -282,7 +281,6 @@ const app = Vue.createApp({
         product.stock--;
         localStorage.setItem("cart", JSON.stringify(this.cart));
       });
-
     },
     showModal(id) {
       let prod = this.products.filter((item) => item.id == id);
@@ -361,7 +359,6 @@ const app = Vue.createApp({
       } else {
         this.show = false;
       }
-      console.log(e.target)
     },
     send_address() {
       axios
@@ -377,95 +374,131 @@ const app = Vue.createApp({
     },
     sendForm(e) {
       let tel = Number(this.phone);
-      let number = Number(this.number)
+      let number = Number(this.number);
 
-      console.log(number)
-
-      axios.post("/api/users/create", {firstName: this.firstName, lastName: this.lastName, email: this.email, password: this.password, number: tel}).then(res => {
-        console.log(res)
-        localStorage.clear()
-      }).catch(err => {
-        console.log(err.response)
-      })
+      axios
+        .post("/api/users/create", {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          email: this.email,
+          password: this.password,
+          number: tel,
+        })
+        .then((res) => {
+          console.log(res);
+          localStorage.clear();
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
     },
     register(e) {
       const button = document.getElementById("confirm");
 
-      switch(e.target.type) {
+      switch (e.target.type) {
         case "email":
           let verify = /[a-zA-Z0-9_.]+@[a-z]+[.][a-z]{2,}/;
-        let match = e.target.value.match(verify);
-  
-  
-        if(match !== null) {
-          if(e.target.value.length == match.input.length) {
-            button.disabled = false;
+          let match = e.target.value.match(verify);
+
+          if (match !== null) {
+            if (e.target.value.length == match.input.length) {
+              button.disabled = false;
+            } else {
+              button.disabled = true;
+            }
           } else {
             button.disabled = true;
           }
-        } else {
-          button.disabled = true;
-        }
-        break;
+          break;
       }
     },
     selectRadio(e) {
-      switch(e.target.value) {
+      switch (e.target.value) {
         case "delivery":
           this.deliver = true;
-        break;
+          break;
         case "in":
           this.deliver = false;
-        break;
+          break;
         case "withdraw":
           this.deliver = false;
-        break;
+          break;
       }
     },
-    loadDataProduct(){
+    loadDataProduct() {
       const urlParam = new URLSearchParams(window.location.search);
-      const id = urlParam.get('id');        
-      
-      axios.get(`/api/user/current/products/${id}`)
-            .then(res => {                
-              this.product = res.data                        
-              console.log(this.product)
-              
-          })
-            .catch(err => err.message)
-      },
-      showProduct(e){
-        
-        let id = e.target.parentElement.id
-        window.location.href = `./product-details.html?id=${id}`
-      },
-      // edit products
-      pacth_product(){
-        this.productimg = this.product.productImage
-        axios.patch(`/api/products/edit/${this.product.id}`,{
-          name:this.nameeditproduct,
-          description:this.descriptionproduc,
-          productImage:this.productimg,
-          price:this.priceedit,
-          stock:this.stockedit
+      const id = urlParam.get("id");
+
+      axios
+        .get(`/api/user/current/products/${id}`)
+        .then((res) => {
+          this.product = res.data;
         })
-        .then(response=>{
+        .catch((err) => err.message);
+    },
+    showProduct(e) {
+      let id = e.target.parentElement.id;
+      window.location.href = `./product-details.html?id=${id}`;
+    },
+    // edit products
+    pacth_product() {
+      this.productimg = this.product.productImage;
+      console.log(this.product)
+      axios
+        .patch(`/api/products/edit/${this.product.id}`, {
+          name: this.nameeditproduct,
+          description: this.descriptionproduc,
+          productImage: this.productimg,
+          price: this.priceedit,
+          stock: this.stockedit,
+        })
+        .then((response) => {
           setTimeout(() => {
-            window.location.reload()
+            window.location.reload();
           }, 500);
         })
-        .catch(err=>console.log(err.response))
-      },
-      // show btn in pag product-details
-      show_btn(){
-        this.showbtn=!this.showbtn
-      }
+        .catch((err) => console.log(err.response));
+    },
+    // show btn in pag product-details
+    show_btn() {
+      this.nameeditproduct = this.product.name;
+      this.descriptionproduc= this.product.description
+      this.priceedit=this.product.price
+      this.stockedit = this.product.stock
+
+      this.showbtn = !this.showbtn;
+    },
+    // product add
+    product_add() {
+      axios
+        .post("/api/products/create", {
+          idCategory: this.idcategory,
+          name: this.nameproducts,
+          description: this.descriptionproducts,
+          productImage: this.products_img,
+          price: this.priceproduct,
+          stock: this.stockproduct,
+        })
+        .then((response) => console.log(response))
+        .catch((err) => {
+          console.log(err.response.data);
+          console.log(
+            this.idcategory,
+            this.nameproducts,
+            this.descriptionproducts,
+            this.products_img,
+            this.priceproduct,
+            this.stockproduct
+          );
+        });
+    },
   },
-  computed:{
-    filterProducts(){
-      return this.products.filter(product => product.name.toLowerCase().match(this.filterNameProduct.toLowerCase()))
-    }
-  }
-  ,
-})
+  computed: {
+    filterProducts() {
+      return this.products.filter((product) =>
+        product.name.toLowerCase().match(this.filterNameProduct.toLowerCase())
+      );
+    },
+  },
+});
 app.mount("#app");
