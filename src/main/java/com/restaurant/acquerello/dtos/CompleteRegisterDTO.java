@@ -18,10 +18,10 @@ public class CompleteRegisterDTO {
     private String reference;
 
     // get order info
-    private LocalDateTime orderHour;
-    private Double Total;
+    //private LocalDateTime orderHour;
+    //private Double Total;
 
-    public CompleteRegisterDTO(String firstName, String lastName, String email, String password, Long number, String street, Integer numberStreet, String zip, String state, String reference , LocalDateTime orderHour) {
+    public CompleteRegisterDTO(String firstName, String lastName, String email, String password, Long number, String street, Integer numberStreet, String zip, String state, String reference) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

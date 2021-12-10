@@ -70,6 +70,8 @@ public class NoAuthUserController {
             return new ResponseEntity<>("Reference field cannot are empty", HttpStatus.FORBIDDEN);
         }
 
+        // check order fields
+
         User user = new User(completeRegisterDTO.getFirstName(), completeRegisterDTO.getLastName(), completeRegisterDTO.getEmail(), completeRegisterDTO.getPassword(), completeRegisterDTO.getNumber(), UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
         Address address = new Address(completeRegisterDTO.getStreet(), completeRegisterDTO.getNumberStreet(), completeRegisterDTO.getZip(), completeRegisterDTO.getState(), completeRegisterDTO.getReference());
 
