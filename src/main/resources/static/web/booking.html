@@ -8,9 +8,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="../styles/bootstrap.min.css">
   <link rel="stylesheet" href="../styles/style.css">
   <link rel="stylesheet" href="../styles/account.css">
-  <link rel="stylesheet" href="../styles/bootstrap.min.css">
   <link rel="stylesheet" href="../styles/carrousel.css">
   <title>Acquerello</title>
 </head>
@@ -76,20 +76,52 @@
 
     <main class="d-flex flex-column align-items-center justify-content-center">
 
-      <div class="d-flex flex-column justify-content-center">
+      <div class="d-flex flex-column justify-content-center bookTable">
         <h3 class="mt-5 py-4">Plan your day with us</h3>
         <div>
           <h4 class="text-center mb-2">Select day and time</h4>
-          <div class="d-flex justify-content-center">
-            <input class="px-2 m-2" type="date" name="" id="" v-model="datetime">
-            <input class="px-2 m-2" type="time" name="" id="" v-model="bookingHour">
-          </div>
-            <div>
-              <h4>How many are you?</h4>
-              <div>
-                <input type="number" max="10" min="1" v-model="quantitytime" name="" id="">
-              </div>
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="date px-4">
+              <input class="px-2 m-2" type="date" name="" id="" v-model="datetime">
             </div>
+            <div class="time px-4">
+              <label for="peop"><i class="bi bi-clock-fill"></i></label>
+              <select name="people" id="peop" v-model="bookingHour">
+                <option value="">Hour</option>
+                <option value="10:00">09:00 am</option>
+                <option value="10:00">10:00 am</option>
+                <option value="11:00">11:00 am </option>
+                <option value="12:00">12:00 pm</option>
+                <option value="13:00">13:00 pm</option>
+                <option value="18:00">18:00 pm</option>
+                <option value="19:00">19:00 pm</option>
+                <option value="20:00">20:00 pm</option>
+                <option value="21:00">21:00 pm</option>
+                <option value="22:00">22:00 pm</option>
+              </select>
+            </div>
+          </div>
+          <div class="d-flex flex-column justify-content-center align-items-center">
+            <h4>How many are you?</h4>
+            <div class="people" >
+              <i class="bi bi-person-fill"></i>
+              <select name="people" id="" v-model="quantitytime">
+                <option value="">People</option>
+                <option value="1">1 person</option>
+                <option value="2">2 people</option>
+                <option value="3">3 people</option>
+                <option value="4">4 people</option>
+                <option value="5">5 people</option>
+                <option value="6">6 people</option>
+                <option value="7">7 people</option>
+                <option value="8">8 people</option>
+                <option value="9">9 people</option>
+                <option value="10">10 people</option>
+                <option value="11">11 people</option>
+                <option value="12">12 people</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -271,7 +303,7 @@
                     </label>
                     <small> 8 </small>
                   </div>
-                </div>                
+                </div>
 
               </div>
             </div>
@@ -367,7 +399,7 @@
                     <small> 31 </small>
                   </div>
                 </div>
-                
+
 
               </div>
             </div>
@@ -415,13 +447,17 @@
               </li>
             </ol>
             <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
               </svg>
             </a>
             <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
               </svg>
             </a>
           </div>
