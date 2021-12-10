@@ -1,6 +1,7 @@
 package com.restaurant.acquerello.controllers;
 
 import com.restaurant.acquerello.dtos.BookingCreateDTO;
+import com.restaurant.acquerello.dtos.BookingDTO;
 import com.restaurant.acquerello.models.Booking;
 import com.restaurant.acquerello.models.TableState;
 import com.restaurant.acquerello.models.User;
@@ -15,6 +16,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -28,6 +31,11 @@ public class BookingController {
 
     @Autowired
     public BookingService bookingService;
+
+    @RequestMapping("/booking")
+    public List<BookingDTO> getAll() {
+        return bookingService.getAll().stream().map(BookingDTO::new).collect(Collectors.toList());
+    }
 
     @RequestMapping(value = "/booking/create", method = RequestMethod.POST)
     public ResponseEntity<?> createAddress(Authentication authentication,  @RequestBody BookingCreateDTO bookingCreateDTO) {

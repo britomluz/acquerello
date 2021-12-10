@@ -812,3 +812,13 @@ footer{
         justify-content: center!important;        
     }
 }
+
+/* Brian CSS */
+
+.flex-d-col {
+    flex-direction: column;
+}
+
+.flex-a-items-center {
+    align-items: center;
+}

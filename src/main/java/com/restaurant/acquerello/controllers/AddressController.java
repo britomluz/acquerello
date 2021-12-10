@@ -1,6 +1,7 @@
 package com.restaurant.acquerello.controllers;
 
 import com.restaurant.acquerello.dtos.AddressCreateDTO;
+import com.restaurant.acquerello.dtos.AddressDTO;
 import com.restaurant.acquerello.models.Address;
 import com.restaurant.acquerello.models.User;
 import com.restaurant.acquerello.models.UserType;
@@ -32,6 +33,11 @@ public class AddressController {
 
     @Autowired
     public AddressService addressService;
+
+    @RequestMapping("/address")
+    public List<AddressDTO> getAll() {
+        return addressService.getAll().stream().map(AddressDTO::new).collect(Collectors.toList());
+    }
 
     @RequestMapping(value = "/address/create", method = RequestMethod.POST)
     public ResponseEntity<?> createAddress(Authentication authentication, @RequestBody AddressCreateDTO addressCreateDTO) {
