@@ -19,6 +19,7 @@ public class Booking {
     private Integer tableNumber;
     private Integer quantity;
     private TableState state;
+    private TableAvailability availability;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
@@ -26,14 +27,15 @@ public class Booking {
 
     public Booking() {}
 
-    public Booking(LocalDate date, LocalTime bookingHour, LocalTime endBooking, SectorTables sector, Integer table, Integer quantity, TableState state) {
+    public Booking(LocalDate date, LocalTime bookingHour, LocalTime endBooking, SectorTables sector, Integer tableNumber, Integer quantity, TableState state, TableAvailability availability) {
         this.dateBooking = date;
         this.bookingHour = bookingHour;
         this.endBooking = endBooking;
         this.sector = sector;
-        this.tableNumber = table;
+        this.tableNumber = tableNumber;
         this.quantity = quantity;
         this.state = state;
+        this.availability = availability;
     }
 
     public Long getId() {
@@ -120,7 +122,13 @@ public class Booking {
         this.user = user;
     }
 
+    public TableAvailability getAvailability() {
+        return availability;
+    }
 
+    public void setAvailability(TableAvailability availability) {
+        this.availability = availability;
+    }
 
     @Override
     public String toString() {
