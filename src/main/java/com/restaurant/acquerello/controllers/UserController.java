@@ -10,6 +10,7 @@ import com.restaurant.acquerello.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,11 @@ public class UserController {
     @GetMapping("/users")
     public List<UserDTO> getAll() {
         return userService.getAll().stream().map(UserDTO::new).collect(Collectors.toList());
+    }
+
+    @RequestMapping("/users/current")
+    public UserDTO getUser(Authentication authentication) {
+        return new UserDTO(userService.getByEmail(authentication.getName()));
     }
 
     @PostMapping("/users/create")

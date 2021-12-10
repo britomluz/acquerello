@@ -92,7 +92,7 @@ const app = Vue.createApp({
       this.total += c.price * c.quantity
     })
   },
-  methods: {
+  methods: {    
     loadProducts() {
       axios
         .get("/api/products")

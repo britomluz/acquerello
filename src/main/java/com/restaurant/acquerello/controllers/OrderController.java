@@ -3,6 +3,7 @@ package com.restaurant.acquerello.controllers;
 import com.restaurant.acquerello.dtos.OrderDTO;
 import com.restaurant.acquerello.dtos.OrderDetailsDTO;
 import com.restaurant.acquerello.dtos.OrderTypeDTO;
+import com.restaurant.acquerello.dtos.UserDTO;
 import com.restaurant.acquerello.models.*;
 import com.restaurant.acquerello.repositories.OrderDetailsRepository;
 import com.restaurant.acquerello.repositories.OrderRepository;
@@ -45,7 +46,6 @@ public class OrderController {
     public List<OrderTypeDTO> getAllOrders() {
         return orderRepository.findAll().stream().map(OrderTypeDTO::new).collect(Collectors.toList());
     }
-
     @GetMapping("/order/{id}")
     public ResponseEntity<Object> getOrders(Authentication authentication, @PathVariable Long id){
 
@@ -57,6 +57,16 @@ public class OrderController {
             return new ResponseEntity<>("Order incorrect",HttpStatus.FORBIDDEN);
         }*/
         return new ResponseEntity<>(orderService.getById(id).map(OrderTypeDTO::new).orElse(null), HttpStatus.CREATED);
+    }
+    @GetMapping("/order/current")
+    public ResponseEntity<Object> getOrderUser(Authentication authentication){
+
+        User user = userServices.getByEmail(authentication.getName());
+        /*
+        if(!user.getOrders().contains(order)){
+            return new ResponseEntity<>("Order incorrect",HttpStatus.FORBIDDEN);
+        }*/
+        return new ResponseEntity<>( user.getOrders().stream().map(OrderTypeDTO::new).collect(Collectors.toList()), HttpStatus.CREATED);
     }
 
 

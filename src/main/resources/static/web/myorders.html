@@ -87,8 +87,22 @@
 
         <li class="item-list">
           <a class="item-link l5" href="#">
+            <div><i class="bi bi-house-fill fs-2"></i></div>
+            <p>My adresses</p>
+          </a>
+        </li>
+
+        <li class="item-list">
+          <a class="item-link l5" href="#">
             <div><i class="bi bi-bag-fill fs-3"></i></div>
             <p>My Orders</p>
+          </a>
+        </li>
+
+        <li class="item-list">
+          <a class="item-link l5" href="#">
+            <div><i class="bi bi-credit-card-2-back-fill fs-3"></i></div>
+            <p>My Card</p>
           </a>
         </li>
 
@@ -100,115 +114,17 @@
         </li>
       </ul>
     </div>
-    <main class="d-flex flex-column mb-5">
-      <div class="row mt-5">
-        <h4 class="text-center">{{user.firstName}}</h4>
-        <p class="text-center">{{user.email}}</p>
-        <div class="row mt-2 d-flex justify-content-center myAccount">
-
-          <div class="firstCol col-10 col-lg-5 info mt-3 d-flex flex-column justify-content-start">
-
-            <div class="row a ">
-              <div class="">
-                <h2 class="fs-1 text-start">Information</h2>
-                <div>
-                  <small>Firstname</small>
-                  <h5>{{user.firstName}}</h5>
-                </div>
-                <div>
-                  <small>Lastname</small>
-                  <h5>{{user.lastName}}</h5>
-                </div>
-              </div>
-            </div>
-
-            <div class="row a mt-5">
-              <div class="">
-                <h2 class="fs-1 text-start">My adresses</h2>
-                <table class="table">
-                  <tbody>
-                    <tr v-for="addr in myaddress">
-                      <td class="text-start">{{addr.street}}</td>
-                      <td class="text-start">{{addr.number}}</td>
-                      <td class="text-start">{{addr.zip}}</td>
-                      <td class="text-start"><button type="button" class="btn-i"><i
-                            class="bi .cRed bi-pencil cRed"></i></button></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div>
-                <button type="button" class="btn-green mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Add
-                  new adress</button>
-              </div>
-            </div>
-
-
-          </div>
-
-          <div class="firstCol col-10 col-lg-5 info mt-3 d-flex flex-column justify-content-center">
-
-            <div class="row a ">
-              <div class="" v-for="card in card">
-                <h2 class="fs-1 text-start">Card Acquerello</h2>
-                <div>
-                  <small>Level</small>
-                  <h5>{{card.level}}</h5>
-                </div>
-                <div>
-                  <small>Points</small>
-                  <h5>{{card.points}}</h5>
-                </div>
-              </div>
-            </div>
-
-            <div class="row a mt-5">
-              <!-- <div class="">
-                <img class="img-fluid" src="../assets/card.png" alt="">
-              </div> -->
-            </div>
-
-
-          </div>
-
-        </div>
-
+    <main class="d-flex flex-column align-items-center">
+      <div class="d-flex flex-column align-items-around mt-5">
+        <h4 class="text-center">Firstname</h4>
+        <p class="text-center">email@email.com</p>
+        
+          
       </div>
-
-
 
     </main>
-    <!-- modal new adress -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <label for="">street</label>
-              <input type="text" name="" v-model="street" id="">
-              <label for="">number</label>
-              <input type="number" name="" v-model="numberAddress" id="">
-              <label for="">zip</label>
-              <input type="text" name="" v-model="zip" id="">
-              <label for="">state</label>
-              <input type="text" name="" v-model="state" id="">
-              <label for="">reference</label>
-              <input type="text" name="" v-model="reference" id=""> 
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn-green" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn-green" @click="send_address">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
+  </div>
 
 
   <script>
@@ -228,7 +144,7 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://unpkg.com/vue@next"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="../scripts/myaccount.js"></script>
+  <script src="./scripts/index.js"></script>
 
 </body>
 
