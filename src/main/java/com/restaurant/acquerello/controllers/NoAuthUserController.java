@@ -77,8 +77,9 @@ public class NoAuthUserController {
 
         user.addAddress(address);
 
-        addressService.save(address);
         userService.save(user);
+        addressService.save(address);
+
 
         return new ResponseEntity<>("Checkout and user created", HttpStatus.CREATED);
     }
