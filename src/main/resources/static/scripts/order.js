@@ -34,22 +34,36 @@ const app = Vue.createApp({
       search: "",
       quantity: [],
       searchProducts: false,
+      show: false,
 
       //multistep form
       prevBtns: "",
-      nextBtns: "",
-      progress: "",
-      formSteps: "",
-      progressSteps: [],
-      progressActive: "",
-      //show
-      show: false,
-      // address
-      street: "",
-      numberAddress: 0,
-      zip: "",
-      reference: "",
-    };
+            nextBtns: "",
+            progress: "",
+            formSteps: "",
+            progressSteps: [],             
+            progressActive:'',
+
+      // save orders step by step
+
+        firstName: "",
+        lastName: "",
+        phone: "",
+        email: "",
+        password: "",
+
+      addessSelected: [],
+
+        street: "",
+        number: "",
+        zip: "",
+        reference: "",
+
+
+        numberCard: "",
+        cvv: "",
+        vec: ""
+    }
   },
   created() {
     //this.Admin_accept_order()
@@ -64,10 +78,10 @@ const app = Vue.createApp({
   },
   methods: {
     loadProducts() {
-      axios.get('/api/products')
-        .then(response => {         
-          this.products = response.data.products
-          //this.mainCourse = this.products.filter(product => product.categories)
+      axios
+        .get("/api/products")
+        .then((response) => {
+          this.products = response.data.products;
         })
         .catch((err) => console.log(err.response.data));
     },
@@ -76,7 +90,6 @@ const app = Vue.createApp({
         .get("/api/categories")
         .then((response) => {
           this.categories = response.data.categories;
-          // this.categories = localStorage.getItem("categories")? JSON.parse(localStorage.getItem("categories")) : [...response.data.categories]
           this.entriesSnacks = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Entries & Snacks"
@@ -232,43 +245,40 @@ const app = Vue.createApp({
         if (product.quantity == 0) {
           this.cart.splice(i, 1);
         }
-      })
-      localStorage.setItem('cart', JSON.stringify(this.cart))
-      },
-      addOne(clickEvent){
-        this.cart.forEach(product => {
-          if(clickEvent.target.id == product.id)
-            product.quantity ++
-            product.stock --
-        })
-        localStorage.setItem('cart', JSON.stringify(this.cart))
+        localStorage.setItem("cart", JSON.stringify(this.cart));
+      });
     },
-       
-      showModal(id){
-      let prod = this.products.filter(item => item.id == id)
-      this.modal = prod                
-      },
-      calculateTotal(){
-        let total = 0
-        this.cart.forEach(product => {
-          total += product.price * product.quantity
-        })
-        return total;
-      },
-      emptyCart(){
-        this.cart = []
-        localStorage.setItem('cart', JSON.stringify(this.cart))
+    addOne(clickEvent) {
+      this.cart.forEach((product) => {
+        if (clickEvent.target.id == product.id) product.quantity++;
+        product.stock--;
+        localStorage.setItem("cart", JSON.stringify(this.cart));
+      });
 
-      },
-      //multistep form
-      updateForms(btn, form1, form2, step){
-        this.nextStep(btn, form1, form2);
-        this.nextProgressBar(btn, step);
-        
-     },
-    backForms(btn, form1, form2, step){
-        this.prevStep(btn, form1, form2);
-        this.prevProgressBar(btn, step);          
+    },
+    showModal(id) {
+      let prod = this.products.filter((item) => item.id == id);
+      this.modal = prod;
+    },
+    calculateTotal() {
+      let total = 0;
+      this.cart.forEach((product) => {
+        total += product.price * product.quantity;
+      });
+      return total;
+    },
+    emptyCart() {
+      this.cart = [];
+      localStorage.setItem("cart", JSON.stringify(this.cart));
+    },
+    //multistep form
+    updateForms(btn, form1, form2, step) {
+      this.nextStep(btn, form1, form2);
+      this.nextProgressBar(btn, step);
+    },
+    backForms(btn, form1, form2, step) {
+      this.prevStep(btn, form1, form2);
+      this.prevProgressBar(btn, step);
     },
     nextStep(btn, form1, form2) {
       //this.paymentsList()
@@ -323,9 +333,9 @@ const app = Vue.createApp({
       } else {
         this.show = false;
       }
+      console.log(e.target)
     },
     send_address() {
-      //zzzzz
       axios
         .post("/api/address/create", {
           street: this.street,
@@ -337,6 +347,35 @@ const app = Vue.createApp({
         .then((response) => alert(response.data))
         .catch((err) => console.log(err.response.data));
     },
+    sendForm(e) {
+      let tel = Number(this.phone);
+      axios.post("/api/users/create", {firstName: this.firstName, lastName: this.lastName, email: this.email, password: this.password, number: tel}).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err.response)
+      })
+    },
+    register(e) {
+      const button = document.getElementById("confirm");
+
+      switch(e.target.type) {
+        case "email":
+          let verify = /[a-zA-Z0-9_.]+@[a-z]+[.][a-z]{2,}/;
+        let match = e.target.value.match(verify);
+  
+  
+        if(match !== null) {
+          if(e.target.value.length == match.input.length) {
+            button.disabled = false;
+          } else {
+            button.disabled = true;
+          }
+        } else {
+          button.disabled = true;
+        }
+        break;
+      }
+    }
   },
-});
+})
 app.mount("#app");

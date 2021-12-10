@@ -31,7 +31,7 @@ public class UserController {
         return userService.getAll().stream().map(UserDTO::new).collect(Collectors.toList());
     }
 
-    @PostMapping("/users")
+    @PostMapping("/users/create")
     public ResponseEntity<?> createUser(@RequestBody CreateUserDTO user){
         if (user.getFirstName().isEmpty() || user.getLastName().isEmpty() || user.getEmail().isEmpty() || user.getPassword().isEmpty()){
             return new ResponseEntity<>("Fields cannot be empty", HttpStatus.FORBIDDEN);
