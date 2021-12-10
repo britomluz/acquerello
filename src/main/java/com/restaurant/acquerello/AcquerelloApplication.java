@@ -50,7 +50,7 @@ public class AcquerelloApplication {
 			Order order2 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.PENDING, 11.43);
 
 			// Brian: Creating bookings
-			Booking booking1 = new Booking(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(4), SectorTables.GOLDEN, 2, 2, TableState.PENDING);
+			Booking booking1 = new Booking(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(4), SectorTables.GOLDEN, 2, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
 
 			// Brian : Creating order details
 			OrderDetails orderDetails1 = new OrderDetails("Pancho a la muzarelle", 1, 15.99, 15.99);

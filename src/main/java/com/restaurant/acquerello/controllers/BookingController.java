@@ -2,10 +2,7 @@ package com.restaurant.acquerello.controllers;
 
 import com.restaurant.acquerello.dtos.BookingCreateDTO;
 import com.restaurant.acquerello.dtos.BookingDTO;
-import com.restaurant.acquerello.models.Booking;
-import com.restaurant.acquerello.models.TableState;
-import com.restaurant.acquerello.models.User;
-import com.restaurant.acquerello.models.UserType;
+import com.restaurant.acquerello.models.*;
 import com.restaurant.acquerello.repositories.BookingRepository;
 import com.restaurant.acquerello.services.BookingService;
 import com.restaurant.acquerello.services.UserService;
@@ -47,7 +44,7 @@ public class BookingController {
 
         LocalTime plus = bookingCreateDTO.getBookingHour().plusHours(4);
 
-        Booking booking = new Booking(bookingCreateDTO.getDate(), bookingCreateDTO.getBookingHour(), plus, bookingCreateDTO.getSector(), 2, 2, TableState.PENDING);
+        Booking booking = new Booking(bookingCreateDTO.getDate(), bookingCreateDTO.getBookingHour(), plus, bookingCreateDTO.getSector(), 2, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
 
         System.out.println(booking);
         user.addBooking(booking);
@@ -101,4 +98,36 @@ public class BookingController {
 
         return new ResponseEntity<>("Booking edited", HttpStatus.ACCEPTED);
     }
+
+    @PatchMapping("/admin/booking/edit")
+    public ResponseEntity<Object> edit( Authentication authentication,
+                                        @RequestParam Long id,
+                                        @RequestParam String type ) {
+
+        User user = userService.getByEmail(authentication.getName());
+        Booking booking = bookingService.getById(id).orElse(null);
+        OrderState orderType = OrderState.valueOf(type);
+        TableAvailability availability = TableAvailability.valueOf(type);
+
+
+        if(!user.getType().equals(UserType.ADMIN)) {
+            return new ResponseEntity<>("Access denied", HttpStatus.FORBIDDEN);
+        }
+
+        if (type.isEmpty()) {
+            return new ResponseEntity<>("Order don't have any type", HttpStatus.BAD_REQUEST);
+        }
+
+        if(booking == null){
+            return new ResponseEntity<>("Denied", HttpStatus.BAD_REQUEST);
+        }
+
+        booking.setAvailability(availability);
+        bookingService.save(booking);
+
+        return new ResponseEntity<>("Order state change",HttpStatus.OK);
+    }
+
+
+
 }
