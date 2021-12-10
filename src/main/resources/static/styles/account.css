@@ -34,7 +34,19 @@ body{
   padding: 5px 25px;
   border: none;
 }
-
+.inputOne input{
+  border: none;
+  
+}
+.inputOne input:focus{  
+  outline: none;
+}
+.inputOne{
+  border-bottom: 2px solid var(--color1);
+}
+.inputOne label{
+  color:  var(--color1);
+}
 /*nav my account*/
 .containers,
 .list,
@@ -358,6 +370,33 @@ body{
 .myAccount h2{
   color: var(--color1);  
 }
+
+
+/* ADMIN PANEL START*/
+.tableAdmin th{
+  background: var(--color1);
+  color: var(--color4);
+}
+.tableProducts th{
+  background: var(--color1);
+  color: var(--color4);
+}
+.tableProducts i{
+  color: var(--color2);
+}
+.tableProducts button{
+  border: none;
+  background: transparent;
+}
+.square{
+  border: 2px solid var(--color1);
+  padding: 20px;
+}
+.text-green{
+  color: var(--color1);
+}
+/* ADMIN PANEL END*/
+
 @media (max-width: 425px){
   .tbp {
     padding: 10px;

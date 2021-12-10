@@ -20,11 +20,11 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/products", "/api/categories", "/api/cards").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/users/create", "/api/address/create").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/users/create").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/users").permitAll()
                 .antMatchers("/h2-console/**", "/web/**", "/scripts/**", "/assets/**","/styles/**").permitAll()
                 .antMatchers("/api/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/rest/**").hasAuthority("ADMIN")
+                .antMatchers("/rest/**", "/web/admin.html", "/web/products.html", "/web/product-details.html", "/web/order-details.html").hasAuthority("ADMIN")
                 .and()
                 .formLogin()
                     .usernameParameter("email")

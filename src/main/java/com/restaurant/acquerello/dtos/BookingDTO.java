@@ -2,6 +2,7 @@ package com.restaurant.acquerello.dtos;
 
 import com.restaurant.acquerello.models.Booking;
 import com.restaurant.acquerello.models.SectorTables;
+import com.restaurant.acquerello.models.TableAvailability;
 import com.restaurant.acquerello.models.TableState;
 
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ public class BookingDTO {
     private Integer tableNumber;
     private Integer quantity;
     private TableState state;
+    private TableAvailability tableAvailability;
 
     public BookingDTO() {}
 
@@ -28,6 +30,7 @@ public class BookingDTO {
         this.tableNumber = booking.getTable();
         this.quantity = booking.getQuantity();
         this.state = booking.getState();
+        this.tableAvailability = booking.getAvailability();
     }
 
     public Long getId() {

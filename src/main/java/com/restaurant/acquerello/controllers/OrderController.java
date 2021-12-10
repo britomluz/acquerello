@@ -168,6 +168,28 @@ public class OrderController {
         return new ResponseEntity<>("Order edited", HttpStatus.ACCEPTED);
     }
 
+    @PatchMapping("/admin/orders/edit")
+    public ResponseEntity<Object> edit( Authentication authentication,
+                                             @RequestParam Long id,
+                                             @RequestParam String type ) {
 
+        User user = userServices.getByEmail(authentication.getName());
+        Order order = orderService.getById(id).orElse(null);
+        OrderState orderType = OrderState.valueOf(type);
+
+        /*
+        if(user.getType().equals(UserType.ADMIN)) {
+            return new ResponseEntity<>("Access denied", HttpStatus.FORBIDDEN);
+        }*/
+
+        if (type.isEmpty()) {
+            return new ResponseEntity<>("Order don't have any type", HttpStatus.BAD_REQUEST);
+        }
+
+        order.setState(orderType);
+        orderService.save(order);
+
+        return new ResponseEntity<>("Order state change",HttpStatus.OK);
+    }
 
 }

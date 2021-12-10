@@ -8,16 +8,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../styles/style.css">    
-    <link rel="stylesheet" href="../styles/account.css">
-    <link rel="shortcut icon" href="../assets/favicon.png"> 
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="shortcut icon" href="../assets/favicon.png">        
     <title>Acquerello</title>
 </head>
 
 <body>
     <div id="app">
 
-        <nav id="navbar" class="navbar fondoBlack fixed-top">
+        <nav id="navbar" class="navbar navbar-light fondoTransp fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                     <img src="../assets/acquerello.png" alt="" width="150">
@@ -35,7 +34,7 @@
                     <span class="navbar-toggler-icon"></span>
                   </button>
                   
-                    
+                    <button class="navIcon"><i class="bi bi-search"></i></button>
                     <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
                     <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i class="bi bi-cart-fill"></i></button>          
             </div>
@@ -71,83 +70,45 @@
           </nav>
 
           <header class="headerPagesPanel d-flex align-items-center">
-              <h1>Products</h1>   
+              <h1>Orders</h1>   
               
           </header>
 
           <main>
-            <div class="mt-1">
-              <a href="admin.html" class="btn-green"><i class="bi bi-arrow-left text-light"></i> Admin Panel</a>
-            </div>
             <div>
-              <h3 class="py-5">Products</h3>
+              <h3 class="py-5">Order details</h3>
             </div>
-            <div class="row mb-4 d-flex flex-column align-items-center ">
-              <div class="col-12 col-md-6 square">
-                  <h3 class="fs-5 py-3">Add new product</h3>
-                  <div>
-                    <form @submit.prevent="product_add()">
-                      <label>products name</label>
-                      <input type="text" v-model="nameproducts">
-                      <label>produtc img</label>
-                      <!-- <input type="file"  
-                      style="display: none;" 
-                      @change="previewfile"
-                      ref="fileinput"> -->
-                      <button type="button" @click="$refs.fileinput.click()">
-                          pick img
-                      </button>
-                      <label for="description">description products</label>
-                      <input type="text" v-model="descriptionproducts">
-                      <label>price</label>
-                      <input type="number" v-model="priceproduct">
-                      <label>stock </label>
-                      <input type="number" v-model="stockproduct">
-                      <button>
-                          send
-                      </button>
-                  </form>
-                  </div>
-              </div>              
-            </div> 
-            <div class="row">
-              <div class="mb-3 col-12 col-md-10">
-                <input type="search" name="" v-model="filterNameProduct" id="" placeholder="Search by name" class="text-muted">
-              </div>
-            </div>
-            <div class="d-flex flex-column align-items-center justify-content-center">
-              <div class="col-12 col-md-10">
-                  <table class="table tableProducts table-striped">
+            <div class="d-flex justify-content-center">
+              <div class="col-12 col-md-8">
+                  <table class="table tableAdmin">
                       <thead>
                         <tr>
-                          <th scope="col" >ID</th>
-                          <th scope="col" class="text-center">Name</th>                                                    
-                          <th scope="col" class="text-center">Price</th>
-                          <th scope="col" class="text-center">Stock</th>
-                          <th scope="col" class="text-center">Description</th>
+                          <th scope="col" >Nº</th>
+                          <th scope="col" class="text-center">Date</th>
+                          <th scope="col" class="text-center">Status</th>
+                          <th scope="col" class="text-center">Actions</th>
+                          <th scope="col" class="text-center">Total</th>
                           <th scope="col" class="text-center">View</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="product in filterProducts">
-                          <th scope="row" class="">{{product.id}}</th>
-                          <td class=""><b>{{product.name}}</b></td>
-                          <td class="">${{product.price}}</td>
-                          <td class="text-center">{{product.stock}}</td>                          
-                          <td class="">{{product.description}}</td>
+                        <tr v-for="product in products">
+                          <th scope="row" class="text-center">{{product.id}}</th>
+                          <td class="text-center">{{}}</td>
+                          <td class="text-center">{{}}</td>
+                          <td class="d-flex justify-content-around"></td>
+                          <td class="text-center">$ {{order.total}}</td>
                           <td class="d-flex justify-content-center">
-                              <button :id="product.id" type="button" @click="showProduct"><i class="bi bi-eye-fill"></i></button>
+                              <button :id="order.id" type="button" @click="showOrder"><i class="bi bi-pencil-square"></i></button>
                           </td>
                         </tr>
-                        <tr v-if="filterProducts.length === 0" colspan="6">
-                           <td colspan="6" class="text-danger">No se encontraron resultados</td> 
-                        </tr>
+                        
                       </tbody>
                     </table>
               </div>
             </div>
             
-            
+              
           </main>
 
 
@@ -155,7 +116,17 @@
     </div>
 
 
-   
+    <script>
+      let menu = document.getElementById('navbar')
+      window.addEventListener('scroll', function () {
+        // navbar.style.background = 'black'
+        menu.classList.toggle('fondoBlack', window.scrollY > 0)
+  
+      })
+    </script>
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
         crossorigin="anonymous"></script>

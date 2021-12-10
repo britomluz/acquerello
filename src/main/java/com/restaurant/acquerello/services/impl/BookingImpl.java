@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookingImpl implements BookingService {
@@ -22,5 +23,10 @@ public class BookingImpl implements BookingService {
     @Override
     public void save(Booking booking) {
         bookingRepository.save(booking);
+    }
+
+    @Override
+    public Optional<Booking> getById(Long id) {
+        return bookingRepository.findById(id);
     }
 }

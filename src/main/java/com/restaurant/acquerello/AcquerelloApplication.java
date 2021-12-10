@@ -42,15 +42,15 @@ public class AcquerelloApplication {
 
 			// Brian: Create User and Order
 			User user1 = new User("Luigi", "number one", "admin@admin.com", passwordEncoder.encode("admin1234"), 5554343L, UserType.ADMIN, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
-			User user2 = new User("Brian", "Cuenca", "correo@user.com", passwordEncoder.encode("user1234"), 5551232L, UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
+			User user2 = new User("Brian", "Cuenca", "gabriel.torrealba33@gmail.com", passwordEncoder.encode("user1234"), 5551232L, UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
 
 
 			// Brian: Creating orders
-			Order order1 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.IN_PROCESS, 32.43);
-			Order order2 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.IN_PROCESS, 11.43);
+			Order order1 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.PENDING, 32.43);
+			Order order2 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.PENDING, 11.43);
 
 			// Brian: Creating bookings
-			Booking booking1 = new Booking(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(4), SectorTables.GOLDEN, 2, 2, TableState.PENDING);
+			Booking booking1 = new Booking(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(4), SectorTables.GOLDEN, 2, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
 
 			// Brian : Creating order details
 			OrderDetails orderDetails1 = new OrderDetails("Pancho a la muzarelle", 1, 15.99, 15.99);
@@ -89,83 +89,83 @@ public class AcquerelloApplication {
 			cardRepository.save(card1);
 
 			//GABRIEL: CREATE PRODUCTS TO TEST THE APP
-			Product product1 = new Product("Bruschetta", "Tomato Reduction base, Mozzarella, Torn Basil, Olive Oil", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/bruschetta_bbzjzr.jpg", 17D, 25);
+			Product product1 = new Product("Bruschetta", 0, "Tomato Reduction base, Mozzarella, Torn Basil, Olive Oil", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/bruschetta_bbzjzr.jpg", 17D, 25);
 			productRepository.save(product1);
-			Product product2 = new Product("Capresse", "Escarole, Cannellini Beans, Meatballs, Parmigiano", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/capresse_jp0bcd.jpg", 23D, 25);
+			Product product2 = new Product("Capresse", 0, "Escarole, Cannellini Beans, Meatballs, Parmigiano", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/capresse_jp0bcd.jpg", 23D, 25);
 			productRepository.save(product2);
-			Product product3 = new Product("Vitello Tonato", "Mushrooms, Ruccola, Pomodoro, Mozzarella, Olives", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/vitello_tonato_hlwouz.jpg", 22D, 25);
+			Product product3 = new Product("Vitello Tonato", 0, "Mushrooms, Ruccola, Pomodoro, Mozzarella, Olives", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/vitello_tonato_hlwouz.jpg", 22D, 25);
 			productRepository.save(product3);
-			Product product4 = new Product("AntiPasti Mixed", "Mixed Greens, peppers, Anchoivies, Mozzarella, Artichokes","https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/antipasti_s7jfku.jpg", 23D, 25);
+			Product product4 = new Product("AntiPasti Mixed", 0, "Mixed Greens, peppers, Anchoivies, Mozzarella, Artichokes","https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/antipasti_s7jfku.jpg", 23D, 25);
 			productRepository.save(product4);
-			Product product5 = new Product("Insalata Rucula", "Tuscan Fried Chicken, Spicy Honey Butter","https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/insalataRusa_xakkbm.jpg", 12D, 25);
+			Product product5 = new Product("Insalata Rucula", 0, "Tuscan Fried Chicken, Spicy Honey Butter","https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/insalataRusa_xakkbm.jpg", 12D, 25);
 			productRepository.save(product5);
-			Product product6 = new Product("Carpacio", "Prosciutto ham, Baby Spinach, Garlic, Gorgonzola, Olives","https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/carpacio_sqxv4q.jpg", 16D, 25);
+			Product product6 = new Product("Carpacio", 0, "Prosciutto ham, Baby Spinach, Garlic, Gorgonzola, Olives","https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/carpacio_sqxv4q.jpg", 16D, 25);
 			productRepository.save(product6);
-			Product product7 = new Product("Crema Di Pomodoro", "Mix of mussels, Prawns, Octopus, Mozzarella, Basil, Red Souce", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/crema_di_pomodoro_v9k2wx.jpg", 19D, 25);
+			Product product7 = new Product("Crema Di Pomodoro", 0, "Mix of mussels, Prawns, Octopus, Mozzarella, Basil, Red Souce", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/crema_di_pomodoro_v9k2wx.jpg", 19D, 25);
 			productRepository.save(product7);
-			Product product8 = new Product("Pizza Pane", "Baby Kale, Apple,Cherry, Mozzarella, Pistachios, Basil", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/pizza_pane_yno3pe.jpg", 14D, 25);
+			Product product8 = new Product("Pizza Pane", 0, "Baby Kale, Apple,Cherry, Mozzarella, Pistachios, Basil", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/pizza_pane_yno3pe.jpg", 14D, 25);
 			productRepository.save(product8);
-			Product product9 = new Product("Stinco di Vitello", "Red Chilli Flakes, Fennel Seeds, Carrot, Celery, Onion", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/stinco_divitello_a8xa5i.jpg",19D, 25);
+			Product product9 = new Product("Stinco di Vitello", 0, "Red Chilli Flakes, Fennel Seeds, Carrot, Celery, Onion", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/stinco_divitello_a8xa5i.jpg",19D, 25);
 			productRepository.save(product9);
-			Product product10 = new Product("Gallo Cedrone", "Olive Oil, Cinnamon, Saffron, Drumsticks, Tomatoes", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/gallo_cedrone_bcvglk.jpg", 17D, 25);
+			Product product10 = new Product("Gallo Cedrone", 0, "Olive Oil, Cinnamon, Saffron, Drumsticks, Tomatoes", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/gallo_cedrone_bcvglk.jpg", 17D, 25);
 			productRepository.save(product10);
-			Product product11 = new Product("Fritto Misto", "Fried baby squid, smelt, shrimp, fennel, Calabrese peppers, served with mustard sauce", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/fritto_mixto_csxkjk.jpg", 18D, 25);
+			Product product11 = new Product("Fritto Misto", 0, "Fried baby squid, smelt, shrimp, fennel, Calabrese peppers, served with mustard sauce", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/fritto_mixto_csxkjk.jpg", 18D, 25);
 			productRepository.save(product11);
-			Product product12 = new Product("Sogliola al Forno", "Red Chilli Flakes, Fennel Seeds, Carrot, Celery, Onion", "https://res.cloudinary.com/luz-brito/image/upload/v1638658788/Acquerello/sogliola-alforno_ddmjgv.jpg", 12D, 25);
+			Product product12 = new Product("Sogliola al Forno", 0, "Red Chilli Flakes, Fennel Seeds, Carrot, Celery, Onion", "https://res.cloudinary.com/luz-brito/image/upload/v1638658788/Acquerello/sogliola-alforno_ddmjgv.jpg", 12D, 25);
 			productRepository.save(product12);
-			Product product13 = new Product("Linguine con Granchio", "Mushrooms, Ruccola, Pomodoro, Mozzarella, Olives", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/linguine_veodru.jpg", 23D, 25);
+			Product product13 = new Product("Linguine con Granchio", 0, "Mushrooms, Ruccola, Pomodoro, Mozzarella, Olives", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/linguine_veodru.jpg", 23D, 25);
 			productRepository.save(product13);
-			Product product14 = new Product("Risotto Verde", "Fresh Basil, Beans, Onion, Extra Virgin Olive Oil", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/risotto_verde_jwbrn5.jpg", 25D, 25);
+			Product product14 = new Product("Risotto Verde", 0, "Fresh Basil, 0, Beans, Onion, Extra Virgin Olive Oil", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/risotto_verde_jwbrn5.jpg", 25D, 25);
 			productRepository.save(product14);
-			Product product15 = new Product("Panzotti", "Onion, Carrot, Stick of Celery, Unsalted Butter, Beef", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/panzotti_rrpets.jpg", 15D, 25);
+			Product product15 = new Product("Panzotti", 0, "Onion, Carrot, Stick of Celery, Unsalted Butter, Beef", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/panzotti_rrpets.jpg", 15D, 25);
 			productRepository.save(product15);
-			Product product16 = new Product("Blue Cheese Crackers with Grapes", "red grapes, olive oil, blue cheese, honey, pear", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/blue_cheese_oppto7.jpg", 12D, 25);
+			Product product16 = new Product("Blue Cheese Crackers with Grapes", 0, "red grapes, olive oil, blue cheese, honey, pear", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/blue_cheese_oppto7.jpg", 12D, 25);
 			productRepository.save(product16);
-			Product product17 = new Product("Creamy Dorblu Appetizer with Honey", "olive oil, dorblu, honey, pear", "https://res.cloudinary.com/luz-brito/image/upload/v1638662291/Acquerello/creemy_dorbiu_zapuve.jpg", 15D, 25);
+			Product product17 = new Product("Creamy Dorblu Appetizer with Honey", 0, "olive oil, dorblu, honey, pear", "https://res.cloudinary.com/luz-brito/image/upload/v1638662291/Acquerello/creemy_dorbiu_zapuve.jpg", 15D, 25);
 			productRepository.save(product17);
-			Product product18 = new Product("Beet Salad", "Juicy Olives", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/category_salads_s5oynp.jpg", 10D, 25);
+			Product product18 = new Product("Beet Salad", 0, "Juicy Olives", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/category_salads_s5oynp.jpg", 10D, 25);
 			productRepository.save(product18);
-			Product product19 = new Product("Crab and Avocado", "avocados, mayonnaise, lemon juice, lump crabmeat, cilantro, chives,  pepper, paprika", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/crab_avocado_x4tszw.jpg", 20D, 25);
+			Product product19 = new Product("Crab and Avocado", 0, "avocados, mayonnaise, lemon juice, lump crabmeat, cilantro, chives,  pepper, paprika", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/crab_avocado_x4tszw.jpg", 20D, 25);
 			productRepository.save(product19);
-			Product product20 = new Product("Skewers", "Tomato, mozarella, skewers", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/skewers_y8qyip.jpg", 24D, 25);
+			Product product20 = new Product("Skewers", 0, "Tomato, 0, mozarella, skewers", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/skewers_y8qyip.jpg", 24D, 25);
 			productRepository.save(product20);
-			Product product21 = new Product("Spaghetti Aglio E Olio", "Whole roasted garlic, Calabrese pepper, parmigiano Reggiano", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/spaghettini-aglio-olio_jemk6t.jpg", 18D, 25);
+			Product product21 = new Product("Spaghetti Aglio E Olio", 0, "Whole roasted garlic, Calabrese pepper, parmigiano Reggiano", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/spaghettini-aglio-olio_jemk6t.jpg", 18D, 25);
 			productRepository.save(product21);
-			Product product22 = new Product("Minestrone Soup", "This original classic Italian soup", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/minestrone-soup_oqdaaa.jpg", 20D, 25);
+			Product product22 = new Product("Minestrone Soup", 0, "This original classic Italian soup", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/minestrone-soup_oqdaaa.jpg", 20D, 25);
 			productRepository.save(product22);
-			Product product23 = new Product("Soupe à l’Oignon", "onion soup gratineed with swiss cheese", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/soupe-a-loignon_nrwj9i.jpg", 18D, 25);
+			Product product23 = new Product("Soupe à l’Oignon", 0, "onion soup gratineed with swiss cheese", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/soupe-a-loignon_nrwj9i.jpg", 18D, 25);
 			productRepository.save(product23);
-			Product product24 = new Product("Lasagna Alla Gino", "Bolognese sauce, Bechamel sauce, ricotta cheese and tomato sauce", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/lasagna_alla_gino_kpjovx.jpg", 17D, 25);
+			Product product24 = new Product("Lasagna Alla Gino", 0, "Bolognese sauce, Bechamel sauce, ricotta cheese and tomato sauce", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/lasagna_alla_gino_kpjovx.jpg", 17D, 25);
 			productRepository.save(product24);
-			Product product25 = new Product("Pappardelle Mimmo", "Long wide pasta with scallops, lobster, asparagus, butter, sage, truffle", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/pappardelle_mimmo_xjqwrf.jpg", 18D, 25);
+			Product product25 = new Product("Pappardelle Mimmo", 0, "Long wide pasta with scallops, lobster, asparagus, butter, sage, truffle", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/pappardelle_mimmo_xjqwrf.jpg", 18D, 25);
 			productRepository.save(product25);
-			Product product26 = new Product("Rapini", "Broccoli rabe, garlic", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/rapini_pgxvot.jpg", 13D, 25);
+			Product product26 = new Product("Rapini", 0, "Broccoli rabe, garlic", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/rapini_pgxvot.jpg", 13D, 25);
 			productRepository.save(product26);
-			Product product27 = new Product("Malloreddus", "Saffron sardinian semolina gnocchetti, wild boar ragu, fiore sardo cheese", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/malloreddus_kmfwoo.jpg", 15D, 25);
+			Product product27 = new Product("Malloreddus", 0, "Saffron sardinian semolina gnocchetti, wild boar ragu, fiore sardo cheese", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/malloreddus_kmfwoo.jpg", 15D, 25);
 			productRepository.save(product27);
-			Product product28 = new Product("Salade d’ Epinards", "field greens with prosciutto", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/salade_epinards_qdqgzm.jpg", 14D, 25);
+			Product product28 = new Product("Salade d’ Epinards", 0, "field greens with prosciutto", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/salade_epinards_qdqgzm.jpg", 14D, 25);
 			productRepository.save(product28);
-			Product product29 = new Product("Salade Douce et Amère", "Salade d’ Epinards", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/poached_eggsalad_tepfuv.jpg", 18D, 25);
+			Product product29 = new Product("Salade Douce et Amère", 0, "Salade d’ Epinards", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/poached_eggsalad_tepfuv.jpg", 18D, 25);
 			productRepository.save(product29);
-			Product product30 = new Product("Poached Egg Salad", "Savory, easy to make Poached Egg & Avocado Breakfast Salad that′s vegetarian, gluten free, and SO delicious!", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/poached_eggsalad_tepfuv.jpg", 12D, 25);
+			Product product30 = new Product("Poached Egg Salad", 0, "Savory, easy to make Poached Egg & Avocado Breakfast Salad that′s vegetarian, gluten free, and SO delicious!", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/poached_eggsalad_tepfuv.jpg", 12D, 25);
 			productRepository.save(product30);
-			Product product31 = new Product("Spinach Cream Soup", "Sauteed chopped spinach is added to a roux-thickened mixture of milk and chicken bouillon", "https://res.cloudinary.com/luz-brito/image/upload/v1638658698/Acquerello/spinach-cream-soup_uo9ay9.jpg", 15D, 25);
+			Product product31 = new Product("Spinach Cream Soup", 0, "Sauteed chopped spinach is added to a roux-thickened mixture of milk and chicken bouillon", "https://res.cloudinary.com/luz-brito/image/upload/v1638658698/Acquerello/spinach-cream-soup_uo9ay9.jpg", 15D, 25);
 			productRepository.save(product31);
-			Product product32 = new Product("Layered Pasta Salad", "With layers of ham, eggs, salami, veggies, and cheese, it is hearty and delicious!", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/layered_pastasalad_jgetre.jpg", 18D, 25);
+			Product product32 = new Product("Layered Pasta Salad", 0, "With layers of ham, eggs, salami, veggies, and cheese, it is hearty and delicious!", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/layered_pastasalad_jgetre.jpg", 18D, 25);
 			productRepository.save(product32);
-			Product product33 = new Product("Strawberry Lemonade", "It′s super refreshing, incredibly delicious and truly the “essence” of summer!", "https://res.cloudinary.com/luz-brito/image/upload/v1638658661/Acquerello/strawberry_lemonade_gm0zr0.jpg", 7D, 25);
+			Product product33 = new Product("Strawberry Lemonade", 0, "It′s super refreshing, incredibly delicious and truly the “essence” of summer!", "https://res.cloudinary.com/luz-brito/image/upload/v1638658661/Acquerello/strawberry_lemonade_gm0zr0.jpg", 7D, 25);
 			productRepository.save(product33);
-			Product product34 = new Product("Classic Lemonade", "There are few things more refreshing than a glass of lemonade, especially when it′s homemade", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/classic_lemonade_glwu6u.jpg", 5D, 25);
+			Product product34 = new Product("Classic Lemonade", 0, "There are few things more refreshing than a glass of lemonade, especially when it′s homemade", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/classic_lemonade_glwu6u.jpg", 5D, 25);
 			productRepository.save(product34);
-			Product product35 = new Product("Gnocchi Pomodoro", "Potato dumplings, Campari tomato sauce, basil, extra virgin olive oil", "https://res.cloudinary.com/luz-brito/image/upload/v1638658555/Acquerello/gnocchi-pomodoro_j6zmkf.jpg", 16D, 25);
+			Product product35 = new Product("Gnocchi Pomodoro", 0, "Potato dumplings, Campari tomato sauce, basil, extra virgin olive oil", "https://res.cloudinary.com/luz-brito/image/upload/v1638658555/Acquerello/gnocchi-pomodoro_j6zmkf.jpg", 16D, 25);
 			productRepository.save(product35);
-			Product product36 = new Product("Filetto Di Manzo", "Seared tenderloin, squash-potato pavé, onion texture, oxtail reduction", "https://res.cloudinary.com/luz-brito/image/upload/v1638658643/Acquerello/filetto-di-manzo_ewicqc.jpg", 28D, 25);
+			Product product36 = new Product("Filetto Di Manzo", 0, "Seared tenderloin, squash-potato pavé, onion texture, oxtail reduction", "https://res.cloudinary.com/luz-brito/image/upload/v1638658643/Acquerello/filetto-di-manzo_ewicqc.jpg", 28D, 25);
 			productRepository.save(product36);
-			Product product37 = new Product("Orange Apricot", "Refreshing with ice cubes and a round slice of orange", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/orange_apricot_xptr70.jpg", 7D, 25);
+			Product product37 = new Product("Orange Apricot", 0, "Refreshing with ice cubes and a round slice of orange", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/orange_apricot_xptr70.jpg", 7D, 25);
 			productRepository.save(product37);
-			Product product38 = new Product("Pumpkin soup", "Made with pumpkin puree, chicken stock, onion, and fresh herbs. Cream is stirred in at the end for added richness.", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/pumpkin_soup_w7xtgb.jpg", 15D, 25);
+			Product product38 = new Product("Pumpkin soup", 0, "Made with pumpkin puree, chicken stock, onion, and fresh herbs. Cream is stirred in at the end for added richness.", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/pumpkin_soup_w7xtgb.jpg", 15D, 25);
 			productRepository.save(product38);
-			Product product39 = new Product("Garden Salad Tacos", "Great snack or light vegetarian lunch", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/garden_saladtacos_wdpdiv.jpg", 20D, 25);
+			Product product39 = new Product("Garden Salad Tacos", 0, "Great snack or light vegetarian lunch", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/garden_saladtacos_wdpdiv.jpg", 20D, 25);
 			productRepository.save(product39);
 
 
