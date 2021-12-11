@@ -46,8 +46,17 @@ h3 {
     background: var(--color2);
     border-radius: 100%;
     position: absolute;
-    top: 8px;
-    right: 5px;    
+    top: 15px;
+    right: 5px;  
+    width: 20px;  
+    height: 20px;
+}
+.badge small{
+    line-height: 0;
+    font-size: 12px;
+    position: absolute;
+    top: 10px;
+    right: 7px;
 }
 .btn-green button{
     background: var(--color1);
@@ -84,9 +93,16 @@ h3 {
   .cRed {
     color: var(--color2);
   }
+  .cWhite {
+    color: var(--color4);
+  }
+  .cWhite2 {
+    color: var(--color3);
+  }
 /* .navbar{
     background: transparent!important;
 } */
+
 .fondoTransp{
     transition: all 1s ease;
 }
@@ -335,6 +351,56 @@ footer{
     color: var(--color4);
 }
 
+/* modal product*/
+.modalInfoProduct{
+    background: var(--color1);
+    height: 60vh!important;
+}
+.modalInfoProduct{
+    background: var(--color1);
+}
+.modalInfoProduct small{
+    color: white;
+    padding: 0;margin: 0;    
+}
+#productModal .modal-body{
+    min-height: 60vh!important;
+}
+/* #xModal{
+    padding: 0;
+    margin: 0; 
+     height: 0em!important;
+} */
+.fill{        
+    height: 60vh;
+    /* object-fit: cover; */
+}
+.fill img{
+    /* height: 60vh; */
+    height: 60vh;
+    width: 100%;
+    object-fit: cover;
+}
+#btnModalProdClose{
+    background: var(--color3);
+    color: var(--color2);
+    padding: 0px;
+    box-shadow: none!important;
+}
+#btnModalProdBuy{
+    background: var(--color2);
+    color: var(--color3);
+    box-shadow: none!important;
+}
+#btnModalProdClose:hover,
+#btnModalProdBuy:hover{
+    background: none;
+    color: var(--color3);
+    outline: 2px solid var(--color3);    
+    box-shadow: none!important;
+}
+
+
 
 /*login start*/
 .mainLogin{
@@ -481,7 +547,7 @@ footer{
 
 /* ORDER PAGE start*/
 /*default card*/
-#img-product{
+#img-product{    
     object-fit: cover;
 }
 .cardProductOne{

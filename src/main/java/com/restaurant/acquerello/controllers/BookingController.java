@@ -2,6 +2,7 @@ package com.restaurant.acquerello.controllers;
 
 import com.restaurant.acquerello.dtos.BookingCreateDTO;
 import com.restaurant.acquerello.dtos.BookingDTO;
+import com.restaurant.acquerello.dtos.OrderDTO;
 import com.restaurant.acquerello.models.*;
 import com.restaurant.acquerello.repositories.BookingRepository;
 import com.restaurant.acquerello.services.BookingService;
@@ -52,6 +53,15 @@ public class BookingController {
         bookingService.save(booking);
 
         return new ResponseEntity<>("Successfully booked", HttpStatus.CREATED);
+    }
+
+    @GetMapping("/user/current/bookings")
+    public ResponseEntity<?> getUserBookings(Authentication authentication) {
+        User user = userService.getByEmail(authentication.getName());
+
+
+
+       return new ResponseEntity<>( user.getBookings().stream().map(BookingDTO::new).collect(Collectors.toList()), HttpStatus.CREATED);
     }
 
     @RequestMapping("/booking/cancel")

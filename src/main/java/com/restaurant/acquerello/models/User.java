@@ -38,8 +38,8 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Card> cards = new LinkedHashSet<>();
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
-    private Booking booking;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Booking> bookings = new LinkedHashSet<>();
 
 
     public User() {}
@@ -148,8 +148,16 @@ public class User {
         this.cards = cards;
     }
 
+    public Set<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(Set<Booking> bookings) {
+        this.bookings = bookings;
+    }
     public void addBooking(Booking booking) {
         booking.setUser(this);
+        bookings.add(booking);
     }
 
     @Override
@@ -165,4 +173,6 @@ public class User {
         sb.append('}');
         return sb.toString();
     }
+
+
 }

@@ -21,7 +21,7 @@ public class Booking {
     private TableState state;
     private TableAvailability availability;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -129,6 +129,8 @@ public class Booking {
     public void setAvailability(TableAvailability availability) {
         this.availability = availability;
     }
+
+
 
     @Override
     public String toString() {

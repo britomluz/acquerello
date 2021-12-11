@@ -18,7 +18,7 @@ public class OrderDetailsDTO {
 
     public OrderDetailsDTO(OrderDetails orderDetails) {
         this.id = orderDetails.getId();
-        this.orderId = orderDetails.getOrder().getId();
+        this.orderId = orderDetails.getOrderId();
         this.name = orderDetails.getName();
         this.quantity = orderDetails.getQuantity();
         this.price = orderDetails.getPrice();
@@ -34,6 +34,14 @@ public class OrderDetailsDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     public String getName() {

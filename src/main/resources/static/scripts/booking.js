@@ -6,25 +6,20 @@ const app = Vue.createApp({
         sectortime: "",
         table: 0,
         quantitytime: 0,
+        disabled : true,
       };
     },
     created() {},
     methods: {
       //   user and admin
-      create_booking() {
-  
+      create_booking() {  
         if(this.table<19){
           this.sectortime= "GOLDEN"
         }else if(this.table<31){
           this.sectortime= "PLATINUM"
         }else{
           this.sectortime= "VIP"
-        }
-        console.log(this.bookingHour)
-        console.log(this.datetime)
-        console.log(this.table)
-        console.log(this.sectortime)
-        console.log(this.quantitytime)
+        }        
         
         axios.post("/api/booking/create", {
             date: this.datetime,
@@ -62,10 +57,17 @@ const app = Vue.createApp({
           .catch((err) => console.log(err));
       },
       BTN(value){
-        this.sectortime=value.target.value
-        console.log(this.sectortime)
-        console.log(value.target.value)
+        this.sectortime = value.target.value        
       }
     },
+    computed:{
+      tableAvailability(){
+        if(booking.type == 'NOTAVAILABLE') {
+          this.disabled = true;
+      } else  {
+          this.disabled = false;
+      }
+      }
+    }
   });
   app.mount("#app");

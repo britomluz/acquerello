@@ -24,6 +24,7 @@ public class UserDTO {
     private List<AddressDTO> address = new ArrayList<>();
     private Set<CardDTO> card = new LinkedHashSet<>();
     private List<OrderDTO> orders = new ArrayList<>();
+    private Set<BookingDTO> bookings = new LinkedHashSet<>();
 
     public UserDTO(User user) {
         this.id = user.getId();
@@ -37,7 +38,7 @@ public class UserDTO {
         this.address = user.getAddress().stream().map(AddressDTO::new).collect(Collectors.toList());
         this.card = user.getCards().stream().map(CardDTO::new).collect(Collectors.toSet());
         this.orders = user.getOrders().stream().map(OrderDTO::new).collect(Collectors.toList());
-
+        this.bookings = user.getBookings().stream().map(BookingDTO::new).collect(Collectors.toSet());
     }
 
     public Long getId() {
@@ -127,4 +128,8 @@ public class UserDTO {
     public void setOrders(List<OrderDTO> orders) {
         this.orders = orders;
     }
+
+    public Set<BookingDTO> getBookings() { return bookings; }
+
+    public void setBookings(Set<BookingDTO> bookings) { this.bookings = bookings; }
 }

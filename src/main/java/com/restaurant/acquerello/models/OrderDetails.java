@@ -13,6 +13,7 @@ public class OrderDetails {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
+    private Long orderId;
     private String name;
     private Integer quantity;
     private Double price;
@@ -26,12 +27,13 @@ public class OrderDetails {
     private Product product;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "order_detail")
     private Order order;
 
     public OrderDetails() {}
 
     public OrderDetails(Integer quantity, Product product, Order order) {
+        this.orderId = order.getId();
         this.name = product.getName();
         this.quantity = quantity;
         this.price = product.getPrice();
@@ -119,5 +121,13 @@ public class OrderDetails {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 }
