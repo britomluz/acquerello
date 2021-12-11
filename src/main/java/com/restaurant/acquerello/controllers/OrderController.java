@@ -171,4 +171,17 @@ public class OrderController {
         return new ResponseEntity<>("Order state change",HttpStatus.OK);
     }
 
+    @RequestMapping("/order/cancel")
+    public ResponseEntity<?> cancelOrder(Authentication authentication, @RequestParam Long id) {
+        User user = userServices.getByEmail(authentication.getName());
+        Order order = orderRepository.findOrderById(id);
+
+        List<Order> orders = user.getOrders().stream().filter(o -> o.getId().equals(id)).collect(Collectors.toList());
+
+        System.out.println(orders.size());
+
+
+        return  new ResponseEntity<>("Order cancelled", HttpStatus.ACCEPTED);
+    }
+
 }
