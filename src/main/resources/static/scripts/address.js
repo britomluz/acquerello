@@ -47,4 +47,4 @@ const App = Vue.createApp({
     },
   },
 });
-let obv =App.mount("#app");
+let obv = App.mount("#app");

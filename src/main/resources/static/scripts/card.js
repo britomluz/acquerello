@@ -16,12 +16,14 @@ const App = Vue.createApp({
     methods: {
         createCard() {
             axios.post('/api/cards/create')
-                .then(console.log("Card create"))
+                .then(() => swal('Card created'))
+                .then(console.log("Card created"))
                 .catch(err => console.log(err))
         },
         deleteCard() {
-            axios.patch(`/api/cards/delete${this.id}`)
-                .then(console.log("Card delete"))
+            axios.patch(`/api/cards/delete/${this.id}`)
+                .then(() => swal('Card deleted'))
+                .then(console.log("Card deleted"))
                 .catch(err => console.log(err))
         },
         addBalance() {
