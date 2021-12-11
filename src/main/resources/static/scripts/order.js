@@ -67,11 +67,18 @@ const app = Vue.createApp({
       numberCard: "",
       cvv: "",
       vec: "",
+      accountNumber: "",
+      description: "Accquerello order",
 
       total: 0,
       totalProduct: 0,
 
       deliver: false,
+
+      // payment ways
+
+      acquerelloCard: false,
+      bankCard: true,
 
       // conteo de peticiones exitosas
 
@@ -109,7 +116,7 @@ const app = Vue.createApp({
 
     let p = JSON.parse(localStorage.getItem("cart"));
 
-    if(p != null) {
+    if (p != null) {
       p.forEach(p => {
         this.totalProduct += p.price * p.quantity
       })
@@ -129,44 +136,44 @@ const app = Vue.createApp({
         .get("/api/categories")
         .then((response) => {
           this.categories = response.data.categories;
-          this.entriesSnacks = [ ...this.categories.filter(
-              (categorie) => categorie.name === "Entries & Snacks" )[0].products].sort((a,b) => parseInt(a.id - b.id));
+          this.entriesSnacks = [...this.categories.filter(
+            (categorie) => categorie.name === "Entries & Snacks")[0].products].sort((a, b) => parseInt(a.id - b.id));
           this.specials = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Specials"
             )[0].products,
-          ].sort((a,b) => parseInt(a.id - b.id));
-          this.chefPicks = [ ...this.categories.filter( (categorie) => categorie.name === "Chef Picks" )[0].products].sort((a,b) => parseInt(a.id - b.id));
+          ].sort((a, b) => parseInt(a.id - b.id));
+          this.chefPicks = [...this.categories.filter((categorie) => categorie.name === "Chef Picks")[0].products].sort((a, b) => parseInt(a.id - b.id));
           this.mainCourses = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Main Course"
             )[0].products,
-          ].sort((a,b) => parseInt(a.id - b.id));
+          ].sort((a, b) => parseInt(a.id - b.id));
           this.soups = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Soup"
             )[0].products,
-          ].sort((a,b) => parseInt(a.id - b.id));
+          ].sort((a, b) => parseInt(a.id - b.id));
           this.drinks = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Drinks"
             )[0].products,
-          ].sort((a,b) => parseInt(a.id - b.id));
+          ].sort((a, b) => parseInt(a.id - b.id));
           this.pastas = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Pasta"
             )[0].products,
-          ].sort((a,b) => parseInt(a.id - b.id));
+          ].sort((a, b) => parseInt(a.id - b.id));
           this.vegetarians = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Vegetarian"
             )[0].products,
-          ].sort((a,b) => parseInt(a.id - b.id));
+          ].sort((a, b) => parseInt(a.id - b.id));
           this.salads = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Salads"
             )[0].products,
-          ].sort((a,b) => parseInt(a.id - b.id));
+          ].sort((a, b) => parseInt(a.id - b.id));
         })
         .catch((err) => console.log(err));
     },
@@ -255,7 +262,7 @@ const app = Vue.createApp({
           } else {
             // de lo contraria le suma +1 a la cantidad del producto
             this.products[i].quantity++;
-          
+
           }
           this.totalPrice = this.totalPrice + this.products[i].price;
           //this.totalQantity = this.totalQantity + 1;
@@ -375,15 +382,17 @@ const app = Vue.createApp({
         .catch((err) => console.log(err.response.data));
     },
     sendForm(e) {
+      // format data
       let tel = Number(this.phone);
       let number = Number(this.number);
       let total = Number(this.totalProduct);
-      
+      let cvv = Number(this.cvv)
+
       const list = JSON.parse(localStorage.getItem("cart"))
-      
+
       let product = [];
 
-      if(list != null) {
+      if (list != null) {
         list.forEach(l => {
           let obj = {
             description: l.description,
@@ -396,9 +405,9 @@ const app = Vue.createApp({
           }
           product.push(obj)
         })
-  
-  
-        // create user and address
+
+
+        // create user and address and order
         axios
           .post("/api/order/checkout", {
             firstName: this.firstName,
@@ -406,7 +415,7 @@ const app = Vue.createApp({
             email: this.email,
             password: this.password,
             number: tel,
-  
+
             street: this.street,
             numberStreet: number,
             zip: this.zip,
@@ -423,6 +432,13 @@ const app = Vue.createApp({
           .catch((err) => {
             console.log(err.response);
           });
+
+          // create payment
+          axios.post("https://mindhub-b.herokuapp.com/api/payments", {number: this.numberCard, cvv: cvv, amount: total, description: this.description, accountNumber: this.accountNumber}).then(res => {
+            console.log(res)
+          }).catch(err => {
+            console.log(err.response)
+          })
       }
     },
     register(e) {
@@ -525,6 +541,18 @@ const app = Vue.createApp({
           );
         });
     },
+    selectPayment(e) {
+      switch(e.target.id) {
+        case "acquerello":
+          this.acquerelloCard = true;
+          this.bankCard = false;
+        break;
+        case "bank":
+          this.acquerelloCard = false;
+          this.bankCard = true;
+        break;
+      }
+    }
   },
   computed: {
     filterProducts() {

@@ -192,24 +192,39 @@
               <div class="title  mt-5">
                 <h3 class="text-center">Billing data</h3>
               </div>
-              <div class="">
-                <div class=" d-flex flex-column">
-                  <label for="ccn">Card Number</label>
-                  <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,16}" autocomplete="cc-number"
-                    maxlength="16" placeholder="xxxxxxxxxxxxxxxx" v-model="numberCard">
-                </div>
+              <div class="d-flex flex-a-items-center radio">
+                <input type="radio" name="card" id="acquerello" @input="selectPayment">
+                <label for="acquerello">Acquerello Card </label>
               </div>
-              <div class="d-flex justify-content-between">
-                <div class=" d-flex flex-column">
-                  <label for="ccn">CVV</label>
-                  <input id="ccn" type="tel" inputmode="numeric" autocomplete="cc-number" maxlength="3"
-                    placeholder="xxx" v-model="cvv">
+              <div class="d-flex flex-a-items-center radio">
+                <input type="radio" name="card" id="bank" @input="selectPayment">
+                <label for="bank">Bank Card </label>
+              </div>
+              <div v-if="bankCard">
+                <div class="">
+                  <div class=" d-flex flex-column">
+                    <label for="ccn">Card Number</label>
+                    <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,16}" autocomplete="cc-number"
+                      maxlength="16" placeholder="xxxxxxxxxxxxxxxx" v-model="numberCard">
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <div class=" d-flex flex-column">
+                    <label for="ccn">CVV</label>
+                    <input id="ccn" type="tel" inputmode="numeric" autocomplete="cc-number" maxlength="3"
+                      placeholder="xxx" v-model="cvv">
+                  </div>
+                  <div class=" d-flex flex-column">
+                    <label for="ccn">Vec.</label>
+                    <input id="ccn" type="tel" inputmode="text" autocomplete="cc-number" maxlength="5"
+                      placeholder="yy/mm" v-model="vec">
+                  </div>
                 </div>
                 <div class=" d-flex flex-column">
-                  <label for="ccn">Vec.</label>
-                  <input id="ccn" type="tel" inputmode="text" autocomplete="cc-number" maxlength="5" placeholder="yy/mm"
-                    v-model="vec">
-                </div>
+                    <label for="acc">Account Number</label>
+                    <input id="acc" type="text"
+                      maxlength="12" placeholder="VIN-XXXXXXXX" v-model="accountNumber">
+                  </div>
               </div>
               <div class="btn-group mt-3">
                 <a ref="back1"
