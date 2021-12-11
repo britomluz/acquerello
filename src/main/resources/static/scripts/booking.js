@@ -31,6 +31,18 @@ const app = Vue.createApp({
       disabled: 0,
 
       bookingsUsers: [],
+      // filter sector
+      statesfilter:[],
+      // status filter
+      sectorfilter:[],
+      // hours filter
+      hoursfilter:[],
+      // data filter
+      yearfilter:[],
+      // monthfilter
+      monthfilter:[],
+      // day filter
+      dayfilter:[],
     };
   },
   created() {
@@ -104,7 +116,6 @@ const app = Vue.createApp({
       this.statusbooking=this.onlybooking[0].state
       this.quantityedit = this.onlybooking[0].quantity;
       this.show = !this.show;
-    
     },
     change(){
       this.show = !this.show;
@@ -123,6 +134,7 @@ const app = Vue.createApp({
         .get("/api/booking")
         .then((response) => {
           this.bookingsUsers = response.data;
+          console.log(this.bookingsUsers)
         })
         .catch((err) => console.log(err));
     },
@@ -153,9 +165,19 @@ const app = Vue.createApp({
       } else {
         this.disabled = this.disabled;
       }
-
       console.log(this.disabled);
     },
+    filter_maximum(){
+      let a = this.bookingsUsers
+      return this.bookingsUsers.filter(booking=>this.statesfilter.includes(booking.sector)||this.statesfilter.length === 0)
+                                .filter(booking=>this.sectorfilter.includes(booking.state)||this.sectorfilter.lenght===0)
+                                .filter(booking=>booking.bookingHour.slice(0,4).match(this.hoursfilter))
+                                .filter(booking=>booking.dateBooking.slice(0,4).match(this.yearfilter))
+                                .filter(booking=>booking.dateBooking.slice(5,7).match(this.monthfilter))
+                                .filter(booking=>booking.dateBooking.slice(8,10).match(this.dayfilter))
+                               
+    },
+   
   },
 });
-app.mount("#app");
+let obv=app.mount("#app");

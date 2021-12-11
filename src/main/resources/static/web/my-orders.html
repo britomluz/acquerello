@@ -127,7 +127,7 @@
                               <td class="text-center">{{booking.state}}</td>
                               <td class="text-center"> {{booking.total}}</td>
                               <td class="d-flex justify-content-center">
-                                  <button :id="booking.id" type="button"  class="btnTransp"><i
+                                  <button :id="booking.id" type="button" @click="order_cancel_user" class="btnTransp"><i
                                       class="bi bi-x-square text-danger"></i>
                                 </td>
                               </form>

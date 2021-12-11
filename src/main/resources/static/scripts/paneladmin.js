@@ -199,8 +199,6 @@ const App = Vue.createApp({
       axios.get("/api/order/details")
            .then((response) => {           
         this.orderDetails = response.data;
-        
-
         this.orderDetails = this.orderDetails.filter(orderDetails => orderDetails.orderId === this.order.id)
         console.log(this.orderDetails)
         //console.log(this.order.id)   
@@ -229,5 +227,8 @@ const App = Vue.createApp({
            });
    },
   },
+  computed:{
+
+  }
 });
 App.mount("#app");
