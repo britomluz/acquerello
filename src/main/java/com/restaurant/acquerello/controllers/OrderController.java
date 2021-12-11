@@ -178,8 +178,14 @@ public class OrderController {
 
         List<Order> orders = user.getOrders().stream().filter(o -> o.getId().equals(id)).collect(Collectors.toList());
 
-        System.out.println(orders.size());
+        // if the user dont have the order
+        if(orders.size() < 1) {
+            return new ResponseEntity<>("Cannot found the order", HttpStatus.FORBIDDEN);
+        }
 
+        order.setState(OrderState.CANCELED);
+
+        orderRepository.save(order);
 
         return  new ResponseEntity<>("Order cancelled", HttpStatus.ACCEPTED);
     }
