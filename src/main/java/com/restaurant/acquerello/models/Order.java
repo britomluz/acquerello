@@ -4,6 +4,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "orders_list")
@@ -83,6 +85,11 @@ public class Order {
 
     public void setOrderDetails(List<OrderDetails> orderDetails) {
         this.orderDetails = orderDetails;
+    }
+
+    public void addOrderDetail(OrderDetails orderDetail) {
+        orderDetail.setOrder(this);
+        orderDetails.add(orderDetail);
     }
 
     @Override

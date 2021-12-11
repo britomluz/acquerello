@@ -5,6 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+// Created by Brian
+
 @Entity
 public class OrderDetails {
     @Id

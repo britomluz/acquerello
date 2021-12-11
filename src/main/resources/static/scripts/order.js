@@ -69,6 +69,7 @@ const app = Vue.createApp({
       vec: "",
 
       total: 0,
+      totalProduct: 0,
 
       deliver: false,
 
@@ -105,6 +106,14 @@ const app = Vue.createApp({
       this.total += c.price * c.quantity;
     });
     this.nameeditproduct = this.product.name;
+
+    let p = JSON.parse(localStorage.getItem("cart"));
+
+    if(p != null) {
+      p.forEach(p => {
+        this.totalProduct += p.price * p.quantity
+      })
+    }
   },
   methods: {
     loadProducts() {
@@ -376,29 +385,53 @@ const app = Vue.createApp({
     sendForm(e) {
       let tel = Number(this.phone);
       let number = Number(this.number);
+      let total = Number(this.totalProduct);
+      
+      const list = JSON.parse(localStorage.getItem("cart"))
+      
+      let product = [];
 
-
-      axios
-        .post("/api/order/checkout", {
-          firstName: this.firstName,
-          lastName: this.lastName,
-          email: this.email,
-          password: this.password,
-          number: tel,
+      if(list != null) {
+        list.forEach(l => {
+          let obj = {
+            description: l.description,
+            id: l.id,
+            name: l.name,
+            price: l.price,
+            productImage: l.productImage,
+            quantity: l.quantity,
+            stock: l.stock
+          }
+          product.push(obj)
+        })
   
-          street: this.street,
-          numberStreet: this.number,
-          zip: this.zip,
-          state: this.state,
-          reference: this.reference
-        })
-        .then((res) => {
-          console.log(res);
-          localStorage.clear();
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
+  
+        // create user and address
+        axios
+          .post("/api/order/checkout", {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            email: this.email,
+            password: this.password,
+            number: tel,
+  
+            street: this.street,
+            numberStreet: number,
+            zip: this.zip,
+            state: this.state,
+            reference: this.reference,
+
+            products: product,
+            total: total
+          })
+          .then((res) => {
+            console.log(res);
+            localStorage.clear();
+          })
+          .catch((err) => {
+            console.log(err.response);
+          });
+      }
     },
     register(e) {
       const button = document.getElementById("confirm");

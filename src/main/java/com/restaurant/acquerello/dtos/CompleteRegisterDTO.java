@@ -1,6 +1,9 @@
 package com.restaurant.acquerello.dtos;
 
+import com.restaurant.acquerello.models.Product;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class CompleteRegisterDTO {
     // get users info
@@ -17,11 +20,11 @@ public class CompleteRegisterDTO {
     private String state;
     private String reference;
 
-    // get order info
-    //private LocalDateTime orderHour;
-    //private Double Total;
+    // get products and total for new order
+    private List<Product> products;
+    private Double total;
 
-    public CompleteRegisterDTO(String firstName, String lastName, String email, String password, Long number, String street, Integer numberStreet, String zip, String state, String reference) {
+    public CompleteRegisterDTO(String firstName, String lastName, String email, String password, Long number, String street, Integer numberStreet, String zip, String state, String reference, List<Product> products, Double total) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -32,6 +35,8 @@ public class CompleteRegisterDTO {
         this.zip = zip;
         this.state = state;
         this.reference = reference;
+        this.products = products;
+        this.total = total;
     }
 
     public String getFirstName() {
@@ -112,5 +117,21 @@ public class CompleteRegisterDTO {
 
     public void setReference(String reference) {
         this.reference = reference;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
 }

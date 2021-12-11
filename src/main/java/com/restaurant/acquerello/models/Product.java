@@ -114,4 +114,9 @@ public class Product {
     public void setOrderDetails(List<OrderDetails> orderDetails) {
         this.orderDetails = orderDetails;
     }
+
+    public void addOrderDetail(OrderDetails orderDetail) {
+        orderDetail.setProduct(this);
+        orderDetails.add(orderDetail);
+    }
 }

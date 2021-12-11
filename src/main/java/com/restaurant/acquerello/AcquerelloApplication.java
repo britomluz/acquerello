@@ -148,6 +148,8 @@ public class AcquerelloApplication {
 			productRepository.save(product39);
 
 
+
+
 			//GABRIEL: CREATE CATEGORIES TO TEST THEE APP
 			Category category1 = new Category("Entries & Snacks", "Whether you need healthy snacks that are gluten free, low calorie, low sugar, high protein, vegan, or more, there's something on this list for you.", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/linguine_veodru.jpg");
 			categoryRepository.save(category1);
@@ -274,6 +276,17 @@ public class AcquerelloApplication {
 			OrderDetails orderDetails2 = new OrderDetails(3,product2,order1);
 			OrderDetails orderDetails3 = new OrderDetails(4,product3,order2);
 			OrderDetails orderDetails4 = new OrderDetails(5,product4,order2);
+
+			product1.addOrderDetail(orderDetails1);
+			product2.addOrderDetail(orderDetails2);
+			product3.addOrderDetail(orderDetails3);
+			product4.addOrderDetail(orderDetails4);
+
+			order1.addOrderDetail(orderDetails1);
+			order1.addOrderDetail(orderDetails2);
+			order2.addOrderDetail(orderDetails3);
+			order2.addOrderDetail(orderDetails4);
+
 			orderDetailsRepository.save(orderDetails1);
 			orderDetailsRepository.save(orderDetails2);
 			orderDetailsRepository.save(orderDetails3);

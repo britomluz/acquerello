@@ -85,9 +85,13 @@ public class OrderController {
     }
 
     @PostMapping("/order/buy")
-    public ResponseEntity<?> editOrder(Authentication authentication, @RequestBody OrderToBuyDTO orderToBuyDTO) {
+    public ResponseEntity<?> createOrder(Authentication authentication, @RequestBody OrderToBuyDTO orderToBuyDTO) {
 
         User user = userServices.getByEmail(authentication.getName());
+        if(orderToBuyDTO.getProducts().size() < 1) {
+            return new ResponseEntity<>("Dont have products selected", HttpStatus.FORBIDDEN);
+        }
+
         if (user == null){
             return new ResponseEntity<>("User doesn't exist", HttpStatus.FORBIDDEN);
         }
@@ -112,10 +116,10 @@ public class OrderController {
            orderDetailsRepository.save(orderDetails);
         }
 
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>("Order created",HttpStatus.ACCEPTED);
     }
 
-   /* @GetMapping("/order/confirm/{id}")
+   @GetMapping("/order/confirm/{id}")
     public ResponseEntity<?> confirmOrder(Authentication authentication, @PathVariable Long id) {
 
         User user = userServices.getByEmail(authentication.getName());
@@ -132,39 +136,6 @@ public class OrderController {
         orderRepository.save(order);
 
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
-    }
-
-    @DeleteMapping("/order/cancel/{id}")
-    public ResponseEntity<?> cancelOrder(Authentication authentication, @PathVariable Long id) {
-
-        User user = userServices.getByEmail(authentication.getName());
-
-        // delete the order by id
-        orderRepository.deleteById(id);
-
-        return new ResponseEntity<>("Order deleted",HttpStatus.ACCEPTED);
-    }*/
-
-    @PatchMapping("/order/edit/{id}")
-    public ResponseEntity<?> editOrder(Authentication authentication, @RequestParam OrderState orderState, @PathVariable Long id) {
-
-        User user = userServices.getByEmail(authentication.getName());
-
-        if(user.getType().equals(UserType.USER)) {
-            return new ResponseEntity<>("Access denied", HttpStatus.FORBIDDEN);
-        }
-
-        Order order = orderRepository.findOrderById(id);
-
-        if(order.getState().equals(orderState)) {
-            return new ResponseEntity<>("Cannot change by the same state", HttpStatus.FORBIDDEN);
-        }
-
-        order.setState(orderState);
-
-        orderRepository.save(order);
-
-        return new ResponseEntity<>("Order edited", HttpStatus.ACCEPTED);
     }
 
     @PatchMapping("/admin/order/edit")
