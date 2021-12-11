@@ -2,152 +2,336 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../styles/style.css">    
-    <link rel="stylesheet" href="../styles/account.css">
-    <link rel="shortcut icon" href="../assets/favicon.png"> 
-    <title>Acquerello</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="stylesheet" href="../styles/account.css">
+  <link rel="shortcut icon" href="../assets/favicon.png">
+  <title>Acquerello</title>
 </head>
 
 <body>
-    <div id="app">
+  <div id="app">
 
-        <nav id="navbar" class="navbar fondoBlack fixed-top">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <img src="../assets/acquerello.png" alt="" width="150">
-                </a>
+    <nav id="navbar" class="navbar fondoBlack fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="../assets/acquerello.png" alt="" width="150">
+        </a>
 
-            <div class="d-flex">
-              <a class="nav-link" href="index.html">HOME</a>
-              <a class="nav-link" href="order.html">ORDER NOW</a>
-              <a class="nav-link" href="booking.html">BOOKING</a>
-              <a class="nav-link" href="contact.html">CONTACT</a>                  
-            </div>  
+        <div class="d-flex">
+          <a class="nav-link" href="index.html">HOME</a>
+          <a class="nav-link" href="order.html">ORDER NOW</a>
+          <a class="nav-link" href="booking.html">BOOKING</a>
+          <a class="nav-link" href="contact.html">CONTACT</a>
+        </div>
 
-            <div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  
-                    
-                    <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
-                    <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart">
-                      <i class="bi bi-cart-fill"></i><button class="navIcon"><i class="bi bi-search"></i></button></button>          
-            </div>
-
-              
-              <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                  <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-                  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                  <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="home.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="order.html">Order Now</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="booking.html">Bookings</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                  </ul>
-                  <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </nav>
-
-          <header class="headerPagesPanel d-flex align-items-center">
-              <h1>Bookings</h1>   
-          </header>
-
-          <main>
-            <div class="mt-1">
-              <a href="admin.html" class="btn-green"><i class="bi bi-arrow-left text-light"></i> Admin Panel</a>
-            </div>
-            <div>
-              <h3 class="py-5">Bookings</h3>
-            </div>
-            <div class="row mb-4 d-flex flex-column align-items-center ">
-               
-            <div class="row">
-              <div class="mb-3 col-12 col-md-10">
-                <input type="search" name="" v-model="filterNameProduct" id="" placeholder="Search by name" class="text-muted">
-              </div>
-            </div>
-            <div class="d-flex justify-content-center">
-              <div class="col-12 col-md-8">
-                  <table class="table tableAdmin">
-                      <thead>
-                        <tr>
-                          <th scope="col" >Nº</th>
-                          <th scope="col" class="text-center">Date</th>
-                          <th scope="col" class="text-center">Hour</th>
-                          <th scope="col" class="text-center">Sector</th>
-                          <th scope="col" class="text-center">Table</th>
-                          <th scope="col" class="text-center">People</th>
-                          <th scope="col" class="text-center">Status</th>
-                          <th scope="col" class="text-center">Actions</th>
-                          <th scope="col" class="text-center">Edit</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr v-for="booking in bookingsUsers">
-                          <th scope="row" class="text-center">{{booking.id}}</th>
-                          <td class="text-center">{{booking.dateBooking}}</td>
-                          <td class="text-center">{{(booking.bookingHour).slice(0,5)}}</td>
-                          <td class="text-center">{{booking.sector}}</td>
-                          <td class="text-center"> {{booking.tableNumber}}</td>
-                          <td class="text-center"> {{booking.quantity}}</td>
-                          <td class="text-center"> {{booking.state}}</td>
-                          <td class="d-flex justify-content-around">                       
-                              <form @submit.prevent="editBookingState">
-                                  <button class="btn-i" :id="booking.id" value="CANCELED" type="submit" ><i class="bi bi-x-square text-danger"></i></button>
-                              </form>
-                              <form @submit.prevent="editBookingState">
-                                  <button class="btn-i" :id="booking.id" value="ACCEPTED" type="submit"><i class="bi bi-check-square text-success"></i></button>
-                              </form>
-                          </td>                          
-                          <td class="d-flex justify-content-center">
-                              <button :id="booking.id" type="button" @click="" class="btnTransp"><i class="bi bi-pencil cRed"></i></button>
-                          </td>
-                        </tr>
-                        
-                      </tbody>
-                    </table>
-              </div>
-            </div>
-            
-            
-          </main>
+        <div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
 
-                
-    </div>
+          <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+          <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart">
+            <i class="bi bi-cart-fill"></i><button class="navIcon"><i class="bi bi-search"></i></button></button>
+        </div>
 
 
-   
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-        crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/vue@next"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="../scripts/booking.js"></script>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="order.html">Order Now</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="booking.html">Bookings</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <header class="headerPagesPanel d-flex align-items-center">
+      <h1>Bookings</h1>
+    </header>
+    <main>
+      <div class="mt-1">
+        <a href="admin.html" class="btn-green"><i class="bi bi-arrow-left text-light"></i> Admin Panel</a>
+      </div>
+      <div>
+        <h3 class="py-5">Bookings</h3>
+      </div>
+      <div class="row mb-4 d-flex flex-column align-items-center ">
+
+        <div class="row">
+          <!-- <div class="mb-3 col-12 col-md-10">
+            <input type="search" name="" v-model="filterNameProduct" id="" placeholder="Search by name"
+              class="text-muted">
+          </div> -->
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="col-12 col-md-8">
+            <table class="table tableAdmin">
+              <thead>
+                <tr>
+                  <th scope="col">Nº</th>
+                  <th scope="col" class="text-center">Date</th>
+                  <th scope="col" class="text-center">Hour</th>
+                  <th scope="col" class="text-center">Sector</th>
+                  <th scope="col" class="text-center">Table</th>
+                  <th scope="col" class="text-center">People</th>
+                  <th scope="col" class="text-center">Status</th>
+                  <th scope="col" class="text-center">Actions</th>
+                  <th scope="col" class="text-center">Edit</th>
+                </tr>
+              </thead>
+              <tbody v-if="show">
+                <tr>
+                  <th scope="row" class="text-center">{{idpacth}}</th>
+                  <td>
+                    <form>
+                      <input type="date" v-model="editdate">
+                    </form>
+                  </td>
+                  <td>
+                    <form>
+                      <select name="people" id="peop" v-model="bookniedit">
+                        <option value="">Hour</option>
+                        <option value="10:00:00">09:00 am</option>
+                        <option value="10:00:00">10:00 am</option>
+                        <option value="11:00:00">11:00 am </option>
+                        <option value="12:00:00">12:00 pm</option>
+                        <option value="13:00:00">13:00 pm</option>
+                        <option value="18:00:00">18:00 pm</option>
+                        <option value="19:00:00">19:00 pm</option>
+                        <option value="20:00:00">20:00 pm</option>
+                        <option value="21:00:00">21:00 pm</option>
+                        <option value="22:00:00">22:00 pm</option>
+                      </select>
+                    </form>
+                  </td>
+                  <td>
+                    <form>
+                      <select name="" v-model="sectoredit" id="">
+                        <option value="GOLDEN">
+                          GOLDEN
+                        </option>
+                        <option value="PLATINUM">
+                          GARDEN
+                        </option>
+                        <option value="VIP">
+                          VIP
+                        </option>
+                      </select>
+                    </form>
+                  </td>
+                  <td>
+                    <form>
+                      <select name="" id="" v-model="tabledit">
+                        <option value="" disabled>
+                          GOLDEN sector
+                        </option>
+                        <option value="1">
+                          1
+                        </option>
+                        <option value="2">
+                          2
+                        </option>
+                        <option value="3">
+                          3
+                        </option>
+                        <option value="4">
+                          4
+                        </option>
+                        <option value="5">
+                          5
+                        </option>
+                        <option value="6">
+                          6
+                        </option>
+                        <option value="7">
+                          7
+                        </option>
+                        <option value="8">
+                          8
+                        </option>
+                        <option value="9">
+                          9
+                        </option>
+                        <option value="10">
+                          10
+                        </option>
+                        <option value="11">
+                          11
+                        </option>
+                        <option value="12">
+                          12
+                        </option>
+                        <option value="13">
+                          13
+                        </option>
+                        <option value="14">
+                          14
+                        </option>
+                        <option value="15">
+                          15
+                        </option>
+                        <option value="16">
+                          16
+                        </option>
+                        <option value="17">
+                          17
+                        </option>
+                        <option value="18">
+                          18
+                        </option>
+                        <option value="19">
+                          19
+                        </option>
+                        <option value="" disabled>
+                          GARDEN sector
+                        </option>
+                        <option value="20">
+                          20
+                        </option>
+                        <option value="21">
+                          21
+                        </option>
+                        <option value="22">
+                          22
+                        </option>
+                        <option value="23">
+                          23
+                        </option>
+                        <option value="24">
+                          24
+                        </option>
+                        <option value="25">
+                          25
+                        </option>
+                        <option value="26">
+                          26
+                        </option>
+                        <option value="27">
+                          27
+                        </option>
+                        <option value="28">
+                          28
+                        </option>
+                        <option value="29">
+                          29
+                        </option>
+                        <option value="30">
+                          30
+                        </option>
+                        <option value="31">
+                          31
+                        </option>
+                        <option value="" disabled>
+                          VIP sector
+                        </option>
+                        <option value="32">
+                          VIP
+                        </option>
+                      </select>
+                    </form>
+                  </td>
+                  <td>
+                    <select name="people" id="" v-model="quantityedit">
+                      <option value="">People</option>
+                      <option value="1">1 person</option>
+                      <option value="2">2 people</option>
+                      <option value="3">3 people</option>
+                      <option value="4">4 people</option>
+                      <option value="5">5 people</option>
+                      <option value="6">6 people</option>
+                      <option value="7">7 people</option>
+                      <option value="8">8 people</option>
+                      <option value="9">9 people</option>
+                      <option value="10">10 people</option>
+                      <option value="11">11 people</option>
+                      <option value="12">12 people</option>
+                    </select>
+                  </td>
+                  <td>
+                    {{statusbooking}}
+                  </td>
+                  <td class="d-flex justify-content-center">
+                    <button type="button" @click="edit_booking" class="btnTransp">
+                      edit
+                    </button>
+                  </td>
+                  <td class="d-flex justify-content-center">
+                    <button type="button" @click="change" class="btnTransp"><i class="bi bi-pencil cRed"></i></button>
+                  </td>
+                </tr>
+          </div>
+          </tbody>
+          <tbody v-else>
+            <tr v-for="booking in bookingsUsers">
+              <th scope="row" class="text-center">{{booking.id}}</th>
+              <td class="text-center">{{booking.dateBooking}}</td>
+              <td class="text-center">{{(booking.bookingHour).slice(0,5)}}</td>
+              <td class="text-center">{{booking.sector}}</td>
+              <td class="text-center"> {{booking.tableNumber}}</td>
+              <td class="text-center"> {{booking.quantity}}</td>
+              <td class="text-center"> {{booking.state}}</td>
+              <td class="d-flex justify-content-around">
+                  <form @submit.prevent="editBookingState">
+                    <button class="btn-i" :id="booking.id" value="CANCELED" type="submit"><i
+                      class="bi bi-x-square text-danger"></i></button>
+                    </form>
+                    <form @submit.prevent="editBookingState">
+                      <button class="btn-i" :id="booking.id" value="ACCEPTED" type="submit"><i
+                        class="bi bi-check-square text-success"></i></button>
+                      </form>
+              </td>
+              <td class="d-flex justify-content-center">
+                <button :id="booking.id" type="button" @click="show_edit" class="btnTransp"><i
+                    class="bi bi-pencil cRed"></i></button>
+              </td>
+          </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </main>
+
+
+
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="../scripts/booking.js"></script>
 
 </body>
 
