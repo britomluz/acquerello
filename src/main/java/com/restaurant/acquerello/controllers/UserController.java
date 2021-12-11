@@ -3,7 +3,9 @@ package com.restaurant.acquerello.controllers;
 //CREATED BY BRIAN
 
 import com.restaurant.acquerello.dtos.CreateUserDTO;
+import com.restaurant.acquerello.dtos.OrderDTO;
 import com.restaurant.acquerello.dtos.UserDTO;
+import com.restaurant.acquerello.models.Order;
 import com.restaurant.acquerello.models.User;
 import com.restaurant.acquerello.models.UserType;
 import com.restaurant.acquerello.services.UserService;
@@ -48,6 +50,18 @@ public class UserController {
         User user1 = new User(user.getFirstName(), user.getLastName(), user.getEmail(), passwordEncoder.encode(user.getPassword()), user.getNumber(), UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
         userService.save(user1);
         return new ResponseEntity<>("User created", HttpStatus.CREATED);
+    }
+
+    @GetMapping("/admin/user/{id}")
+    public ResponseEntity<Object> getAccounts(Authentication authentication, @PathVariable Long id){
+
+        User user = userService.getByEmail(authentication.getName());
+
+        if(!user.getType().equals(UserType.ADMIN)){
+            return new ResponseEntity<>("Acces denied", HttpStatus.FORBIDDEN);
+        }
+
+        return new ResponseEntity<>( userService.getById(id).map(UserDTO::new).orElse(null), HttpStatus.CREATED);
     }
 
 }

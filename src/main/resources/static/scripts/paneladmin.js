@@ -24,7 +24,10 @@ const App = Vue.createApp({
       orderDetails:"",
 
       //each order
-      order: ""
+      order: "",
+      //users
+      users:[],
+      user:[],
     };
   },
   created() {
@@ -34,15 +37,41 @@ const App = Vue.createApp({
     this.loadcreate();
     this.loadDataOrders()
     this.loadDataOrderDetails()
+    this.loadDataUser()
+    this.loadUsers()
 
   },
   methods: {
+    loadUsers(){
+      axios.get(`/api/users`)
+      .then((response) => {
+        this.users = response.data;
+        //console.log(this.orders)
+      })
+      .catch((err) => console.log(err));
+    },
+    loadDataUser(){
+      const urlParam = new URLSearchParams(window.location.search);
+      const id = urlParam.get('id');
+
+      axios.get(`/api/user/${id}`)
+        .then(res => {
+          this.user = res.data
+          //.sort((a,b) => parseInt(b.id - a.id))
+
+        })
+        .catch(err => err.message)
+    },
+    showUser(e) {
+      let id = e.target.parentElement.id
+      window.location.href = `./client-details.html?id=${id}`
+    },    
     showOrder(e) {
 
       let id = e.target.parentElement.id
       window.location.href = `./order-details.html?id=${id}`
 
-    },
+    },    
     loadDataOrders() {
       const urlParam = new URLSearchParams(window.location.search);
       const id = urlParam.get('id');
