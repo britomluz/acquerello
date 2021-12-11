@@ -15,10 +15,11 @@ public class OrderDetailsDTO {
     private LocalDateTime creationDate;
     private OrderState state;
     private Double totalOrder;
+    private String imageProduct;
 
     public OrderDetailsDTO(OrderDetails orderDetails) {
         this.id = orderDetails.getId();
-        this.orderId = orderDetails.getOrderId();
+        this.orderId = orderDetails.getOrder().getId();
         this.name = orderDetails.getName();
         this.quantity = orderDetails.getQuantity();
         this.price = orderDetails.getPrice();
@@ -26,6 +27,7 @@ public class OrderDetailsDTO {
         this.creationDate = orderDetails.getCreationDate();
         this.state = orderDetails.getState();
         this.totalOrder = orderDetails.getTotalOrder();
+        this.imageProduct = orderDetails.getProduct().getProductImage();
     }
 
     public Long getId() {
@@ -98,5 +100,13 @@ public class OrderDetailsDTO {
 
     public void setTotalOrder(Double totalOrder) {
         this.totalOrder = totalOrder;
+    }
+
+    public String getImageProduct() {
+        return imageProduct;
+    }
+
+    public void setImageProduct(String imageProduct) {
+        this.imageProduct = imageProduct;
     }
 }
