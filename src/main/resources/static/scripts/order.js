@@ -120,51 +120,44 @@ const app = Vue.createApp({
         .get("/api/categories")
         .then((response) => {
           this.categories = response.data.categories;
-          this.entriesSnacks = [
-            ...this.categories.filter(
-              (categorie) => categorie.name === "Entries & Snacks"
-            )[0].products,
-          ];
+          this.entriesSnacks = [ ...this.categories.filter(
+              (categorie) => categorie.name === "Entries & Snacks" )[0].products].sort((a,b) => parseInt(a.id - b.id));
           this.specials = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Specials"
             )[0].products,
-          ];
-          this.chefPicks = [
-            ...this.categories.filter(
-              (categorie) => categorie.name === "Chef Picks"
-            )[0].products,
-          ];
+          ].sort((a,b) => parseInt(a.id - b.id));
+          this.chefPicks = [ ...this.categories.filter( (categorie) => categorie.name === "Chef Picks" )[0].products].sort((a,b) => parseInt(a.id - b.id));
           this.mainCourses = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Main Course"
             )[0].products,
-          ];
+          ].sort((a,b) => parseInt(a.id - b.id));
           this.soups = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Soup"
             )[0].products,
-          ];
+          ].sort((a,b) => parseInt(a.id - b.id));
           this.drinks = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Drinks"
             )[0].products,
-          ];
+          ].sort((a,b) => parseInt(a.id - b.id));
           this.pastas = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Pasta"
             )[0].products,
-          ];
+          ].sort((a,b) => parseInt(a.id - b.id));
           this.vegetarians = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Vegetarian"
             )[0].products,
-          ];
+          ].sort((a,b) => parseInt(a.id - b.id));
           this.salads = [
             ...this.categories.filter(
               (categorie) => categorie.name === "Salads"
             )[0].products,
-          ];
+          ].sort((a,b) => parseInt(a.id - b.id));
         })
         .catch((err) => console.log(err));
     },
@@ -252,12 +245,14 @@ const app = Vue.createApp({
             };
             let result = Object.assign(this.products[i], obj);
             this.cart.push(this.products[i]);
+            this.totalQantity = this.totalQantity + 1;
           } else {
             // de lo contraria le suma +1 a la cantidad del producto
             this.products[i].quantity++;
+          
           }
           this.totalPrice = this.totalPrice + this.products[i].price;
-          this.totalQantity = this.totalQantity + 1;
+          //this.totalQantity = this.totalQantity + 1;
         }
       }
       localStorage.setItem("cart", JSON.stringify(this.cart));

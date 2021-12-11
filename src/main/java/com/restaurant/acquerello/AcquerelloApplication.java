@@ -144,7 +144,7 @@ public class AcquerelloApplication {
 			productRepository.save(product37);
 			Product product38 = new Product("Pumpkin soup", 0, "Made with pumpkin puree, chicken stock, onion, and fresh herbs. Cream is stirred in at the end for added richness.", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/pumpkin_soup_w7xtgb.jpg", 15D, 25);
 			productRepository.save(product38);
-			Product product39 = new Product("Garden Salad Tacos", 0, "Great snack or light vegetarian lunch", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/garden_saladtacos_wdpdiv.jpg", 20D, 25);
+			Product product39 = new Product("Garden Salad Capresse", 0, "Great snack or light vegetarian lunch", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/garden_saladtacos_wdpdiv.jpg", 20D, 25);
 			productRepository.save(product39);
 
 
@@ -193,8 +193,6 @@ public class AcquerelloApplication {
 			productCategoryRepository.save(productCategory11);
 			ProductCategory productCategory12 = new ProductCategory(product10, category4);
 			productCategoryRepository.save(productCategory12);
-			ProductCategory productCategory13 = new ProductCategory(product10, category3);
-			productCategoryRepository.save(productCategory13);
 			ProductCategory productCategory14 = new ProductCategory(product11, category4);
 			productCategoryRepository.save(productCategory14);
 			ProductCategory productCategory15 = new ProductCategory(product11, category8);
