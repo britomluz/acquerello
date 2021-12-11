@@ -94,7 +94,12 @@ const app = Vue.createApp({
       stockedit: 0,
       showbtn: false,
       // add product
-      products_img: "",
+      products_img: "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgDefault_qbhg4k.jpg",
+      nameproducts:"",
+      descriptionproducts:"",
+      priceproduct:0,
+      stockproduct:0,
+      id_addproduct:0
     };
   },
   created() {
@@ -514,31 +519,29 @@ const app = Vue.createApp({
       this.descriptionproduc = this.product.description
       this.priceedit = this.product.price
       this.stockedit = this.product.stock
-
       this.showbtn = !this.showbtn;
     },
     // product add
     product_add() {
       axios
         .post("/api/products/create", {
-          idCategory: this.idcategory,
+          idCategory: this.id_addproduct,
           name: this.nameproducts,
           description: this.descriptionproducts,
           productImage: this.products_img,
           price: this.priceproduct,
           stock: this.stockproduct,
         })
-        .then((response) => console.log(response))
+        .then((response) => {
+          console.log(response)
+          alert(response.data)
+          setTimeout(() => {
+            window.location.reload()
+          }, 500);
+
+        })
         .catch((err) => {
-          console.log(err.response.data);
-          console.log(
-            this.idcategory,
-            this.nameproducts,
-            this.descriptionproducts,
-            this.products_img,
-            this.priceproduct,
-            this.stockproduct
-          );
+          console.log(err.response.data)
         });
     },
     selectPayment(e) {

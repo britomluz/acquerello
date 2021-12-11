@@ -30,7 +30,6 @@ const app = Vue.createApp({
     get_user() {
         axios.get("/api/users")
         .then(response=>{
-            console.log(response.data)
             this.users=response.data
         })
         .catch(err=>console.log(err))
@@ -41,7 +40,6 @@ const app = Vue.createApp({
           this.user = res.data
           this.card=res.data.card
          this.myaddress = res.data.address 
-          console.log(res.data.address)
       })
         .catch(err => err.message)
     }, 
@@ -68,12 +66,11 @@ const app = Vue.createApp({
           })
           .then((response) => console.log(response))
           .catch((err) => console.log(err.response.data));
-      },
+      },  
       order_user(){
           axios.get("/api/order/current")
           .then(response=>{
-            this.order=response.data  
-            console.log(response.data)
+            this.order=response.data
         })
           .catch(err=>console.log(err))
       }

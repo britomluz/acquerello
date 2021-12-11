@@ -1,149 +1,161 @@
 const app = Vue.createApp({
-    data() {
-      return {
-        datetime: "",
-        bookingHour: 0,
-        sectortime: "",
-        table: 0,
-        quantitytime: 0,
-       
-        idpacth:0,
-        idcal:0,
-        // show edit booking
-        show:false,
-        // get a booking
-        bookinget:[],
-        // get id for delete booking
-        booking_id:0,
-        // edit booking
-        editdate:"",
-        bookniedit:"",
-        sectoredit:"",
-        tabledit:0,
-        quantityedit:0,
+  data() {
+    return {
+      datetime: "",
+      bookingHour: 0,
+      sectortime: "",
+      table: 0,
+      quantitytime: 0,
+      // cancel booking user
+      idcal: 0,
+      // show edit booking
+      show: false,
+      // get a booking
+      bookinget: [],
+      // get id for delete booking
+      booking_id: 0,
+      // edit booking
+      idpacth: [],
+      editdate: [],
+      bookniedit: "",
+      sectoredit: "",
+      tabledit: 0,
+      quantityedit: 0,
+      // edit value to edit in booking
+      valueid: 0,
+      // booking only
+      onlybooking:[],
+      // status booking
+      statusbooking:"",
+      // disabled table 
+      disabled: 0,
 
-        disabled : 0,
+      bookingsUsers: [],
+    };
+  },
+  created() {
+    this.get_users();
+    this.get_bookings();
+  },
+  methods: {
+    //   user and admin
+    create_booking() {
+      if (this.table < 19) {
+        this.sectortime = "GOLDEN";
+      } else if (this.table < 31) {
+        this.sectortime = "PLATINUM";
+      } else {
+        this.sectortime = "VIP";
+      }
+      axios
+        .post("/api/booking/create", {
+          date: this.datetime,
+          bookingHour: this.bookingHour,
+          sector: this.sectortime,
+          table: this.table,
+          quantity: this.quantitytime,
+        })
+        .then((response) => {
+          swal({
+            title: "Booking succesfull!",
+            text: "we will love to see you!",
+            icon: "success",
+            button: "Ok",
+          });
+        })
+        .catch((err) => console.log(err));
+    },
+    // cancel user booking
+    cancel_booking(e){
+      this.idcal=this.bookinget.filter(booking=>booking.id==e.target.parentElement.id)
+      axios.get(`/api/booking/cancel?id=${this.idcal[0].id}`)
+      .then(response=>{
+        alert(response.data)
+        setTimeout(() => {
+          window.location.reload()
+        }, 200);
 
-        bookingsUsers:[],
-      };
+      })
+      .catch(err=>console.log(err.response))
     },
-    created() {
-      this.get_users()
-      this.get_bookings()
+    //  edit  user
+    edit_booking() {
+      axios
+        .patch(`/api/booking/edit?id=${this.idpacth}`, {
+          date: this.editdate,
+          bookingHour: this.bookniedit,
+          sector: this.sectoredit,
+          table: this.tabledit,
+          quantity: this.quantityedit,
+        })
+        .then((response) => {
+          alert(response.data)
+        })
+        .catch((err) => console.log(err.response.data));
     },
-    methods: {
-      //   user and admin
-      create_booking() {
-        if(this.table<19){
-          this.sectortime= "GOLDEN"
-        }else if(this.table<31){
-          this.sectortime= "PLATINUM"
-        }else{
-          this.sectortime= "VIP"
-        }
-        axios.post("/api/booking/create", {
-            date: this.datetime,
-            bookingHour: this.bookingHour,
-            sector: this.sectortime,
-            table: this.table,
-            quantity: this.quantitytime,
-          })
-          .then((response) => {
-            swal({
-                title: "Booking succesfull!",
-                text: "we will love to see you!",
-                icon: "success",
-                button: "Ok",
-              });
-          })
-          .catch((err) => console.log(err));
-      },
-      //  edit  user
-      edit_booking() {
-        this.sectoredit =this.sectortime
-        this.tabledit = this.table
-        console.log(this.editdate,this.bookniedit,this.sectoredit,this.tabledit,this.quantityedit)
-        if(this.tabledit<19){
-          this.sectoredit= "GOLDEN"
-        }else if(this.tabledit<31){
-          this.sectoredit= "PLATINUM"
-        }else{
-          this.sectoredit= "VIP"
-        }
-        axios.patch(`/api/booking/edit?id=${this.idpacth}`,{
-          date:this.editdate,
-          bookingHour:this.bookniedit,
-          sector:this.sectoredit,
-          table:this.tabledit,
-          quantity:this.quantityedit
+    // show edit booking
+    show_edit(e) {
+      this.onlybooking = this.bookingsUsers.filter(booking=> booking.id==e.target.parentElement.id)
+      this.idpacth = this.onlybooking[0].id
+      this.editdate = this.onlybooking[0].dateBooking;
+      this.bookniedit = this.onlybooking[0].bookingHour;
+      this.tabledit = this.onlybooking[0].tableNumber;
+      this.sectoredit=this.onlybooking[0].sector
+      this.statusbooking=this.onlybooking[0].state
+      this.quantityedit = this.onlybooking[0].quantity;
+      this.show = !this.show;
+    
+    },
+    change(){
+      this.show = !this.show;
+    },
+    get_users() {
+      axios
+        .get("/api/user/current/bookings")
+        .then((response) => {
+          this.bookinget = response.data;
+          this.bookinget = response.data.sort((a,b) => parseInt(a.id - b.id))
         })
-          .then((response) => console.log(response))
-          .catch((err) => console.log(err.response.data));
-      },
-      // booking cancel
-      delete_booking() {
-        console.log(this.booking_id)
-        axios.get(`/api/booking/cancel?id=${this.booking_id}`)
-          .then((response) => alert(response.data))
-          .catch((err) => console.log(err));
-      },
-      // ADMIN
-      patch_booking() {
-        axios.patch(``)
-          .then((response) => console.log(response))
-          .catch((err) => console.log(err));
-      },
-      show_edit(){
-        this.show=!this.show
-      },
-      // change(){
-      //   this.editdate=this.datetime
-      //   this.bookniedit=this.bookingHour
-      //   this.tabledit = this.table
-      //   this.quantityedit=this.quantitytime
-      // },
-      get_users(){
-        axios.get("/api/user/current/bookings")
-        .then(response=>{
-          console.log(response.data)
-          this.bookinget=response.data
+        .catch((err) => console.log(err));
+    },
+    get_bookings() {
+      axios
+        .get("/api/booking")
+        .then((response) => {
+          this.bookingsUsers = response.data;
         })
-        .catch(err=>console.log(err))
-      },
-      get_bookings(){
-        axios.get("/api/booking")
-        .then(response=>{
-          console.log(response.data)
-          this.bookingsUsers=response.data
-        })
-        .catch(err=>console.log(err))
-      },
-      editBookingState(e){        
-        let bookingId = e.target.firstChild.id
-        let bookingState = e.target.firstChild.value
-        console.log(bookingId)
-        console.log(bookingState)
-  
-        axios.patch('/api/admin/booking/edit',`id=${bookingId}&type=${bookingState}`)
-        .then(res => {
-          console.log(res)
+        .catch((err) => console.log(err));
+    },
+    editBookingState(e) {
+      let bookingId = e.target.firstChild.id;
+      let bookingState = e.target.firstChild.value;
+      console.log(bookingId);
+      console.log(bookingState);
+
+      axios
+        .patch(
+          "/api/admin/booking/edit",
+          `id=${bookingId}&type=${bookingState}`
+        )
+        .then((res) => {
+          console.log(res);
           window.location.reload();
-        }).catch(err => {
-          console.log(err)
         })
-      },
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    computed:{
-      tableAvailability(){
-        if(this.bookingsUsers.tableAvailability == 'NOTAVAILABLE') {
-          this.disabled = this.disabled + 1;
-      } else  {
-          this.disabled = this.disabled;
+  },
+  computed: {
+    tableAvailability() {
+      if (this.bookingsUsers.tableAvailability == "NOTAVAILABLE") {
+        this.disabled = this.disabled + 1;
+      } else {
+        this.disabled = this.disabled;
       }
 
-      console.log(this.disabled)
-      },
-      
-    }
-  });
-  app.mount("#app");
+      console.log(this.disabled);
+    },
+  },
+});
+app.mount("#app");
