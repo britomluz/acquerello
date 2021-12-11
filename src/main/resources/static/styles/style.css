@@ -853,9 +853,19 @@ footer{
 
 /* MAP */
 #map {
-    height: 600px;
+    width: 100%;
+    height: 250px;
   }
 
+
+
+  /*ORDER DETAILS*/
+ 
+  .imgFill img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
 
 /* QUERIES*/
 @media (max-width: 768px) {
