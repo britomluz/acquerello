@@ -72,7 +72,7 @@
           </nav>
 
           <header class="headerPagesPanel d-flex align-items-center">
-              <h1>Products</h1>   
+              <h1>Bookings</h1>   
               
           </header>
 
@@ -81,87 +81,53 @@
               <a href="admin.html" class="btn-green"><i class="bi bi-arrow-left text-light"></i> Admin Panel</a>
             </div>
             <div>
-              <h3 class="py-5">Products</h3>
+              <h3 class="py-5">Bookings</h3>
             </div>
             <div class="row mb-4 d-flex flex-column align-items-center ">
-              <div class="col-12 col-md-6 square">
-                  <h3 class="fs-5 py-3">Add new product</h3>
-                  <div class="row d-flex justify-content-center">
-                    <div class="col-12 col-md-4 mt-5 bg-warning">
-
-                      <p>aaaaaaa</p>
-                    </div>
-                    <div class="col-12 col-md-8 mt-5 bg-info">
-                      <p>aaaa</p>
-                      
-                  </div>
-                  <div>
-                    <form @submit.prevent="product_add()">
-                      <div class="py-2">
-                        <label><b>Product name: </b></label>
-                        <input type="text" v-model="nameproducts">
-                      </div>
-                      <div class="py-2">
-                        <label for="description"><b>Description: </b></label>
-                        <input type="text" v-model="descriptionproducts">
-                      </div>
-                      <div class="py-2">
-                        <label><b>Price: </b></label>
-                        <input type="number" v-model="priceproduct">
-                      </div>
-                      <div class="py-2">
-                        <label><b>Stock: </b></label>
-                        <input type="number" v-model="stockproduct">
-                      </div>
-                      <div class="py-2">
-                        <label for=""><b>Category: </b></label>
-                        <select name="" id="" v-model="id_addproduct">
-                          <option  v-for=" categorie in categories" :value="categorie.id">
-                            {{categorie.name}}
-                          </option>
-                        </select>
-                      </div>
-                      <!-- <label>produtc img</label> -->
-                      <!-- <button type="button" @click="$refs.fileinput.click()">
-                          pick img
-                      </button> -->
-                      <button type="button" class="btn-green mt-4"> send </button>
-                  </form>
-                  </div>
-              </div>              
-            </div> 
+               
             <div class="row">
               <div class="mb-3 col-12 col-md-10">
                 <input type="search" name="" v-model="filterNameProduct" id="" placeholder="Search by name" class="text-muted">
               </div>
             </div>
-            <div class="d-flex flex-column align-items-center justify-content-center">
-              <div class="col-12 col-md-10">
-                  <table class="table tableProducts table-striped">
+            <div class="d-flex justify-content-center">
+              <div class="col-12 col-md-8">
+                  <table class="table tableAdmin">
                       <thead>
                         <tr>
-                          <th scope="col" >ID</th>
-                          <th scope="col" class="text-center">Name</th>                                                    
-                          <th scope="col" class="text-center">Price</th>
-                          <th scope="col" class="text-center">Stock</th>
-                          <th scope="col" class="text-center">Description</th>
-                          <th scope="col" class="text-center">View</th>
+                          <th scope="col" >Nº</th>
+                          <th scope="col" class="text-center">Date</th>
+                          <th scope="col" class="text-center">Hour</th>
+                          <th scope="col" class="text-center">Sector</th>
+                          <th scope="col" class="text-center">Table</th>
+                          <th scope="col" class="text-center">People</th>
+                          <th scope="col" class="text-center">Status</th>
+                          <th scope="col" class="text-center">Actions</th>
+                          <th scope="col" class="text-center">Edit</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="product in filterProducts">
-                          <th scope="row" class="">{{product.id}}</th>
-                          <td class=""><b>{{product.name}}</b></td>
-                          <td class="">${{product.price}}</td>
-                          <td class="text-center">{{product.stock}}</td>                          
-                          <td class="">{{product.description}}</td>
+                        <tr v-for="booking in bookingsUsers">
+                          <th scope="row" class="text-center">{{booking.id}}</th>
+                          <td class="text-center">{{booking.dateBooking}}</td>
+                          <td class="text-center">{{(booking.bookingHour).slice(0,5)}}</td>
+                          <td class="text-center">{{booking.sector}}</td>
+                          <td class="text-center"> {{booking.tableNumber}}</td>
+                          <td class="text-center"> {{booking.quantity}}</td>
+                          <td class="text-center"> {{booking.state}}</td>
+                          <td class="d-flex justify-content-around">                       
+                              <form @submit.prevent="editBookingState">
+                                  <button class="btn-i" :id="booking.id" value="CANCELED" type="submit" ><i class="bi bi-x-square text-danger"></i></button>
+                              </form>
+                              <form @submit.prevent="editBookingState">
+                                  <button class="btn-i" :id="booking.id" value="ACCEPTED" type="submit"><i class="bi bi-check-square text-success"></i></button>
+                              </form>
+                          </td>                          
                           <td class="d-flex justify-content-center">
-                              <button :id="product.id" type="button" @click="showProduct"><i class="bi bi-eye-fill"></i></button>
+                              <button :id="booking.id" type="button" @click="" class="btnTransp"><i class="bi bi-pencil cRed"></i></button>
                           </td>
                         </tr>
-                        <tr v-if="filterProducts.length === 0" colspan="6">
-                           <td colspan="6" class="text-danger">No se encontraron resultados</td> 
-                        </tr>
+                        
                       </tbody>
                     </table>
               </div>
@@ -182,7 +148,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="../scripts/order.js"></script>
+    <script src="../scripts/booking.js"></script>
 
 </body>
 

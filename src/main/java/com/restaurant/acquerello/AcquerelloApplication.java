@@ -195,8 +195,6 @@ public class AcquerelloApplication {
 			productCategoryRepository.save(productCategory11);
 			ProductCategory productCategory12 = new ProductCategory(product10, category4);
 			productCategoryRepository.save(productCategory12);
-			ProductCategory productCategory14 = new ProductCategory(product11, category4);
-			productCategoryRepository.save(productCategory14);
 			ProductCategory productCategory15 = new ProductCategory(product11, category8);
 			productCategoryRepository.save(productCategory15);
 			ProductCategory productCategory16 = new ProductCategory(product12, category4);

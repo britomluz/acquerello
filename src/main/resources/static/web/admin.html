@@ -78,6 +78,13 @@
                   <p>My account</p>
                 </a>
               </li>
+
+              <li class="item-list">
+                <a class="item-link l5" href="bookings.html">
+                  <div><i class="bi bi-bag-fill fs-3"></i></div>
+                  <p>Bookings</p>
+                </a>
+              </li>
       
               <li class="item-list">
                 <a class="item-link l5" href="products.html">
@@ -124,7 +131,7 @@
                           <tr v-for="order in orders">
                             <th scope="row" class="text-center">{{order.id}}</th>
                             <td class="text-center">{{order.creationDate.slice(5,10)}} - {{order.creationDate.slice(11,16)}}</td>
-                            <td class="text-center">{{order.orderState}}</td>
+                            <td class="text-center">{{order.state}}</td>
                             <td class="d-flex justify-content-around">                       
                                 <form @submit.prevent="editOrderState">
                                     <button class="btn-i" :id="order.id" value="CANCELED" type="submit" ><i class="bi bi-x-square text-danger"></i></button>
@@ -134,12 +141,11 @@
                                 </form>
                                 <form @submit.prevent="editOrderState">
                                     <button class="btn-i" :id="order.id" value="DELIVERED" type="submit"><i class="bi bi-check-all bg-success px-2 text-light"></i></button>
-                                </form>
-                                
+                                </form>                                
                             </td>
                             <td class="text-center">$ {{order.total}}</td>
                             <td class="d-flex justify-content-center">
-                                <button :id="order.id" type="button" @click="showOrder"><i class="bi bi-pencil-square"></i></button>
+                                <button :id="order.id" type="button" @click="showOrder" class="btnTransp"><i class="bi bi-eye-fill cRed"></i></button>
                             </td>
                           </tr>
                           

@@ -42,6 +42,20 @@ h3 {
     color: var(--color2);
     text-align: center;    
 }
+
+.btnTransp{
+    background: transparent;
+    border: none;
+}
+.btnTransp:hover{
+    color: var(--color2);
+}
+.btnTransp:focus{
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
 .badge{
     background: var(--color2);
     border-radius: 100%;
@@ -353,12 +367,12 @@ footer{
 
 /* modal product*/
 .modalInfoProduct{
-    background: var(--color1);
+    background: var(--color4);
     height: 60vh!important;
 }
-.modalInfoProduct{
+/* .modalInfoProduct{
     background: var(--color1);
-}
+} */
 .modalInfoProduct small{
     color: white;
     padding: 0;margin: 0;    
@@ -382,8 +396,8 @@ footer{
     object-fit: cover;
 }
 #btnModalProdClose{
-    background: var(--color3);
-    color: var(--color2);
+    background: var(--color1);
+    color: var(--color4);
     padding: 0px;
     box-shadow: none!important;
 }
@@ -395,8 +409,8 @@ footer{
 #btnModalProdClose:hover,
 #btnModalProdBuy:hover{
     background: none;
-    color: var(--color3);
-    outline: 2px solid var(--color3);    
+    color: var(--color2);
+    outline: 2px solid var(--color2);    
     box-shadow: none!important;
 }
 
@@ -550,6 +564,9 @@ footer{
 #img-product{    
     object-fit: cover;
 }
+#img-product:hover{
+    cursor: pointer;   
+}
 .cardProductOne{
     border: none;
 }
@@ -568,11 +585,10 @@ footer{
     padding: 5px;
     transition: all 1s ease;
     border-radius: 30px;
+    cursor: pointer;
 }
 .cardFooter i:hover{
-    font-weight: bolder;
-    color: var(--color4);    
-    background: var(--color2);
+    color: var(--color2);
 
 }
 
@@ -589,8 +605,7 @@ footer{
     color: var(--color4);
 }
 .specialSection i{
-    color: var(--color4);
-    padding: 20px;
+    color: var(--color4);    
 }
 
 /*acquerello specials card*/

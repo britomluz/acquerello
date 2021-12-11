@@ -36,6 +36,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           
+          <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
           <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
               class="bi bi-cart-fill"></i>
               <div class="badge"><small class="cWhite">1</small></div></button>
@@ -118,9 +119,7 @@
               </div>
             </div>
           </div>
-          <div>
-
-          </div>
+          
         </div>
         
         <!-- Main Course Menu -->
@@ -385,13 +384,13 @@
                     <button type="button" id="xModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div>
-                    <h5 class="modal-title fs-1 cWhite py-0" id="exampleModalLabel">{{producto.name}}</h5>
+                    <h5 class="modal-title cRed fs-1 py-0" id="exampleModalLabel">{{producto.name}}</h5>
                   </div>
                   <div>
-                    <p class="cWhite px-3">{{producto.description}}</p>
+                    <p class="cGreen px-3 pt-4">{{producto.description}}</p>
                   </div>
                   <div>
-                    <h5 class="cWhite px-3 fs-2">${{producto.price}}</h5>
+                    <h5 class="cGreen px-3 fs-2">${{producto.price}}</h5>
                   </div>
                   <div class="modal-footer d-flex flex-nowrap mt-auto mb-4">
                     <button id="btnModalProdClose" type="button" class="btn" data-bs-dismiss="modal">Close</button>
