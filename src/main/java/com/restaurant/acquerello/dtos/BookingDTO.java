@@ -37,16 +37,12 @@ public class BookingDTO {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getDate() {
+    public LocalDate getDateBooking() {
         return dateBooking;
     }
 
-    public void setDate(LocalDate date) {
-        this.dateBooking = date;
+    public void setDateBooking(LocalDate dateBooking) {
+        this.dateBooking = dateBooking;
     }
 
     public LocalTime getBookingHour() {
@@ -73,12 +69,12 @@ public class BookingDTO {
         this.sector = sector;
     }
 
-    public Integer getTable() {
+    public Integer getTableNumber() {
         return tableNumber;
     }
 
-    public void setTable(Integer table) {
-        this.tableNumber = table;
+    public void setTableNumber(Integer tableNumber) {
+        this.tableNumber = tableNumber;
     }
 
     public Integer getQuantity() {
@@ -95,5 +91,13 @@ public class BookingDTO {
 
     public void setState(TableState state) {
         this.state = state;
+    }
+
+    public TableAvailability getTableAvailability() {
+        return tableAvailability;
+    }
+
+    public void setTableAvailability(TableAvailability tableAvailability) {
+        this.tableAvailability = tableAvailability;
     }
 }

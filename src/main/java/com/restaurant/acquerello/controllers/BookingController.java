@@ -65,7 +65,7 @@ public class BookingController {
     public ResponseEntity<?> cancelBooking(@RequestParam Long id) {
         Booking booking = bookingRepository.getById(id);
 
-        booking.setState(TableState.CANCELLED);
+        booking.setState(TableState.CANCELED);
 
         bookingRepository.save(booking);
 
@@ -113,8 +113,8 @@ public class BookingController {
 
         User user = userService.getByEmail(authentication.getName());
         Booking booking = bookingService.getById(id).orElse(null);
-        OrderState orderType = OrderState.valueOf(type);
-        TableAvailability availability = TableAvailability.valueOf(type);
+        //OrderState orderType = OrderState.valueOf(type);
+        TableState state= TableState.valueOf(type);
 
 
         if(!user.getType().equals(UserType.ADMIN)) {
@@ -129,7 +129,7 @@ public class BookingController {
             return new ResponseEntity<>("Denied", HttpStatus.BAD_REQUEST);
         }
 
-        booking.setAvailability(availability);
+        booking.setState(state);
         bookingService.save(booking);
 
         return new ResponseEntity<>("Order state change",HttpStatus.OK);

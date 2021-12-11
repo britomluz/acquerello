@@ -86,29 +86,46 @@
             <div class="row mb-4 d-flex flex-column align-items-center ">
               <div class="col-12 col-md-6 square">
                   <h3 class="fs-5 py-3">Add new product</h3>
+                  <div class="row d-flex justify-content-center">
+                    <div class="col-12 col-md-4 mt-5 bg-warning">
+
+                      <p>aaaaaaa</p>
+                    </div>
+                    <div class="col-12 col-md-8 mt-5 bg-info">
+                      <p>aaaa</p>
+                      
+                  </div>
                   <div>
                     <form @submit.prevent="product_add()">
-                     <label for=""> categories</label>
-                      <select name="" id="" v-model="id_addproduct">
-                        <option  v-for=" categorie in categories" :value="categorie.id">
-                          {{categorie.name}}
-                        </option>
-                      </select>
-                      <label>products name</label>
-                      <input type="text" v-model="nameproducts">
+                      <div class="py-2">
+                        <label><b>Product name: </b></label>
+                        <input type="text" v-model="nameproducts">
+                      </div>
+                      <div class="py-2">
+                        <label for="description"><b>Description: </b></label>
+                        <input type="text" v-model="descriptionproducts">
+                      </div>
+                      <div class="py-2">
+                        <label><b>Price: </b></label>
+                        <input type="number" v-model="priceproduct">
+                      </div>
+                      <div class="py-2">
+                        <label><b>Stock: </b></label>
+                        <input type="number" v-model="stockproduct">
+                      </div>
+                      <div class="py-2">
+                        <label for=""><b>Category: </b></label>
+                        <select name="" id="" v-model="id_addproduct">
+                          <option  v-for=" categorie in categories" :value="categorie.id">
+                            {{categorie.name}}
+                          </option>
+                        </select>
+                      </div>
                       <!-- <label>produtc img</label> -->
                       <!-- <button type="button" @click="$refs.fileinput.click()">
                           pick img
                       </button> -->
-                      <label for="description">description products</label>
-                      <input type="text" v-model="descriptionproducts">
-                      <label>price</label>
-                      <input type="number" v-model="priceproduct">
-                      <label>stock </label>
-                      <input type="number" v-model="stockproduct">
-                      <button>
-                          send
-                      </button>
+                      <button type="button" class="btn-green mt-4"> send </button>
                   </form>
                   </div>
               </div>              

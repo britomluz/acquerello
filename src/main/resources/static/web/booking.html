@@ -222,7 +222,7 @@
                   <div class="table table1 tbp d-flex align-items-center justify-content-center">
                     <input type="radio" name="mesa" id="1" value="1" v-model="table">
                     <label for="1" class="label">
-                      <img src="../assets/mesa2.svg" class="w-100 disabled" alt="">
+                      <img src="../assets/mesa2.svg" class="w-100 disabled" alt="" :class="disabled == 1 ? 'disabled' : 'available'">
                     </label>
                     <small> 1 </small>
                   </div>
@@ -319,21 +319,21 @@
                   <div class="table table3 tbp d-flex align-items-center justify-content-center">
                     <input type="radio" name="mesa" id="2" v-model="table" value="2">
                     <label for="2" class="label">
-                      <img src="../assets/mesa2.svg" class="w-100" alt="">
+                      <img src="../assets/mesa2.svg" class="w-100" alt="" >
                     </label>
                     <small> 2 </small>
                   </div>
                   <div class="table table4 tbp d-flex align-items-center justify-content-center">
                     <input type="radio" name="mesa" id="5" v-model="table" value="5">
                     <label for="5" class="label">
-                      <img src="../assets/mesa2.svg" class="w-100" alt="">
+                      <img src="../assets/mesa2.svg" class="w-100" alt="" >
                     </label>
                     <small> 5 </small>
                   </div>
                   <div class="table table5 tbp d-flex align-items-center justify-content-center">
                     <input type="radio" name="mesa" id="4" v-model="table" value="4">
                     <label for="4" class="label">
-                      <img src="../assets/mesa2.svg" class="w-100" alt="">
+                      <img src="../assets/mesa2.svg" class="w-100" alt="" >
                     </label>
                     <small> 4 </small>
                   </div>

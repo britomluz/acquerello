@@ -148,19 +148,15 @@ const App = Vue.createApp({
         div.innerText = err.response.data
       })
     },
-    editOrderState(e){
-      //console.log(e.target)
-
+    editOrderState(e){      
       console.log(e.target.firstChild)
       
-      
-
       let orderId = e.target.firstChild.id
       let orderState = e.target.firstChild.value
       console.log(orderId)
       console.log(orderState)
 
-      axios.patch('/api/admin/orders/edit',`id=${orderId}&type=${orderState}`)
+      axios.patch('/api/admin/order/edit',`id=${orderId}&type=${orderState}`)
       .then(res => {
         console.log(res)
         window.location.reload();

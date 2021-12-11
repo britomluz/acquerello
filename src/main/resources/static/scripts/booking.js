@@ -22,11 +22,14 @@ const app = Vue.createApp({
         tabledit:0,
         quantityedit:0,
 
-        disabled : true,
+        disabled : 0,
+
+        bookingsUsers:[],
       };
     },
     created() {
       this.get_users()
+      this.get_bookings()
     },
     methods: {
       //   user and admin
@@ -106,16 +109,41 @@ const app = Vue.createApp({
           this.bookinget=response.data
         })
         .catch(err=>console.log(err))
-      }
+      },
+      get_bookings(){
+        axios.get("/api/booking")
+        .then(response=>{
+          console.log(response.data)
+          this.bookingsUsers=response.data
+        })
+        .catch(err=>console.log(err))
+      },
+      editBookingState(e){        
+        let bookingId = e.target.firstChild.id
+        let bookingState = e.target.firstChild.value
+        console.log(bookingId)
+        console.log(bookingState)
+  
+        axios.patch('/api/admin/booking/edit',`id=${bookingId}&type=${bookingState}`)
+        .then(res => {
+          console.log(res)
+          window.location.reload();
+        }).catch(err => {
+          console.log(err)
+        })
+      },
     },
     computed:{
       tableAvailability(){
-        if(booking.type == 'NOTAVAILABLE') {
-          this.disabled = true;
+        if(this.bookingsUsers.tableAvailability == 'NOTAVAILABLE') {
+          this.disabled = this.disabled + 1;
       } else  {
-          this.disabled = false;
+          this.disabled = this.disabled;
       }
-      }
+
+      console.log(this.disabled)
+      },
+      
     }
   });
   app.mount("#app");
