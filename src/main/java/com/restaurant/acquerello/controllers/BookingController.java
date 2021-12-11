@@ -58,9 +58,6 @@ public class BookingController {
     @GetMapping("/user/current/bookings")
     public ResponseEntity<?> getUserBookings(Authentication authentication) {
         User user = userService.getByEmail(authentication.getName());
-
-
-
        return new ResponseEntity<>( user.getBookings().stream().map(BookingDTO::new).collect(Collectors.toList()), HttpStatus.CREATED);
     }
 
@@ -79,10 +76,10 @@ public class BookingController {
     public ResponseEntity<?> editBooking(Authentication authentication, @RequestParam Long id, @RequestBody BookingCreateDTO bookingCreateDTO) {
         User user = userService.getByEmail(authentication.getName());
         Booking booking = bookingRepository.getById(id);
-
+/*
         if(user.getType().equals(UserType.USER)) {
             return new ResponseEntity<>("User cannot edit a booking", HttpStatus.FORBIDDEN);
-        }
+        }*/
 
         if(bookingCreateDTO.getDate() != null) {
             booking.setDate(bookingCreateDTO.getDate());
@@ -112,7 +109,7 @@ public class BookingController {
     @PatchMapping("/admin/booking/edit")
     public ResponseEntity<Object> edit( Authentication authentication,
                                         @RequestParam Long id,
-                                        @RequestParam String type ) {
+                                        @RequestParam String type) {
 
         User user = userService.getByEmail(authentication.getName());
         Booking booking = bookingService.getById(id).orElse(null);
