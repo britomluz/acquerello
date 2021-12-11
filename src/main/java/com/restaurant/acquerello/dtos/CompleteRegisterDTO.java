@@ -23,8 +23,9 @@ public class CompleteRegisterDTO {
     // get products and total for new order
     private List<Product> products;
     private Double total;
+    private String type;
 
-    public CompleteRegisterDTO(String firstName, String lastName, String email, String password, Long number, String street, Integer numberStreet, String zip, String state, String reference, List<Product> products, Double total) {
+    public CompleteRegisterDTO(String firstName, String lastName, String email, String password, Long number, String street, Integer numberStreet, String zip, String state, String reference, List<Product> products, Double total, String type) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -37,6 +38,7 @@ public class CompleteRegisterDTO {
         this.reference = reference;
         this.products = products;
         this.total = total;
+        this.type = type;
     }
 
     public String getFirstName() {
@@ -133,5 +135,13 @@ public class CompleteRegisterDTO {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -24,7 +24,7 @@ public class MailServiceImpl implements MailService {
 
         mailMessage.setFrom("acquerelloMindhub@gmail.com");
         mailMessage.setTo(user.getEmail());
-        mailMessage.setSubject("Acquerrello Restaurant");
+        mailMessage.setSubject("Acquerrello italian food Order No."+order.getId());
         mailMessage.setText(body);
 
         javaMailSender.send(mailMessage);

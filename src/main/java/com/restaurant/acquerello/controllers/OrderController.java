@@ -102,8 +102,8 @@ public class OrderController {
         if(orderToBuyDTO.getTotal() == null || orderToBuyDTO.getTotal() < 1) {
             return new ResponseEntity<>("Fields cannot are empty", HttpStatus.FORBIDDEN);
         }
-
-        Order order = new Order(LocalDateTime.now(), LocalDateTime.now(), OrderState.PENDING, orderToBuyDTO.getTotal());
+        OrderType type = OrderType.valueOf(orderToBuyDTO.getType());
+        Order order = new Order(LocalDateTime.now(), LocalDateTime.now(), OrderState.PENDING, orderToBuyDTO.getTotal(), type);
         user.addOrder(order);
         orderRepository.save(order);
 

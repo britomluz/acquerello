@@ -1,9 +1,6 @@
 package com.restaurant.acquerello.controllers;
 
-import com.restaurant.acquerello.models.Card;
-import com.restaurant.acquerello.models.Order;
-import com.restaurant.acquerello.models.OrderDetails;
-import com.restaurant.acquerello.models.User;
+import com.restaurant.acquerello.models.*;
 import com.restaurant.acquerello.services.*;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,12 +85,31 @@ public class PaymentsController {
         User user = userService.getByEmail(authentication.getName());
         Order order = orderService.getById(id).orElse(null);
         List<OrderDetails> details = orderDetailsService.getAll().stream().filter(orderDetails -> orderDetails.getOrder().getId().equals(id)).collect(Collectors.toList());
-       /* for (OrderDetails orderDetails : details){
+        if (order == null){
+            return new ResponseEntity<>("Order doesn't exist", HttpStatus.FORBIDDEN);
+        }
+        if (order.getState().equals(OrderState.PENDING)){
+        String body = "Hey "+user.getFirstName()+" "+user.getLastName()+"\n\nStatus: "+order.getState()+"\n\nDetail:\n";
+        for (OrderDetails orderDetails : details){
+           body = body.concat(Integer.toString(orderDetails.getQuantity())+"  "+orderDetails.getName()+ "  $"+orderDetails.getTotalProduct()+ "\n");
 
-        }*/
-        assert order != null;
-        String body = "Hey "+user.getFirstName()+" "+user.getLastName()+"\n\n Status: "+order.getState()+"\n\n"+"\n\n Total: "+order.getTotal();
-        mailService.sendMail(user,order,body);
+        }
+            body = body.concat("\nTotal: $"+order.getTotal());
+            mailService.sendMail(user,order,body);
+            return new ResponseEntity<>("Send successful", HttpStatus.OK);
+        }
+        if (order.getState().equals(OrderState.IN_PROCESS)){
+            String body = "Hey "+ order.getUser().getFirstName()+" "+order.getUser().getLastName()+" your order was accepted"+"\n\nStatus: "+order.getState()+"\n\nWe are preparing your order!";
+            mailService.sendMail(order.getUser(),order,body);
+            return new ResponseEntity<>("Send successful", HttpStatus.OK);
+        }
+        if (order.getState().equals(OrderState.DELIVERED)){
+            String body = "Hey "+order.getUser().getFirstName()+" "+order.getUser().getLastName()+" your order was delivered"+"\n\nStatus: "+order.getState()+"\n\nEnjoy it and Buon apetit!";
+            mailService.sendMail(order.getUser(),order,body);
+            return new ResponseEntity<>("Send successful", HttpStatus.OK);
+        }
+        String body = "Hey "+order.getUser().getFirstName()+" "+order.getUser().getLastName()+" We are really sorry but your order was canceled"+"\n\nDon't worry in the next 24hrs we will be making the reverse of the payment";
+        mailService.sendMail(order.getUser(),order,body);
         return new ResponseEntity<>("Send successful", HttpStatus.OK);
     }
 

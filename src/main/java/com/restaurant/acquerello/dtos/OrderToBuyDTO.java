@@ -8,10 +8,12 @@ import java.util.List;
 public class OrderToBuyDTO {
     private List<Product> products = new ArrayList<>();
     private Double total;
+    private String type;
 
-    public OrderToBuyDTO(List<Product> products, Double total) {
+    public OrderToBuyDTO(List<Product> products, Double total, String type) {
         this.products = products;
         this.total = total;
+        this.type = type;
     }
 
     public List<Product> getProducts() {
@@ -28,5 +30,13 @@ public class OrderToBuyDTO {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

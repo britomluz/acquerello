@@ -2,22 +2,27 @@ package com.restaurant.acquerello.dtos;
 
 import com.restaurant.acquerello.models.Order;
 import com.restaurant.acquerello.models.OrderState;
+import com.restaurant.acquerello.models.OrderType;
 
 import java.time.LocalDateTime;
 
 public class OrderDTO {
     private Long id;
+    private String email;
     private LocalDateTime creationDate;
     private LocalDateTime aceptedDate;
     private OrderState state;
     private Double total;
+    private OrderType type;
 
     public OrderDTO(Order order) {
         this.id = order.getId();
+        this.email = order.getUser().getEmail();
         this.creationDate = order.getCreationDate();
         this.aceptedDate = order.getAceptedDate();
         this.state = order.getState();
         this.total = order.getTotal();
+        this.type = order.getType();
     }
 
     public Long getId() {
@@ -26,6 +31,14 @@ public class OrderDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public LocalDateTime getCreationDate() {
@@ -58,5 +71,13 @@ public class OrderDTO {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public OrderType getType() {
+        return type;
+    }
+
+    public void setType(OrderType type) {
+        this.type = type;
     }
 }

@@ -91,10 +91,11 @@ public class NoAuthUserController {
         }
 
         // create user order and address
+        OrderType type = OrderType.valueOf(completeRegisterDTO.getType());
 
         User user = new User(completeRegisterDTO.getFirstName(), completeRegisterDTO.getLastName(), completeRegisterDTO.getEmail(), completeRegisterDTO.getPassword(), completeRegisterDTO.getNumber(), UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
         Address address = new Address(completeRegisterDTO.getStreet(), completeRegisterDTO.getNumberStreet(), completeRegisterDTO.getZip(), completeRegisterDTO.getState(), completeRegisterDTO.getReference());
-        Order order = new Order(LocalDateTime.now(), LocalDateTime.now(), OrderState.PENDING, completeRegisterDTO.getTotal());
+        Order order = new Order(LocalDateTime.now(), LocalDateTime.now(), OrderState.PENDING, completeRegisterDTO.getTotal(), type);
 
         // add address and order to user
         user.addAddress(address);

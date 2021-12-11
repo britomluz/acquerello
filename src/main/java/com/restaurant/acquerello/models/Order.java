@@ -18,6 +18,7 @@ public class Order {
     private LocalDateTime aceptedDate;
     private OrderState state;
     private Double total;
+    private OrderType type;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_oder")
@@ -28,11 +29,12 @@ public class Order {
 
     public Order() {}
 
-    public Order(LocalDateTime creationDate, LocalDateTime aceptedDate, OrderState state, Double total) {
+    public Order(LocalDateTime creationDate, LocalDateTime aceptedDate, OrderState state, Double total, OrderType type) {
         this.creationDate = creationDate;
         this.aceptedDate = aceptedDate;
         this.state = state;
         this.total = total;
+        this.type = type;
     }
 
     public Long getId() {
@@ -90,6 +92,14 @@ public class Order {
     public void addOrderDetail(OrderDetails orderDetail) {
         orderDetail.setOrder(this);
         orderDetails.add(orderDetail);
+    }
+
+    public OrderType getType() {
+        return type;
+    }
+
+    public void setType(OrderType type) {
+        this.type = type;
     }
 
     @Override

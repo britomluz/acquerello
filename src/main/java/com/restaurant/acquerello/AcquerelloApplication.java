@@ -257,8 +257,8 @@ public class AcquerelloApplication {
 			productCategoryRepository.save(productCategory51);
 
 			// Brian: Creating order
-			Order order1 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.PENDING, 32.43);
-			Order order2 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.PENDING, 11.43);
+			Order order1 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.PENDING, 32.43, OrderType.DELIVERY);
+			Order order2 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.PENDING, 11.43, OrderType.TAKEAWAY);
 			// Brian: Adding order to Users
 			user1.addOrder(order1);
 			user2.addOrder(order2);
