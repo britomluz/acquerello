@@ -21,6 +21,7 @@ const App = Vue.createApp({
       orderStates: ["PENDING", "IN_PROCESS", "DELIVERED", "CANCELED"],
       orderStateSelected: "",
       idOrderDelete: "",
+      orderDetails:"",
 
       //each order
       order: ""
@@ -32,6 +33,7 @@ const App = Vue.createApp({
     });
     this.loadcreate();
     this.loadDataOrders()
+    this.loadDataOrderDetails()
 
   },
   methods: {
@@ -76,7 +78,7 @@ const App = Vue.createApp({
       axios.get(`/api/order`)
         .then((response) => {
           this.orders = response.data;
-          console.log(this.orders)
+          //console.log(this.orders)
         })
         .catch((err) => console.log(err));
     },
@@ -164,6 +166,39 @@ const App = Vue.createApp({
         console.log(err.data)
       })
     },
+    loadDataOrderDetails(){
+      axios.get("/api/order/details")
+           .then((response) => {           
+        this.orderDetails = response.data;
+        
+
+        this.orderDetails = this.orderDetails.filter(orderDetails => orderDetails.orderId === this.order.id)
+        console.log(this.orderDetails)
+        //console.log(this.order.id)   
+      
+      });
+    },
+    downloadInvoice(e){            
+      this.idTransfer = e.target.firstChild.value 
+      let idOrder = this.order.id
+      axios.post("/api/bill/pdf",`id=${this.order.id}`,{ responseType: 'blob' }, {headers:{"Content-type": "application/pdf" }})
+         .then((res) => {
+           let disposition = res.headers['content-disposition']
+           let filename = decodeURI(disposition.substring(21))
+           let blob = new Blob([res.data], {type: 'application/pdf'});
+           let objectUrl = URL.createObjectURL(blob);
+           let link = document.createElement("a");
+           //let filename = "transaccion"+ this.idTransfer;  
+
+           link.href = objectUrl;
+           link.setAttribute("download", filename);
+           document.body.appendChild(link);
+           link.click();
+         })
+         .catch(err=> {
+           console.log("No se puede descargar el pdf");
+           });
+   },
   },
 });
 App.mount("#app");

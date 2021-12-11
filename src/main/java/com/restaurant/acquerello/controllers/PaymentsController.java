@@ -2,20 +2,26 @@ package com.restaurant.acquerello.controllers;
 
 import com.restaurant.acquerello.models.Card;
 import com.restaurant.acquerello.models.Order;
+import com.restaurant.acquerello.models.OrderDetails;
 import com.restaurant.acquerello.models.User;
-import com.restaurant.acquerello.services.CardService;
-import com.restaurant.acquerello.services.MailService;
-import com.restaurant.acquerello.services.OrderService;
-import com.restaurant.acquerello.services.UserService;
+import com.restaurant.acquerello.services.*;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.parameters.P;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.http.HttpResponse;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional
 @RestController
@@ -32,7 +38,13 @@ public class PaymentsController {
     private OrderService orderService;
 
     @Autowired
+    private OrderDetailsService orderDetailsService;
+
+    @Autowired
     private MailService mailService;
+
+    @Autowired
+    private BillingPDFService billingPDFService;
 
     @PostMapping("/payments/{id}")
     public ResponseEntity<?> registerPayment(Authentication authentication, @PathVariable("id") Long id, @NotNull @RequestParam Double amount){
@@ -75,10 +87,14 @@ public class PaymentsController {
     public ResponseEntity<?> sendMail(Authentication authentication, @RequestParam Long id){
         User user = userService.getByEmail(authentication.getName());
         Order order = orderService.getById(id).orElse(null);
+        List<OrderDetails> details = orderDetailsService.getAll().stream().filter(orderDetails -> orderDetails.getOrder().getId().equals(id)).collect(Collectors.toList());
+       /* for (OrderDetails orderDetails : details){
+
+        }*/
         assert order != null;
-        String body = "Hey "+user.getFirstName()+" "+"\n\n Status: "+order.getState()+"\n\n Total: "+order.getTotal();
+        String body = "Hey "+user.getFirstName()+" "+user.getLastName()+"\n\n Status: "+order.getState()+"\n\n"+"\n\n Total: "+order.getTotal();
         mailService.sendMail(user,order,body);
-        return new ResponseEntity<>("Send", HttpStatus.OK);
+        return new ResponseEntity<>("Send successful", HttpStatus.OK);
     }
 
     @GetMapping("/")
@@ -86,13 +102,31 @@ public class PaymentsController {
         return "send_mail_view";
     }
 
-   /* @PostMapping("/sendMailTo")
-    public String sendMail(@RequestParam("name") String name, @RequestParam("mail") String mail, @RequestParam("subject") String subject, @RequestParam("body") String body){
+    @PostMapping("/bill/pdf")
+    public ResponseEntity<?> generatePDFBill(HttpServletResponse httpServletResponse, Authentication authentication, @RequestParam Long id) throws IOException {
+        User user = userService.getByEmail(authentication.getName());
+        Order order = orderService.getById(id).orElse(null);
+        if (order == null){
+            return new ResponseEntity<>("Order doesn't exist",HttpStatus.FORBIDDEN);
+        }
+        if (!user.getOrders().contains(order)){
+            return new ResponseEntity<>("Order don't belongs you",HttpStatus.FORBIDDEN);
+        }
+        httpServletResponse.setContentType("application/pdf");
+        DateFormat dateFormat= new SimpleDateFormat("MM-dd-yyyy_hh:mm:ss");
+        String currentDatTime= dateFormat.format(new Date());
 
-        String message = body +"\n\n\nDatos de contacto: " + "\nNombre: " + name + "\nE-mail: " + mail;
-        mailService.sendMailTo(mail, subject, message);
+        List<OrderDetails> details = orderDetailsService.getAll().stream().filter(orderDetails -> orderDetails.getOrder().getId().equals(id)).collect(Collectors.toList());
 
-        return "send_mail_view";
-    }*/
+        String headerKey = "Content-Disposition";
+        String headerValue = "attacment; filename=Bill_order_No."+order.getId()+"_"+currentDatTime+".pdf";
+        httpServletResponse.setHeader(headerKey,headerValue);
+
+        billingPDFService.exportPDF(httpServletResponse, user, order, details);
+
+        return new ResponseEntity<>("PDF created", HttpStatus.CREATED);
+    }
+
+
 
 }
