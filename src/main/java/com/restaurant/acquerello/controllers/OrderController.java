@@ -3,7 +3,6 @@ package com.restaurant.acquerello.controllers;
 import com.restaurant.acquerello.dtos.OrderDTO;
 import com.restaurant.acquerello.dtos.OrderToBuyDTO;
 import com.restaurant.acquerello.dtos.OrderDetailsDTO;
-import com.restaurant.acquerello.dtos.OrderTypeDTO;
 import com.restaurant.acquerello.models.*;
 import com.restaurant.acquerello.repositories.OrderDetailsRepository;
 import com.restaurant.acquerello.repositories.OrderRepository;
@@ -15,10 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -84,6 +83,7 @@ public class OrderController {
         return orderDetailsRepository.findAll().stream().map(OrderDetailsDTO::new).collect(Collectors.toList());
     }
 
+    @Transactional
     @PostMapping("/order/buy")
     public ResponseEntity<?> createOrder(Authentication authentication, @RequestBody OrderToBuyDTO orderToBuyDTO) {
 
@@ -111,8 +111,15 @@ public class OrderController {
            Integer quantity = product.getQuantity();
            Long idProduct = product.getId();
            Product product1 = productService.getById(idProduct).orElse(null);
-           assert product1 != null;
+           if (product1 == null){
+               return new ResponseEntity<>("Product doesn't exist", HttpStatus.FORBIDDEN);
+           }
+           if (product1.getStock() < quantity){
+               return new ResponseEntity<>("Sorry we don't have enough stock", HttpStatus.FORBIDDEN);
+           }
            OrderDetails orderDetails = new OrderDetails(quantity,product1,order);
+           product1.setStock(product1.getStock() - quantity);
+           productService.save(product1);
            orderDetailsRepository.save(orderDetails);
         }
 
@@ -135,7 +142,7 @@ public class OrderController {
 
         orderRepository.save(order);
 
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>("Order created No."+order.getId(),HttpStatus.ACCEPTED);
     }
 
     @PatchMapping("/admin/order/edit")

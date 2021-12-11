@@ -2,7 +2,6 @@ package com.restaurant.acquerello.controllers;
 
 import com.restaurant.acquerello.dtos.CreateProductDTO;
 import com.restaurant.acquerello.dtos.ModifyProductDTO;
-import com.restaurant.acquerello.dtos.OrderTypeDTO;
 import com.restaurant.acquerello.dtos.ProductDTO;
 import com.restaurant.acquerello.models.*;
 import com.restaurant.acquerello.services.CategoryService;

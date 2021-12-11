@@ -41,6 +41,9 @@ public class OrderDetails {
         this.creationDate = order.getCreationDate();
         this.state = order.getState();
         this.totalOrder = order.getTotal();
+        this.product = product;
+        this.order = order;
+        
     }
 
     public Long getId() {

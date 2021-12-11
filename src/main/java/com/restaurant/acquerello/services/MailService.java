@@ -7,5 +7,5 @@ import java.io.IOException;
 
 public interface MailService {
     public void sendMail(User user, Order order, String body);
-   // public void sendMailTo( String to, String subject, String body);
+
 }

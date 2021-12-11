@@ -5,6 +5,7 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.restaurant.acquerello.models.Order;
+import com.restaurant.acquerello.models.OrderDetails;
 import com.restaurant.acquerello.models.User;
 import com.restaurant.acquerello.services.BillingPDFService;
 import org.springframework.stereotype.Service;
@@ -14,11 +15,12 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class BillingPDFImpl implements BillingPDFService {
     @Override
-    public void exportPDF(HttpServletResponse response, User user, Order order) throws IOException {
+    public void exportPDF(HttpServletResponse response, User user, Order order, List<OrderDetails> orderDetails) throws IOException {
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, response.getOutputStream());
         DateFormat dateFormat= new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
@@ -52,15 +54,19 @@ public class BillingPDFImpl implements BillingPDFService {
         table.addCell(cell);
         cell.setPhrase(new Phrase(user.getFirstName()+" "+user.getLastName(), fontParagraph2));
         table.addCell(cell);
-        cell.setPhrase(new Phrase("Status:", fontParagraphTitle));
+        cell.setPhrase(new Phrase("Email:", fontParagraphTitle));
+        table.addCell(cell);
+        cell.setPhrase(new Phrase(user.getEmail(), fontParagraph2));
+        table.addCell(cell);
+        cell.setPhrase(new Phrase("Status Order:", fontParagraphTitle));
         table.addCell(cell);
         cell.setPhrase(new Phrase(order.getState().toString(), fontParagraph2));
         table.addCell(cell);
-        cell.setPhrase(new Phrase("Total:", fontParagraphTitle));
-        table.addCell(cell);
-        cell.setPhrase(new Phrase(order.getTotal().toString(), fontParagraph2));
-        table.addCell(cell);
+        table.setSpacingAfter(20);
         document.add(table);
+
+        PdfPTable tableBilling = new PdfPTable(4);
+
 
         document.close();
     }

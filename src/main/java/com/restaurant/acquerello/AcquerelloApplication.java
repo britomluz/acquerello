@@ -275,15 +275,6 @@ public class AcquerelloApplication {
 			OrderDetails orderDetails3 = new OrderDetails(4,product3,order2);
 			OrderDetails orderDetails4 = new OrderDetails(5,product4,order2);
 
-			product1.addOrderDetail(orderDetails1);
-			product2.addOrderDetail(orderDetails2);
-			product3.addOrderDetail(orderDetails3);
-			product4.addOrderDetail(orderDetails4);
-
-			order1.addOrderDetail(orderDetails1);
-			order1.addOrderDetail(orderDetails2);
-			order2.addOrderDetail(orderDetails3);
-			order2.addOrderDetail(orderDetails4);
 
 			orderDetailsRepository.save(orderDetails1);
 			orderDetailsRepository.save(orderDetails2);
