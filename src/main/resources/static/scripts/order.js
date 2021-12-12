@@ -30,7 +30,7 @@ const app = Vue.createApp({
 
       //cart
       qantity: "",
-      totalQantity: "",
+      totalQantity: 0,
       product: [],
       destacados: [],
       cart: [],
