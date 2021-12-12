@@ -76,9 +76,9 @@
 
     <main class="d-flex flex-column justify-content-around align-items-center py-5">
       <h3 class="fs-1">CHECKOUT</h3>
-      <div class="col-11 col-xl-8 d-flex align-items-center justify-content-around">
+      <div class="row col-10 d-flex justify-content-around mt-5">
 
-        <div class="p-3 formCardLoan">
+        <div class="col-12 col-md-6 col-lg-5 p-3 formCardLoan">
           <div class="form-header">
           </div>
           <!-- Progress bar-->
@@ -275,6 +275,51 @@
               </div> -->
             </div>
           </form>
+        </div>
+        <div class="col-12 col-md-6 col-lg-5">
+          <h4 class="text-start cGreen"><i class="bi bi-cart-check-fill cGreen"> </i> Tu pedido</h4>
+          <div>
+            <table class="table">
+              <thead>
+                <tr>                      
+                  <th scope="col" class="cRed">Image</th>
+                  <th scope="col" class="cRed">Items</th>
+                  <th scope="col" class="cRed">Qty.</th>
+                  <th scope="col" class="cRed">Price</th>
+                </tr>
+              </thead>
+              <tbody v-if="cart.length > 0">
+                <tr v-for="product in cart">
+                  <td class="imgFill"><img :src="product.productImage" alt=""></td>
+                  <td >{{product.name}}</td>
+                  <td >{{product.quantity}}</td>
+                  <td >${{product.price}}</td>                               
+                </tr>    
+                <tr>
+                  <td colspan="3">
+                    <p class="text-end"><b>Total: </b></p>
+                  </td>
+                  <td>
+                    <p><b>$.....</b></p>
+                  </td>
+                </tr>                
+              </tbody>
+              <tbody v-else>
+                <tr id="footer-cart">              
+                  <td scope="row" colspan="5">Cart empty</td>
+                </tr>
+                <tr>
+                  <!-- v-if="carrito.length === 0" -->
+                  <td scope="row" colspan="5"><a href="order.html">ORDER NOW </a></td>
+                </tr>                
+              </tbody>
+              <!-- <tfoot>
+                <td colspan="3" class="cGreen"><b>Total price:</b> </td>
+                <td class="cGreen"><b>${{order.total}}</b></td>                    
+              </tfoot> -->
+
+            </table>
+          </div>
         </div>
       </div>
 

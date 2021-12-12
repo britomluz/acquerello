@@ -63,5 +63,4 @@ public class UserController {
 
         return new ResponseEntity<>( userService.getById(id).map(UserDTO::new).orElse(null), HttpStatus.CREATED);
     }
-
 }

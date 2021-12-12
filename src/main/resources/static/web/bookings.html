@@ -85,10 +85,45 @@
       <div class="row mb-4 d-flex flex-column align-items-center ">
 
         <div class="row">
-          <!-- <div class="mb-3 col-12 col-md-10">
-            <input type="search" name="" v-model="filterNameProduct" id="" placeholder="Search by name"
-              class="text-muted">
-          </div> -->
+          <div class="mb-3 col-12 col-md-10">
+            <select v-model="statesfilter" name="" id="">
+              <option value="GOLDEN">
+                GOLDEN
+              </option>
+              <option value="PLATINUM">
+
+                GARDEN
+              </option>
+              <option value="VIP">
+                VIP
+              </option>
+            </select>
+            <select name="" v-model="sectorfilter" id="">
+              <option value="ACCEPTED">
+                accepted
+              </option>
+              <option value="CANCELED">
+                canceled
+              </option>
+            </select>
+
+            <select name="people" id="peop" v-model="hoursfilter">
+              <option value="">Hour</option>
+              <option value="9">09:00 am</option>
+              <option value="10">10:00 am</option>
+              <option value="11">11:00 am </option>
+              <option value="12">12:00 pm</option>
+              <option value="13">13:00 pm</option>
+              <option value="18">18:00 pm</option>
+              <option value="19">19:00 pm</option>
+              <option value="20">20:00 pm</option>
+              <option value="21">21:00 pm</option>
+              <option value="22">22:00 pm</option>
+            </select>
+            <input type="text"  v-model="yearfilter" placeholder="year" >
+            <input type="text" name="" v-model="monthfilter" id="" placeholder="month">
+            <input type="text" name="" v-model="dayfilter" id="" placeholder="day">
+          </div>
         </div>
         <div class="d-flex justify-content-center">
           <div class="col-12 col-md-8">
@@ -289,7 +324,7 @@
           </div>
           </tbody>
           <tbody v-else>
-            <tr v-for="booking in bookingsUsers">
+            <tr v-for="booking in filter_maximum">
               <th scope="row" class="text-center">{{booking.id}}</th>
               <td class="text-center">{{booking.dateBooking}}</td>
               <td class="text-center">{{(booking.bookingHour).slice(0,5)}}</td>
@@ -298,19 +333,20 @@
               <td class="text-center"> {{booking.quantity}}</td>
               <td class="text-center"> {{booking.state}}</td>
               <td class="d-flex justify-content-around">
-                  <form @submit.prevent="editBookingState">
-                    <button class="btn-i" :id="booking.id" value="CANCELED" type="submit"><i
+                <form @submit.prevent="editBookingState">
+                  <button class="btn-i" :id="booking.id" value="CANCELED" type="submit"><i
                       class="bi bi-x-square text-danger"></i></button>
-                    </form>
-                    <form @submit.prevent="editBookingState">
-                      <button class="btn-i" :id="booking.id" value="ACCEPTED" type="submit"><i
-                        class="bi bi-check-square text-success"></i></button>
-                      </form>
+                </form>
+                <form @submit.prevent="editBookingState">
+                  <button class="btn-i" :id="booking.id" value="ACCEPTED" type="submit"><i
+                      class="bi bi-check-square text-success"></i></button>
+                </form>
               </td>
               <td class="d-flex justify-content-center">
                 <button :id="booking.id" type="button" @click="show_edit" class="btnTransp"><i
                     class="bi bi-pencil cRed"></i></button>
               </td>
+            </tr>
           </tbody>
           </table>
         </div>

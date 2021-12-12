@@ -17,7 +17,8 @@ const app = Vue.createApp({
       addnumber: 0,
       addstreet: "",
     //   order
-    order:[]
+    order:[],
+    idorder:0,
 
     };
   },
@@ -55,7 +56,8 @@ const app = Vue.createApp({
           .then((response) => alert(response.data))
           .catch((err) => console.log(err.response.data));
       },
-      edit_address() {
+      edit_address(e) {
+        this.id=e.target.parentElement.id
         axios
           .patch(`/api/address/edit?id=${1}`, {
             street: this.addstreet,
@@ -67,10 +69,41 @@ const app = Vue.createApp({
           .then((response) => console.log(response))
           .catch((err) => console.log(err.response.data));
       },  
+      order_cancel_user(e){  
+        this.idorder=e.target.parentElement.id
+        axios.get(`/api/order/cancel?id=${this.idorder}`)
+        .then(response=>{
+          console.log(response)
+          // alert(response.data)
+          swal({
+            title: "Are you sure?",
+            // text: "Once canceled",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal(response.data, {
+                icon: "success",
+              })
+              .then(respone=>{window.location.reload()})
+            } else {
+              swal("your order is not cancel");
+            }
+          });
+        })
+        .catch(err=>console.log(err))
+      },
+      show_id(e){
+        
+        console.log(this.idorder)
+      },
       order_user(){
           axios.get("/api/order/current")
           .then(response=>{
             this.order=response.data
+            console.log(this.order)
         })
           .catch(err=>console.log(err))
       }
