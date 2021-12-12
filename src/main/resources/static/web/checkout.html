@@ -103,7 +103,19 @@
               <div class="title">
                 <h3 class="text-center">Shipping information</h3>
               </div>
-              <div class="">
+              <div class="title mt-3 d-flex flex-column" v-if="logged">
+                <h4>Personal Account</h4>
+                <div class="d-flex flex-a-items-center">
+                  <label>Name: {{user.firstName}}</label>
+                </div>
+                <div class="d-flex flex-a-items-center">
+                  <label>Last Name: {{user.lastName}}</label>
+                </div>
+                <div class="d-flex flex-a-items-center">
+                  <label>Phone: {{user.number}}</label>
+                </div>
+              </div>
+              <div class="" v-if="guest">
                 <div class=" d-flex flex-column">
                   <label for="firstName">Firstname</label>
                   <input type="text" id="firstName" v-model="firstName">
@@ -120,16 +132,64 @@
               <div class="title mt-3 d-flex flex-column">
                 <h4>Choose method</h4>
                 <div class="d-flex flex-a-items-center radio">
-                  <input type="radio" @click="selectRadio" value="delivery" name="method">
-                  <label>Delivery </label>
+                  <input type="radio" @click="selectRadio" value="delivery" name="method" id="deliver">
+                  <label for="deliver">Delivery </label>
                 </div>
                 <div class="d-flex flex-a-items-center radio">
-                  <input type="radio" @click="selectRadio" value="in" name="method">
-                  <label>Eat in restaurant </label>
+                  <input type="radio" @click="selectRadio" value="in" name="method" id="takeaway">
+                  <label for="takeaway">Eat in restaurant </label>
                 </div>
                 <div class="d-flex flex-a-items-center radio">
-                  <input type="radio" @click="selectRadio" value="withdraw" name="method">
-                  <label>Withdraw order in restaurant </label>
+                  <input type="radio" @click="selectRadio" value="withdraw" name="method" id="in">
+                  <label for="in">Withdraw order in restaurant </label>
+                </div>
+                <div class="title mt-3" v-if="deliver">
+                  <h4 v-if="guest">Already are you registered?</h4>
+                  <a href="./login.html" v-if="guest">Log in</a>
+                  <h4>Where do you want your order?</h4>
+                  <select class="w-100" name="cuentas" @change="show_address" id="" placeholder="">
+                    <option value="">Select adress</option>
+                    <option v-if="logged" v-for="add in address" :value="add.zip">{{add.street}} {{add.number}}</option>
+                    <option value="newAdress">Add new adress</option>
+                  </select>
+                  <div v-if="show">
+                    <div>
+                      <form class="d-flex flex-column">
+                        <div class=" d-flex flex-column">
+                          <div class="d-flex align-items-center justify-content-around">
+                            <div class="d-flex flex-column w-100">
+                              <label for="street">*Street</label>
+                              <input type="text" id="street" v-model="street" required>
+                            </div>
+                          </div>
+                          <div class="d-flex align-items-center justify-content-around">
+                            <div class="d-flex flex-column w-100">
+                              <label for="state">*State</label>
+                              <input type="text" id="state" v-model="state" required>
+                            </div>
+                          </div>
+                          <div class=" d-flex flex-column">
+                            <div class="d-flex align-items-center justify-content-around">
+  
+                              <div class="d-flex flex-column">
+                                <label for="number">*Nº</label>
+                                <input type="text" id="number" v-model="number" required>
+                              </div>
+                              <div class="d-flex flex-column">
+                                <label for="zip">Zip Code</label>
+                                <input type="text" id="zip" v-model="zip">
+                              </div>
+                            </div>
+                            <div>
+                              <label for="reference">Reference</label>
+                              <textarea name="" id="reference" cols="30" rows="3" class="col-12"
+                                v-model="reference"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="mt-2">
@@ -141,53 +201,11 @@
 
             <!-- Step 2 -->
             <div ref="form2" class="form-step form2">
-              <div class="title mt-3" v-if="deliver">
-                <h4>Already are you registered?</h4>
-                <a href="./login.html">Log in</a>
-                <h4>Where do you want your order?</h4>
-                <select class="w-100" name="cuentas" @change="show_address" id="" placeholder="">
-                  <option value="">Select adress</option>
-                  <option value="">[array adress]</option>
-                  <option value="newAdress">Add new adress</option>
+              <div v-if="table">
+                <label for="table">Select number Table: </label>
+                <select name="table" id="table">
+                  <option value="" selected disabled>Select Table</option>
                 </select>
-                <div v-if="show">
-                  <div>
-                    <form class="d-flex flex-column">
-                      <div class=" d-flex flex-column">
-                        <div class="d-flex align-items-center justify-content-around">
-                          <div class="d-flex flex-column w-100">
-                            <label for="street">*Street</label>
-                            <input type="text" id="street" v-model="street" required>
-                          </div>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-around">
-                          <div class="d-flex flex-column w-100">
-                            <label for="state">*State</label>
-                            <input type="text" id="state" v-model="state" required>
-                          </div>
-                        </div>
-                        <div class=" d-flex flex-column">
-                          <div class="d-flex align-items-center justify-content-around">
-
-                            <div class="d-flex flex-column">
-                              <label for="number">*Nº</label>
-                              <input type="text" id="number" v-model="number" required>
-                            </div>
-                            <div class="d-flex flex-column">
-                              <label for="zip">Zip Code</label>
-                              <input type="text" id="zip" v-model="zip">
-                            </div>
-                          </div>
-                          <div>
-                            <label for="reference">Reference</label>
-                            <textarea name="" id="reference" cols="30" rows="3" class="col-12"
-                              v-model="reference"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
               </div>
               <div class="title  mt-5">
                 <h3 class="text-center">Billing data</h3>
@@ -221,10 +239,9 @@
                   </div>
                 </div>
                 <div class=" d-flex flex-column">
-                    <label for="acc">Account Number</label>
-                    <input id="acc" type="text"
-                      maxlength="12" placeholder="VIN-XXXXXXXX" v-model="accountNumber">
-                  </div>
+                  <label for="acc">Account Number</label>
+                  <input id="acc" type="text" maxlength="12" placeholder="VIN-XXXXXXXX" v-model="accountNumber">
+                </div>
               </div>
               <div class="btn-group mt-3">
                 <a ref="back1"
@@ -247,11 +264,11 @@
                 <p v-if="cart != ''">Products: <b v-for="c in cart"> {{c.name}}, </b> </p>
                 <p v-else> Products: <span>You don't have products yet</span> </p>
                 <p v-if="cart != ''">Total price: <b>${{totalProduct}}</b> </p>
-                <p>Register your Account:</p>
-                <label for="email">Email: </label>
-                <input type="email" v-model="email" id="email" @input="register" placeholder="correo@user.com">
-                <label for="password">Password: </label>
-                <input type="password" v-model="password" id="password" @input="register" placeholder="correo@user.com">
+                <p v-if="guest">Register your Account:</p>
+                <label for="email" v-if="guest">Email: </label>
+                <input type="email" v-model="email" id="email" @input="register" placeholder="correo@user.com" v-if="guest">
+                <label for="password" v-if="guest">Password: </label>
+                <input type="password" v-model="password" id="password" @input="register" placeholder="correo@user.com" v-if="guest">
               </div>
               <div class=" mt-5 pt-5">
                 <h4 class="text-center">Confirm your order</h4>
@@ -260,8 +277,8 @@
                     @click="backForms(this.$refs.back2, this.$refs.form2, this.$refs.form3, this.$refs.progressStep3)"
                     class="btn btn-prev"><i class="bi bi-arrow-left"></i>
                     Go back</a>
-                  <button ref="submit" type="submit" value="submit" class="btn btn-confirm" @click="sendForm"
-                    id="confirm" disabled>Confirm <i class="bi bi-check-lg"></i></button>
+                  <button ref="submit" type="submit" value="submit" class="btn btn-confirm" @click="confirmBuy"
+                    id="confirm">Confirm <i class="bi bi-check-lg"></i></button>
                   <!-- <p> @click="nextProgressBar(this.$refs.submit, this.$refs.progressStep3)"</p> NO SE QUE FUNCION CUMPLE-->
                 </div>
               </div>
@@ -281,7 +298,7 @@
           <div>
             <table class="table">
               <thead>
-                <tr>                      
+                <tr>
                   <th scope="col" class="cRed">Image</th>
                   <th scope="col" class="cRed">Items</th>
                   <th scope="col" class="cRed">Qty.</th>
@@ -291,27 +308,27 @@
               <tbody v-if="cart.length > 0">
                 <tr v-for="product in cart">
                   <td class="imgFill"><img :src="product.productImage" alt=""></td>
-                  <td >{{product.name}}</td>
-                  <td >{{product.quantity}}</td>
-                  <td >${{product.price}}</td>                               
-                </tr>    
+                  <td>{{product.name}}</td>
+                  <td>{{product.quantity}}</td>
+                  <td>${{product.price}}</td>
+                </tr>
                 <tr>
                   <td colspan="3">
                     <p class="text-end"><b>Total: </b></p>
                   </td>
                   <td>
-                    <p><b>$.....</b></p>
+                    <p><b>${{totalProduct}}</b></p>
                   </td>
-                </tr>                
+                </tr>
               </tbody>
               <tbody v-else>
-                <tr id="footer-cart">              
+                <tr id="footer-cart">
                   <td scope="row" colspan="5">Cart empty</td>
                 </tr>
                 <tr>
                   <!-- v-if="carrito.length === 0" -->
                   <td scope="row" colspan="5"><a href="order.html">ORDER NOW </a></td>
-                </tr>                
+                </tr>
               </tbody>
               <!-- <tfoot>
                 <td colspan="3" class="cGreen"><b>Total price:</b> </td>
