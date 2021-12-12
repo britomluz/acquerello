@@ -666,6 +666,18 @@ footer{
     background: rgba(0, 0, 0, 0.205);   
 }
 
+.cardDiv{
+    background-image: url(../assets/card.png);
+    background-size: contain;
+    width: 300px;
+    height: 192px;
+}
+.cardDiv p{
+    font-size: 20px;
+    color:white;
+    padding-top: 130px;
+    padding-left: 50px;
+}
 /* ORDER PAGE end*/
 
 
@@ -875,7 +887,7 @@ footer{
     .progressBar{
       width: 300px;
     }
-  
+    
   }
 
 
@@ -937,6 +949,7 @@ footer{
     .aboutUs img{
         width: 300px;
     }
+
 }
 
 @media (max-width: 325px){
@@ -948,6 +961,7 @@ footer{
         flex-direction: column;
         justify-content: center!important;        
     }
+   
 }
 
 /* Brian CSS */
