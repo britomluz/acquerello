@@ -148,6 +148,12 @@ const app = Vue.createApp({
             this.error_cardRest = error.response.data
           })
       },
+      createCard() {
+        axios.post('/api/cards/create')
+            .then(() => swal('Card created'))
+            .then(console.log("Card created"))
+            .catch(err => console.log(err))
+    },
       
   },
 });
