@@ -37,7 +37,18 @@ const App = Vue.createApp({
       address: "",
       bookings: "",
       cardInfo: "",
-      orderInfo: ""
+      orderInfo: "",
+       // filter orders
+       emailfilter:[],
+       typefilter:[],
+       statefilter:[],
+       yearsfilter:[],
+       monthfilter:[],
+       dayfilter:[],
+       hoursfilter:[],
+       // errors
+       errororder:false,
+       errorcancel:""
     };
   },
   created() {
@@ -96,12 +107,10 @@ const App = Vue.createApp({
     loadDataUser(){
       const urlParam = new URLSearchParams(window.location.search);
       const id = urlParam.get('id');
-
-      axios.get(`/api/user/${id}`)
+      axios.get(`/api/admin/user/${id}`)
         .then(res => {
           this.user = res.data
-          //.sort((a,b) => parseInt(b.id - a.id))
-
+          .sort((a,b) => parseInt(b.id - a.id))
         })
         .catch(err => err.message)
     },
@@ -131,8 +140,6 @@ const App = Vue.createApp({
         .then(res => {
           this.order = res.data
           //.sort((a,b) => parseInt(b.id - a.id))
-
-
         })
         .catch(err => err.message)
     },
@@ -158,7 +165,7 @@ const App = Vue.createApp({
       axios.get(`/api/order`)
         .then((response) => {
           this.orders = response.data;
-          //console.log(this.orders)
+          console.log(this.orders)
         })
         .catch((err) => console.log(err));
     },
@@ -221,29 +228,28 @@ const App = Vue.createApp({
         div.innerText = err.response.data
       })
     },
-    deleteOrder() {
-      axios.delete(`/api/order/cancel/${this.idOrderDelete}`).then(res => {
-        const div = document.getElementById("response");
-        div.innerText = res.data
-      }).catch(err => {
-        const div = document.getElementById("response");
-        div.innerText = err.response.data
-      })
-    },
+    // deleteOrder() {
+    //   axios.delete(`/api/order/cancel/${this.idOrderDelete}`).then(res => {
+    //     const div = document.getElementById("response");
+    //     div.innerText = res.data
+    //   }).catch(err => {
+    //     const div = document.getElementById("response");
+    //     div.innerText = err.response.data
+    //   })
+    // },
     editOrderState(e){      
       console.log(e.target.firstChild)
       
       let orderId = e.target.firstChild.id
       let orderState = e.target.firstChild.value
-      console.log(orderId)
-      console.log(orderState)
 
       axios.patch('/api/admin/order/edit',`id=${orderId}&type=${orderState}`)
       .then(res => {
         console.log(res)
         window.location.reload();
       }).catch(err => {
-        console.log(err.data)
+        this.errororder=true
+        this.errorcancel=err.response.data
       })
     },
     loadDataOrderDetails(){
@@ -251,7 +257,7 @@ const App = Vue.createApp({
            .then((response) => {           
         this.orderDetails = response.data;
         this.orderDetails = this.orderDetails.filter(orderDetails => orderDetails.orderId === this.order.id)
-        console.log(this.orderDetails)
+        // console.log(this.orderDetails)
         //console.log(this.order.id)   
       
       });
@@ -279,7 +285,18 @@ const App = Vue.createApp({
    },
   },
   computed:{
+    filter_order(){
 
+      let b =this.orders
+      return this.orders
+      .filter(order=>this.emailfilter.includes(order.email)||this.emailfilter.length === 0)
+      .filter(order=>this.typefilter.includes(order.type)||this.typefilter.length === 0)
+      .filter(order=>this. statefilter.includes(order.state)||this.statefilter === 0)
+      .filter(order=>order.creationDate.slice(0,4).match(this.yearsfilter))
+      .filter(order=>order.creationDate.slice(5,7).match(this.monthfilter))
+      .filter(order=>order.creationDate.slice(8,10).match(this.dayfilter))
+      .filter(order=>order.creationDate.slice(11,13).match(this.hoursfilter))
+    }
   }
 });
 App.mount("#app");
