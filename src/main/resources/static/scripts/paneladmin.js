@@ -25,9 +25,19 @@ const App = Vue.createApp({
 
       //each order
       order: "",
+
+      userAcc: false,
+      adminAcc: false,
+      card: false,
+      order: false,
       //users
       users:[],
-      user:[],
+      user: "",
+
+      address: "",
+      bookings: "",
+      cardInfo: "",
+      orderInfo: ""
     };
   },
   created() {
@@ -40,13 +50,46 @@ const App = Vue.createApp({
     this.loadDataUser()
     this.loadUsers()
 
+    // check if the localStorage have the user selected
+
+    if(localStorage.getItem("user") != null) {
+      this.user = JSON.parse(localStorage.getItem("user"))
+
+      this.address = this.user.address[0];
+      
+
+      if(this.user.type == "USER") {
+        this.userAcc = true;
+        this.adminAcc = false;
+      } else {
+        this.userAcc = false;
+        this.adminAcc = true;
+      }
+      if(this.userAcc) {
+        this.bookings = this.user.bookings[0];
+      }
+
+      if(this.user.card.length >= 1) {
+        this.card = true;
+        this.cardInfo = this.user.card[0];
+      } else {
+        this.card = false
+      }
+
+      if(this.user.orders.length >= 1) {
+        this.order = true;
+        this.orderInfo = this.user.orders[0];
+      } else {
+        this.order = false
+      }
+    }
+
   },
   methods: {
     loadUsers(){
       axios.get(`/api/users`)
       .then((response) => {
         this.users = response.data;
-        //console.log(this.orders)
       })
       .catch((err) => console.log(err));
     },
@@ -63,8 +106,16 @@ const App = Vue.createApp({
         .catch(err => err.message)
     },
     showUser(e) {
-      let id = e.target.parentElement.id
-      window.location.href = `./client-details.html?id=${id}`
+      let id = e.target.parentElement.id;
+      let type = e.target.parentElement.name;
+
+      axios.get(`/api/admin/user/${id}`).then(res => {
+        this.user = res.data;
+        localStorage.setItem("user", JSON.stringify(this.user))
+        window.location.href = "/web/clients-details.html"
+      }).catch(err => {
+        console.log(err.response)
+      })
     },    
     showOrder(e) {
 

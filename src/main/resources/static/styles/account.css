@@ -431,3 +431,8 @@ body{
       padding: 5px;
     }
 }
+
+.img-user {
+  width: 100px;
+  border-radius: 50%;
+}

@@ -117,47 +117,134 @@
           </div>
           <div class="p-4">
             <h3>
-                CLIENTS
+                USER INFO
             </h3>
           </div>
           <main>
               <div class="d-flex justify-content-center">
                 <div class="col-12 col-md-8">
-                    <table class="table tableAdmin">
-                        <thead>
-                          <tr>
-                            <th scope="col" >Nº</th>
-                            <th scope="col" class="text-center">Date</th>
-                            <th scope="col" class="text-center">Status</th>
-                            <th scope="col" class="text-center">Actions</th>
-                            <th scope="col" class="text-center">Total</th>
-                            <th scope="col" class="text-center">View</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr v-for="order in orders">
-                            <th scope="row" class="text-center">{{order.id}}</th>
-                            <td class="text-center">{{order.creationDate.slice(5,10)}} - {{order.creationDate.slice(11,16)}}</td>
-                            <td class="text-center">{{order.state}}</td>
-                            <td class="d-flex justify-content-around">                       
-                                <form @submit.prevent="editOrderState">
-                                    <button class="btn-i" :id="order.id" value="CANCELED" type="submit" ><i class="bi bi-x-square text-danger"></i></button>
-                                </form>
-                                <form @submit.prevent="editOrderState">
-                                    <button class="btn-i" :id="order.id" value="IN_PROCESS" type="submit"><i class="bi bi-check-square text-success"></i></button>
-                                </form>
-                                <form @submit.prevent="editOrderState">
-                                    <button class="btn-i" :id="order.id" value="DELIVERED" type="submit"><i class="bi bi-check-all bg-success px-2 text-light"></i></button>
-                                </form>                                
-                            </td>
-                            <td class="text-center">$ {{order.total}}</td>
-                            <td class="d-flex justify-content-center">
-                                <button :id="order.id" type="button" @click="showOrder" class="btnTransp"><i class="bi bi-eye-fill cRed"></i></button>
-                            </td>
-                          </tr>
-                          
-                        </tbody>
-                      </table>
+                  <table class="table tableAdmin">
+                    <thead>
+                      <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col" class="text-center">First Name</th>
+                        <th scope="col" class="text-center">Last Name</th>
+                        <th scope="col" class="text-center">Address</th>
+                        <th scope="col" class="text-center">Type</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row" class="text-center"><img :src="user.img" :alt="user.firstName" class="img-user"></th>
+                        <td class="text-center">{{user.firstName}}</td>
+                        <td class="text-center">{{user.lastName}}</td>
+                        <td><p v-for="add in address">{{add.name}}</p></td>
+                        <td class="text-center">{{user.type}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="p-4">
+                    <h3>
+                        ADDRESS
+                    </h3>
+                  </div>
+                  <table class="table tableAdmin">
+                    <thead>
+                      <tr>
+                        <th scope="col">Street</th>
+                        <th scope="col" class="text-center">Nº</th>
+                        <th scope="col" class="text-center">State</th>
+                        <th scope="col" class="text-center">Reference</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="text-center">{{address.street}}</td>
+                        <td class="text-center">{{address.number}}</td>
+                        <td class="text-center">{{address.state}}</td>
+                        <td class="text-center">{{address.reference}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="p-4" v-if="userAcc">
+                    <h3>
+                        BOOKINGS
+                    </h3>
+                  </div>
+                  <table class="table tableAdmin" v-if="userAcc">
+                    <thead>
+                      <tr>
+                        <th scope="col">Booking day</th>
+                        <th scope="col" class="text-center">Hour</th>
+                        <th scope="col" class="text-center">End Booking hour</th>
+                        <th scope="col" class="text-center">Persons</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="text-center">{{bookings.dateBooking}}</td>
+                        <td class="text-center">{{bookings.bookingHour}}</td>
+                        <td class="text-center">{{bookings.endBooking}}</td>
+                        <td class="text-center">{{bookings.quantity}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="p-4" v-if="card">
+                    <h3>
+                        CARD INFO
+                    </h3>
+                  </div>
+                  <table class="table tableAdmin" v-if="card">
+                    <thead>
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col" class="text-center">Card Holder</th>
+                        <th scope="col" class="text-center">CVV</th>
+                        <th scope="col" class="text-center">Number</th>
+                        <th scope="col" class="text-center">From Date</th>
+                        <th scope="col" class="text-center">Type</th>
+                        <th scope="col" class="text-center">Level</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="text-center">{{cardInfo.id}}</td>
+                        <td class="text-center">{{cardInfo.cardHolder}}</td>
+                        <td class="text-center">{{cardInfo.cvv}}</td>
+                        <td class="text-center">{{cardInfo.number}}</td>
+                        <td class="text-center">{{cardInfo.fromDate}}</td>
+                        <td class="text-center">{{cardInfo.type}}</td>
+                        <td class="text-center">{{cardInfo.level}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="p-4" v-if="order">
+                    <h3>
+                        ORDER INFO
+                    </h3>
+                  </div>
+                  <table class="table tableAdmin" v-if="card">
+                    <thead>
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col" class="text-center">Acepted Date</th>
+                        <th scope="col" class="text-center">Creation Date</th>
+                        <th scope="col" class="text-center">State</th>
+                        <th scope="col" class="text-center">Total</th>
+                        <th scope="col" class="text-center">Type</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="text-center">{{orderInfo.id}}</td>
+                        <td class="text-center">{{orderInfo.aceptedDate}}</td>
+                        <td class="text-center">{{orderInfo.creationDate}}</td>
+                        <td class="text-center">{{orderInfo.state}}</td>
+                        <td class="text-center">{{orderInfo.total}}</td>
+                        <td class="text-center">{{orderInfo.type}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             <div class="row">
