@@ -29,12 +29,6 @@ public class OrderController {
     private UserService userServices;
 
     @Autowired
-    private OrderRepository orderRepository;
-
-    @Autowired
-    private OrderDetailsRepository orderDetailsRepository;
-
-    @Autowired
     private OrderServiceImpl orderService;
 
     @Autowired
@@ -46,7 +40,7 @@ public class OrderController {
 
     @GetMapping("/order")
     public List<OrderDTO> getAllOrders() {
-        return orderRepository.findAll().stream().map(OrderDTO::new).collect(Collectors.toList());
+        return orderService.getAll().stream().map(OrderDTO::new).collect(Collectors.toList());
     }
     @GetMapping("/order/{id}")
     public ResponseEntity<Object> getOrders(Authentication authentication, @PathVariable Long id){
@@ -54,10 +48,9 @@ public class OrderController {
         User user = userServices.getByEmail(authentication.getName());
         Order order = orderService.getById(id).orElse(null);
 
-        /*
-        if(!user.getOrder().contains(order)){
-            return new ResponseEntity<>("Order incorrect",HttpStatus.FORBIDDEN);
-        }*/
+        if(!user.getOrders().contains(order)){
+            return new ResponseEntity<>("Order incorrect",HttpStatus.CONFLICT);
+        }
         return new ResponseEntity<>(orderService.getById(id).map(OrderDTO::new).orElse(null), HttpStatus.CREATED);
     }
     @GetMapping("/order/current")
@@ -74,13 +67,13 @@ public class OrderController {
 
     @GetMapping("/order/details")
     public List<OrderDetailsDTO> getAllOrderDetails() {
-        return orderDetailsRepository.findAll().stream().map(OrderDetailsDTO::new).collect(Collectors.toList());
+        return orderDetailsService.getAll().stream().map(OrderDetailsDTO::new).collect(Collectors.toList());
     }
 
 
     @GetMapping("/order/details/{id}")
     public List<OrderDetailsDTO> getAllOrderDetailsById() {
-        return orderDetailsRepository.findAll().stream().map(OrderDetailsDTO::new).collect(Collectors.toList());
+        return orderDetailsService.getAll().stream().map(OrderDetailsDTO::new).collect(Collectors.toList());
     }
 
     @Transactional
@@ -105,7 +98,7 @@ public class OrderController {
         OrderType type = OrderType.valueOf(orderToBuyDTO.getType());
         Order order = new Order(LocalDateTime.now(), LocalDateTime.now(), OrderState.PENDING, orderToBuyDTO.getTotal(), type);
         user.addOrder(order);
-        orderRepository.save(order);
+        orderService.save(order);
 
         for (Product product : orderToBuyDTO.getProducts()){
            Integer quantity = product.getQuantity();
@@ -120,12 +113,12 @@ public class OrderController {
            OrderDetails orderDetails = new OrderDetails(quantity,product1,order);
            product1.setStock(product1.getStock() - quantity);
            productService.save(product1);
-           orderDetailsRepository.save(orderDetails);
+           orderDetailsService.save(orderDetails);
         }
 
         return new ResponseEntity<>("Order created",HttpStatus.ACCEPTED);
     }
-
+//consultar y de no servir borrar
    @GetMapping("/order/confirm/{id}")
     public ResponseEntity<?> confirmOrder(Authentication authentication, @PathVariable Long id) {
 
@@ -137,10 +130,13 @@ public class OrderController {
 
         // search the order by id
 
-        Order order = orderRepository.findOrderById(id);
+        Order order = orderService.getById(id).orElse(null);
+        if (order == null){
+            return new ResponseEntity<>("Order doesn't exist", HttpStatus.FORBIDDEN);
+        }
         order.setAceptedDate(LocalDateTime.now());
 
-        orderRepository.save(order);
+        orderService.save(order);
 
         return new ResponseEntity<>("Order created No."+order.getId(),HttpStatus.ACCEPTED);
     }
@@ -165,27 +161,38 @@ public class OrderController {
         if (order == null){
             return new ResponseEntity<>("Order doesn't exist", HttpStatus.FORBIDDEN);
         }
+        if (order.getState().equals(OrderState.CANCELED)){
+            return new ResponseEntity<>("Order was canceled", HttpStatus.FORBIDDEN);
+        }
         order.setState(orderType);
+        order.setAceptedDate(LocalDateTime.now());
         orderService.save(order);
 
         return new ResponseEntity<>("Order state change",HttpStatus.OK);
     }
-
+//
     @RequestMapping("/order/cancel")
     public ResponseEntity<?> cancelOrder(Authentication authentication, @RequestParam Long id) {
         User user = userServices.getByEmail(authentication.getName());
-        Order order = orderRepository.findOrderById(id);
-
-        List<Order> orders = user.getOrders().stream().filter(o -> o.getId().equals(id)).collect(Collectors.toList());
+        Order order = orderService.getById(id).orElse(null);
 
         // if the user dont have the order
-        if(orders.size() < 1) {
+        if (!user.getType().equals(UserType.USER)){
+            return new ResponseEntity<>("Don't have authority", HttpStatus.FORBIDDEN);
+        }
+        if(!user.getOrders().contains(order)) {
             return new ResponseEntity<>("Cannot found the order", HttpStatus.FORBIDDEN);
+        }
+        if (order == null){
+            return new ResponseEntity<>("Order doesn't exist", HttpStatus.FORBIDDEN);
+        }
+        if (order.getState().equals(OrderState.CANCELED)){
+            return new ResponseEntity<>("Order already canceled", HttpStatus.FORBIDDEN);
         }
 
         order.setState(OrderState.CANCELED);
 
-        orderRepository.save(order);
+        orderService.save(order);
 
         return  new ResponseEntity<>("Order cancelled", HttpStatus.ACCEPTED);
     }

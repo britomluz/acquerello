@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,23 +25,29 @@ public class BookingController {
     @Autowired
     public UserService userService;
 
-    @Autowired
-    public BookingRepository bookingRepository;
 
     @Autowired
     public BookingService bookingService;
 
-    @RequestMapping("/booking")
+    @GetMapping("/booking")
     public List<BookingDTO> getAll() {
         return bookingService.getAll().stream().map(BookingDTO::new).collect(Collectors.toList());
     }
 
-    @RequestMapping(value = "/booking/create", method = RequestMethod.POST)
+    @PostMapping("/booking/create")
     public ResponseEntity<?> createAddress(Authentication authentication,  @RequestBody BookingCreateDTO bookingCreateDTO) {
         User user = userService.getByEmail(authentication.getName());
+        Booking table = bookingService.getTable(bookingCreateDTO.getTable());
 
         if(bookingCreateDTO.getDate().lengthOfMonth() < 1) {
             return new ResponseEntity<>("The field date is empty", HttpStatus.FORBIDDEN);
+        }
+        if (table.getAvailability().equals(TableAvailability.NOTAVAILABLE)){
+            return new ResponseEntity<>("Table not available", HttpStatus.FORBIDDEN);
+        }
+        LocalDate day = bookingCreateDTO.getDate();
+        if (user.getBookings().stream().map(Booking::getDateBooking).collect(Collectors.toList()).contains(day)){
+            return new ResponseEntity<>("Already have a booking to this day", HttpStatus.FORBIDDEN);
         }
 
         LocalTime plus = bookingCreateDTO.getBookingHour().plusHours(4);
@@ -60,26 +67,39 @@ public class BookingController {
         User user = userService.getByEmail(authentication.getName());
        return new ResponseEntity<>( user.getBookings().stream().map(BookingDTO::new).collect(Collectors.toList()), HttpStatus.CREATED);
     }
-
+//ver para que es esto
     @RequestMapping("/booking/cancel")
     public ResponseEntity<?> cancelBooking(@RequestParam Long id) {
-        Booking booking = bookingRepository.getById(id);
+        Booking booking = bookingService.getById(id).orElse(null);
+
+        if (booking == null){
+            return new ResponseEntity<>("Booking doesn't exist", HttpStatus.FORBIDDEN);
+        }
+        if (booking.getState().equals(TableState.CANCELED)){
+            return new ResponseEntity<>("Booking is already canceled", HttpStatus.FORBIDDEN);
+        }
 
         booking.setState(TableState.CANCELED);
 
-        bookingRepository.save(booking);
+        bookingService.save(booking);
 
         return new ResponseEntity<>("Booking canceled", HttpStatus.ACCEPTED);
     }
 
-    @RequestMapping(value = "/booking/edit", method = RequestMethod.PATCH)
+    @PatchMapping("/booking/edit")
     public ResponseEntity<?> editBooking(Authentication authentication, @RequestParam Long id, @RequestBody BookingCreateDTO bookingCreateDTO) {
         User user = userService.getByEmail(authentication.getName());
-        Booking booking = bookingRepository.getById(id);
+        Booking booking = bookingService.getById(id).orElse(null);
 /*
         if(user.getType().equals(UserType.USER)) {
             return new ResponseEntity<>("User cannot edit a booking", HttpStatus.FORBIDDEN);
         }*/
+        if (booking == null){
+            return new ResponseEntity<>("Booking doesn't exist", HttpStatus.FORBIDDEN);
+        }
+        if (booking.getState().equals(TableState.CANCELED)){
+            return new ResponseEntity<>("Booking is already canceled", HttpStatus.FORBIDDEN);
+        }
 
         if(bookingCreateDTO.getDate() != null) {
             booking.setDate(bookingCreateDTO.getDate());
@@ -101,7 +121,7 @@ public class BookingController {
             booking.setQuantity(bookingCreateDTO.getQuantity());
         }
 
-        bookingRepository.save(booking);
+        bookingService.save(booking);
 
         return new ResponseEntity<>("Booking edited", HttpStatus.ACCEPTED);
     }
@@ -127,6 +147,9 @@ public class BookingController {
 
         if(booking == null){
             return new ResponseEntity<>("Denied", HttpStatus.BAD_REQUEST);
+        }
+        if (booking.getState().equals(TableState.CANCELED)){
+            return new ResponseEntity<>("Booking is already canceled", HttpStatus.FORBIDDEN);
         }
 
         booking.setState(state);

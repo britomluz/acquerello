@@ -29,4 +29,9 @@ public class BookingImpl implements BookingService {
     public Optional<Booking> getById(Long id) {
         return bookingRepository.findById(id);
     }
+
+    @Override
+    public Booking getTable(Integer table) {
+        return bookingRepository.getByTableNumber(table);
+    }
 }

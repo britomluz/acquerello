@@ -7,4 +7,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 public interface BookingRepository extends JpaRepository<Booking, Long> {
     public Booking getById(Long id);
+    public Booking getByTableNumber(Integer table);
 }

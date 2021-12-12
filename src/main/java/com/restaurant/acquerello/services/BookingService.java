@@ -10,4 +10,5 @@ public interface BookingService {
     public List<Booking> getAll();
     public void save(Booking booking);
     public Optional<Booking> getById(Long id);
+    public Booking getTable(Integer table);
 }
