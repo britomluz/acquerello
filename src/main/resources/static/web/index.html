@@ -16,7 +16,7 @@
 <body>
     <div id="app">
 
-        <nav id="navbar" class="navbar navbar-light fondoTransp fixed-top">
+        <nav id="navbar" ref="navbar" class="navbar navbar-light fondoTransp fixed-top">
             <div class="container-fluid containernav">
                 <a class="navbar-brand" href="#">
                     <img src="../assets/acquerello.png" alt="" width="150">
@@ -38,7 +38,7 @@
                     
                     <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
                     <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
-                            class="bi bi-cart-fill"></i><div class="badge"><small class="cWhite">1</small></div></button>
+                            class="bi bi-cart-fill"></i><div class="badge"><small class="cWhite" v-if="totalQantity > 0">{{totalQantity}}</small></div></button>
                 </div>
 
 
@@ -74,7 +74,7 @@
         </nav>
 
         <header id="headerIndex">
-            <div class="header" id="side1">
+            <div class="header" id="side1" ref="side1">
                 <h1>La vera Cucina</h1>
                 <h3>Italian Food</h3>
                 <div class="headerButtons">
@@ -82,7 +82,7 @@
                     <button><span>Book now</span></button>
                 </div>
             </div>
-            <div class="header" id="side2">
+            <div class="header" id="side2" ref="side2">
                 <h1>La vera Cucina</h1>
                 <h3>Italian Food</h3>
                 <div class="headerButtons">
@@ -133,7 +133,76 @@
 
         </main>
 
+<!-- CART MODAL -->
+<div id="canvasCart" class="offcanvas offcanvas-end" tabindex="-1" aria-labelledby="offcanvasRightLabel">
+    <div id="" class="offcanvas-header">
+      <h5 id="offcanvasRightLabel">Carrito de compras</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+        <h5>x</h5>
+      </button>
+    </div>
+    <div class="offcanvas-body">
+      <table class="table">
+        <thead>
+          <tr class="title-offcanvas">
+            <th scope="col" colspan="2" class="cRed">Product</th>
+            <th scope="col" class="cRed">Qty.</th>
+            <th scope="col" class="cRed">Action</th>
+            <th scope="col" class="cRed">Total</th>
+          </tr>
+        </thead>
+        <!-- Template del carrito  -->
+        <tbody v-if="cart.length > 0" id="items">
+          <div>
+            <tr v-for="product in cart" :key="product.id" id="template-cart">
+              <td class="imgFill"><img :src="product.productImage" alt=""></td>
+              <!-- <td scope="row" class=""><img class="img-fluid img-thumbnail" :src="product.productImage" :alt="product.name"> -->
+              </td>
+              <td>{{product.name}}</td>
+              <td>{{product.quantity}}</td>
+              <td>
+                <button class="btn btn-info btn-sm" type="button" :id="product.id" @click="addOne"> + </button>
+                <button class="btn btn-danger btn-sm" type="button" :id="product.id" @click="deleteOne"> - </button>
+              </td>
+              <td class="off-canvas-priceTotal">${{product.price * product.quantity}}</td>
+            </tr>
+          </div>
+        </tbody>
+        <tfoot v-if="cart.length === 0">
+          <tr id="footer-cart">              
+            <td scope="row" colspan="5">Cart empty</td>
+          </tr>
+          <tr>
+            <!-- v-if="carrito.length === 0" -->
+            <td scope="row" colspan="5"><a href="order.html">ORDER NOW </a></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div v-if="cart.length > 0" id="template-footer">
+      <th scope="row" colspan="2">Total</th>
+      <td>{{totalQantity}}</td>
+      <td>
+        <button class="btn btn-danger btn-sm" id="vaciar-carrito" @click="emptyCart">
+          vaciar todo
+        </button>
+      </td>
+      <td class="font-weight-bold">$ <span>{{calculateTotal()}}</span></td>
+    </div>
 
+
+    <div class="canvas-bottom">
+      <button id="btn-seguir-comprando" type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+        aria-label="Close">
+        <p> Seguir comprando</p>
+      </button>
+      <button id="btn-finalizar-compra" type="button" class="btn-close" href="compra.html">
+        <p> Finalizar compra</p>
+      </button>
+
+    </div>
+
+  </div>
 
     </div>
     <footer class="d-flex flex-wrap justify-content-around align-items-center py-4">
@@ -173,7 +242,6 @@
         window.addEventListener('scroll', function () {
             // navbar.style.background = 'black'
             menu.classList.toggle('fondoBlack', window.scrollY > 800)
-
         })
 
     </script>
@@ -184,7 +252,8 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="./scripts/index.js"></script>
+   <script src="./scripts/index.js"></script> 
+    <!-- <script src="../scripts/index.js"></script> -->
 
 </body>
 

@@ -12,4 +12,4 @@ const AppChat = {
     },    
   }
   
-  Vue.createApp(App).mount('#app')
+  Vue.createApp(AppChat).mount('#appChat')

@@ -114,10 +114,11 @@ const app = Vue.createApp({
    
 
     this.showModal();
-    if (localStorage.getItem("cart")) {
+     if (localStorage.getItem("cart")) {
       this.cart = JSON.parse(localStorage.getItem("cart"));
+      this.totalQantity = JSON.parse(localStorage.getItem("quantity"));
       this.addToCart();
-    }
+    } 
 
     this.cart.forEach((c) => {
       this.total += c.price * c.quantity;
@@ -258,9 +259,8 @@ const app = Vue.createApp({
         .then((response) => console.log(response))
         .catch((err) => console.log(err));
     },
-    addToCart(id) {
+     addToCart(id) {
       this.totalPrice = 0;
-      
 
       for (let i = 0; i < this.products.length; i++) {
         if (this.products[i].id == id) {
@@ -280,7 +280,8 @@ const app = Vue.createApp({
         }
       }
       localStorage.setItem("cart", JSON.stringify(this.cart));
-    },
+      localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
+    }, 
     deleteOne(clickEvent) {
       this.cart.forEach((product) => {
         if (clickEvent.target.id == product.id) {
@@ -294,17 +295,19 @@ const app = Vue.createApp({
           this.cart.splice(i, 1);
         }
         localStorage.setItem("cart", JSON.stringify(this.cart));
+        localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
       });
-    },
+    }, 
     addOne(clickEvent) {
       this.cart.forEach((product) => {
         if (clickEvent.target.id == product.id){ 
           product.quantity++;
         product.stock--;
         this.totalQantity++
-        localStorage.setItem("cart", JSON.stringify(this.cart));}
+        localStorage.setItem("cart", JSON.stringify(this.cart));
+        localStorage.setItem("quantity", JSON.stringify(this.totalQantity));}
       });
-    },
+    }, 
     showModal(id) {
       let prod = this.products.filter((item) => item.id == id);
       this.modal = prod;
@@ -321,7 +324,8 @@ const app = Vue.createApp({
       this.cart = [];
       this.totalQantity = 0
       localStorage.setItem("cart", JSON.stringify(this.cart));
-    },
+      localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
+    }, 
     //multistep form
     updateForms(btn, form1, form2, step) {
       this.nextStep(btn, form1, form2);
