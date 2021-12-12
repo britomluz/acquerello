@@ -107,9 +107,11 @@ const app = Vue.createApp({
   },
   created() {
     //this.Admin_accept_order()
+    this.totalQantity = 0
     this.loadProducts();
     this.loadCategories();
     this.loadDataProduct();
+   
 
     this.showModal();
     if (localStorage.getItem("cart")) {
@@ -258,7 +260,7 @@ const app = Vue.createApp({
     },
     addToCart(id) {
       this.totalPrice = 0;
-      this.totalQantity = 0;
+      
 
       for (let i = 0; i < this.products.length; i++) {
         if (this.products[i].id == id) {
@@ -266,14 +268,15 @@ const app = Vue.createApp({
           if (!this.cart.includes(this.products[i])) {
             this.products[i].quantity++;
             this.cart.push(this.products[i]);
-            this.totalQantity = this.totalQantity + 1;
+            this.totalQantity++
           } else {
             // de lo contraria le suma +1 a la cantidad del producto
             this.products[i].quantity++;
+            this.totalQantity++
 
           }
           this.totalPrice = this.totalPrice + this.products[i].price;
-          //this.totalQantity = this.totalQantity + 1;
+         
         }
       }
       localStorage.setItem("cart", JSON.stringify(this.cart));
@@ -283,6 +286,7 @@ const app = Vue.createApp({
         if (clickEvent.target.id == product.id) {
           product.quantity--;
           product.stock++;
+          this.totalQantity--
         }
       });
       this.cart.forEach((product, i) => {
@@ -294,9 +298,11 @@ const app = Vue.createApp({
     },
     addOne(clickEvent) {
       this.cart.forEach((product) => {
-        if (clickEvent.target.id == product.id) product.quantity++;
+        if (clickEvent.target.id == product.id){ 
+          product.quantity++;
         product.stock--;
-        localStorage.setItem("cart", JSON.stringify(this.cart));
+        this.totalQantity++
+        localStorage.setItem("cart", JSON.stringify(this.cart));}
       });
     },
     showModal(id) {
@@ -311,7 +317,9 @@ const app = Vue.createApp({
       return total;
     },
     emptyCart() {
+      this.cart.forEach(product => product.quantity = 0)
       this.cart = [];
+      this.totalQantity = 0
       localStorage.setItem("cart", JSON.stringify(this.cart));
     },
     //multistep form
