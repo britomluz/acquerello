@@ -125,12 +125,12 @@
           </div>
         </div>
       </div>
-      <div>
+      <div>    
+        
+        
+        <!-- TABLES -->
         <div>
-          <h4 class="text-center mt-5">Select your table</h4>
-        </div>
-        <div>
-          <div class="nav nav-tabs tab-registration" id="nav-tab" role="tablist">
+          <div class="nav nav-tabs tab-registration pt-5" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#golden"
               type="button" role="tab" aria-controls="nav-home" aria-selected="true" >GOLDEN</button>
             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#garden" type="button"
@@ -147,8 +147,11 @@
 
           <div class="tab-pane fade show active golden" id="golden" role="tabpanel" aria-labelledby="nav-home-tab">
             <div class=" d-flex justify-content-center">
-              <div class="py-5 col-12 col-lg-8">
-
+              <div class="pb-2 col-12 col-lg-8">
+                <div>
+                  <h4 class="text-center mt-5">Select your table</h4>
+                  <p>{{table}}</p>
+                </div>
                 <div class="container tableContainer">
                   <div class="table table1 tbp d-flex align-items-center justify-content-center">
                     <input type="radio" name="mesa" id="1" value="1" v-model="table">
@@ -176,7 +179,6 @@
                       <label for="19" class="label">
                         <img src="../assets/mesa1.svg" class="w-100 p-0" alt="">
                       </label>
-
                     </div>
 
                     <div class="table table13 ">
@@ -311,8 +313,10 @@
 
           <div class="tab-pane fade garden" id="garden" role="tabpanel" aria-labelledby="nav-profile-tab" v-cloak>
             <div class=" d-flex justify-content-center">
-              <div class="py-5 col-12 col-lg-8">
-
+              <div class="pb-2 col-12 col-lg-8">
+                <div>
+                  <h4 class="text-center mt-5">Select your table</h4>
+                </div>
                 <div class="container tableContainer">
                   <div class="table table4 tbp d-flex align-items-center justify-content-center">
                     <input type="radio" name="mesa" id="20" v-model="table" value="20">
@@ -408,8 +412,10 @@
           <div class="tab-pane fade vip" id="vip" role="tabpanel" aria-labelledby="nav-profile-tab" v-cloak>
             <div class=" d-flex justify-content-center">
               <div class=" d-flex justify-content-center">
-                <div class="py-5 col-12 col-lg-8">
-
+                <div class=" col-12 col-lg-8">
+                  <div class="pb-5">
+                    <h4 class="text-center mt-5">Select your table</h4>
+                  </div>
                   <div class="container tableContainer vipContainer">
                     <div class="table table10 tablevip tbp d-flex align-items-center justify-content-center">
                       <input type="radio" name="mesa" id="32" value="32">
@@ -430,6 +436,8 @@
           </div>
         </div>
       </div>
+
+      <!-- carrousel -->
       <section class="home">
         <div id="carousel" class="carousel slide" data-ride="carousel">
           <div class="carousel-controls">

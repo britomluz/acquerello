@@ -310,17 +310,18 @@
         <table class="table">
           <thead>
             <tr class="title-offcanvas">
-              <th scope="col" colspan="2">Producto</th>
-              <th scope="col">Cant.</th>
-              <th scope="col">Acción</th>
-              <th scope="col">Total</th>
+              <th scope="col" colspan="2" class="cRed">Product</th>
+              <th scope="col" class="cRed">Qty.</th>
+              <th scope="col" class="cRed">Action</th>
+              <th scope="col" class="cRed">Total</th>
             </tr>
           </thead>
           <!-- Template del carrito  -->
           <tbody v-if="cart.length > 0" id="items">
             <div>
               <tr v-for="product in cart" :key="product.id" id="template-cart">
-                <td scope="row"><img class="img-fluid img-thumbnail" :src="product.productImage" :alt="product.name">
+                <td class="imgFill"><img :src="product.productImage" alt=""></td>
+                <!-- <td scope="row" class=""><img class="img-fluid img-thumbnail" :src="product.productImage" :alt="product.name"> -->
                 </td>
                 <td>{{product.name}}</td>
                 <td>{{product.quantity}}</td>

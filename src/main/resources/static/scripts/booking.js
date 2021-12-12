@@ -50,8 +50,9 @@ const app = Vue.createApp({
     this.get_bookings();
   },
   methods: {
-    //   user and admin
+    //   user and admin    
     create_booking() {
+      console.log(this.datetime, this.bookingHour, this.sectortime, this.table, this.quantitytime)
       if (this.table < 19) {
         this.sectortime = "GOLDEN";
       } else if (this.table < 31) {
@@ -59,8 +60,10 @@ const app = Vue.createApp({
       } else {
         this.sectortime = "VIP";
       }
-      axios
-        .post("/api/booking/create", {
+
+      this.table = parseInt(this.table)
+      
+      axios.post("/api/booking/create", {
           date: this.datetime,
           bookingHour: this.bookingHour,
           sector: this.sectortime,
@@ -75,7 +78,9 @@ const app = Vue.createApp({
             button: "Ok",
           });
         })
-        .catch((err) => console.log(err));
+        .catch((err) =>{
+          console.log(err.response.data)
+        });
     },
     // cancel user booking
     cancel_booking(e){
@@ -167,17 +172,17 @@ const app = Vue.createApp({
       }
       console.log(this.disabled);
     },
-    filter_maximum(){
+    filterBookings(){
       let a = this.bookingsUsers
       return this.bookingsUsers.filter(booking=>this.statesfilter.includes(booking.sector)||this.statesfilter.length === 0)
-                                .filter(booking=>this.sectorfilter.includes(booking.state)||this.sectorfilter.lenght===0)
+                                .filter(booking=>this.sectorfilter.includes(booking.state)||this.sectorfilter.length===0)
                                 .filter(booking=>booking.bookingHour.slice(0,4).match(this.hoursfilter))
                                 .filter(booking=>booking.dateBooking.slice(0,4).match(this.yearfilter))
                                 .filter(booking=>booking.dateBooking.slice(5,7).match(this.monthfilter))
                                 .filter(booking=>booking.dateBooking.slice(8,10).match(this.dayfilter))
-                               
     },
    
+
   },
 });
 let obv=app.mount("#app");

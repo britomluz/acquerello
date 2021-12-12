@@ -99,7 +99,10 @@ const app = Vue.createApp({
       descriptionproducts:"",
       priceproduct:0,
       stockproduct:0,
-      id_addproduct:0
+      id_addproduct:0,
+
+      //shop
+      cardNumber:"",
     };
   },
   created() {
@@ -555,6 +558,10 @@ const app = Vue.createApp({
           this.bankCard = true;
         break;
       }
+    },
+    verifyCard(){
+
+
     }
   },
   computed: {
