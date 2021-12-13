@@ -63,7 +63,7 @@ const App = Vue.createApp({
 
     this.loadDataUser()
     this.loadUsers()
-    this. showOrder()
+    this.showOrder()
     // check if the localStorage have the user selected
 
     if(localStorage.getItem("user") != null) {
