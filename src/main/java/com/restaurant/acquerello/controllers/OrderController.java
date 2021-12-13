@@ -61,6 +61,7 @@ public class OrderController {
         }
         return new ResponseEntity<>(orderService.getById(id).map(OrderDTO::new).orElse(null), HttpStatus.CREATED);
     }
+
     @GetMapping("/order/current")
     public ResponseEntity<Object> getOrderUser(Authentication authentication){
 
@@ -80,8 +81,8 @@ public class OrderController {
 
 
     @GetMapping("/order/details/{id}")
-    public List<OrderDetailsDTO> getAllOrderDetailsById() {
-        return orderDetailsService.getAll().stream().map(OrderDetailsDTO::new).collect(Collectors.toList());
+    public ResponseEntity<?> getAllOrderDetailsById(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(orderDetailsService.getById(id).map(OrderDetailsDTO::new), HttpStatus.OK);
     }
 
     @Transactional
