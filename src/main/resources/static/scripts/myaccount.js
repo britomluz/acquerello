@@ -68,7 +68,11 @@ const app = Vue.createApp({
           this.card=res.data.card
           this.myaddress = res.data.address 
       })
-        .catch(err => err.message)
+        .catch(err =>{
+          // err.message
+          console.log(err.response)  
+        } 
+        )
     }, 
     send_address() {
         axios
@@ -171,6 +175,12 @@ const app = Vue.createApp({
             .then(console.log("Card created"))
             .catch(err => console.log(err))
     },
+    showOrderDetails(e) {
+      let id = e.target.parentElement.id
+      window.location.href = `./order-details.html?id=${id}`
+
+    },
+
       //cart
     deleteOne(clickEvent) {
       this.cart.forEach((product) => {

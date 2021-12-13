@@ -99,10 +99,11 @@ public class NoAuthUserController {
         // add address and order to user
         user.addAddress(address);
         user.addOrder(order);
+        order.addAddress(address);
 
         userService.save(user);
-        addressService.save(address);
         orderService.save(order);
+        addressService.save(address);
 
         // Brian: keep "for" on this place, or get server error
 
@@ -112,9 +113,6 @@ public class NoAuthUserController {
             Product product1 = productService.getById(idProduct).orElse(null);
             assert product1 != null;
             OrderDetails orderDetails = new OrderDetails(quantity,product1,order);
-            product1.addOrderDetail(orderDetails);
-            order.addOrderDetail(orderDetails);
-            address.addOrderDetails(orderDetails);
             orderDetailsRepository.save(orderDetails);
         }
 

@@ -173,7 +173,6 @@ const app = Vue.createApp({
 
     // check if a user is logged
     axios.get("/api/users/current").then(res => {
-      console.log(res)
       if (res.status === 200) {
         this.logged = true;
         this.user = res.data;

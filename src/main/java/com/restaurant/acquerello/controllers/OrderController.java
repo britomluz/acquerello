@@ -76,14 +76,16 @@ public class OrderController {
 
 
     @GetMapping("/order/details")
-    public List<OrderDetailsDTO> getAllOrderDetails() {
-        return orderDetailsService.getAll().stream().map(OrderDetailsDTO::new).collect(Collectors.toList());
+    public ResponseEntity<?> getAllOrderDetails(Authentication authentication) {
+        User user = userServices.getByEmail(authentication.getName());
+
+        return new ResponseEntity<>(orderDetailsService.getAll().stream().map(OrderDetailsDTO::new).collect(Collectors.toList()), HttpStatus.OK);
     }
 
 
     @GetMapping("/order/details/{id}")
     public ResponseEntity<?> getAllOrderDetailsById(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(orderDetailsService.getById(id).map(OrderDetailsDTO::new), HttpStatus.OK);
+        return new ResponseEntity<>(orderDetailsService.getAll().stream().filter(orderDetails -> orderDetails.getOrder().getId().equals(id)).collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @Transactional
@@ -99,9 +101,6 @@ public class OrderController {
 
         if (user == null){
             return new ResponseEntity<>("User doesn't exist", HttpStatus.FORBIDDEN);
-        }
-        if (!user.getType().equals(UserType.USER)){
-            return new ResponseEntity<>("Don't have authority", HttpStatus.FORBIDDEN);
         }
 
         if(orderToBuyDTO.getTotal() == null || orderToBuyDTO.getTotal() < 1) {
@@ -124,7 +123,6 @@ public class OrderController {
            }
            OrderDetails orderDetails = new OrderDetails(quantity,product1,order);
            product1.setStock(product1.getStock() - quantity);
-           address.addOrderDetails(orderDetails);
            productService.save(product1);
            orderDetailsService.save(orderDetails);
         }

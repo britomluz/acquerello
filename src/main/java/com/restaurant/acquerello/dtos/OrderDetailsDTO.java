@@ -1,5 +1,6 @@
 package com.restaurant.acquerello.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.restaurant.acquerello.models.Address;
 import com.restaurant.acquerello.models.OrderDetails;
 import com.restaurant.acquerello.models.OrderState;
@@ -31,7 +32,7 @@ public class OrderDetailsDTO {
         this.state = orderDetails.getState();
         this.totalOrder = orderDetails.getTotalOrder();
         this.imageProduct = orderDetails.getProduct().getProductImage();
-        this.address = orderDetails.getAddress();
+        this.address = orderDetails.getOrder().getAddress();
     }
 
     public Long getId() {

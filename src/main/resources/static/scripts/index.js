@@ -192,8 +192,8 @@ const App = Vue.createApp({
           number: this.phone.input,
         })
           .then(response => {
-            window.location.href = "/web/myaccount.html"
             this.login(this.email.input,this.password.input)
+            window.location.href = "/web/myaccount.html"
         })
           .catch(err => {
             swal({

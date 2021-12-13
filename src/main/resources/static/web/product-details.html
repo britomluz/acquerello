@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
@@ -15,7 +18,7 @@
 </head>
 
 <body>
-  <div id="app">
+  <div id="app" v-cloak>
 
     <nav id="navbar" class="navbar navbar-light fondoBlack fixed-top">
       <div class="container-fluid">
@@ -27,7 +30,7 @@
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
           <a class="nav-link" href="booking.html">BOOKING</a>
-          <a @click="logout" class="nav-link">LOG OUT</a>
+          <a href="#" @click="logout" class="nav-link">LOG OUT</a>
         </div>
 
         <div>
@@ -60,6 +63,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="booking.html">Bookings</a>
               </li>
+              <li class="nav-item">
+                <a href="#" @click="logout" class="nav-link">Log out</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -89,6 +95,8 @@
             <img ref="imagePreviewDos" :src="product.productImage" class="w-100" alt="product.name">
           </div>
         </div>
+
+        <!-- form edit product -->
         <div class="col-12 col-md-4 mt-5">
 
           <div v-if="showbtn">
@@ -99,7 +107,7 @@
               </div>
               <div class="d-flex py-2">
                 <label for=""><b>Description:</b></label>
-              <textarea name="" v-model="descriptionproduc" id="" cols="30" rows="2"></textarea>
+                <textarea name="" v-model="descriptionproduc" id="" cols="30" rows="2"></textarea>
               </div>
               <div class="d-flex py-2">
                 <label for=""><b>Price:</b> </label>
@@ -107,7 +115,7 @@
               </div>
               <div class="d-flex py-2">
                 <label for=""><b>Stock:</b></label>
-              <input  type="number" name="" v-model="stockedit" id="">
+                <input type="number" name="" v-model="stockedit" id="">
               </div>
               <div>
                 <label for="" class="py-2"><b>image: </b></label>
@@ -119,7 +127,7 @@
               <div>
                 <small class="cRed"><i class="bi bi-info-circle-fill px-3 cRed"></i>{{error_editProduct}}</small>
               </div>
-    </div>
+            </div>
           </div>
           <div v-else>
             <h3 class="mb-4">{{product.name}}</h3>

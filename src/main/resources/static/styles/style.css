@@ -329,13 +329,14 @@ footer{
     /* background-attachment: fixed; */
     background-size: cover;
     width: 100%;
-    min-height: 40vh;
+    min-height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 .headerPages h1{
+    margin-top: 60px;
     font-size: 5rem;    
     color: var(--color4);
 }
@@ -368,7 +369,7 @@ footer{
     /* background-attachment: fixed; */
     background-size: cover;
     width: 100%;
-    min-height: 30vh;
+    min-height: 40vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -376,7 +377,7 @@ footer{
 }
 .headerPagesPanel h1{
     font-size: 4rem;
-    margin-top: 3rem;
+    margin-top: 4rem;
     color: var(--color4);
 }
 .headerPagesPanel h3{
@@ -507,9 +508,11 @@ footer{
 .containerSignup{
     padding: 50px;
 }
-/* .formsIndex{
-    position: relative;
-} */
+
+
+
+
+/*form login and sign up*/
 .formIndex input{
     background: rgba(255, 255, 255, 0.15);
     border: none;
@@ -1131,4 +1134,47 @@ footer{
 
 [v-cloak] {
     display: none;
+}
+
+
+
+
+
+@media (max-width: 768px){
+    #title-pages{
+        font-size: 60px;
+    }
+    #title-pages3{
+        font-size: 20px;
+    }
+    .glass .cover{
+        display: none;
+    }
+
+    .containerLogin,
+    .containerSignup {
+        width: 100%;
+    }
+
+    .containerSignup {
+        display: none;
+    }
+
+    .glass #flip{
+        display: none;
+    }
+
+    .glass #flip:checked ~ .formsIndex .signup-form {
+        display: block;
+    }
+    .glass #flip:checked ~ .formsIndex .login-form {
+        display: none;
+    }
+
+    .containerLogin{
+        padding: 20px;
+    }
+    .containerSignup{
+        padding: 20px;
+    }
 }
