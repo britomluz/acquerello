@@ -174,6 +174,9 @@ public class OrderController {
         if (order.getState().equals(OrderState.CANCELED)){
             return new ResponseEntity<>("Order was canceled", HttpStatus.FORBIDDEN);
         }
+        if (order.getState().equals(OrderState.DELIVERED)){
+            return new ResponseEntity<>("Order was canceled", HttpStatus.FORBIDDEN);
+        }
         order.setState(orderType);
         order.setAceptedDate(LocalDateTime.now());
         orderService.save(order);

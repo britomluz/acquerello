@@ -117,6 +117,6 @@ public class NoAuthUserController {
         }
 
 
-        return new ResponseEntity<>("Checkout and user created", HttpStatus.CREATED);
+        return new ResponseEntity<>("Checkout and user created order No."+order.getId(), HttpStatus.CREATED);
     }
 }
