@@ -11,6 +11,7 @@ import com.restaurant.acquerello.services.ProductService;
 import com.restaurant.acquerello.services.UserService;
 import com.restaurant.acquerello.services.impl.OrderDetailsImpl;
 import com.restaurant.acquerello.services.impl.OrderServiceImpl;
+import com.restaurant.acquerello.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -80,8 +81,8 @@ public class OrderController {
 
 
     @GetMapping("/order/details/{id}")
-    public List<OrderDetailsDTO> getAllOrderDetailsById() {
-        return orderDetailsService.getAll().stream().map(OrderDetailsDTO::new).collect(Collectors.toList());
+    public ResponseEntity<?> getAllOrderDetailsById(@PathVariable Long id) {
+        return new ResponseEntity<>(Util.makeDTO("details", orderDetailsService.getById(id).map(OrderDetailsDTO::new)),HttpStatus.ACCEPTED);
     }
 
     @Transactional

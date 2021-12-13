@@ -24,6 +24,7 @@ const App = Vue.createApp({
       orderDetails:"",      
       //each order
       order: "",
+      orderDetail: false,
 
       userAcc: false,
       adminAcc: false,
@@ -95,6 +96,9 @@ const App = Vue.createApp({
       }
     }
 
+    if(orderDetail) {
+      
+    }
   },
   methods: {
     loadUsers(){
@@ -127,17 +131,17 @@ const App = Vue.createApp({
       })
     },    
     showOrder(e) {
-
       let id = e.target.parentElement.id
 
       axios.get(`/api/order/details/${id}`).then(res => {
-        console.log(res)
+        console.log(res.data)
       }).catch(err => {
-        console.log(err)
+        console.log(err.response.data)
       })
-      //window.location.href = `./order-details.html?id=${id}`
+      window.location.href = `./order-details.html?id=${id}`
 
     },    
+
     loadDataOrders() {
       const urlParam = new URLSearchParams(window.location.search);
       const id = urlParam.get('id');

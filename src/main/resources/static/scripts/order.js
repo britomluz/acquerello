@@ -647,6 +647,7 @@ const app = Vue.createApp({
     },
     showProduct(e) {
       let id = e.target.parentElement.id;
+      
       window.location.href = `./product-details.html?id=${id}`;
     },
     // edit products
