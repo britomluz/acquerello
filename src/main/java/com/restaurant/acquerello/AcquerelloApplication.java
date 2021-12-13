@@ -37,31 +37,120 @@ public class AcquerelloApplication {
 		return (args) -> {
 
 			Address address1 = new Address("Bids Hills", 332, "HI-3232", "California", "A white house");
-			Address address2 = new Address("Bids Hills", 113, "HI-3110", "California", "A house gray");
-
+			Address address2 = new Address("Bids Hills", 113, "HI-3110", "California", "A gray house");
+			Address address3 = new Address("Jackson St", 2250, "HI-3110", "California", "Red door");
+			Address address4 = new Address("Jackson St",2350,"HI-3110","California","Green door");
+			Address address5 = new Address("Washington St",2370,"HI-3232","California","A light blue house");
 
 			// Brian: Create User and Order
-			User user1 = new User("Luigi", "number one", "admin@admin.com", passwordEncoder.encode("admin1234"), 5554343L, UserType.ADMIN, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
+			User user1 = new User("Antonio", "Costa", "admin@admin.com", passwordEncoder.encode("admin1234"), 5554343L, UserType.ADMIN, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
 			User user2 = new User("Brian", "Cuenca", "gabriel.torrealba33@gmail.com", passwordEncoder.encode("user1234"), 5551232L, UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
-
-
+			User user3 = new User("Logan", "Brown", "logan.brown@acquerello.com", passwordEncoder.encode("user1234"),5552324L ,UserType.USER,"https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
+			User user4 = new User("Zoe", "Williams", "zoe.williams@acquerello.com", passwordEncoder.encode("user1234"),5554542L ,UserType.USER,"https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
+			User user5 = new User("Chloe", "Smith", "chloe.smith@acquerello.com", passwordEncoder.encode("user1234"),5551957L ,UserType.USER,"https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
 
 			// Brian: Creating bookings
 			Booking booking1 = new Booking(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(4), SectorTables.GOLDEN, 4, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking2 = new Booking(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(8), SectorTables.GOLDEN, 4, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking3 = new Booking(LocalDate.parse("2021-12-15"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 4, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking4 = new Booking(LocalDate.parse("2021-12-15"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 5, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking5 = new Booking(LocalDate.parse("2021-12-15"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 4, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking6 = new Booking(LocalDate.parse("2021-12-15"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 5, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking7 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 4, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking8 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 5, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking9 = new Booking(LocalDate.parse("2021-12-16"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 4, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking10 = new Booking(LocalDate.parse("2021-12-16"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 5, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking11 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 4, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking12 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 5, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking13 = new Booking(LocalDate.parse("2021-12-17"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 4, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking14 = new Booking(LocalDate.parse("2021-12-17"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 5, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+
+			Booking booking15 = new Booking(LocalDate.parse("2021-12-15"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.PLATINUM, 15, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking16 = new Booking(LocalDate.parse("2021-12-15"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.PLATINUM, 16, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking17 = new Booking(LocalDate.parse("2021-12-15"),LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.PLATINUM, 15, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking18 = new Booking(LocalDate.parse("2021-12-15"),LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.PLATINUM, 16, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking19 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.PLATINUM, 15, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking20 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.PLATINUM, 16, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking21 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.PLATINUM, 15, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking22 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.PLATINUM, 16, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking23 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.PLATINUM, 15, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking24 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.PLATINUM, 16, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking25 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.PLATINUM, 15, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking26 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.PLATINUM, 16, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
 
 			user1.addAddress(address1);
 			user2.addAddress(address2);
+			user3.addAddress(address3);
+			user4.addAddress(address4);
+			user5.addAddress(address5);
 
 			// Brian: Adding bookings to User
 			user2.addBooking(booking1);
+			user3.addBooking(booking2);
+			user4.addBooking(booking3);
+			user5.addBooking(booking4);
+			user2.addBooking(booking5);
+			user3.addBooking(booking6);
+			user4.addBooking(booking7);
+			user5.addBooking(booking8);
+			user2.addBooking(booking9);
+			user3.addBooking(booking10);
+			user4.addBooking(booking11);
+			user5.addBooking(booking12);
+			user2.addBooking(booking13);
+			user3.addBooking(booking14);
+			user4.addBooking(booking15);
+			user5.addBooking(booking16);
+			user2.addBooking(booking17);
+			user3.addBooking(booking18);
+			user4.addBooking(booking18);
+			user5.addBooking(booking19);
+			user2.addBooking(booking20);
+			user3.addBooking(booking21);
+			user4.addBooking(booking22);
+			user5.addBooking(booking23);
+			user2.addBooking(booking24);
+			user3.addBooking(booking25);
+			user4.addBooking(booking26);
 
 			userRepository.save(user1);
 			userRepository.save(user2);
+			userRepository.save(user3);
+			userRepository.save(user4);
+			userRepository.save(user5);
 
 			addressRepository.save(address1);
 			addressRepository.save(address2);
+			addressRepository.save(address3);
+			addressRepository.save(address4);
+			addressRepository.save(address5);
 
 			bookingRepository.save(booking1);
+			bookingRepository.save(booking2);
+			bookingRepository.save(booking3);
+			bookingRepository.save(booking4);
+			bookingRepository.save(booking5);
+			bookingRepository.save(booking6);
+			bookingRepository.save(booking7);
+			bookingRepository.save(booking8);
+			bookingRepository.save(booking9);
+			bookingRepository.save(booking10);
+			bookingRepository.save(booking11);
+			bookingRepository.save(booking12);
+			bookingRepository.save(booking13);
+			bookingRepository.save(booking14);
+			bookingRepository.save(booking15);
+			bookingRepository.save(booking16);
+			bookingRepository.save(booking17);
+			bookingRepository.save(booking18);
+			bookingRepository.save(booking19);
+			bookingRepository.save(booking20);
+			bookingRepository.save(booking21);
+			bookingRepository.save(booking22);
+			bookingRepository.save(booking23);
+			bookingRepository.save(booking24);
+			bookingRepository.save(booking25);
+			bookingRepository.save(booking26);
 
 			//GABRIEL: CREATE CARDS TO TEST THE APP
 			Card card1 = new Card("1234-5654-9874-6321", 315, LocalDateTime.now(), 0D, 20, 1, CardType.ACTIVE, user2);
@@ -146,9 +235,6 @@ public class AcquerelloApplication {
 			productRepository.save(product38);
 			Product product39 = new Product("Garden Salad Capresse", 0, "Great snack or light vegetarian lunch", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/garden_saladtacos_wdpdiv.jpg", 20D, 25);
 			productRepository.save(product39);
-
-
-
 
 			//GABRIEL: CREATE CATEGORIES TO TEST THEE APP
 			Category category1 = new Category("Entries & Snacks", "Whether you need healthy snacks that are gluten free, low calorie, low sugar, high protein, vegan, or more, there's something on this list for you.", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/linguine_veodru.jpg");
@@ -259,27 +345,57 @@ public class AcquerelloApplication {
 			// Brian: Creating order
 			Order order1 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.PENDING, 32.43, OrderType.DELIVERY);
 			Order order2 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.PENDING, 11.43, OrderType.TAKEAWAY);
+			Order order3 = new Order(LocalDateTime.now().minusMinutes(30), LocalDateTime.now(), OrderState.IN_PROCESS, 30.25, OrderType.LOCAL);
+			Order order4 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.DELIVERED, 20.16, OrderType.DELIVERY);
+			Order order5 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.CANCELED, 19.43, OrderType.TAKEAWAY);
+
 			// Brian: Adding order to Users
 			user1.addOrder(order1);
 			user2.addOrder(order2);
+			user3.addOrder(order3);
+			user4.addOrder(order4);
+			user5.addOrder(order5);
+
 			orderRepository.save(order1);
 			orderRepository.save(order2);
-			userRepository.save(user1);
-			userRepository.save(user2);
+			orderRepository.save(order3);
+			orderRepository.save(order4);
+			orderRepository.save(order5);
 
 			// Brian : Creating order details
 			OrderDetails orderDetails1 = new OrderDetails(2,product1,order1);
 			OrderDetails orderDetails2 = new OrderDetails(3,product2,order1);
 			OrderDetails orderDetails3 = new OrderDetails(4,product3,order2);
 			OrderDetails orderDetails4 = new OrderDetails(5,product4,order2);
+			OrderDetails orderDetails5 = new OrderDetails(2,product5,order3);
+			OrderDetails orderDetails6 = new OrderDetails(3,product6,order3);
+			OrderDetails orderDetails7 = new OrderDetails(4,product7,order4);
+			OrderDetails orderDetails8 = new OrderDetails(5,product8,order4);
+			OrderDetails orderDetails9 = new OrderDetails(2,product9,order5);
+			OrderDetails orderDetails10 = new OrderDetails(3,product10,order5);
 
 			address1.addOrderDetails(orderDetails1);
-
+			address1.addOrderDetails(orderDetails2);
+			address1.addOrderDetails(orderDetails3);
+			address1.addOrderDetails(orderDetails4);
+			address1.addOrderDetails(orderDetails5);
+			address1.addOrderDetails(orderDetails6);
+			address1.addOrderDetails(orderDetails7);
+			address1.addOrderDetails(orderDetails8);
+			address1.addOrderDetails(orderDetails9);
+			address1.addOrderDetails(orderDetails10);
 
 			orderDetailsRepository.save(orderDetails1);
 			orderDetailsRepository.save(orderDetails2);
 			orderDetailsRepository.save(orderDetails3);
 			orderDetailsRepository.save(orderDetails4);
+			orderDetailsRepository.save(orderDetails5);
+			orderDetailsRepository.save(orderDetails6);
+			orderDetailsRepository.save(orderDetails7);
+			orderDetailsRepository.save(orderDetails8);
+			orderDetailsRepository.save(orderDetails9);
+			orderDetailsRepository.save(orderDetails10);
+
 		};
 	}
 }
