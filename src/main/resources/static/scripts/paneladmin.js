@@ -6,7 +6,6 @@ const App = Vue.createApp({
       idproducts: 0,
       nameproducts: "",
       descriptionproducts: "",
-      productsimg: "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgDefault_qbhg4k.jpg",
       priceproduct: 0,
       stockproduct: 0,
       idcategory: 1,
@@ -30,8 +29,10 @@ const App = Vue.createApp({
 
       userAcc: false,
       adminAcc: false,
+      addressboolean:false,
       card: false,
       orderBoolean: false,
+      bookingboolean:false,
       //users
       users:[],
       user: "",
@@ -68,10 +69,19 @@ const App = Vue.createApp({
 
     if(localStorage.getItem("user") != null) {
       this.user = JSON.parse(localStorage.getItem("user"))
-
-      this.address = this.user.address[0];
+      if(this.user.address.length >= 1) {
+        this.addressboolean = true;
+        this.address = this.user.address[0];
+      } else {
+        this.addressboolean= false
+      }
+      if(this.user.bookings.length >= 1) {
+        this.bookingboolean= true;
+        this.bookings = this.user.bookings[0];
+      } else {
+        this.bookingboolean= false
+      }
       
-
       if(this.user.type == "USER") {
         this.userAcc = true;
         this.adminAcc = false;
@@ -79,17 +89,12 @@ const App = Vue.createApp({
         this.userAcc = false;
         this.adminAcc = true;
       }
-      if(this.userAcc) {
-        this.bookings = this.user.bookings[0];
-      }
-
       if(this.user.card.length >= 1) {
         this.card = true;
         this.cardInfo = this.user.card[0];
       } else {
         this.card = false
       }
-
       if(this.user.orders.length >= 1) {
         this.orderBoolean = true;
         this.orderInfo = this.user.orders[0];
@@ -130,7 +135,6 @@ const App = Vue.createApp({
       })
     },    
     showOrder() {
-
       const urlParam = new URLSearchParams(window.location.search);
       const id = urlParam.get('id');
 
@@ -140,7 +144,7 @@ const App = Vue.createApp({
         console.log(this.orderDetail)
         console.log(this.orderDetailId)
       }).catch(err => {
-        console.log(err)
+        console.log(err.response)
       })
       //window.location.href = `./order-details.html?id=${id}`
 
@@ -178,18 +182,10 @@ const App = Vue.createApp({
       axios.get(`/api/order`)
         .then((response) => {
           this.orders = response.data;
-          console.log(this.orders)
         })
         .catch((err) => console.log(err));
     },
-    // previewfile(e){
-    //   console.log(e.target.files[0].name)
-    //   this.productsimg = e.target.files[0]
-    //   console.log(this.productimg)
-    // },
     product_add() {
-      // const fd = new FormData;
-      // fd.append('image',this.productsimg,this.productimg.name)
       axios.post("/api/products/create", {
         idCategory: this.idcategory,
         name: this.nameproducts,
@@ -298,6 +294,14 @@ const App = Vue.createApp({
            console.log("No se puede descargar el pdf");
            });
    },
+   logout(){
+    axios.get("/api/logout")
+    .then(res=>{
+      console.log(res)
+      window.location.href="/web/login.html"
+    })
+    .catch(err=>console.log(err))
+  }
   },
   computed:{
     filter_order(){

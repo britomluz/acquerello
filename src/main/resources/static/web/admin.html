@@ -19,7 +19,7 @@
 
 <body>
   <div id="app" v-cloak>
-    <nav id="navbar" class="navbar navbar-light fondoTransp fixed-top">
+    <nav id="navbar" class="navbar navbar-light fondoBlack fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <img src="../assets/acquerello.png" alt="" width="150">
@@ -29,7 +29,7 @@
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
           <a class="nav-link" href="booking.html">BOOKING</a>
-          <a href="#" @click="logout" class="nav-link">LOG OUT</a>
+          <a href="#" @click="logout" class="nav-link">LOG OUT</a>   
         </div>
 
         <div>
@@ -37,7 +37,7 @@
             aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
-
+          
           <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
         </div>
 
@@ -61,6 +61,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="booking.html">Bookings</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" @click="logout" class="nav-link">Log out</a> 
               </li>
             </ul>
           </div>

@@ -68,7 +68,11 @@ const app = Vue.createApp({
           this.card=res.data.card
           this.myaddress = res.data.address 
       })
-        .catch(err => err.message)
+        .catch(err =>{
+          // err.message
+          console.log(err.response)  
+        } 
+        )
     }, 
     send_address() {
         axios

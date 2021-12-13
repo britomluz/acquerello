@@ -50,7 +50,7 @@ const App = Vue.createApp({
         deleteCategory(){
             axios.delete(`/api/categories/delete/${this.idCategory}`)
                 .then(() => swal('Category deleted'))
-                .then(console.log("Category deleted"))
+                .then()
                 .then(res=>{
                     window.location.reload();
                 })

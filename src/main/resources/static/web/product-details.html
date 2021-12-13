@@ -30,7 +30,7 @@
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
           <a class="nav-link" href="booking.html">BOOKING</a>
-          <a @click="logout" class="nav-link">LOG OUT</a>   
+          <a href="#" @click="logout" class="nav-link">LOG OUT</a>
         </div>
 
         <div>
@@ -38,11 +38,8 @@
             aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
-          
+
           <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
-          <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
-              class="bi bi-cart-fill"></i>
-              <div class="badge"><small class="cWhite" v-if="totalQantity > 0">{{totalQantity}}</small></div></button>
         </div>
 
         <!-- MENU RESPONSIVE -->
@@ -65,6 +62,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="booking.html">Bookings</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" @click="logout" class="nav-link">Log out</a>
               </li>
             </ul>
           </div>

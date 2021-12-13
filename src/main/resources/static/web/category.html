@@ -30,7 +30,7 @@
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
           <a class="nav-link" href="booking.html">BOOKING</a>
-          <a @click="logout" class="nav-link">LOG OUT</a>   
+          <a href="#" @click="logout" class="nav-link">LOG OUT</a>
         </div>
 
         <div>
@@ -38,11 +38,8 @@
             aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
-          
+
           <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
-          <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
-              class="bi bi-cart-fill"></i>
-              <div class="badge"><small class="cWhite" v-if="totalQantity > 0">{{totalQantity}}</small></div></button>
         </div>
 
         <!-- MENU RESPONSIVE -->
@@ -66,6 +63,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="booking.html">Bookings</a>
               </li>
+              <li class="nav-item">
+                <a href="#" @click="logout" class="nav-link">Log out</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -78,6 +78,9 @@
     </header>
 
     <main>
+      <div class="mt-1">
+        <a href="admin.html" class="btn-green"><i class="bi bi-arrow-left text-light"></i> Admin Panel</a>
+      </div>
       <div class="d-flex f-justify-c-space-a">
         <div class="d-flex flex-d-col category-w">
           <h4>Add Category</h4>
@@ -140,26 +143,28 @@
       </div>
       <div class="d-flex justify-content-center">
         <div class="col-12 col-md-8">
-          <table class="table tableAdmin">
-            <thead>
-              <tr>
-                <th scope="col">Nº Id</th>
-                <th scope="col" class="text-center">Name</th>
-                <th scope="col" class="text-center">Description</th>
-                <th scope="col" class="text-center">Category Image</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="category in categories">
-                <td scope="row" class="text-center">{{category.id}}</td>
-                <td class="text-center">{{category.name}}</td>
-                <td class="text-center">{{category.description}}</td>
-                <td class="d-flex justify-content-around"><img :src="category.categoryImage" class="card-img-top"
-                    alt="category.name" style="width: 200px; height: 100px;"></td>
-              </tr>
+          <div class="table-responsive">
+            <table class="table tableAdmin">
+              <thead>
+                <tr>
+                  <th scope="col">Nº Id</th>
+                  <th scope="col" class="text-center">Name</th>
+                  <th scope="col" class="text-center">Description</th>
+                  <th scope="col" class="text-center">Category Image</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="category in categories">
+                  <td scope="row" class="text-center">{{category.id}}</td>
+                  <td class="text-center">{{category.name}}</td>
+                  <td class="text-center">{{category.description}}</td>
+                  <td class="d-flex justify-content-around"><img :src="category.categoryImage" class="card-img-top"
+                      alt="category.name" style="width: 200px; height: 100px;"></td>
+                </tr>
 
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 

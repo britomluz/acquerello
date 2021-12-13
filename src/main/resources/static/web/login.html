@@ -29,8 +29,7 @@
         <div class="d-flex navlinks">
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
-          <a class="nav-link" href="booking.html">BOOKING</a>
-          <a @click="logout" class="nav-link">LOG OUT</a>   
+          <a class="nav-link" href="booking.html">BOOKING</a>  
         </div>
 
         <div>
@@ -82,7 +81,6 @@
           <div class="containerLogin login-form">
             <h1 class="fs-2">Log in</h1>
             <form class="formIndex" @submit.prevent="login(email_two.input,password_two.input)">
-
               <!-- EMIAL -->
               <div class="email">
                 <i class="bi bi-envelope-fill"></i>

@@ -19,7 +19,7 @@
 <body>
   <div id="app" v-cloak>
 
-    <nav id="navbar" class="navbar fondoBlack fixed-top">
+    <nav id="navbar" class="navbar navbar-light fondoBlack fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <img src="../assets/acquerello.png" alt="" width="150">
@@ -29,7 +29,7 @@
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
           <a class="nav-link" href="booking.html">BOOKING</a>
-          <a @click="logout" class="nav-link">LOG OUT</a>   
+          <a href="#" @click="logout" class="nav-link">LOG OUT</a>   
         </div>
 
         <div>
@@ -37,6 +37,7 @@
             aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
+          
           <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
         </div>
 
@@ -53,13 +54,16 @@
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="order.html">Order Now</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="booking.html">Bookings</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" @click="logout" class="nav-link">Log out</a> 
               </li>
             </ul>
           </div>
@@ -340,26 +344,44 @@
 
   </div>
 
-  <footer class="d-flex flex-wrap justify-content-around align-items-center py-4">
+  <footer class="d-flex flex-wrap justify-content-around align-items-center py-4" style="position: relative;">
     <div class="d-flex flex-column navlinks">
-      <h2 class="fs-3">Quick Links</h2>
-      <a class="nav-link" href="#">HOME</a>
-      <a class="nav-link" href="#">ORDER NOW</a>
-      <a class="nav-link" href="#">BOOKING</a>
-      <a class="nav-link" href="#">CONTACT</a>
+        <h2 class="fs-3">Quick Links</h2>
+        <a class="nav-link" href="#">HOME</a>
+        <a class="nav-link" href="../web/order.html">ORDER NOW</a>
+        <a class="nav-link" href="../web/booking.html">BOOKING</a>
     </div>
     <div>
-      <img src="../assets/acquerello.png" alt="" width="200">
+        <img src="../assets/acquerello.png" alt="" width="200">
+        <p class="text-white">
+            Phone :  
+            <span>
+                415-567-5432
+            </span>
+        </p>
+        <p class="text-white">
+            Street :
+            <span>
+                1722 Sacramento Street
+            </span>
+        </p>
+        <p class="text-white">
+            City :
+            <span>
+                San Francisco, CA 94109
+            </span>
+        </p>
     </div>
     <div class="d-flex flex-column">
-      <h2 class="fs-3">Contact Us</h2>
-      <div class="d-flex justify-content-around iconFooter">
-        <i class="bi bi-instagram"></i>
-        <i class="bi bi-facebook"></i>
-        <i class="bi bi-twitter"></i>
-      </div>
+        <h2 class="fs-3">Contact Us</h2>
+        <div class="d-flex justify-content-around iconFooter">
+            <i class="bi bi-instagram"></i>
+            <i class="bi bi-facebook"></i>
+            <i class="bi bi-twitter"></i>
+        </div>
     </div>
-  </footer>
+</footer>
+
 
 
   <script>

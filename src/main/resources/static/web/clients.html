@@ -28,7 +28,7 @@
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
           <a class="nav-link" href="booking.html">BOOKING</a>
-          <a @click="logout" class="nav-link">LOG OUT</a>   
+          <a href="#" @click="logout" class="nav-link">LOG OUT</a>   
         </div>
 
         <div>
@@ -38,9 +38,6 @@
           </button>
           
           <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
-          <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
-              class="bi bi-cart-fill"></i>
-              <div class="badge"><small class="cWhite" v-if="totalQantity > 0">{{totalQantity}}</small></div></button>
         </div>
 
         <!-- MENU RESPONSIVE -->
@@ -64,12 +61,14 @@
               <li class="nav-item">
                 <a class="nav-link" href="booking.html">Bookings</a>
               </li>
+              <li class="nav-item">
+                <a href="#" @click="logout" class="nav-link">Log out</a> 
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </nav>
-
     <header class="headerPagesPanel d-flex align-items-center">
       <h1>My Account</h1>
       <h3>ADMIN PANEL</h3>
@@ -121,33 +120,35 @@
     <main>
       <div class="d-flex justify-content-center">
         <div class="col-12 col-md-8">
-          <table class="table tableAdmin">
-            <thead>
-              <tr>
-                <th scope="col">Nº</th>
-                <th scope="col" class="text-center">First Name</th>
-                <th scope="col" class="text-center">Last Name</th>
-                <th scope="col" class="text-center">Email</th>
-                <th scope="col" class="text-center">Number</th>
-                <th scope="col" class="text-center">Type</th>
-                <th scope="col" class="text-center">View</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="u in users">
-                <th scope="row" class="text-center">{{u.id}}</th>
-                <td class="text-center">{{u.firstName}}</td>
-                <td class="text-center">{{u.lastName}}</td>
-                <td class="text-center">{{u.email}}</td>
-                <td class="text-center">{{u.number}}</td>
-                <td class="text-center">{{u.type}}</td>
-                <td class="d-flex justify-content-center">
-                  <button :id="u.id" :name="u.type" type="button" @click="showUser" class="btnTransp"><i
-                      class="bi bi-eye-fill cRed"></i></button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="table tableAdmin">
+              <thead>
+                <tr>
+                  <th scope="col">Nº</th>
+                  <th scope="col" class="text-center">First Name</th>
+                  <th scope="col" class="text-center">Last Name</th>
+                  <th scope="col" class="text-center">Email</th>
+                  <th scope="col" class="text-center">Number</th>
+                  <th scope="col" class="text-center">Type</th>
+                  <th scope="col" class="text-center">View</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="u in users">
+                  <th scope="row" class="text-center">{{u.id}}</th>
+                  <td class="text-center">{{u.firstName}}</td>
+                  <td class="text-center">{{u.lastName}}</td>
+                  <td class="text-center">{{u.email}}</td>
+                  <td class="text-center">{{u.number}}</td>
+                  <td class="text-center">{{u.type}}</td>
+                  <td class="d-flex justify-content-center">
+                    <button :id="u.id" :name="u.type" type="button" @click="showUser" class="btnTransp"><i
+                        class="bi bi-eye-fill cRed"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </main>

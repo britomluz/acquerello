@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../styles/style.css">
   <link rel="stylesheet" href="../styles/account.css">
-  <link rel="shortcut icon" href="../assets/favicon.png">    
+  <link rel="shortcut icon" href="../assets/favicon.png">
   <title>Acquerello</title>
 </head>
 
@@ -30,7 +30,7 @@
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
           <a class="nav-link" href="booking.html">BOOKING</a>
-          <a @click="logout" class="nav-link">LOG OUT</a>   
+          <a href="#" @click="logout" class="nav-link">LOG OUT</a>
         </div>
 
         <div>
@@ -38,7 +38,7 @@
             aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
-          
+
           <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
           <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
               class="bi bi-cart-fill"></i>
@@ -66,12 +66,14 @@
               <li class="nav-item">
                 <a class="nav-link" href="booking.html">Bookings</a>
               </li>
+              <li class="nav-item">
+                <a href="#" @click="logout" class="nav-link">Log out</a>
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </nav>
-
     <header class="headerPagesPanel d-flex align-items-center">
       <h1>My Account</h1>
       <h3>Italian Food</h3>
@@ -103,36 +105,38 @@
           <div class="firstCol col-10 col-lg-5 info mt-3 d-flex flex-column justify-content-start">
             <div class="d-flex justify-content-center">
               <div class="col-12 col-md-8">
+                <div class="table-responsive">
                   <table class="table tableAdmin">
-                      <thead>
-                          <tr>
-                              <th scope="col">Nº</th>
-                              <th scope="col" class="text-center">Date</th>
-                              <th scope="col" class="text-center">Status</th>
-                              <th scope="col" class="text-center">Total</th>
-                              <th scope="col" class="text-center">Actions</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr v-for="booking in order">
-                              <th scope="row" class="text-center">{{booking.id}}</th>
-                              <td class="text-center">{{(booking.creationDate).slice(0,10)}}</td>
-                              <td class="text-center">{{booking.state}}</td>
-                              <td class="text-center"> {{booking.total}}</td>
-                              <td class="d-flex justify-content-center">
-                                  <button :id="booking.id" type="button" @click="order_cancel_user" class="btnTransp"><i
-                                      class="bi bi-x-square text-danger"></i>
-                                </td>
-                              </form>
-                              </td>
-                      </tbody>
+                    <thead>
+                      <tr>
+                        <th scope="col">Nº</th>
+                        <th scope="col" class="text-center">Date</th>
+                        <th scope="col" class="text-center">Status</th>
+                        <th scope="col" class="text-center">Total</th>
+                        <th scope="col" class="text-center">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="booking in order">
+                        <th scope="row" class="text-center">{{booking.id}}</th>
+                        <td class="text-center">{{(booking.creationDate).slice(0,10)}}</td>
+                        <td class="text-center">{{booking.state}}</td>
+                        <td class="text-center"> {{booking.total}}</td>
+                        <td class="d-flex justify-content-center">
+                          <button :id="booking.id" type="button" @click="order_cancel_user" class="btnTransp"><i
+                              class="bi bi-x-square text-danger"></i>
+                        </td>
+                        </form>
+                        </td>
+                    </tbody>
                   </table>
+                </div>
               </div>
-          </div>
+            </div>
 
           </div>
 
-        
+
 
         </div>
 
@@ -160,7 +164,7 @@
               <label for="">state</label>
               <input type="text" name="" v-model="state" id="">
               <label for="">reference</label>
-              <input type="text" name="" v-model="reference" id=""> 
+              <input type="text" name="" v-model="reference" id="">
             </form>
           </div>
           <div class="modal-footer">
