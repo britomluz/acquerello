@@ -978,6 +978,10 @@ footer{
     justify-content: space-between;
 }
 
+.f-justify-c-space-a {
+    justify-content: space-around;
+}
+
 .f-justify-c-center {
     justify-content: center;
 }
@@ -992,6 +996,19 @@ footer{
 
 
 }
+
+.category-w {
+    width: 25%;
+}
+
+.category-button {
+    display: block;
+    margin:  0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
 /*BOOKING*/
 .available{
     filter: invert(0%) sepia(0%) saturate(31%) hue-rotate(288deg) brightness(95%) contrast(103%);

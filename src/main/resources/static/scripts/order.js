@@ -135,12 +135,12 @@ const app = Vue.createApp({
       error_cardRest: "",
 
       //image products
-      CLOUDINARY_URL:"",
-      CLOUDINARY_UPLOAD_PRESET:"",
-      urlImg:"",
+      CLOUDINARY_URL: "",
+      CLOUDINARY_UPLOAD_PRESET: "",
+      urlImg: "",
       imagePreviewDos: "",
       imageUploaderDos: "",
-      
+
     };
   },
   created() {
@@ -271,13 +271,13 @@ const app = Vue.createApp({
     },
     editProduct() {
       axios.patch(`/api/products/edit/${this.id}`, {
-          //ren, I added {} because I got an error
-          name: this.productName,
-          description: this.description,
-          productImage: this.productImage,
-          price: this.price,
-          stock: this.stock,
-        })
+        //ren, I added {} because I got an error
+        name: this.productName,
+        description: this.description,
+        productImage: this.productImage,
+        price: this.price,
+        stock: this.stock,
+      })
         .then(console.log("Product Edit"))
         .catch((err) => console.log(err));
     },
@@ -560,15 +560,37 @@ const app = Vue.createApp({
                   icon: "success",
                   button: "Ok",
                 }).then(res => {
-                  window.location.href = "/web/myaccount.html"
+                  window.location.href = "/web/login.html"
                 });
                 localStorage.clear();
               }).catch(err => {
-                console.log(err.response)
+                this.errorCardRest = true;
+
+                if (err.response.status == 500) {
+                  this.error_cardRest = "Check empty fields";
+                } else {
+                  this.error_cardRest = err.response.message;
+                }
+
+                setTimeout(() => {
+                  this.errorCardRest = false;
+                  this.error_cardRest = ""
+                }, 3000)
               })
             })
             .catch((err) => {
-              console.log(err.response);
+              this.errorCardRest = true;
+
+              if (err.response.status == 500) {
+                this.error_cardRest = "Check empty fields";
+              } else {
+                this.error_cardRest = err.response.message;
+              }
+
+              setTimeout(() => {
+                this.errorCardRest = false;
+                this.error_cardRest = ""
+              }, 3000)
             });
         }
       }
@@ -648,12 +670,12 @@ const app = Vue.createApp({
             icon: "success",
             button: "Ok",
           })
-          .then(res => window.location.reload()) 
-          
+            .then(res => window.location.reload())
+
         })
         .catch((err) => console.log(err.response));
-        this.errorEditProduct= true
-        this.error_editProduct= err.response.data
+      this.errorEditProduct = true
+      this.error_editProduct = err.response.data
     },
     // show btn in pag product-details
     show_btn() {
@@ -675,14 +697,14 @@ const app = Vue.createApp({
           stock: this.stockproduct,
         })
         .then((response) => {
-          console.log(response)  
+          console.log(response)
           swal({
             title: "Good job!",
             text: "Product added succesfully!",
             icon: "success",
             button: "Ok",
           })
-          .then(res => window.location.reload())        
+            .then(res => window.location.reload())
 
         })
         .catch((err) => {
@@ -702,13 +724,13 @@ const app = Vue.createApp({
           this.bankCard = true;
           break;
       }
-    },    
-    uploadImageProduct(event){
+    },
+    uploadImageProduct(event) {
       this.imagePreviewDos = this.$refs.imagePreviewDos
       this.imageUploaderDos = this.$refs.imageUploaderDos
       this.CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/luz-brito/image/upload'
       this.CLOUDINARY_UPLOAD_PRESET = 'qda9s173'
-      
+
       console.log(event.target.files[0])
       const fileImg = event.target.files[0]
 
@@ -716,20 +738,20 @@ const app = Vue.createApp({
 
       formData.append('file', fileImg)
       formData.append('upload_preset', this.CLOUDINARY_UPLOAD_PRESET)
-      
-      axios.post(this.CLOUDINARY_URL, formData, {headers: {'Content-Type': 'multipart/form-data'}})
-      .then (res => {
-         console.log("Imagen cargada!")
-         console.log(res)
-         this.imagePreviewDos.src = res.data.secure_url
 
-         this.products_img=  this.imagePreviewDos.src   
-         
-         console.log(this.products_img)
-      
-      })
+      axios.post(this.CLOUDINARY_URL, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+        .then(res => {
+          console.log("Imagen cargada!")
+          console.log(res)
+          this.imagePreviewDos.src = res.data.secure_url
 
-   },   
+          this.products_img = this.imagePreviewDos.src
+
+          console.log(this.products_img)
+
+        })
+
+    },
 
   },
   computed: {
