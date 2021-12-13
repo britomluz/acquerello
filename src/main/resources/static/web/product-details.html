@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
@@ -17,17 +20,17 @@
 <body>
   <div id="app">
 
-    <nav id="navbar" class="navbar navbar-light fondoBlack fixed-top">
+    <nav id="navbar" class="navbar fondoBlack fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <img src="../assets/acquerello.png" alt="" width="150">
         </a>
 
-        <div class="d-flex navlinks">
+        <div class="d-flex">
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
           <a class="nav-link" href="booking.html">BOOKING</a>
-          <a @click="logout" class="nav-link">LOG OUT</a>
+          <a class="nav-link" href="contact.html">CONTACT</a>
         </div>
 
         <div>
@@ -36,23 +39,22 @@
             <span class="navbar-toggler-icon"></span>
           </button>
 
+          
           <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+          <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
+              class="bi bi-cart-fill"></i><button class="navIcon"><i class="bi bi-search"></i></button></button>
         </div>
 
-        <!-- MENU RESPONSIVE -->
+
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
           <div class="offcanvas-header">
-            <a class="navbar-brand" href="#">
-              <img src="../assets/acquerello.png" alt="" width="150">
-            </a>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
-              <h5>x</h5>
-            </button>
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                <a class="nav-link active" aria-current="page" href="home.html">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="order.html">Order Now</a>
@@ -60,7 +62,14 @@
               <li class="nav-item">
                 <a class="nav-link" href="booking.html">Bookings</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact</a>
+              </li>
             </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
           </div>
         </div>
       </div>
@@ -89,6 +98,8 @@
             <img ref="imagePreviewDos" :src="product.productImage" class="w-100" alt="product.name">
           </div>
         </div>
+
+        <!-- form edit product -->
         <div class="col-12 col-md-4 mt-5">
 
           <div v-if="showbtn">
@@ -99,7 +110,7 @@
               </div>
               <div class="d-flex py-2">
                 <label for=""><b>Description:</b></label>
-              <textarea name="" v-model="descriptionproduc" id="" cols="30" rows="2"></textarea>
+                <textarea name="" v-model="descriptionproduc" id="" cols="30" rows="2"></textarea>
               </div>
               <div class="d-flex py-2">
                 <label for=""><b>Price:</b> </label>
@@ -107,7 +118,7 @@
               </div>
               <div class="d-flex py-2">
                 <label for=""><b>Stock:</b></label>
-              <input  type="number" name="" v-model="stockedit" id="">
+                <input type="number" name="" v-model="stockedit" id="">
               </div>
               <div>
                 <label for="" class="py-2"><b>image: </b></label>
@@ -119,7 +130,7 @@
               <div>
                 <small class="cRed"><i class="bi bi-info-circle-fill px-3 cRed"></i>{{error_editProduct}}</small>
               </div>
-    </div>
+            </div>
           </div>
           <div v-else>
             <h3 class="mb-4">{{product.name}}</h3>

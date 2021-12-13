@@ -21,7 +21,8 @@ const App = Vue.createApp({
       orderStates: ["PENDING", "IN_PROCESS", "DELIVERED", "CANCELED"],
       orderStateSelected: "",
       idOrderDelete: "",
-      orderDetails:"",
+      orderDetails:"",  
+      orderDetailsId:[],
       //each order
       order: "",
 
@@ -37,6 +38,7 @@ const App = Vue.createApp({
       bookings: "",
       cardInfo: "",
       orderInfo: "",
+      addressUser: "",
        // filter orders
        emailfilter:[],
        typefilter:[],
@@ -131,10 +133,12 @@ const App = Vue.createApp({
 
       axios.get(`/api/order/details/${id}`).then(res => {
         console.log(res)
+        
+        //this.orderDetails = res.data
       }).catch(err => {
         console.log(err)
       })
-      //window.location.href = `./order-details.html?id=${id}`
+      window.location.href = `./order-details.html?id=${id}`
 
     },    
     loadDataOrders() {
@@ -224,6 +228,7 @@ const App = Vue.createApp({
       console.log(this.orderState)
     },
     changeOrderState() {
+      console.log(this.orderStateSelected)
       axios.patch(`/api/order/edit/${this.idOrder}?orderState=${this.orderStateSelected}`).then(res => {
         const div = document.getElementById("response");
         div.innerText = res.data
@@ -232,6 +237,15 @@ const App = Vue.createApp({
         div.innerText = err.response.data
       })
     },
+    // deleteOrder() {
+    //   axios.delete(`/api/order/cancel/${this.idOrderDelete}`).then(res => {
+    //     const div = document.getElementById("response");
+    //     div.innerText = res.data
+    //   }).catch(err => {
+    //     const div = document.getElementById("response");
+    //     div.innerText = err.response.data
+    //   })
+    // },
     editOrderState(e){      
       console.log(e.target.firstChild)
       
@@ -252,10 +266,10 @@ const App = Vue.createApp({
            .then((response) => {           
         this.orderDetails = response.data;
         this.orderDetails = this.orderDetails.filter(orderDetails => orderDetails.orderId === this.order.id)
-      })
         // console.log(this.orderDetails)
-        //console.log(this.order.id)
-      .catch(err => {
+        //console.log(this.order.id)   
+      
+      }).catch(err => {
         console.log(err)
       })
     },
@@ -269,6 +283,7 @@ const App = Vue.createApp({
            let blob = new Blob([res.data], {type: 'application/pdf'});
            let objectUrl = URL.createObjectURL(blob);
            let link = document.createElement("a");
+           //let filename = "transaccion"+ this.idTransfer;  
 
            link.href = objectUrl;
            link.setAttribute("download", filename);
@@ -285,9 +300,9 @@ const App = Vue.createApp({
 
       let b =this.orders
       return this.orders
-      .filter(order=>this.emailfilter.includes(order.email)||this.emailfilter.length === 0)
-      .filter(order=>this.typefilter.includes(order.type)||this.typefilter.length === 0)
-      .filter(order=>this. statefilter.includes(order.state)||this.statefilter === 0)
+      .filter(order=>this.emailfilter.includes(order.email) || this.emailfilter.length === 0)
+      .filter(order=>this.typefilter.includes(order.type) || this.typefilter.length === 0)
+      .filter(order=>this. statefilter.includes(order.state) || this.statefilter.length === 0)
       .filter(order=>order.creationDate.slice(0,4).match(this.yearsfilter))
       .filter(order=>order.creationDate.slice(5,7).match(this.monthfilter))
       .filter(order=>order.creationDate.slice(8,10).match(this.dayfilter))
