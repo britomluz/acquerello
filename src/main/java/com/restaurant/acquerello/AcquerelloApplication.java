@@ -273,6 +273,8 @@ public class AcquerelloApplication {
 			OrderDetails orderDetails3 = new OrderDetails(4,product3,order2);
 			OrderDetails orderDetails4 = new OrderDetails(5,product4,order2);
 
+			address1.addOrderDetails(orderDetails1);
+
 
 			orderDetailsRepository.save(orderDetails1);
 			orderDetailsRepository.save(orderDetails2);

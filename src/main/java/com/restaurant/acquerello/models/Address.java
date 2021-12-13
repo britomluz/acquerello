@@ -22,6 +22,9 @@ public class Address {
     @JoinColumn(name = "address_id")
     private User userAdd;
 
+    @OneToOne(mappedBy = "address")
+    private OrderDetails orderDetails;
+
     public Address() {}
 
     public Address(String street, Integer number, String zip, String state, String reference) {
@@ -82,6 +85,18 @@ public class Address {
 
     public void setUser(User user) {
         this.userAdd = user;
+    }
+
+    public OrderDetails getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(OrderDetails orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
+    public void addOrderDetails(OrderDetails orderDetails) {
+        orderDetails.setAddress(this);
     }
 
     @Override

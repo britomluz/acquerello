@@ -121,6 +121,49 @@
             </h3>
           </div>
           <main>
+            <input type="text" name="" id="" v-model="emailfilter" placeholder="email">
+      <select name="" id="" v-model="typefilter">
+        <option value="DELIVERY">
+          delivery
+        </option>
+        <option value="TAKEAWAY">
+          take away
+        </option>
+        <option value="LOCAL">
+          local
+        </option>
+      </select>
+      <select name="" id="" v-model="statefilter">
+        <option value="PENDING">
+          pending
+        </option>
+        <option value="IN_PROCESS">
+          in process
+        </option>
+        <option value="DELIVERED">
+          delivered
+        </option>
+        <option value="CANCELED">
+          canceled
+        </option>
+      </select>
+      <input type="text" name="" v-model="yearsfilter" id="" placeholder="years">
+      <input type="text" name="" v-model="monthfilter" id="" placeholder="month">
+      <input type="text" name="" v-model=" dayfilter" id="" placeholder="day">
+
+      <select name="people" id="peop" v-model="hoursfilter">
+        <option value="">Hour</option>
+        <option value="9">09:00 am</option>
+        <option value="10">10:00 am</option>
+        <option value="11">11:00 am </option>
+        <option value="12">12:00 pm</option>
+        <option value="13">13:00 pm</option>
+        <option value="18">18:00 pm</option>
+        <option value="19">19:00 pm</option>
+        <option value="20">20:00 pm</option>
+        <option value="21">21:00 pm</option>
+        <option value="22">22:00 pm</option>
+      </select>
               <div class="d-flex justify-content-center">
                 <div class="col-12 col-md-8">
                     <table class="table tableAdmin">
@@ -135,7 +178,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="order in orders">
+                          <tr v-for="order in filter_order">
                             <th scope="row" class="text-center">{{order.id}}</th>
                             <td class="text-center">{{order.creationDate.slice(5,10)}} - {{order.creationDate.slice(11,16)}}</td>
                             <td class="text-center">{{order.state}}</td>
@@ -158,109 +201,14 @@
                           
                         </tbody>
                       </table>
+                      <div class="errors" v-if="errororder">
+                        <div>
+                          <small class="cRed"><i class="bi bi-info-circle-fill px-3 cRed"></i>{{errorcancel}}</small>
+                        </div>
+                      </div>
                 </div>
-              </div>
-            <div class="row">
-                <div class="col-12 col-md-6 bg-info mt-5">
-                    <h1>aaaaaaa</h1>
-                </div>
-                <div class="col-12 col-md-6 bg-warning mt-5">
-                    <h1>aaaaaaa</h1>
-                </div>
-              </div>
-        
-            
+              </div>  
           </main>
-
-
-
-        <button type="submit" @click="showOrder">View order</button>
-        <!-- DELETE PRODUCTS -->
-        <form @submit.prevent="deleteProduct()">
-            <label>Select products: </label>
-            <select v-model="idproducts">
-                <option v-for="producto in products" :value="producto.id">
-                    {{producto.id}} - {{producto.name}}
-                </option>
-            </select>
-            <button type="submit">
-                send
-            </button>
-            <div>
-                <p>State: {{producto}}</p>
-            </div>
-        </form>
-        <!-- ADD PRODUCTS -->
-        <form @submit.prevent="product_add()">
-            <label>products name</label>
-            <input type="text" v-model="nameproducts">
-            <label>produtc img</label>
-            <!-- <input type="file"  
-            style="display: none;" 
-            @change="previewfile"
-            ref="fileinput"> -->
-            <button type="button" @click="$refs.fileinput.click()">
-                pick img
-            </button>
-            <label for="description">description products</label>
-            <input type="text" v-model="descriptionproducts">
-            <label>price</label>
-            <input type="number" v-model="priceproduct">
-            <label>stock </label>
-            <input type="number" v-model="stockproduct">
-            <button>
-                send
-            </button>
-        </form>
-        <!-- PATCH PRODUCTS -->
-        <form @submit.prevent=" path_product()">
-            <select v-model="idpatch">
-                <option v-for="producto in products" :value="producto.id">
-                    {{producto.id}} - {{producto.name}}
-                </option>
-            </select>
-            <label>name</label>
-            <input type="text" v-model="namepatch">
-            <label>description</label>
-            <input type="text" v-model="descriptionpatch">
-            <label>img</label>
-            <input type="file">
-            <label>price</label>
-            <input type="number" v-model=" pricepatch">
-            <label> stock</label>
-            <input type="number" v-model=" stockpatch">
-            <button>
-                send
-            </button>
-        </form>
-
-        <h2>Order Section</h2>
-        <form>
-            <label for="order">Select Order: </label>
-            <select id="order" v-model="idOrder">
-                <option value="">Select</option>
-                <option v-for="order in orders" :value="order.id">{{order.id}}</option>
-            </select>
-            <input type="button" value="Send" @click="getOrderState">
-        </form>
-        <p>{{orderState}}</p>
-        <form>
-            <label for="state">Select new state: </label>
-            <select id="state" v-model="orderStateSelected">
-                <option value="">Select</option>
-                <option v-for="state in orderStates" :value="state">{{state}}</option>
-            </select>
-            <input type="button" value="Send" @click="changeOrderState">
-        </form>
-        <form>
-            <label for="order">Delete Order: </label>
-            <select id="order" v-model="idOrderDelete">
-                <option value="">Select</option>
-                <option v-for="order in orders" :value="order.id">{{order.id}}</option>
-            </select>
-            <input type="button" value="Send" @click="deleteOrder">
-        </form>
-        <p id="response"></p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"

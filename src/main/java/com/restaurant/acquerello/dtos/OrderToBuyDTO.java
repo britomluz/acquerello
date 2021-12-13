@@ -1,5 +1,6 @@
 package com.restaurant.acquerello.dtos;
 
+import com.restaurant.acquerello.models.OrderType;
 import com.restaurant.acquerello.models.Product;
 
 import java.util.ArrayList;
@@ -8,12 +9,14 @@ import java.util.List;
 public class OrderToBuyDTO {
     private List<Product> products = new ArrayList<>();
     private Double total;
-    private String type;
+    private OrderType type;
+    private Long id;
 
-    public OrderToBuyDTO(List<Product> products, Double total, String type) {
+    public OrderToBuyDTO(List<Product> products, Double total, OrderType type, Long id) {
         this.products = products;
         this.total = total;
         this.type = type;
+        this.id = id;
     }
 
     public List<Product> getProducts() {
@@ -32,11 +35,19 @@ public class OrderToBuyDTO {
         this.total = total;
     }
 
-    public String getType() {
+    public OrderType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(OrderType type) {
         this.type = type;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

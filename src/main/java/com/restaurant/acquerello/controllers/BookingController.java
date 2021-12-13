@@ -42,9 +42,13 @@ public class BookingController {
         if(bookingCreateDTO.getDate().lengthOfMonth() < 1) {
             return new ResponseEntity<>("The field date is empty", HttpStatus.FORBIDDEN);
         }
-        if (table.getAvailability().equals(TableAvailability.NOTAVAILABLE)){
+
+
+        if (table != null){
             return new ResponseEntity<>("Table not available", HttpStatus.FORBIDDEN);
         }
+
+
         LocalDate day = bookingCreateDTO.getDate();
         if (user.getBookings().stream().map(Booking::getDateBooking).collect(Collectors.toList()).contains(day)){
             return new ResponseEntity<>("Already have a booking to this day", HttpStatus.FORBIDDEN);
@@ -52,7 +56,7 @@ public class BookingController {
 
         LocalTime plus = bookingCreateDTO.getBookingHour().plusHours(4);
 
-        Booking booking = new Booking(bookingCreateDTO.getDate(), bookingCreateDTO.getBookingHour(), plus, bookingCreateDTO.getSector(), 2, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+        Booking booking = new Booking(bookingCreateDTO.getDate(), bookingCreateDTO.getBookingHour(), plus, bookingCreateDTO.getSector(), bookingCreateDTO.getTable(), bookingCreateDTO.getQuantity(), TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
 
         System.out.println(booking);
         user.addBooking(booking);

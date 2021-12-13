@@ -43,15 +43,33 @@ const app = Vue.createApp({
       monthfilter:[],
       // day filter
       dayfilter:[],
+
+       //cart
+       qantity: "",
+       totalQantity: 0,
+       product: [],
+       destacados: [],
+       cart: [],
+       modal: [],
+       search: "",
+       quantity: [],
+       searchProducts: false,
+       show: false,
     };
   },
   created() {
     this.get_users();
     this.get_bookings();
+
+    if (localStorage.getItem("cart")) {
+      this.cart = JSON.parse(localStorage.getItem("cart"));
+      this.totalQantity = JSON.parse(localStorage.getItem("quantity"));
+    } 
   },
   methods: {
-    //   user and admin
+    //   user and admin    
     create_booking() {
+      console.log(this.datetime, this.bookingHour, this.sectortime, this.table, this.quantitytime)
       if (this.table < 19) {
         this.sectortime = "GOLDEN";
       } else if (this.table < 31) {
@@ -59,8 +77,10 @@ const app = Vue.createApp({
       } else {
         this.sectortime = "VIP";
       }
-      axios
-        .post("/api/booking/create", {
+
+      this.table = parseInt(this.table)
+      
+      axios.post("/api/booking/create", {
           date: this.datetime,
           bookingHour: this.bookingHour,
           sector: this.sectortime,
@@ -75,7 +95,9 @@ const app = Vue.createApp({
             button: "Ok",
           });
         })
-        .catch((err) => console.log(err));
+        .catch((err) =>{
+          console.log(err.response.data)
+        });
     },
     // cancel user booking
     cancel_booking(e){
@@ -157,6 +179,47 @@ const app = Vue.createApp({
           console.log(err);
         });
     },
+    //cart
+    deleteOne(clickEvent) {
+      this.cart.forEach((product) => {
+        if (clickEvent.target.id == product.id) {
+          product.quantity--;
+          product.stock++;
+          this.totalQantity--
+        }
+      });
+      this.cart.forEach((product, i) => {
+        if (product.quantity == 0) {
+          this.cart.splice(i, 1);
+        }
+        localStorage.setItem("cart", JSON.stringify(this.cart));
+        localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
+      });
+    }, 
+    addOne(clickEvent) {
+      this.cart.forEach((product) => {
+        if (clickEvent.target.id == product.id){ 
+          product.quantity++;
+        product.stock--;
+        this.totalQantity++
+        localStorage.setItem("cart", JSON.stringify(this.cart));
+        localStorage.setItem("quantity", JSON.stringify(this.totalQantity));}
+      });
+    }, 
+    calculateTotal() {
+      let total = 0;
+      this.cart.forEach((product) => {
+        total += product.price * product.quantity;
+      });
+      return total;
+    },
+    emptyCart() {
+      this.cart.forEach(product => product.quantity = 0)
+      this.cart = [];
+      this.totalQantity = 0
+      localStorage.setItem("cart", JSON.stringify(this.cart));
+      localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
+    }, 
   },
   computed: {
     tableAvailability() {
@@ -167,17 +230,17 @@ const app = Vue.createApp({
       }
       console.log(this.disabled);
     },
-    filter_maximum(){
+    filterBookings(){
       let a = this.bookingsUsers
       return this.bookingsUsers.filter(booking=>this.statesfilter.includes(booking.sector)||this.statesfilter.length === 0)
-                                .filter(booking=>this.sectorfilter.includes(booking.state)||this.sectorfilter.lenght===0)
+                                .filter(booking=>this.sectorfilter.includes(booking.state)||this.sectorfilter.length===0)
                                 .filter(booking=>booking.bookingHour.slice(0,4).match(this.hoursfilter))
                                 .filter(booking=>booking.dateBooking.slice(0,4).match(this.yearfilter))
                                 .filter(booking=>booking.dateBooking.slice(5,7).match(this.monthfilter))
                                 .filter(booking=>booking.dateBooking.slice(8,10).match(this.dayfilter))
-                               
     },
    
+
   },
 });
 let obv=app.mount("#app");

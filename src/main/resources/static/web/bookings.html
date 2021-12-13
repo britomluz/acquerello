@@ -84,47 +84,71 @@
       </div>
       <div class="row mb-4 d-flex flex-column align-items-center ">
 
-        <div class="row">
-          <div class="mb-3 col-12 col-md-10">
-            <select v-model="statesfilter" name="" id="">
-              <option value="GOLDEN">
-                GOLDEN
-              </option>
-              <option value="PLATINUM">
+        <div class="row d-flex flex-column align-items-center">
+          <div class="mb-3 col-12 col-md-8">
+            <h4 class="fs-5 cGreen">Filtrar por:</h4>
+            <div class="ipt-g  py-1"> 
+              <small>
+                Sector:
+              </small>           
+              <select v-model="statesfilter" name="" id="">
+                <option value="GOLDEN">
+                  GOLDEN
+                </option>
+                <option value="PLATINUM">
+  
+                  GARDEN
+                </option>
+                <option value="VIP">
+                  VIP
+                </option>
+              </select>
+            </div>
+            <div class="ipt-g  py-1">
+              <small>Status: </small>
+              <select name="" v-model="sectorfilter" id="">
+                <option value="ACCEPTED">
+                  accepted
+                </option>
+                <option value="CANCELED">
+                  canceled
+                </option>
+              </select>
+            </div>
+            
+            <div class="ipt-g py-1">
+              <small>Hora: </small>
+              <select name="people" id="peop" v-model="hoursfilter" >
+                <option value="">Hour</option>
+                <option value="9">09:00 am</option>
+                <option value="10">10:00 am</option>
+                <option value="11">11:00 am </option>
+                <option value="12">12:00 pm</option>
+                <option value="13">13:00 pm</option>
+                <option value="18">18:00 pm</option>
+                <option value="19">19:00 pm</option>
+                <option value="20">20:00 pm</option>
+                <option value="21">21:00 pm</option>
+                <option value="22">22:00 pm</option>
+              </select>
+            </div>
 
-                GARDEN
-              </option>
-              <option value="VIP">
-                VIP
-              </option>
-            </select>
-            <select name="" v-model="sectorfilter" id="">
-              <option value="ACCEPTED">
-                accepted
-              </option>
-              <option value="CANCELED">
-                canceled
-              </option>
-            </select>
+            <div class="ipt-g  py-1 d-flex">
+              <small>Fecha: </small>
+              <div class=" px-3">
+                <input type="text"  v-model="yearfilter" max="9999" placeholder="yyyy">
+                <small class="cRed">/</small>
+                <input class="" type="text" name="" max="99" v-model="monthfilter" id="" placeholder="mm">
+                <small class="cRed">/</small>
+                <input class="" type="text" name="" v-model="dayfilter" max="99" id="" placeholder="dd">
+              </div>
+              
+            </div>
 
-            <select name="people" id="peop" v-model="hoursfilter">
-              <option value="">Hour</option>
-              <option value="9">09:00 am</option>
-              <option value="10">10:00 am</option>
-              <option value="11">11:00 am </option>
-              <option value="12">12:00 pm</option>
-              <option value="13">13:00 pm</option>
-              <option value="18">18:00 pm</option>
-              <option value="19">19:00 pm</option>
-              <option value="20">20:00 pm</option>
-              <option value="21">21:00 pm</option>
-              <option value="22">22:00 pm</option>
-            </select>
-            <input type="text"  v-model="yearfilter" placeholder="year" >
-            <input type="text" name="" v-model="monthfilter" id="" placeholder="month">
-            <input type="text" name="" v-model="dayfilter" id="" placeholder="day">
+            
           </div>
         </div>
+
         <div class="d-flex justify-content-center">
           <div class="col-12 col-md-8">
             <table class="table tableAdmin">
@@ -324,7 +348,7 @@
           </div>
           </tbody>
           <tbody v-else>
-            <tr v-for="booking in filter_maximum">
+            <tr v-for="booking in filterBookings">
               <th scope="row" class="text-center">{{booking.id}}</th>
               <td class="text-center">{{booking.dateBooking}}</td>
               <td class="text-center">{{(booking.bookingHour).slice(0,5)}}</td>
@@ -342,11 +366,16 @@
                       class="bi bi-check-square text-success"></i></button>
                 </form>
               </td>
-              <td class="d-flex justify-content-center">
+              
+              <td>
                 <button :id="booking.id" type="button" @click="show_edit" class="btnTransp"><i
-                    class="bi bi-pencil cRed"></i></button>
+                class="bi bi-pencil cRed"></i></button>
               </td>
             </tr>
+            
+            <tr v-if="filterBookings.length === 0" colspan="6">
+              <td colspan="9" class="text-danger">No se encontraron resultados</td> 
+           </tr>
           </tbody>
           </table>
         </div>

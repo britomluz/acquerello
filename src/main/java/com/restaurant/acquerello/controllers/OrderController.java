@@ -6,6 +6,7 @@ import com.restaurant.acquerello.dtos.OrderDetailsDTO;
 import com.restaurant.acquerello.models.*;
 import com.restaurant.acquerello.repositories.OrderDetailsRepository;
 import com.restaurant.acquerello.repositories.OrderRepository;
+import com.restaurant.acquerello.services.AddressService;
 import com.restaurant.acquerello.services.ProductService;
 import com.restaurant.acquerello.services.UserService;
 import com.restaurant.acquerello.services.impl.OrderDetailsImpl;
@@ -27,6 +28,9 @@ public class OrderController {
 
     @Autowired
     private UserService userServices;
+
+    @Autowired
+    private AddressService addressService;
 
     @Autowired
     private OrderServiceImpl orderService;
@@ -81,6 +85,8 @@ public class OrderController {
     public ResponseEntity<?> createOrder(Authentication authentication, @RequestBody OrderToBuyDTO orderToBuyDTO) {
 
         User user = userServices.getByEmail(authentication.getName());
+        Address address = addressService.getAddressBydId(orderToBuyDTO.getId());
+
         if(orderToBuyDTO.getProducts().size() < 1) {
             return new ResponseEntity<>("Dont have products selected", HttpStatus.FORBIDDEN);
         }
@@ -95,8 +101,8 @@ public class OrderController {
         if(orderToBuyDTO.getTotal() == null || orderToBuyDTO.getTotal() < 1) {
             return new ResponseEntity<>("Fields cannot are empty", HttpStatus.FORBIDDEN);
         }
-        OrderType type = OrderType.valueOf(orderToBuyDTO.getType());
-        Order order = new Order(LocalDateTime.now(), LocalDateTime.now(), OrderState.PENDING, orderToBuyDTO.getTotal(), type);
+
+        Order order = new Order(LocalDateTime.now(), LocalDateTime.now(), OrderState.PENDING, orderToBuyDTO.getTotal(), orderToBuyDTO.getType());
         user.addOrder(order);
         orderService.save(order);
 
@@ -112,6 +118,7 @@ public class OrderController {
            }
            OrderDetails orderDetails = new OrderDetails(quantity,product1,order);
            product1.setStock(product1.getStock() - quantity);
+           address.addOrderDetails(orderDetails);
            productService.save(product1);
            orderDetailsService.save(orderDetails);
         }
@@ -196,5 +203,8 @@ public class OrderController {
 
         return  new ResponseEntity<>("Order cancelled", HttpStatus.ACCEPTED);
     }
+
+
+
 
 }

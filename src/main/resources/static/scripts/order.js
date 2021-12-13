@@ -1,10 +1,15 @@
 // fill tables
-const select = document.getElementById("table");
-for (let i = 1; i <= 30; i++) {
-  const opt = document.createElement("option");
-  opt.value = i;
-  opt.innerText = `Nº ${i}`
-  select.appendChild(opt)
+let test = /\b[checkout]+\b/g
+let url = window.location.href;
+let match = url.match(test);
+if (match != null) {
+  const select = document.getElementById("table");
+  for (let i = 1; i <= 30; i++) {
+    const opt = document.createElement("option");
+    opt.value = i;
+    opt.innerText = `Nº ${i}`
+    select.appendChild(opt)
+  }
 }
 
 const app = Vue.createApp({
@@ -39,7 +44,7 @@ const app = Vue.createApp({
 
       //cart
       qantity: "",
-      totalQantity: "",
+      totalQantity: 0,
       product: [],
       destacados: [],
       cart: [],
@@ -73,6 +78,7 @@ const app = Vue.createApp({
       zip: "",
       reference: "",
       state: "",
+      addressId: "",
 
       numberCard: "",
       cvv: "",
@@ -115,18 +121,24 @@ const app = Vue.createApp({
       descriptionproducts: "",
       priceproduct: 0,
       stockproduct: 0,
-      id_addproduct: 0
+      id_addproduct: 0,
+
+      //shop
+      cardNumber: "",
     };
   },
   created() {
     //this.Admin_accept_order()
+    this.totalQantity = 0
     this.loadProducts();
     this.loadCategories();
     this.loadDataProduct();
 
+
     this.showModal();
     if (localStorage.getItem("cart")) {
       this.cart = JSON.parse(localStorage.getItem("cart"));
+      this.totalQantity = JSON.parse(localStorage.getItem("quantity"));
       this.addToCart();
     }
 
@@ -286,7 +298,6 @@ const app = Vue.createApp({
     },
     addToCart(id) {
       this.totalPrice = 0;
-      this.totalQantity = 0;
 
       for (let i = 0; i < this.products.length; i++) {
         if (this.products[i].id == id) {
@@ -294,23 +305,26 @@ const app = Vue.createApp({
           if (!this.cart.includes(this.products[i])) {
             this.products[i].quantity++;
             this.cart.push(this.products[i]);
-            this.totalQantity = this.totalQantity + 1;
+            this.totalQantity++
           } else {
             // de lo contraria le suma +1 a la cantidad del producto
             this.products[i].quantity++;
+            this.totalQantity++
 
           }
           this.totalPrice = this.totalPrice + this.products[i].price;
-          //this.totalQantity = this.totalQantity + 1;
+
         }
       }
       localStorage.setItem("cart", JSON.stringify(this.cart));
+      localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
     },
     deleteOne(clickEvent) {
       this.cart.forEach((product) => {
         if (clickEvent.target.id == product.id) {
           product.quantity--;
           product.stock++;
+          this.totalQantity--
         }
       });
       this.cart.forEach((product, i) => {
@@ -318,13 +332,18 @@ const app = Vue.createApp({
           this.cart.splice(i, 1);
         }
         localStorage.setItem("cart", JSON.stringify(this.cart));
+        localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
       });
     },
     addOne(clickEvent) {
       this.cart.forEach((product) => {
-        if (clickEvent.target.id == product.id) product.quantity++;
-        product.stock--;
-        localStorage.setItem("cart", JSON.stringify(this.cart));
+        if (clickEvent.target.id == product.id) {
+          product.quantity++;
+          product.stock--;
+          this.totalQantity++
+          localStorage.setItem("cart", JSON.stringify(this.cart));
+          localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
+        }
       });
     },
     showModal(id) {
@@ -339,8 +358,11 @@ const app = Vue.createApp({
       return total;
     },
     emptyCart() {
+      this.cart.forEach(product => product.quantity = 0)
       this.cart = [];
+      this.totalQantity = 0
       localStorage.setItem("cart", JSON.stringify(this.cart));
+      localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
     },
     //multistep form
     updateForms(btn, form1, form2, step) {
@@ -403,6 +425,7 @@ const app = Vue.createApp({
         this.show = true;
       } else {
         this.show = false;
+        this.addressId = e.target.value;
       }
     },
     send_address() {
@@ -444,7 +467,7 @@ const app = Vue.createApp({
 
         // if an authenticated user send a request
         if (this.logged) {
-          axios.post("/api/order/buy", {products: product, total: total, type: this.type}).then(res => {
+          axios.post("/api/order/buy", { products: product, total: total, type: this.type, id: this.addressId }).then(res => {
             console.log(res)
             localStorage.clear();
           }).catch(err => {
@@ -467,7 +490,8 @@ const app = Vue.createApp({
               reference: this.reference,
 
               products: product,
-              total: total
+              total: total,
+              type: this.type
             })
             .then((res) => {
               console.log(res);
@@ -600,6 +624,10 @@ const app = Vue.createApp({
           this.bankCard = true;
           break;
       }
+    },
+    verifyCard() {
+
+
     }
   },
   computed: {

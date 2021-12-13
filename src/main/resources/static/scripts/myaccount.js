@@ -20,12 +20,38 @@ const app = Vue.createApp({
     order:[],
     idorder:0,
 
+    //add balance card restaurant
+    numberCardRest:"",
+    cvvCardRest:"",
+    vecCardRest:"",
+    amountCardRest:"",
+    idCardRest:"",
+    errorCardRest: false,
+    error_cardRest:"",
+
+     //cart
+     qantity: "",
+     totalQantity: 0,
+     product: [],
+     destacados: [],
+     cart: [],
+     modal: [],
+     search: "",
+     quantity: [],
+     searchProducts: false,
+     show: false,
+
     };
   },
   created() {
     this.get_user()
     this.load_user()
     this.order_user()
+
+    if (localStorage.getItem("cart")) {
+      this.cart = JSON.parse(localStorage.getItem("cart"));
+      this.totalQantity = JSON.parse(localStorage.getItem("quantity"));
+    }
   },
   methods: {
     get_user() {
@@ -102,11 +128,92 @@ const app = Vue.createApp({
       order_user(){
           axios.get("/api/order/current")
           .then(response=>{
-            this.order=response.data
-            console.log(this.order)
+            this.order=response.data            
         })
           .catch(err=>console.log(err))
-      }
+      },
+      getCardId(e){
+        this.idCardRest = e.target.id
+        
+        console.log(e.target.id)
+        console.log(this.idCardRest)
+
+      },
+      addBalanceCardRest(e){
+          axios.post('https://mindhub-b.herokuapp.com/api/payments', {
+            number: this.numberCardRest,
+            cvv: this.cvvCardRest,
+            amount: this.amountCardRest,
+            description: "Add balance Acquerello Card",
+            accountNumber: "VIN-64578965",
+          })
+          .then(res => {
+            axios.patch(`/api/cards/add-balance/${this.idCardRest}?amount=${this.amountCardRest}`)
+          })
+          .then(res =>{
+            swal({
+              title: "Good job!",
+              text: "You add balance to Acquerello Card",
+              icon: "success",
+              button: "OK",
+            });
+          })
+          .catch(error =>{
+            console.log(error.response.data)
+
+            this.errorCardRest = true
+            this.error_cardRest = error.response.data
+          })
+      },
+      createCard() {
+        axios.post('/api/cards/create')
+            .then(() => swal('Card created'))
+            .then(console.log("Card created"))
+            .catch(err => console.log(err))
+    },
+      //cart
+    deleteOne(clickEvent) {
+      this.cart.forEach((product) => {
+        if (clickEvent.target.id == product.id) {
+          product.quantity--;
+          product.stock++;
+          this.totalQantity--
+        }
+      });
+      this.cart.forEach((product, i) => {
+        if (product.quantity == 0) {
+          this.cart.splice(i, 1);
+        }
+        localStorage.setItem("cart", JSON.stringify(this.cart));
+        localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
+      });
+    },
+    addOne(clickEvent) {
+      this.cart.forEach((product) => {
+        if (clickEvent.target.id == product.id) {
+          product.quantity++;
+          product.stock--;
+          this.totalQantity++
+          localStorage.setItem("cart", JSON.stringify(this.cart));
+          localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
+        }
+      });
+    },
+    calculateTotal() {
+      let total = 0;
+      this.cart.forEach((product) => {
+        total += product.price * product.quantity;
+      });
+      return total;
+    },
+    emptyCart() {
+      this.cart.forEach(product => product.quantity = 0)
+      this.cart = [];
+      this.totalQantity = 0
+      localStorage.setItem("cart", JSON.stringify(this.cart));
+      localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
+    },
+
   },
 });
 app.mount("#app");

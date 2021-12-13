@@ -52,9 +52,27 @@ const App = Vue.createApp({
       filterDayUser: '',
       filterMonthUser: '',
       filterYearUser: '',
+
+      //cart
+      qantity: "",
+      totalQantity: 0,
+      product: [],
+      destacados: [],
+      cart: [],
+      modal: [],
+      search: "",
+      quantity: [],
+      searchProducts: false,
+      show: false,
     };
   },
-  created() { },
+  created() {
+   
+    if (localStorage.getItem("cart")) {
+      this.cart = JSON.parse(localStorage.getItem("cart"));
+      this.totalQantity = JSON.parse(localStorage.getItem("quantity"));
+    }
+  },
   methods: {
     validator_firstname(data) {
       if (!data.input) {
@@ -195,8 +213,54 @@ const App = Vue.createApp({
           console.log(this.email_two.input, this.password_two.input)
 
         })
-    }
+    },
+
+    //cart
+    deleteOne(clickEvent) {
+      this.cart.forEach((product) => {
+        if (clickEvent.target.id == product.id) {
+          product.quantity--;
+          product.stock++;
+          this.totalQantity--
+        }
+      });
+      this.cart.forEach((product, i) => {
+        if (product.quantity == 0) {
+          this.cart.splice(i, 1);
+        }
+        localStorage.setItem("cart", JSON.stringify(this.cart));
+        localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
+      });
+    },
+    addOne(clickEvent) {
+      this.cart.forEach((product) => {
+        if (clickEvent.target.id == product.id) {
+          product.quantity++;
+          product.stock--;
+          this.totalQantity++
+          localStorage.setItem("cart", JSON.stringify(this.cart));
+          localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
+        }
+      });
+    },
+    calculateTotal() {
+      let total = 0;
+      this.cart.forEach((product) => {
+        total += product.price * product.quantity;
+      });
+      return total;
+    },
+    emptyCart() {
+      this.cart.forEach(product => product.quantity = 0)
+      this.cart = [];
+      this.totalQantity = 0
+      localStorage.setItem("cart", JSON.stringify(this.cart));
+      localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
+    },
+   
+    
   },
+
   computed: {
     filterOrdersAdmin() {
       this.orders.filter(order => order.description.toLowerCase().match(this.filterDescription.toLowerCase()))
@@ -208,12 +272,22 @@ const App = Vue.createApp({
     },
     filterOrdersUser() {
       this.ordersUser.filter(order => order.description.toLowerCase().match(this.filterDescriptionUser.toLowerCase()))
-                .filter(order => this.filterTypeUser.includes(order.type) || this.filterTypeUser.length === 0)
-                .filter(order => order.amount <= this.filterRangeUser)
-                .filter(order => order.date.slice(0, 2).match(this.filterDayUser))
-                .filter(order => order.date.slice(3, 5).match(this.filterMonthUser))
-                .filter(order => order.date.slice(6, 10).match(this.filterYearUser))
+        .filter(order => this.filterTypeUser.includes(order.type) || this.filterTypeUser.length === 0)
+        .filter(order => order.amount <= this.filterRangeUser)
+        .filter(order => order.date.slice(0, 2).match(this.filterDayUser))
+        .filter(order => order.date.slice(3, 5).match(this.filterMonthUser))
+        .filter(order => order.date.slice(6, 10).match(this.filterYearUser))
     },
+    /* prueba(){
+      let side1 = this.$refs.side1
+      let side2 = this.$refs.side1
+        side1.style.left = "-window.pageYOffset" + 'px'
+        side2.style.left = "window.pageYOffset" + 'px'
+      let menu = this.$refs.navbar
+      menu.classList.toggle('fondoBlack', window.scrollY > 800)
+      console.log(side1, side2, menu)
+    } */
+
   }
 });
 

@@ -72,6 +72,8 @@ h3 {
     top: 10px;
     right: 7px;
 }
+
+/*btns*/
 .btn-green button{
     background: var(--color1);
     color: var(--color4);
@@ -101,6 +103,7 @@ h3 {
     border: none;
     font-size: 20px;    
   }
+  /*text color*/
   .cGreen {
     color: var(--color1);
   }
@@ -113,10 +116,27 @@ h3 {
   .cWhite2 {
     color: var(--color3);
   }
-/* .navbar{
-    background: transparent!important;
-} */
 
+  /* inputs */
+
+  .ipt-g input{
+      border: none;
+      border-bottom: 2px solid var(--color2);
+      width: 60px;
+  }
+  .ipt-g input:focus{
+    outline: none;    
+}
+.ipt-g select{
+    border: none;
+    border-bottom: 1px solid var(--color2);
+    border-right: 1px solid var(--color2);
+    
+    
+}
+
+
+/* NAVBAR*/
 .fondoTransp{
     transition: all 1s ease;
 }
@@ -504,6 +524,7 @@ footer{
     
 }
 
+
 .formIndex input:-webkit-autofill,
 .formIndex input:-webkit-autofill:hover, 
 .formIndex input:-webkit-autofill:focus, 
@@ -561,6 +582,13 @@ footer{
 
 /* ORDER PAGE start*/
 /*default card*/
+
+
+.imgCart img{
+    object-fit: cover;
+}
+
+
 #img-product{    
     object-fit: cover;
 }
@@ -638,6 +666,18 @@ footer{
     background: rgba(0, 0, 0, 0.205);   
 }
 
+.cardDiv{
+    background-image: url(../assets/card.png);
+    background-size: contain;
+    width: 300px;
+    height: 192px;
+}
+.cardDiv p{
+    font-size: 20px;
+    color:white;
+    padding-top: 130px;
+    padding-left: 50px;
+}
 /* ORDER PAGE end*/
 
 
@@ -847,7 +887,7 @@ footer{
     .progressBar{
       width: 300px;
     }
-  
+    
   }
 
 
@@ -909,6 +949,7 @@ footer{
     .aboutUs img{
         width: 300px;
     }
+
 }
 
 @media (max-width: 325px){
@@ -920,6 +961,7 @@ footer{
         flex-direction: column;
         justify-content: center!important;        
     }
+   
 }
 
 /* Brian CSS */

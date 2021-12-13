@@ -40,7 +40,7 @@
           <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
           <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
             class="bi bi-cart-fill"></i>
-            <div class="badge"><small class="cWhite">1</small></div></button>
+            <div class="badge"><small class="cWhite" v-if="totalQantity > 0">{{totalQantity}}</small></div></button>
         </div>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
           <div class="offcanvas-header">
@@ -125,12 +125,12 @@
           </div>
         </div>
       </div>
-      <div>
+      <div>    
+        
+        
+        <!-- TABLES -->
         <div>
-          <h4 class="text-center mt-5">Select your table</h4>
-        </div>
-        <div>
-          <div class="nav nav-tabs tab-registration" id="nav-tab" role="tablist">
+          <div class="nav nav-tabs tab-registration pt-5" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#golden"
               type="button" role="tab" aria-controls="nav-home" aria-selected="true" >GOLDEN</button>
             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#garden" type="button"
@@ -147,8 +147,11 @@
 
           <div class="tab-pane fade show active golden" id="golden" role="tabpanel" aria-labelledby="nav-home-tab">
             <div class=" d-flex justify-content-center">
-              <div class="py-5 col-12 col-lg-8">
-
+              <div class="pb-2 col-12 col-lg-8">
+                <div>
+                  <h4 class="text-center mt-5">Select your table</h4>
+                  <p>{{table}}</p>
+                </div>
                 <div class="container tableContainer">
                   <div class="table table1 tbp d-flex align-items-center justify-content-center">
                     <input type="radio" name="mesa" id="1" value="1" v-model="table">
@@ -176,7 +179,6 @@
                       <label for="19" class="label">
                         <img src="../assets/mesa1.svg" class="w-100 p-0" alt="">
                       </label>
-
                     </div>
 
                     <div class="table table13 ">
@@ -311,8 +313,10 @@
 
           <div class="tab-pane fade garden" id="garden" role="tabpanel" aria-labelledby="nav-profile-tab" v-cloak>
             <div class=" d-flex justify-content-center">
-              <div class="py-5 col-12 col-lg-8">
-
+              <div class="pb-2 col-12 col-lg-8">
+                <div>
+                  <h4 class="text-center mt-5">Select your table</h4>
+                </div>
                 <div class="container tableContainer">
                   <div class="table table4 tbp d-flex align-items-center justify-content-center">
                     <input type="radio" name="mesa" id="20" v-model="table" value="20">
@@ -408,8 +412,10 @@
           <div class="tab-pane fade vip" id="vip" role="tabpanel" aria-labelledby="nav-profile-tab" v-cloak>
             <div class=" d-flex justify-content-center">
               <div class=" d-flex justify-content-center">
-                <div class="py-5 col-12 col-lg-8">
-
+                <div class=" col-12 col-lg-8">
+                  <div class="pb-5">
+                    <h4 class="text-center mt-5">Select your table</h4>
+                  </div>
                   <div class="container tableContainer vipContainer">
                     <div class="table table10 tablevip tbp d-flex align-items-center justify-content-center">
                       <input type="radio" name="mesa" id="32" value="32">
@@ -430,6 +436,8 @@
           </div>
         </div>
       </div>
+
+      <!-- carrousel -->
       <section class="home">
         <div id="carousel" class="carousel slide" data-ride="carousel">
           <div class="carousel-controls">
@@ -484,7 +492,76 @@
       </section>
 
     </main>
+<!-- CART MODAL -->
+    <div id="canvasCart" class="offcanvas offcanvas-end" tabindex="-1" aria-labelledby="offcanvasRightLabel">
+      <div id="" class="offcanvas-header">
+        <h5 id="offcanvasRightLabel">Carrito de compras</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+          <h5>x</h5>
+        </button>
+      </div>
+      <div class="offcanvas-body">
+        <table class="table">
+          <thead>
+            <tr class="title-offcanvas">
+              <th scope="col" colspan="2" class="cRed">Product</th>
+              <th scope="col" class="cRed">Qty.</th>
+              <th scope="col" class="cRed">Action</th>
+              <th scope="col" class="cRed">Total</th>
+            </tr>
+          </thead>
+          <!-- Template del carrito  -->
+          <tbody v-if="cart.length > 0" id="items">
+            <div>
+              <tr v-for="product in cart" :key="product.id" id="template-cart">
+                <td class="imgFill"><img :src="product.productImage" alt=""></td>
+                <!-- <td scope="row" class=""><img class="img-fluid img-thumbnail" :src="product.productImage" :alt="product.name"> -->
+                </td>
+                <td>{{product.name}}</td>
+                <td>{{product.quantity}}</td>
+                <td>
+                  <button class="btn btn-info btn-sm" type="button" :id="product.id" @click="addOne"> + </button>
+                  <button class="btn btn-danger btn-sm" type="button" :id="product.id" @click="deleteOne"> - </button>
+                </td>
+                <td class="off-canvas-priceTotal">${{product.price * product.quantity}}</td>
+              </tr>
+            </div>
+          </tbody>
+          <tfoot v-if="cart.length === 0">
+            <tr id="footer-cart">              
+              <td scope="row" colspan="5">Cart empty</td>
+            </tr>
+            <tr>
+              <!-- v-if="carrito.length === 0" -->
+              <td scope="row" colspan="5"><a href="order.html">ORDER NOW </a></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div v-if="cart.length > 0" id="template-footer">
+        <th scope="row" colspan="2">Total</th>
+        <td>{{totalQantity}}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" id="vaciar-carrito" @click="emptyCart">
+            vaciar todo
+          </button>
+        </td>
+        <td class="font-weight-bold">$ <span>{{calculateTotal()}}</span></td>
+      </div>
 
+
+      <div class="canvas-bottom">
+        <button id="btn-seguir-comprando" type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+          aria-label="Close">
+          <p> Seguir comprando</p>
+        </button>
+        <button id="btn-finalizar-compra" type="button" class="btn-close" href="compra.html">
+          <p> Finalizar compra</p>
+        </button>
+
+      </div>
+
+    </div>
 
 
 

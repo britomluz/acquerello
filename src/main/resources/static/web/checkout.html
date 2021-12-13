@@ -149,7 +149,7 @@
                   <h4>Where do you want your order?</h4>
                   <select class="w-100" name="cuentas" @change="show_address" id="" placeholder="">
                     <option value="">Select adress</option>
-                    <option v-if="logged" v-for="add in address" :value="add.zip">{{add.street}} {{add.number}}</option>
+                    <option v-if="logged" v-for="add in address" :value="add.id">{{add.street}} {{add.number}}</option>
                     <option value="newAdress">Add new adress</option>
                   </select>
                   <div v-if="show">
