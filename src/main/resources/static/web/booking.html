@@ -357,7 +357,7 @@
               </div>
             </tbody>
             <tfoot v-if="cart.length === 0">
-              <tr id="footer-cart">
+              <tr id="footer-cart">              
                 <td scope="row" colspan="5">Cart empty</td>
               </tr>
               <tr>
@@ -380,20 +380,23 @@
             </button>
           </td>
         </div>
-
-
+  
+  
         <div class="canvas-bottom">
           <button id="btn-seguir-comprando" type="button" class="btn-green" data-bs-dismiss="offcanvas"
             aria-label="Close">
             <p> Keep buying</p>
           </button>
-          <button id="btn-finalizar-compra" type="button" class="btn-green" href="compra.html">
-            <p> Finish your purchase</p>
-          </button>
-
+          <a href="../web/checkout.html">
+            <button id="btn-finalizar-compra" type="button" class="btn-green">
+              <p>Checkout</p>
+            </button>
+          </a>
+  
         </div>
-
+  
       </div>
+  
 
 
   </div>

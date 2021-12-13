@@ -91,8 +91,6 @@ const app = Vue.createApp({
   created() {
     this.get_users();
     this.get_bookings();
-
-
     if (localStorage.getItem("cart")) {
       this.cart = JSON.parse(localStorage.getItem("cart"));
       this.totalQantity = JSON.parse(localStorage.getItem("quantity"));

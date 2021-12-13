@@ -40,9 +40,6 @@
           </button>
           
           <a href="myaccount.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
-          <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
-              class="bi bi-cart-fill"></i>
-              <div class="badge"><small class="cWhite" v-if="totalQantity > 0">{{totalQantity}}</small></div></button>
         </div>
 
         <!-- MENU RESPONSIVE -->
@@ -86,7 +83,7 @@
       </div>
       <h3 class="py-4 fs-5 text-green">Product details</h3>
 
-      <div class="row d-flex justify-content-center mb-5">
+      <div class="row d-flex justify-content-center mb-5" style="margin-right: 0;">
         <div class="d-flex justify-content-center">
           <h3>Product Nº {{product.id}}</h3>
           <button type="button" class="btnTransp" @click="show_btn"><i class="bi bi-pencil text-primary fs-3"></i></button>
