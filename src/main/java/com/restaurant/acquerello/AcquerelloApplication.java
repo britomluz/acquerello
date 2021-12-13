@@ -47,7 +47,7 @@ public class AcquerelloApplication {
 
 
 			// Brian: Creating bookings
-			Booking booking1 = new Booking(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(4), SectorTables.GOLDEN, 2, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking1 = new Booking(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(4), SectorTables.GOLDEN, 4, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
 
 			user1.addAddress(address1);
 			user2.addAddress(address2);

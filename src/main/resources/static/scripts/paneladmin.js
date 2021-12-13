@@ -21,8 +21,7 @@ const App = Vue.createApp({
       orderStates: ["PENDING", "IN_PROCESS", "DELIVERED", "CANCELED"],
       orderStateSelected: "",
       idOrderDelete: "",
-      orderDetails:"",
-
+      orderDetails:"",      
       //each order
       order: "",
 

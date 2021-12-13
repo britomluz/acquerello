@@ -49,7 +49,7 @@ const app = Vue.createApp({
         .then(res => {
           this.user = res.data
           this.card=res.data.card
-         this.myaddress = res.data.address 
+          this.myaddress = res.data.address 
       })
         .catch(err => err.message)
     }, 
