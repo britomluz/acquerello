@@ -2,10 +2,41 @@ const app = Vue.createApp({
   data() {
     return {
       datetime: "",
-      bookingHour: 0,
+      bookingHour: "",
       sectortime: "",
-      table: 0,
+      table: "",
       quantitytime: 0,
+
+      //booking grid
+      errorBookTable:"",
+      error_bookTable:"",
+      tab:[],
+      num:[
+        {id: 1, capacity: 2},
+        {id: 2, capacity: 80},
+        {id: 3, capacity: 2},
+        {id: 4, capacity: 2},
+        {id: 5, capacity: 2},
+        {id: 6, capacity: 4},
+        {id: 7, capacity: 6},
+        {id: 8, capacity: 4},
+        {id: 9, capacity: 4},
+        {id: 10, capacity: 4},],
+      numGarden:[
+        {id: 11, capacity: 2},
+        {id: 12, capacity: 2},
+        {id: 13, capacity: 2},
+        {id: 14, capacity: 2},
+        {id: 15, capacity: 2},
+        {id: 16, capacity: 2},
+        {id: 17, capacity: 4},
+        {id: 18, capacity: 4},
+        {id: 19, capacity: 4},
+        {id: 20, capacity: 4},
+        {id: 21, capacity: 4},
+        {id: 22, capacity: 4},],
+
+      nums:[10,11,12,13,14,15,16,17,18,19,20],
       // cancel booking user
       idcal: 0,
       // show edit booking
@@ -28,7 +59,7 @@ const app = Vue.createApp({
       // status booking
       statusbooking:"",
       // disabled table 
-      disabled: 0,
+      disabled: false,
 
       bookingsUsers: [],
       // filter sector
@@ -60,6 +91,7 @@ const app = Vue.createApp({
   created() {
     this.get_users();
     this.get_bookings();
+    
 
     if (localStorage.getItem("cart")) {
       this.cart = JSON.parse(localStorage.getItem("cart"));
@@ -70,15 +102,15 @@ const app = Vue.createApp({
     //   user and admin    
     create_booking() {
       console.log(this.datetime, this.bookingHour, this.sectortime, this.table, this.quantitytime)
-      if (this.table < 19) {
+      if (this.table < 10) {
         this.sectortime = "GOLDEN";
-      } else if (this.table < 31) {
+      } else if (this.table < 22) {
         this.sectortime = "PLATINUM";
       } else {
         this.sectortime = "VIP";
       }
 
-      this.table = parseInt(this.table)
+      //this.table = parseInt(this.table)
       
       axios.post("/api/booking/create", {
           date: this.datetime,
@@ -93,10 +125,17 @@ const app = Vue.createApp({
             text: "we will love to see you!",
             icon: "success",
             button: "Ok",
-          });
+          })
+          .then(res => window.location.reload())          
         })
         .catch((err) =>{
           console.log(err.response.data)
+          if(err.response.status == 401){
+            this.error_bookTable = 'Please log in to book a table'  
+          }
+
+          this.errorBookTable = err.response.data
+          this.error_bookTable = err.response.data
         });
     },
     // cancel user booking
@@ -152,11 +191,11 @@ const app = Vue.createApp({
         .catch((err) => console.log(err));
     },
     get_bookings() {
-      axios
-        .get("/api/booking")
+      axios.get("/api/booking")
         .then((response) => {
-          this.bookingsUsers = response.data;
-          console.log(this.bookingsUsers)
+          this.bookingsUsers = response.data;   
+         // console.log(this.bookingsUsers)  
+         // this.tableAvailability()    
         })
         .catch((err) => console.log(err));
     },
@@ -166,8 +205,7 @@ const app = Vue.createApp({
       console.log(bookingId);
       console.log(bookingState);
 
-      axios
-        .patch(
+      axios.patch(
           "/api/admin/booking/edit",
           `id=${bookingId}&type=${bookingState}`
         )
@@ -178,6 +216,17 @@ const app = Vue.createApp({
         .catch((err) => {
           console.log(err);
         });
+    },
+    tableAvailability() {
+      let tables = this.bookingsUsers.filter(booking =>  booking.dateBooking.match(this.datetime) && (booking.bookingHour <= this.bookingHour  &&  this.bookingHour <= booking.endBooking))      
+
+      //let tables = this.bookingsUsers.filter(booking =>  booking.dateBooking.match(this.datetime) && (booking.bookingHour.match(this.bookingHour)))      
+      
+      this.tab = tables.map( tb => tb.tableNumber)
+
+      console.log(tables)
+      console.log(this.tab)
+      
     },
     //cart
     deleteOne(clickEvent) {
@@ -222,14 +271,16 @@ const app = Vue.createApp({
     }, 
   },
   computed: {
-    tableAvailability() {
-      if (this.bookingsUsers.tableAvailability == "NOTAVAILABLE") {
-        this.disabled = this.disabled + 1;
-      } else {
-        this.disabled = this.disabled;
-      }
-      console.log(this.disabled);
-    },
+    // tableAvailability() {
+    //   let imgBooking = document.querySelectorAll('.tbBooking')
+      
+    //   let tables = this.bookingsUsers.filter(booking => booking.tableAvailability == 'NOTAVAILABLE')
+
+
+    //   console.log(tables)
+    //   //let imgBooking = document.querySelectorAll('.tbBooking')
+      
+    // },
     filterBookings(){
       let a = this.bookingsUsers
       return this.bookingsUsers.filter(booking=>this.statesfilter.includes(booking.sector)||this.statesfilter.length === 0)

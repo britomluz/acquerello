@@ -86,15 +86,7 @@
             <div class="row mb-4 d-flex flex-column align-items-center ">
               <div class="col-12 col-md-6 square">
                   <h3 class="fs-5 py-3">Add new product</h3>
-                  <div class="row d-flex justify-content-center">
-                    <!-- <div class="col-12 col-md-4 mt-5 bg-warning">
-
-                      <p>aaaaaaa</p>
-                    </div>
-                    <div class="col-12 col-md-8 mt-5 bg-info">
-                      <p>aaaa</p>
-                      
-                  </div> -->
+                  <div class="row d-flex justify-content-center">                    
                   <div>
                     <form @submit.prevent="product_add()">
                       <div class="py-2">
@@ -121,10 +113,16 @@
                           </option>
                         </select>
                       </div>
-                      <!-- <label>produtc img</label> -->
-                      <!-- <button type="button" @click="$refs.fileinput.click()">
-                          pick img
-                      </button> -->
+                      <div class="d-flex flex-column justify-content-center align-items-start btn-profile">
+                        <div class="containerImg">
+                          <div class="cardImg">
+                            <img :src="products_img" id="img-preview" ref="imagePreviewDos">                          
+                          </div>
+                          <div class="cardImg-footer">                            
+                            <input ref="imageUploaderDos" type="file" @change="uploadImageProduct($event)" id="img-uploader2">
+                          </div>                          
+                        </div>  
+                      </div>                      
                       <button class="btn-green mt-4"> send </button>
                   </form>
                   </div>
@@ -160,7 +158,7 @@
                           </td>
                         </tr>
                         <tr v-if="filterProducts.length === 0" colspan="6">
-                           <td colspan="6" class="text-danger">No se encontraron resultados</td> 
+                           <td colspan="6" class="text-danger">No results found</td> 
                         </tr>
                       </tbody>
                     </table>

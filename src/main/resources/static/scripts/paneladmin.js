@@ -21,8 +21,7 @@ const App = Vue.createApp({
       orderStates: ["PENDING", "IN_PROCESS", "DELIVERED", "CANCELED"],
       orderStateSelected: "",
       idOrderDelete: "",
-      orderDetails:"",
-
+      orderDetails:"",      
       //each order
       order: "",
 
@@ -38,6 +37,7 @@ const App = Vue.createApp({
       bookings: "",
       cardInfo: "",
       orderInfo: "",
+      addressUser: "",
        // filter orders
        emailfilter:[],
        typefilter:[],
@@ -129,7 +129,13 @@ const App = Vue.createApp({
     showOrder(e) {
 
       let id = e.target.parentElement.id
-      window.location.href = `./order-details.html?id=${id}`
+
+      axios.get(`/api/order/details/${id}`).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
+      //window.location.href = `./order-details.html?id=${id}`
 
     },    
     loadDataOrders() {
@@ -260,7 +266,9 @@ const App = Vue.createApp({
         // console.log(this.orderDetails)
         //console.log(this.order.id)   
       
-      });
+      }).catch(err => {
+        console.log(err)
+      })
     },
     downloadInvoice(e){            
       this.idTransfer = e.target.firstChild.value 

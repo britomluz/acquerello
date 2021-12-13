@@ -128,7 +128,15 @@ const app = Vue.createApp({
 
       // error div
       errorCardRest: false,
-      error_cardRest: ""
+      error_cardRest: "",
+
+      //image products
+      CLOUDINARY_URL:"",
+      CLOUDINARY_UPLOAD_PRESET:"",
+      urlImg:"",
+      imagePreviewDos: "",
+      imageUploaderDos: "",
+      
     };
   },
   created() {
@@ -258,8 +266,7 @@ const app = Vue.createApp({
         .catch((err) => console.log(err));
     },
     editProduct() {
-      axios
-        .patch(`/api/products/edit/${this.id}`, {
+      axios.patch(`/api/products/edit/${this.id}`, {
           //ren, I added {} because I got an error
           name: this.productName,
           description: this.description,
@@ -427,9 +434,15 @@ const app = Vue.createApp({
     show_address(e) {
       if (e.target.value == "newAdress") {
         this.show = true;
+        const div = document.getElementById("check")
+        div.style.height = "1000px";
+        div.style.transition = "height 1s ease"
       } else {
         this.show = false;
         this.addressId = e.target.value;
+
+        const div = document.getElementById("check")
+        div.style.height = "auto"
       }
     },
     send_address() {
@@ -623,9 +636,10 @@ const app = Vue.createApp({
           stock: this.stockedit,
         })
         .then((response) => {
-          setTimeout(() => {
-            window.location.reload();
-          }, 500);
+          console.log('hecho')
+          console.log(response)
+           // window.location.reload();
+          
         })
         .catch((err) => console.log(err.response));
     },
@@ -671,11 +685,35 @@ const app = Vue.createApp({
           this.bankCard = true;
           break;
       }
-    },
-    verifyCard() {
+    },    
+    uploadImageProduct(event){
+      this.imagePreviewDos = this.$refs.imagePreviewDos
+      this.imageUploaderDos = this.$refs.imageUploaderDos
+      this.CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/luz-brito/image/upload'
+      this.CLOUDINARY_UPLOAD_PRESET = 'qda9s173'
+      
+      console.log(event.target.files[0])
+      const fileImg = event.target.files[0]
 
+      const formData = new FormData;
 
-    }
+      formData.append('file', fileImg)
+      formData.append('upload_preset', this.CLOUDINARY_UPLOAD_PRESET)
+      
+      axios.post(this.CLOUDINARY_URL, formData, {headers: {'Content-Type': 'multipart/form-data'}})
+      .then (res => {
+         console.log("Imagen cargada!")
+         console.log(res)
+         this.imagePreviewDos.src = res.data.secure_url
+
+         this.products_img=  this.imagePreviewDos.src   
+         
+         console.log(this.products_img)
+      
+      })
+
+   },   
+
   },
   computed: {
     filterProducts() {

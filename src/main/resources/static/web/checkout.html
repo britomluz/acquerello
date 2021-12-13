@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <div id="app">
+  <div id="app" v-cloak>
 
     <nav id="navbar" class="navbar fondoBlack fixed-top">
       <div class="container-fluid">
@@ -76,7 +76,7 @@
 
     <main class="d-flex flex-column justify-content-around align-items-center py-5">
       <h3 class="fs-1">CHECKOUT</h3>
-      <div class="row col-10 d-flex justify-content-around mt-5">
+      <div class="row col-10 d-flex justify-content-around mt-5" id="check">
 
         <div class="col-12 col-md-6 col-lg-5 p-3 formCardLoan">
           <div class="form-header">
@@ -259,12 +259,7 @@
               <div class="title  mt-5">
                 <h3 class="text-center">Checkout Details</h3>
               </div>
-              <div class="pt-5">
-                <h4>Your order: </h4>
-                <!-- asasasa -->
-                <p v-if="cart != ''">Products: <b v-for="c in cart"> {{c.name}}, </b> </p>
-                <p v-else> Products: <span>You don't have products yet</span> </p>
-                <p v-if="cart != ''">Total price: <b>${{totalProduct}}</b> </p>
+              <div>
                 <p v-if="guest">Register your Account:</p>
                 <label for="email" v-if="guest">Email: </label>
                 <input type="email" v-model="email" id="email" @input="register" placeholder="correo@user.com"

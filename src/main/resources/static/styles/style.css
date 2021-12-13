@@ -989,4 +989,129 @@ footer{
 .error-div {
     text-align: center;
     margin: 20px 0;
+
+
+}
+/*BOOKING*/
+.available{
+    filter: invert(0%) sepia(0%) saturate(31%) hue-rotate(288deg) brightness(95%) contrast(103%);
+}
+
+.disabled{
+    filter: invert(89%) sepia(10%) saturate(22%) hue-rotate(342deg) brightness(81%) contrast(87%);
+    
+} 
+
+.bTable .date input{
+    box-shadow: none;
+    outline:none;
+    border-color:none;
+}
+
+
+.tbt img{
+    width: 85%;
+    padding: 5px 5px;
+}
+.c {
+  margin-left: 0px!important;
+  margin-right: 0px!important;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr ;
+}
+.c2{
+    margin-left: 0px!important;
+    margin-right: 0px!important;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+/* .c:nth-child(1){
+    grid-row: 4/2;
+    background: #d1037b;
+} */
+
+.tbt{    
+    padding: 5px;
+}
+
+.golden .tbt:nth-child(7){    
+    grid-row: 4/2;
+}
+
+.golden .tbt:nth-child(1) img,
+.golden .tbt:nth-child(3) img{
+    transform: rotate(90deg);
+}
+
+.golden .tbt:nth-child(2){
+    grid-column: 2/4;  
+}
+
+
+
+
+.golden .c2:nth-child(2){
+    grid-column: 2/8;
+}
+
+.c input{
+    display: none;
+}
+.c input:checked ~ label{  
+    filter: invert(73%) sepia(12%) saturate(607%) hue-rotate(41deg) brightness(91%) contrast(83%);
+}
+.c label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.c small{
+    position: absolute;
+    font-size: 1em;  
+    user-select: none;
+    z-index: -1;  
+}
+
+
+/* 2  div */
+
+.c2 .tbt{    
+    padding: 5px;
+}
+.c2 .tbt img{
+    width: 100%;
+    padding: 5px 5px;
+
+}
+
+.c2 .tbt input{
+    display: none;
+}
+
+.c2 small{
+    position: absolute;
+    font-size: 1em;  
+    user-select: none;
+    z-index: -1;  
+}
+
+.c2 input:checked ~ label{  
+    filter: invert(73%) sepia(12%) saturate(607%) hue-rotate(41deg) brightness(91%) contrast(83%);
+}
+.c2 label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.cGrey{
+    color: #b3b3b3;
+}
+
+[v-cloak] {
+    display: none;
 }
