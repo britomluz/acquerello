@@ -17,59 +17,54 @@
 <body>
     <div id="app">
 
-        <nav id="navbar" class="navbar fondoBlack fixed-top">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <img src="../assets/acquerello.png" alt="" width="150">
-                </a>
-
-            <div class="d-flex">
-              <a class="nav-link" href="index.html">HOME</a>
-              <a class="nav-link" href="order.html">ORDER NOW</a>
-              <a class="nav-link" href="booking.html">BOOKING</a>
-              <a class="nav-link" href="contact.html">CONTACT</a>                  
-            </div>  
-
-            <div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  
-                    
-                    <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
-                    <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart">
-                      <i class="bi bi-cart-fill"></i><button class="navIcon"><i class="bi bi-search"></i></button></button>          
+      <nav id="navbar" class="navbar navbar-light fondoBlack fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="../assets/acquerello.png" alt="" width="150">
+          </a>
+  
+          <div class="d-flex navlinks">
+            <a class="nav-link" href="index.html">HOME</a>
+            <a class="nav-link" href="order.html">ORDER NOW</a>
+            <a class="nav-link" href="booking.html">BOOKING</a>
+            <a @click="logout" class="nav-link">LOG OUT</a>
+          </div>
+  
+          <div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+              aria-controls="offcanvasNavbar">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+  
+            <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+          </div>
+  
+          <!-- MENU RESPONSIVE -->
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+              <a class="navbar-brand" href="#">
+                <img src="../assets/acquerello.png" alt="" width="150">
+              </a>
+              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+                <h5>x</h5>
+              </button>
             </div>
-
-              
-              <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                  <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-                  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                  <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="home.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="order.html">Order Now</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="booking.html">Bookings</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                  </ul>
-                  <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                  </form>
-                </div>
-              </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="order.html">Order Now</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="booking.html">Bookings</a>
+                </li>
+              </ul>
             </div>
-          </nav>
+          </div>
+        </div>
+      </nav>
 
           <header class="headerPagesPanel d-flex align-items-center">
               <h1>Products</h1>   

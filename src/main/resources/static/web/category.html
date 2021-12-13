@@ -9,6 +9,7 @@
     integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../styles/style.css">
+  <link rel="stylesheet" href="../styles/account.css">
   <link rel="shortcut icon" href="../assets/favicon.png">
   <title>Acquerello</title>
 </head>
@@ -26,7 +27,7 @@
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
           <a class="nav-link" href="booking.html">BOOKING</a>
-          <a class="nav-link" href="contact.html">CONTACT</a>
+          <a @click="logout" class="nav-link">LOG OUT</a>
         </div>
 
         <div>
@@ -37,8 +38,6 @@
 
 
           <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
-          <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart">
-            <i class="bi bi-cart-fill"></i><button class="navIcon"><i class="bi bi-search"></i></button></button>
         </div>
 
 
@@ -57,9 +56,6 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="booking.html">Bookings</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact</a>
               </li>
             </ul>
             <form class="d-flex">

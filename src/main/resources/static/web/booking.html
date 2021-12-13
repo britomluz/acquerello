@@ -28,7 +28,7 @@
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
           <a class="nav-link" href="booking.html">BOOKING</a>
-          <a class="nav-link" href="contact.html">CONTACT</a>
+          <a @click="logout" class="nav-link">LOG OUT</a>
         </div>
         <div>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
@@ -58,14 +58,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="booking.html">Bookings</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact</a>
-              </li>
             </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
           </div>
         </div>
       </div>
@@ -127,11 +120,11 @@
         <div class="mt-3 d-flex justify-content-center align-items-center">
           <button class="btn-green" @click="tableAvailability">Check availibility</button>
         </div>
-        
+
       </div>
 
 
-      <div>    
+      <div>
         <!-- TABLES -->
         <div>
           <div class="nav nav-tabs tab-registration pt-5" id="nav-tab" role="tablist">
@@ -147,7 +140,7 @@
         </div>
 
 
-        <div class="tab-content bookTable" id="nav-tabContent">          
+        <div class="tab-content bookTable" id="nav-tabContent">
           <div class="tab-pane fade show active golden" id="golden" role="tabpanel" aria-labelledby="nav-home-tab">
             <div class=" d-flex justify-content-center">
               <div class="pb-2 col-12 col-md-8 d-flex flex-column justify-content-center align-items-center">
@@ -156,12 +149,12 @@
                   <div class="px-2"> <i class="bi bi-tablet-landscape-fill px-1 cGrey"></i> <small class="text-muted">Not Available</small></div>
                 </div>
                 <div>
-                  <h4 class="text-center mt-5">Select your table</h4>                  
+                  <h4 class="text-center mt-5">Select your table</h4>
                 </div>
-                
+
                   <div class="c col-12 col-lg-8 ">
                     <div class="tbt d-inline d-flex justify-content-center align-items-center" v-for="n in num" >
-                        <div class="d-flex justify-content-center align-items-center">                          
+                        <div class="d-flex justify-content-center align-items-center">
                             <input type="radio" name="mesa" :id="n.id" :value="n.id" v-model="table">
                             <label :for="n.id" class="label">
                                 <img  src="../assets/mesa2.svg" alt=""  v-if="n.capacity == 2" :class="[tab.includes(n.id) ? 'disabled' : 'available']">
@@ -176,13 +169,13 @@
                               <img  src="../assets/mesabar.svg" alt=""  v-if="n.capacity == 80">
                           </label>
                           <small>{{n.id}}</small>
-                        </div>                
+                        </div>
                         <!-- <div v-if="n.capacity == 80" v-for="n in nums" class="c2 bg-info d-inline d-flex justify-content-center">
                             <img  src="../assets/mesa1.svg" alt="">
                         </div>     -->
-                    </div>                    
+                    </div>
                 </div>
-                
+
 
 
               </div>
@@ -197,7 +190,7 @@
                 </div>
                 <div class="c2 col-12 col-lg-8 ">
                   <div class="tbt d-inline d-flex justify-content-center align-items-center" v-for="n in numGarden" >
-                      <div class="d-flex justify-content-center align-items-center">                          
+                      <div class="d-flex justify-content-center align-items-center">
                           <input type="radio" name="mesa" :id="n.id" :value="n.id" v-model="table">
                           <label :for="n.id" class="label">
                               <img  src="../assets/mesa2.svg" alt=""  v-if="n.capacity == 2" :class="[tab.includes(n.id) ? 'disabled' : 'available']">
@@ -212,11 +205,11 @@
                             <img  src="../assets/mesabar.svg" alt=""  v-if="n.capacity == 80">
                         </label>
                         <small>{{n.id}}</small>
-                      </div>                
+                      </div>
                       <!-- <div v-if="n.capacity == 80" v-for="n in nums" class="c2 bg-info d-inline d-flex justify-content-center">
                           <img  src="../assets/mesa1.svg" alt="">
                       </div>     -->
-                  </div>                    
+                  </div>
               </div>
 
               </div>
@@ -235,7 +228,7 @@
                       <input type="radio" name="mesa" id="23" value="23" v-model="table">
                       <label for="23" class="label">
                         <img src="../assets/mesagolden.svg" class="w-100" alt="">
-                      </label>                      
+                      </label>
                     </div>
                   </div>
 
@@ -310,77 +303,79 @@
       </section>
 
     </main>
-<!-- CART MODAL -->
-    <div id="canvasCart" class="offcanvas offcanvas-end" tabindex="-1" aria-labelledby="offcanvasRightLabel">
-      <div id="" class="offcanvas-header">
-        <h5 id="offcanvasRightLabel">Carrito de compras</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
-          <h5>x</h5>
-        </button>
-      </div>
-      <div class="offcanvas-body">
-        <table class="table">
-          <thead>
-            <tr class="title-offcanvas">
-              <th scope="col" colspan="2" class="cRed">Product</th>
-              <th scope="col" class="cRed">Qty.</th>
-              <th scope="col" class="cRed">Action</th>
-              <th scope="col" class="cRed">Total</th>
-            </tr>
-          </thead>
-          <!-- Template del carrito  -->
-          <tbody v-if="cart.length > 0" id="items">
-            <div>
-              <tr v-for="product in cart" :key="product.id" id="template-cart">
-                <td class="imgFill"><img :src="product.productImage" alt=""></td>
-                <!-- <td scope="row" class=""><img class="img-fluid img-thumbnail" :src="product.productImage" :alt="product.name"> -->
-                </td>
-                <td>{{product.name}}</td>
-                <td>{{product.quantity}}</td>
-                <td>
-                  <button class="btn btn-info btn-sm" type="button" :id="product.id" @click="addOne"> + </button>
-                  <button class="btn btn-danger btn-sm" type="button" :id="product.id" @click="deleteOne"> - </button>
-                </td>
-                <td class="off-canvas-priceTotal">${{product.price * product.quantity}}</td>
-              </tr>
-            </div>
-          </tbody>
-          <tfoot v-if="cart.length === 0">
-            <tr id="footer-cart">              
-              <td scope="row" colspan="5">Cart empty</td>
-            </tr>
-            <tr>
-              <!-- v-if="carrito.length === 0" -->
-              <td scope="row" colspan="5"><a href="order.html">ORDER NOW </a></td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-      <div v-if="cart.length > 0" id="template-footer">
-        <th scope="row" colspan="2">Total</th>
-        <td>{{totalQantity}}</td>
-        <td>
-          <button class="btn btn-danger btn-sm" id="vaciar-carrito" @click="emptyCart">
-            vaciar todo
+      <!-- CART MODAL -->
+      <div id="canvasCart" class="offcanvas offcanvas-end" tabindex="-1" aria-labelledby="offcanvasRightLabel">
+        <div id="" class="offcanvas-header">
+          <h5 id="offcanvasRightLabel">Shopping cart</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+            <h5>x</h5>
           </button>
-        </td>
-        <td class="font-weight-bold">$ <span>{{calculateTotal()}}</span></td>
+        </div>
+        <div class="offcanvas-body">
+          <table class="table">
+            <thead>
+              <tr class="title-offcanvas">
+                <th scope="col" colspan="2" class="cRed">Product</th>
+                <th scope="col" class="cRed">Qty.</th>
+                <th scope="col" class="cRed">Action</th>
+                <th scope="col" class="cRed">Total</th>
+              </tr>
+            </thead>
+            <!-- Template del carrito  -->
+            <tbody v-if="cart.length > 0" id="items">
+              <div>
+                <tr v-for="product in cart" :key="product.id" id="template-cart">
+                  <td class="imgFill"><img :src="product.productImage" alt=""></td>
+                  <!-- <td scope="row" class=""><img class="img-fluid img-thumbnail" :src="product.productImage" :alt="product.name"> -->
+                  </td>
+                  <td>{{product.name}}</td>
+                  <td>{{product.quantity}}</td>
+                  <td>
+                    <button class="btn btn-info btn-sm" type="button" :id="product.id" @click="addOne"> + </button>
+                    <button class="btn btn-danger btn-sm" type="button" :id="product.id" @click="deleteOne"> - </button>
+                  </td>
+                  <td class="off-canvas-priceTotal">${{product.price * product.quantity}}</td>
+                </tr>
+              </div>
+            </tbody>
+            <tfoot v-if="cart.length === 0">
+              <tr id="footer-cart">
+                <td scope="row" colspan="5">Cart empty</td>
+              </tr>
+              <tr>
+                <!-- v-if="carrito.length === 0" -->
+                <td scope="row" colspan="5"><a href="order.html">ORDER NOW </a></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div v-if="cart.length > 0" id="template-footer">
+          <th scope="row" colspan="2">products:
+            <span>
+              {{totalQantity}}
+            </span>
+          </th>
+          <td class="font-weight-bold">  total :$<span>{{calculateTotal()}}</span></td>
+          <td>
+            <button class="btn-green" id="vaciar-carrito" @click="emptyCart">
+              Clear cart
+            </button>
+          </td>
+        </div>
+
+
+        <div class="canvas-bottom">
+          <button id="btn-seguir-comprando" type="button" class="btn-green" data-bs-dismiss="offcanvas"
+            aria-label="Close">
+            <p> Keep buying</p>
+          </button>
+          <button id="btn-finalizar-compra" type="button" class="btn-green" href="compra.html">
+            <p> Finish your purchase</p>
+          </button>
+
+        </div>
+
       </div>
-
-
-      <div class="canvas-bottom">
-        <button id="btn-seguir-comprando" type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-          aria-label="Close">
-          <p> Seguir comprando</p>
-        </button>
-        <button id="btn-finalizar-compra" type="button" class="btn-close" href="compra.html">
-          <p> Finalizar compra</p>
-        </button>
-
-      </div>
-
-    </div>
-
 
 
   </div>

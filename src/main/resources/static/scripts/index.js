@@ -184,34 +184,33 @@ const App = Vue.createApp({
       }
     },
     send() {
-      if (
-        this.firstname.correct == true &&
-        this.lastname.correct == true &&
-        this.email.correct == true &&
-        this.password.correct == true &&
-        this.phone.correct == true
-      ) {
-        axios.post("/api/users", {
+        axios.post("/api/users/create", {
           firstName: this.firstname.input,
           lastName: this.lastname.input,
           email: this.email.input,
           password: this.password.input,
           number: this.phone.input,
         })
-          .then(response => window.location.href = "/web/myaccount.html")
+          .then(response => {
+            window.location.href = "/web/myaccount.html"
+            this.login(this.email.input,this.password.input)
+        })
           .catch(err => {
-            console.log(err.response.data)
-            console.log(this.firstname.input, this.lastname.input, this.email.input, this.password.input, this.phone.input,)
+            swal({
+              title: err.response.data,
+              icon: "warning", 
+            })  
           })
-      }
     },
-    login() {
-      axios.post("/api/login", `email=${this.email_two.input}&password=${this.password_two.input}`)
+    login(email,password) {
+      axios.post("/api/login", `email=${email}&password=${password}`)
         .then(response => window.location.href = "/web/myaccount.html")
         .catch(err => {
-          console.log(err.response.data)
-          console.log(this.email_two.input, this.password_two.input)
-
+          let a = err.response.data.error;
+          swal({
+            title: a,
+            icon: "warning", 
+          })  
         })
     },
 
