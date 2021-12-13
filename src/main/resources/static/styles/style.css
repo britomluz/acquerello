@@ -507,9 +507,11 @@ footer{
 .containerSignup{
     padding: 50px;
 }
-/* .formsIndex{
-    position: relative;
-} */
+
+
+
+
+/*form login and sign up*/
 .formIndex input{
     background: rgba(255, 255, 255, 0.15);
     border: none;
@@ -1131,4 +1133,41 @@ footer{
 
 [v-cloak] {
     display: none;
+}
+
+
+
+
+
+@media (max-width: 768px){
+    .glass .cover{
+        display: none;
+    }
+
+    .containerLogin,
+    .containerSignup {
+        width: 100%;
+    }
+
+    .containerSignup {
+        display: none;
+    }
+
+    .glass #flip{
+        display: none;
+    }
+
+    .glass #flip:checked ~ .formsIndex .signup-form {
+        display: block;
+    }
+    .glass #flip:checked ~ .formsIndex .login-form {
+        display: none;
+    }
+
+    .containerLogin{
+        padding: 20px;
+    }
+    .containerSignup{
+        padding: 20px;
+    }
 }

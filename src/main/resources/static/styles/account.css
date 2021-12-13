@@ -369,7 +369,7 @@ body{
   font-size: 1em; 
   
 }
-}
+
 
 /*MY ACCOUNT*/
 
@@ -451,4 +451,6 @@ body{
 .img-user {
   width: 100px;
   border-radius: 50%;
+}
+
 }
