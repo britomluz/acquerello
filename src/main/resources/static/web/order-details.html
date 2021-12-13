@@ -107,11 +107,11 @@
                       <th scope="col" class="cRed">Image</th>
                       <th scope="col" class="cRed">Items</th>
                       <th scope="col" class="cRed">Qty.</th>
-                      <th scope="col" class="cRed">Price</th>
+                      <th scope="col" class="cRed">Price p/p</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="product in orderDetails">
+                    <tr v-for="product in orderDetailId">
                       <td class="imgFill"><img :src="product.imageProduct" alt=""></td>
                       <td >{{product.name}}</td>
                       <td >{{product.quantity}}</td>

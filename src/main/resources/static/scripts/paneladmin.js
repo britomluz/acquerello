@@ -21,8 +21,10 @@ const App = Vue.createApp({
       orderStates: ["PENDING", "IN_PROCESS", "DELIVERED", "CANCELED"],
       orderStateSelected: "",
       idOrderDelete: "",
-      orderDetails:"",  
-      orderDetailsId:[],
+
+      orderDetailId: [],
+      orderDetail:[],
+      orders: [],
       //each order
       order: "",
 
@@ -41,12 +43,12 @@ const App = Vue.createApp({
       addressUser: "",
        // filter orders
        emailfilter:[],
-       typefilter:[],
-       statefilter:[],
+       typefilter:"",
+       statefilter:"",
        yearsfilter:[],
        monthfilter:[],
        dayfilter:[],
-       hoursfilter:[],
+       hoursfilter:"",
        // errors
        errororder:false,
        errorcancel:""
@@ -58,10 +60,10 @@ const App = Vue.createApp({
     });
     this.loadcreate();
     this.loadDataOrders()
-    this.loadDataOrderDetails()
+
     this.loadDataUser()
     this.loadUsers()
-
+    this. showOrder()
     // check if the localStorage have the user selected
 
     if(localStorage.getItem("user") != null) {
@@ -127,18 +129,20 @@ const App = Vue.createApp({
         console.log(err.response)
       })
     },    
-    showOrder(e) {
+    showOrder() {
 
-      let id = e.target.parentElement.id
+      const urlParam = new URLSearchParams(window.location.search);
+      const id = urlParam.get('id');
 
-      axios.get(`/api/order/details/${id}`).then(res => {
-        console.log(res)
-        
-        //this.orderDetails = res.data
+      axios.get(`/api/order/details?id=${id}`).then(res => {
+        this.orderDetail = res.data
+        this.orderDetailId = this.orderDetail.filter(idP => idP.orderId == id)
+        console.log(this.orderDetail)
+        console.log(this.orderDetailId)
       }).catch(err => {
         console.log(err)
       })
-      window.location.href = `./order-details.html?id=${id}`
+      //window.location.href = `./order-details.html?id=${id}`
 
     },    
     loadDataOrders() {
@@ -300,9 +304,10 @@ const App = Vue.createApp({
 
       let b =this.orders
       return this.orders
-      .filter(order=>this.emailfilter.includes(order.email) || this.emailfilter.length === 0)
-      .filter(order=>this.typefilter.includes(order.type) || this.typefilter.length === 0)
-      .filter(order=>this. statefilter.includes(order.state) || this.statefilter.length === 0)
+
+      .filter(order=>this.emailfilter.includes(order.email)||this.emailfilter.length === 0)
+      .filter(order=>this.typefilter.includes(order.type)||this.typefilter == "")
+      .filter(order=>this. statefilter.includes(order.state)||this.statefilter === "")
       .filter(order=>order.creationDate.slice(0,4).match(this.yearsfilter))
       .filter(order=>order.creationDate.slice(5,7).match(this.monthfilter))
       .filter(order=>order.creationDate.slice(8,10).match(this.dayfilter))
