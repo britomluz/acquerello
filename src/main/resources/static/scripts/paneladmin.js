@@ -270,7 +270,10 @@ const App = Vue.createApp({
         //console.log(this.order.id)   
       
       }).catch(err => {
-        console.log(err)
+        if (err.response.status == 400) {
+          window.location.href = `./my-orders.html`
+        }
+        console.log(err.response.status)
       })
     },
     downloadInvoice(e){            

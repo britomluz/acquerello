@@ -75,22 +75,16 @@ public class OrderController {
 
 
     @GetMapping("/order/details")
-    public ResponseEntity<?> getAllOrderDetails(Authentication authentication, @RequestParam Long id) {
+    public ResponseEntity<?> getAllOrderDetails(Authentication authentication) {
         User user = userServices.getByEmail(authentication.getName());
-        Order order = orderService.getById(id).orElse(null);
-        if (user.getType().equals(UserType.USER)){
-            if (!user.getOrders().contains(order)){
-                return new ResponseEntity<>("Order don't belong you", HttpStatus.BAD_REQUEST);
-            }
-            return new ResponseEntity<>(orderDetailsService.getAll().stream().map(OrderDetailsDTO::new).collect(Collectors.toList()), HttpStatus.OK);
-        }
+
         return new ResponseEntity<>(orderDetailsService.getAll().stream().map(OrderDetailsDTO::new).collect(Collectors.toList()), HttpStatus.OK);
     }
 
 
     @GetMapping("/order/details/{id}")
     public ResponseEntity<?> getAllOrderDetailsById(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(orderDetailsService.getById(id).map(OrderDetailsDTO::new), HttpStatus.OK);
+        return new ResponseEntity<>(orderDetailsService.getAll().stream().filter(orderDetails -> orderDetails.getOrder().getId().equals(id)).collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @Transactional
@@ -128,7 +122,6 @@ public class OrderController {
            }
            OrderDetails orderDetails = new OrderDetails(quantity,product1,order);
            product1.setStock(product1.getStock() - quantity);
-           address.addOrderDetails(orderDetails);
            productService.save(product1);
            orderDetailsService.save(orderDetails);
         }

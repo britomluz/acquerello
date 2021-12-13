@@ -90,8 +90,8 @@ public class CardController {
         Card card = cardService.getById(id).orElse(null);
         User user = userService.getByEmail(authentication.getName());
 
-        if (!user.getType().equals(UserType.USER)){
-            return new ResponseEntity<>("Don't have authority",HttpStatus.FORBIDDEN);
+        if (user == null){
+            return new ResponseEntity<>("Don't have authority",HttpStatus.UNAUTHORIZED);
         }
         if (!user.getCards().contains(card)){
             return new ResponseEntity<>("Card don't belongs you",HttpStatus.FORBIDDEN);

@@ -1,5 +1,6 @@
 package com.restaurant.acquerello.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -19,11 +20,12 @@ public class Address {
     private String reference;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "user_id")
     private User userAdd;
 
-    @OneToOne(mappedBy = "address")
-    private OrderDetails orderDetails;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     public Address() {}
 
@@ -78,25 +80,33 @@ public class Address {
     public void setReference(String reference) {
         this.reference = reference;
     }
-
+    @JsonIgnore
     public User getUser() {
         return userAdd;
     }
-
+    @JsonIgnore
     public void setUser(User user) {
         this.userAdd = user;
     }
-
-    public OrderDetails getOrderDetails() {
-        return orderDetails;
+    @JsonIgnore
+    public User getUserAdd() {
+        return userAdd;
+    }
+    @JsonIgnore
+    public void setUserAdd(User userAdd) {
+        this.userAdd = userAdd;
+    }
+    @JsonIgnore
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrderDetails(OrderDetails orderDetails) {
-        this.orderDetails = orderDetails;
+    public void setOrder(Order order) {
+        this.order = order;
     }
-
-    public void addOrderDetails(OrderDetails orderDetails) {
-        orderDetails.setAddress(this);
+    @JsonIgnore
+    public void addOrder(Order order) {
+        order.setAddress(this);
     }
 
     @Override

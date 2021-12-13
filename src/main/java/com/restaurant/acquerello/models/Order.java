@@ -27,6 +27,10 @@ public class Order {
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private List<OrderDetails> orderDetails = new ArrayList<>();
 
+
+    @OneToOne(mappedBy = "order")
+    private Address address;
+
     public Order() {}
 
     public Order(LocalDateTime creationDate, LocalDateTime aceptedDate, OrderState state, Double total, OrderType type) {
@@ -101,6 +105,24 @@ public class Order {
     public void setType(OrderType type) {
         this.type = type;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public void addAddress(Address address) {
+        address.setOrder(this);
+    }
+
+
 
     @Override
     public String toString() {

@@ -175,6 +175,12 @@ const app = Vue.createApp({
             .then(console.log("Card created"))
             .catch(err => console.log(err))
     },
+    showOrderDetails(e) {
+      let id = e.target.parentElement.id
+      window.location.href = `./order-details.html?id=${id}`
+
+    },
+
       //cart
     deleteOne(clickEvent) {
       this.cart.forEach((product) => {

@@ -119,11 +119,7 @@ public class AcquerelloApplication {
 			userRepository.save(user4);
 			userRepository.save(user5);
 
-			addressRepository.save(address1);
-			addressRepository.save(address2);
-			addressRepository.save(address3);
-			addressRepository.save(address4);
-			addressRepository.save(address5);
+
 
 			bookingRepository.save(booking1);
 			bookingRepository.save(booking2);
@@ -356,11 +352,24 @@ public class AcquerelloApplication {
 			user4.addOrder(order4);
 			user5.addOrder(order5);
 
+
 			orderRepository.save(order1);
 			orderRepository.save(order2);
 			orderRepository.save(order3);
 			orderRepository.save(order4);
 			orderRepository.save(order5);
+
+			order1.addAddress(address1);
+			order2.addAddress(address2);
+			order3.addAddress(address3);
+			order4.addAddress(address4);
+			order5.addAddress(address5);
+
+			addressRepository.save(address1);
+			addressRepository.save(address2);
+			addressRepository.save(address3);
+			addressRepository.save(address4);
+			addressRepository.save(address5);
 
 			// Brian : Creating order details
 			OrderDetails orderDetails1 = new OrderDetails(2,product1,order1);
@@ -374,16 +383,7 @@ public class AcquerelloApplication {
 			OrderDetails orderDetails9 = new OrderDetails(2,product9,order5);
 			OrderDetails orderDetails10 = new OrderDetails(3,product10,order5);
 
-			address1.addOrderDetails(orderDetails1);
-			address1.addOrderDetails(orderDetails2);
-			address1.addOrderDetails(orderDetails3);
-			address1.addOrderDetails(orderDetails4);
-			address1.addOrderDetails(orderDetails5);
-			address1.addOrderDetails(orderDetails6);
-			address1.addOrderDetails(orderDetails7);
-			address1.addOrderDetails(orderDetails8);
-			address1.addOrderDetails(orderDetails9);
-			address1.addOrderDetails(orderDetails10);
+
 
 			orderDetailsRepository.save(orderDetails1);
 			orderDetailsRepository.save(orderDetails2);
