@@ -98,6 +98,11 @@
           <!-- Form Steps -->
           <form @submit.prevent="" v-cloak>
 
+            <div class="errors" id="error" v-if="errorCardRest">
+              <div class="error-div">
+                <small class="cRed"><i class="bi bi-info-circle-fill px-3 cRed"></i>{{error_cardRest}}</small>
+              </div>
+            </div>
             <!-- Step 1 -->
             <div ref="form1" class="form-step form1 form-step-active">
               <div class="title">
@@ -170,7 +175,7 @@
                           </div>
                           <div class=" d-flex flex-column">
                             <div class="d-flex align-items-center justify-content-around">
-  
+
                               <div class="d-flex flex-column">
                                 <label for="number">*Nº</label>
                                 <input type="text" id="number" v-model="number" required>
@@ -238,10 +243,6 @@
                       placeholder="yy/mm" v-model="vec">
                   </div>
                 </div>
-                <div class=" d-flex flex-column">
-                  <label for="acc">Account Number</label>
-                  <input id="acc" type="text" maxlength="12" placeholder="VIN-XXXXXXXX" v-model="accountNumber">
-                </div>
               </div>
               <div class="btn-group mt-3">
                 <a ref="back1"
@@ -266,9 +267,11 @@
                 <p v-if="cart != ''">Total price: <b>${{totalProduct}}</b> </p>
                 <p v-if="guest">Register your Account:</p>
                 <label for="email" v-if="guest">Email: </label>
-                <input type="email" v-model="email" id="email" @input="register" placeholder="correo@user.com" v-if="guest">
+                <input type="email" v-model="email" id="email" @input="register" placeholder="correo@user.com"
+                  v-if="guest">
                 <label for="password" v-if="guest">Password: </label>
-                <input type="password" v-model="password" id="password" @input="register" placeholder="correo@user.com" v-if="guest">
+                <input type="password" v-model="password" id="password" @input="register" placeholder="correo@user.com"
+                  v-if="guest">
               </div>
               <div class=" mt-5 pt-5">
                 <h4 class="text-center">Confirm your order</h4>

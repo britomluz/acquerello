@@ -83,7 +83,7 @@ const app = Vue.createApp({
       numberCard: "",
       cvv: "",
       vec: "",
-      accountNumber: "",
+      accountNumber: "VIN-64578965",
       description: "Accquerello order",
 
       total: 0,
@@ -125,6 +125,10 @@ const app = Vue.createApp({
 
       //shop
       cardNumber: "",
+
+      // error div
+      errorCardRest: false,
+      error_cardRest: ""
     };
   },
   created() {
@@ -161,7 +165,7 @@ const app = Vue.createApp({
       if (res.status === 200) {
         this.logged = true;
         this.user = res.data;
-        this.address = res.data.address;
+        this.address = [...res.data.address];
       }
     }).catch(err => {
       if (err.response.status === 401) {
@@ -468,10 +472,45 @@ const app = Vue.createApp({
         // if an authenticated user send a request
         if (this.logged) {
           axios.post("/api/order/buy", { products: product, total: total, type: this.type, id: this.addressId }).then(res => {
-            console.log(res)
-            localStorage.clear();
+            // create payment
+            axios.post("https://mindhub-b.herokuapp.com/api/payments", { number: this.numberCard, cvv: cvv, amount: total, description: this.description, accountNumber: this.accountNumber }).then(res => {
+              console.log(res)
+              swal({
+                title: "Payment succesfull!",
+                text: "Yumm!",
+                icon: "success",
+                button: "Ok",
+              }).then(res => {
+                window.location.href = "/web/my-orders.html"
+              });
+              localStorage.clear();
+            }).catch(err => {
+              this.errorCardRest = true;
+
+              if (err.response.status == 500) {
+                this.error_cardRest = "Check empty fields";
+              } else {
+                this.error_cardRest = err.response.message;
+              }
+
+              setTimeout(() => {
+                this.errorCardRest = false;
+                this.error_cardRest = ""
+              }, 3000)
+            })
           }).catch(err => {
-            console.log(err.response)
+            this.errorCardRest = true;
+
+            if (err.response.status == 500) {
+              this.error_cardRest = "Check empty fields";
+            } else {
+              this.error_cardRest = err.response.message;
+            }
+
+            setTimeout(() => {
+              this.errorCardRest = false;
+              this.error_cardRest = ""
+            }, 3000)
           })
         } else {
           // create user and address and order
@@ -495,18 +534,26 @@ const app = Vue.createApp({
             })
             .then((res) => {
               console.log(res);
-              localStorage.clear();
+              // create payment
+              axios.post("https://mindhub-b.herokuapp.com/api/payments", { number: this.numberCard, cvv: cvv, amount: total, description: this.description, accountNumber: this.accountNumber }).then(res => {
+                console.log(res)
+                swal({
+                  title: "Payment succesfull!",
+                  text: "Account registered!",
+                  icon: "success",
+                  button: "Ok",
+                }).then(res => {
+                  window.location.href = "/web/myaccount.html"
+                });
+                localStorage.clear();
+              }).catch(err => {
+                console.log(err.response)
+              })
             })
             .catch((err) => {
               console.log(err.response);
             });
         }
-        // create payment
-        axios.post("https://mindhub-b.herokuapp.com/api/payments", { number: this.numberCard, cvv: cvv, amount: total, description: this.description, accountNumber: this.accountNumber }).then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err.response)
-        })
       }
     },
     register(e) {
