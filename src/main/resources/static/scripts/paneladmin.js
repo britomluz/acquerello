@@ -28,7 +28,7 @@ const App = Vue.createApp({
       userAcc: false,
       adminAcc: false,
       card: false,
-      order: false,
+      orderBoolean: false,
       //users
       users:[],
       user: "",
@@ -87,10 +87,10 @@ const App = Vue.createApp({
       }
 
       if(this.user.orders.length >= 1) {
-        this.order = true;
+        this.orderBoolean = true;
         this.orderInfo = this.user.orders[0];
       } else {
-        this.order = false
+        this.orderBoolean = false
       }
     }
 

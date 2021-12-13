@@ -1,5 +1,6 @@
 package com.restaurant.acquerello.dtos;
 
+import com.restaurant.acquerello.models.OrderType;
 import com.restaurant.acquerello.models.Product;
 
 import java.time.LocalDateTime;
@@ -23,9 +24,9 @@ public class CompleteRegisterDTO {
     // get products and total for new order
     private List<Product> products;
     private Double total;
-    private String type;
+    private OrderType type;
 
-    public CompleteRegisterDTO(String firstName, String lastName, String email, String password, Long number, String street, Integer numberStreet, String zip, String state, String reference, List<Product> products, Double total, String type) {
+    public CompleteRegisterDTO(String firstName, String lastName, String email, String password, Long number, String street, Integer numberStreet, String zip, String state, String reference, List<Product> products, Double total, OrderType type) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -137,11 +138,11 @@ public class CompleteRegisterDTO {
         this.total = total;
     }
 
-    public String getType() {
+    public OrderType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(OrderType type) {
         this.type = type;
     }
 }

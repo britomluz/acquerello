@@ -1,3 +1,17 @@
+// fill tables
+let test = /\b[checkout]+\b/g
+let url = window.location.href;
+let match = url.match(test);
+if (match != null) {
+  const select = document.getElementById("table");
+  for (let i = 1; i <= 30; i++) {
+    const opt = document.createElement("option");
+    opt.value = i;
+    opt.innerText = `Nº ${i}`
+    select.appendChild(opt)
+  }
+}
+
 const app = Vue.createApp({
   data() {
     return {
@@ -39,6 +53,7 @@ const app = Vue.createApp({
       quantity: [],
       searchProducts: false,
       show: false,
+      table: false,
 
       //multistep form
       prevBtns: "",
@@ -63,6 +78,7 @@ const app = Vue.createApp({
       zip: "",
       reference: "",
       state: "",
+      addressId: "",
 
       numberCard: "",
       cvv: "",
@@ -72,8 +88,14 @@ const app = Vue.createApp({
 
       total: 0,
       totalProduct: 0,
+      type: "",
 
       deliver: false,
+
+      logged: false,
+      guest: false,
+      user: "",
+      address: [],
 
       // payment ways
 
@@ -95,11 +117,11 @@ const app = Vue.createApp({
       showbtn: false,
       // add product
       products_img: "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgDefault_qbhg4k.jpg",
-      nameproducts:"",
-      descriptionproducts:"",
-      priceproduct:0,
-      stockproduct:0,
-      id_addproduct:0,
+      nameproducts: "",
+      descriptionproducts: "",
+      priceproduct: 0,
+      stockproduct: 0,
+      id_addproduct: 0,
 
       //shop
       cardNumber:"",
@@ -119,11 +141,12 @@ const app = Vue.createApp({
     this.loadProducts();
     this.loadCategories();
     this.loadDataProduct();
-   
+
 
     this.showModal();
     if (localStorage.getItem("cart")) {
       this.cart = JSON.parse(localStorage.getItem("cart"));
+      this.totalQantity = JSON.parse(localStorage.getItem("quantity"));
       this.addToCart();
     }
 
@@ -139,6 +162,21 @@ const app = Vue.createApp({
         this.totalProduct += p.price * p.quantity
       })
     }
+
+    // check if a user is logged
+    axios.get("/api/users/current").then(res => {
+      console.log(res)
+      if (res.status === 200) {
+        this.logged = true;
+        this.user = res.data;
+        this.address = res.data.address;
+      }
+    }).catch(err => {
+      if (err.response.status === 401) {
+        this.logged = false;
+        this.guest = true;
+      }
+    })
   },
   methods: {
     loadProducts() {
@@ -267,7 +305,6 @@ const app = Vue.createApp({
     },
     addToCart(id) {
       this.totalPrice = 0;
-      
 
       for (let i = 0; i < this.products.length; i++) {
         if (this.products[i].id == id) {
@@ -283,10 +320,11 @@ const app = Vue.createApp({
 
           }
           this.totalPrice = this.totalPrice + this.products[i].price;
-         
+
         }
       }
       localStorage.setItem("cart", JSON.stringify(this.cart));
+      localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
     },
     deleteOne(clickEvent) {
       this.cart.forEach((product) => {
@@ -301,15 +339,18 @@ const app = Vue.createApp({
           this.cart.splice(i, 1);
         }
         localStorage.setItem("cart", JSON.stringify(this.cart));
+        localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
       });
     },
     addOne(clickEvent) {
       this.cart.forEach((product) => {
-        if (clickEvent.target.id == product.id){ 
+        if (clickEvent.target.id == product.id) {
           product.quantity++;
-        product.stock--;
-        this.totalQantity++
-        localStorage.setItem("cart", JSON.stringify(this.cart));}
+          product.stock--;
+          this.totalQantity++
+          localStorage.setItem("cart", JSON.stringify(this.cart));
+          localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
+        }
       });
     },
     showModal(id) {
@@ -328,6 +369,7 @@ const app = Vue.createApp({
       this.cart = [];
       this.totalQantity = 0
       localStorage.setItem("cart", JSON.stringify(this.cart));
+      localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
     },
     //multistep form
     updateForms(btn, form1, form2, step) {
@@ -390,6 +432,7 @@ const app = Vue.createApp({
         this.show = true;
       } else {
         this.show = false;
+        this.addressId = e.target.value;
       }
     },
     send_address() {
@@ -404,7 +447,7 @@ const app = Vue.createApp({
         .then((response) => alert(response.data))
         .catch((err) => console.log(err.response.data));
     },
-    sendForm(e) {
+    confirmBuy() {
       // format data
       let tel = Number(this.phone);
       let number = Number(this.number);
@@ -429,39 +472,48 @@ const app = Vue.createApp({
           product.push(obj)
         })
 
-
-        // create user and address and order
-        axios
-          .post("/api/order/checkout", {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            email: this.email,
-            password: this.password,
-            number: tel,
-
-            street: this.street,
-            numberStreet: number,
-            zip: this.zip,
-            state: this.state,
-            reference: this.reference,
-
-            products: product,
-            total: total
-          })
-          .then((res) => {
-            console.log(res);
-            localStorage.clear();
-          })
-          .catch((err) => {
-            console.log(err.response);
-          });
-
-          // create payment
-          axios.post("https://mindhub-b.herokuapp.com/api/payments", {number: this.numberCard, cvv: cvv, amount: total, description: this.description, accountNumber: this.accountNumber}).then(res => {
+        // if an authenticated user send a request
+        if (this.logged) {
+          axios.post("/api/order/buy", { products: product, total: total, type: this.type, id: this.addressId }).then(res => {
             console.log(res)
+            localStorage.clear();
           }).catch(err => {
             console.log(err.response)
           })
+        } else {
+          // create user and address and order
+          axios
+            .post("/api/order/checkout", {
+              firstName: this.firstName,
+              lastName: this.lastName,
+              email: this.email,
+              password: this.password,
+              number: tel,
+
+              street: this.street,
+              numberStreet: number,
+              zip: this.zip,
+              state: this.state,
+              reference: this.reference,
+
+              products: product,
+              total: total,
+              type: this.type
+            })
+            .then((res) => {
+              console.log(res);
+              localStorage.clear();
+            })
+            .catch((err) => {
+              console.log(err.response);
+            });
+        }
+        // create payment
+        axios.post("https://mindhub-b.herokuapp.com/api/payments", { number: this.numberCard, cvv: cvv, amount: total, description: this.description, accountNumber: this.accountNumber }).then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err.response)
+        })
       }
     },
     register(e) {
@@ -488,12 +540,18 @@ const app = Vue.createApp({
       switch (e.target.value) {
         case "delivery":
           this.deliver = true;
+          this.table = false;
+          this.type = "DELIVERY"
           break;
         case "in":
           this.deliver = false;
+          this.table = true;
+          this.type = "LOCAL"
           break;
         case "withdraw":
           this.deliver = false;
+          this.table = false;
+          this.type = "TAKEAWAY";
           break;
       }
     },
@@ -564,15 +622,15 @@ const app = Vue.createApp({
         });
     },
     selectPayment(e) {
-      switch(e.target.id) {
+      switch (e.target.id) {
         case "acquerello":
           this.acquerelloCard = true;
           this.bankCard = false;
-        break;
+          break;
         case "bank":
           this.acquerelloCard = false;
           this.bankCard = true;
-        break;
+          break;
       }
     },    
     uploadImageProduct(event){

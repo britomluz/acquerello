@@ -300,7 +300,7 @@
 
     <!-- CART MODAL -->
     <div id="canvasCart" class="offcanvas offcanvas-end" tabindex="-1" aria-labelledby="offcanvasRightLabel">
-      <div class="offcanvas-header">
+      <div id="" class="offcanvas-header">
         <h5 id="offcanvasRightLabel">Carrito de compras</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
           <h5>x</h5>
@@ -395,7 +395,7 @@
                   </div>
                   <div class="modal-footer d-flex flex-nowrap mt-auto mb-4">
                     <button id="btnModalProdClose" type="button" class="btn" data-bs-dismiss="modal">Close</button>
-                    <button id="btnModalProdBuy" type="button" class="btn">Add to cart</button>
+                    <button id="btnModalProdBuy" type="button" @click="addToCart(producto.id)" class="btn">Add to cart</button>
                   </div>
                 </div>
               </div>
@@ -450,6 +450,7 @@
   <script src="https://unpkg.com/vue@next"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="../scripts/order.js"></script>
+  
 
 </body>
 

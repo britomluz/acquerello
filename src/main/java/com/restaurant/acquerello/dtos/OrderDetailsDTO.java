@@ -1,9 +1,11 @@
 package com.restaurant.acquerello.dtos;
 
+import com.restaurant.acquerello.models.Address;
 import com.restaurant.acquerello.models.OrderDetails;
 import com.restaurant.acquerello.models.OrderState;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class OrderDetailsDTO {
     private Long id;
@@ -16,6 +18,7 @@ public class OrderDetailsDTO {
     private OrderState state;
     private Double totalOrder;
     private String imageProduct;
+    private Address address;
 
     public OrderDetailsDTO(OrderDetails orderDetails) {
         this.id = orderDetails.getId();
@@ -28,6 +31,7 @@ public class OrderDetailsDTO {
         this.state = orderDetails.getState();
         this.totalOrder = orderDetails.getTotalOrder();
         this.imageProduct = orderDetails.getProduct().getProductImage();
+        this.address = orderDetails.getAddress();
     }
 
     public Long getId() {
@@ -108,5 +112,13 @@ public class OrderDetailsDTO {
 
     public void setImageProduct(String imageProduct) {
         this.imageProduct = imageProduct;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

@@ -74,12 +74,29 @@ const app = Vue.createApp({
       monthfilter:[],
       // day filter
       dayfilter:[],
+
+       //cart
+       qantity: "",
+       totalQantity: 0,
+       product: [],
+       destacados: [],
+       cart: [],
+       modal: [],
+       search: "",
+       quantity: [],
+       searchProducts: false,
+       show: false,
     };
   },
   created() {
     this.get_users();
     this.get_bookings();
     
+
+    if (localStorage.getItem("cart")) {
+      this.cart = JSON.parse(localStorage.getItem("cart"));
+      this.totalQantity = JSON.parse(localStorage.getItem("quantity"));
+    } 
   },
   methods: {
     //   user and admin    
@@ -211,6 +228,47 @@ const app = Vue.createApp({
       console.log(this.tab)
       
     },
+    //cart
+    deleteOne(clickEvent) {
+      this.cart.forEach((product) => {
+        if (clickEvent.target.id == product.id) {
+          product.quantity--;
+          product.stock++;
+          this.totalQantity--
+        }
+      });
+      this.cart.forEach((product, i) => {
+        if (product.quantity == 0) {
+          this.cart.splice(i, 1);
+        }
+        localStorage.setItem("cart", JSON.stringify(this.cart));
+        localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
+      });
+    }, 
+    addOne(clickEvent) {
+      this.cart.forEach((product) => {
+        if (clickEvent.target.id == product.id){ 
+          product.quantity++;
+        product.stock--;
+        this.totalQantity++
+        localStorage.setItem("cart", JSON.stringify(this.cart));
+        localStorage.setItem("quantity", JSON.stringify(this.totalQantity));}
+      });
+    }, 
+    calculateTotal() {
+      let total = 0;
+      this.cart.forEach((product) => {
+        total += product.price * product.quantity;
+      });
+      return total;
+    },
+    emptyCart() {
+      this.cart.forEach(product => product.quantity = 0)
+      this.cart = [];
+      this.totalQantity = 0
+      localStorage.setItem("cart", JSON.stringify(this.cart));
+      localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
+    }, 
   },
   computed: {
     // tableAvailability() {

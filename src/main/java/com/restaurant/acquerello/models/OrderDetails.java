@@ -29,6 +29,10 @@ public class OrderDetails {
     @JoinColumn(name = "order_detail")
     private Order order;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "address")
+    private Address address;
+
     public OrderDetails() {}
 
     public OrderDetails(Integer quantity, Product product, Order order) {
@@ -124,4 +128,11 @@ public class OrderDetails {
         this.order = order;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 }

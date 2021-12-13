@@ -218,12 +218,12 @@
                       </tr>
                     </tbody>
                   </table>
-                  <div class="p-4" v-if="order">
+                  <div class="p-4" v-if="orderBoolean">
                     <h3>
                         ORDER INFO
                     </h3>
                   </div>
-                  <table class="table tableAdmin" v-if="card">
+                  <table class="table tableAdmin" v-if="orderBoolean">
                     <thead>
                       <tr>
                         <th scope="col">ID</th>
