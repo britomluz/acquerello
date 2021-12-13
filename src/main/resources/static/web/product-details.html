@@ -121,6 +121,11 @@
               </div>
               <button class="btn-green"> Save </button>
             </form>
+            <div class="errors" v-if="errorEditProduct">
+              <div>
+                <small class="cRed"><i class="bi bi-info-circle-fill px-3 cRed"></i>{{error_editProduct}}</small>
+              </div>
+    </div>
           </div>
           <div v-else>
             <h3 class="mb-4">{{product.name}}</h3>
