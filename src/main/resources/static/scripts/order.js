@@ -115,6 +115,8 @@ const app = Vue.createApp({
       priceedit: 0,
       stockedit: 0,
       showbtn: false,
+      errorEditProduct: false,
+      error_editProduct: "",
       // add product
       products_img: "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgDefault_qbhg4k.jpg",
       nameproducts: "",
@@ -122,6 +124,8 @@ const app = Vue.createApp({
       priceproduct: 0,
       stockproduct: 0,
       id_addproduct: 0,
+      errorAddProduct: false,
+      error_addProduct: "",
 
       //shop
       cardNumber: "",
@@ -625,23 +629,31 @@ const app = Vue.createApp({
     },
     // edit products
     pacth_product() {
-      this.productimg = this.product.productImage;
+      //this.productimg = this.product.productImage;
       console.log(this.product)
       axios
         .patch(`/api/products/edit/${this.product.id}`, {
           name: this.nameeditproduct,
           description: this.descriptionproduc,
-          productImage: this.productimg,
+          productImage: this.products_img,
           price: this.priceedit,
           stock: this.stockedit,
         })
         .then((response) => {
           console.log('hecho')
           console.log(response)
-           // window.location.reload();
+          swal({
+            title: "Good job!",
+            text: "Product was edited succesfully!",
+            icon: "success",
+            button: "Ok",
+          })
+          .then(res => window.location.reload()) 
           
         })
         .catch((err) => console.log(err.response));
+        this.errorEditProduct= true
+        this.error_editProduct= err.response.data
     },
     // show btn in pag product-details
     show_btn() {
@@ -663,15 +675,20 @@ const app = Vue.createApp({
           stock: this.stockproduct,
         })
         .then((response) => {
-          console.log(response)
-          alert(response.data)
-          setTimeout(() => {
-            window.location.reload()
-          }, 500);
+          console.log(response)  
+          swal({
+            title: "Good job!",
+            text: "Product added succesfully!",
+            icon: "success",
+            button: "Ok",
+          })
+          .then(res => window.location.reload())        
 
         })
         .catch((err) => {
           console.log(err.response.data)
+          this.errorAddProduct = true
+          this.error_addProduct = err.response.data
         });
     },
     selectPayment(e) {

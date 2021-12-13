@@ -125,6 +125,11 @@
                       </div>                      
                       <button class="btn-green mt-4"> send </button>
                   </form>
+                  <div class="errors" v-if="errorAddProduct">
+                    <div>
+                      <small class="cRed"><i class="bi bi-info-circle-fill px-3 cRed"></i>{{error_addProduct}}</small>
+                    </div>
+          </div>
                   </div>
               </div>              
             </div> 
