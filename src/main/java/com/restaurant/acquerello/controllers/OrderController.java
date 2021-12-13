@@ -75,8 +75,16 @@ public class OrderController {
 
 
     @GetMapping("/order/details")
-    public List<OrderDetailsDTO> getAllOrderDetails() {
-        return orderDetailsService.getAll().stream().map(OrderDetailsDTO::new).collect(Collectors.toList());
+    public ResponseEntity<?> getAllOrderDetails(Authentication authentication, @RequestParam Long id) {
+        User user = userServices.getByEmail(authentication.getName());
+        Order order = orderService.getById(id).orElse(null);
+        if (user.getType().equals(UserType.USER)){
+            if (!user.getOrders().contains(order)){
+                return new ResponseEntity<>("Order don't belong you", HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity<>(orderDetailsService.getAll().stream().map(OrderDetailsDTO::new).collect(Collectors.toList()), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(orderDetailsService.getAll().stream().map(OrderDetailsDTO::new).collect(Collectors.toList()), HttpStatus.OK);
     }
 
 
@@ -98,9 +106,6 @@ public class OrderController {
 
         if (user == null){
             return new ResponseEntity<>("User doesn't exist", HttpStatus.FORBIDDEN);
-        }
-        if (!user.getType().equals(UserType.USER)){
-            return new ResponseEntity<>("Don't have authority", HttpStatus.FORBIDDEN);
         }
 
         if(orderToBuyDTO.getTotal() == null || orderToBuyDTO.getTotal() < 1) {
