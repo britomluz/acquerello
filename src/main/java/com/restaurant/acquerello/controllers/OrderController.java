@@ -52,6 +52,10 @@ public class OrderController {
         User user = userServices.getByEmail(authentication.getName());
         Order order = orderService.getById(id).orElse(null);
 
+        if(user.getType().equals(UserType.ADMIN)){
+            return new ResponseEntity<>(orderService.getById(id).map(OrderDTO::new).orElse(null), HttpStatus.CREATED);
+        }
+
         if(!user.getOrders().contains(order)){
             return new ResponseEntity<>("Order incorrect",HttpStatus.CONFLICT);
         }
