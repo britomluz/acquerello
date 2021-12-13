@@ -43,7 +43,6 @@ public class OrderDetails {
         this.totalOrder = order.getTotal();
         this.product = product;
         this.order = order;
-        
     }
 
     public Long getId() {

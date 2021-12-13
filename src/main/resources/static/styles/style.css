@@ -885,13 +885,7 @@ footer{
   /*FORM END*/ 
   
   
-  @media screen and (max-width:767px){
   
-    .progressBar{
-      width: 300px;
-    }
-    
-  }
 
 
 /* MAP */
@@ -910,62 +904,6 @@ footer{
     object-fit: cover;
   }
 
-/* QUERIES*/
-@media (max-width: 768px) {
-    h1 {
-        font-family: var(--fontTitle1);
-        font-size: 3.5rem;
-        color: var(--color1);
-        text-align: center;
-    }
-    h2 {
-        font-family: var(--fontTitle1);
-        font-size: 3.5rem;
-        color: var(--color1);
-        text-align: center;
-    }    
-    h3 {
-        font-family: var(--fontTitle2);
-        font-size: 1.3rem;
-        letter-spacing: .6rem;
-        text-transform: uppercase;
-        color: var(--color2);
-        text-align: center;    
-    }
-    .header h1{
-        color: var(--color4);
-        
-    }
-    .header h3{
-        color: var(--color4);    
-        font-size: 3rem;    
-        text-align: center;
-        letter-spacing: 1rem;
-    }
-    .navlinks{
-        display: none!important;
-    }
-    
-    .navbar-toggler{     
-        display: inline;
-    }
-    .aboutUs img{
-        width: 300px;
-    }
-
-}
-
-@media (max-width: 325px){
-    .containernav{        
-        justify-content: center!important;
-    }
-    .headerButtons{
-        display: flex;
-        flex-direction: column;
-        justify-content: center!important;        
-    }
-   
-}
 
 /* Brian CSS */
 
@@ -1138,9 +1076,56 @@ footer{
 
 
 
+/* QUERIES*/
+@media screen and (max-width:767px){
+  
+    .progressBar{
+      width: 300px;
+    }
+    
+  }
+@media (max-width: 768px) {
+    h1 {
+        font-family: var(--fontTitle1);
+        font-size: 3.5rem;
+        color: var(--color1);
+        text-align: center;
+    }
+    h2 {
+        font-family: var(--fontTitle1);
+        font-size: 3.5rem;
+        color: var(--color1);
+        text-align: center;
+    }    
+    h3 {
+        font-family: var(--fontTitle2);
+        font-size: 1.3rem;
+        letter-spacing: .6rem;
+        text-transform: uppercase;
+        color: var(--color2);
+        text-align: center;    
+    }
+    .header h1{
+        color: var(--color4);
+        
+    }
+    .header h3{
+        color: var(--color4);    
+        font-size: 3rem;    
+        text-align: center;
+        letter-spacing: 1rem;
+    }
+    .navlinks{
+        display: none!important;
+    }
+    
+    .navbar-toggler{     
+        display: inline;
+    }
+    .aboutUs img{
+        width: 300px;
+    }
 
-
-@media (max-width: 768px){
     #title-pages{
         font-size: 60px;
     }
@@ -1177,4 +1162,18 @@ footer{
     .containerSignup{
         padding: 20px;
     }
+    
 }
+
+@media (max-width: 325px){
+    .containernav{        
+        justify-content: center!important;
+    }
+    .headerButtons{
+        display: flex;
+        flex-direction: column;
+        justify-content: center!important;        
+    }
+   
+}
+
