@@ -345,9 +345,9 @@ public class AcquerelloApplication {
 			// Brian: Creating order
 			Order order1 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.PENDING, 103D, OrderType.DELIVERY);
 			Order order2 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.PENDING, 203D, OrderType.TAKEAWAY);
-			Order order3 = new Order(LocalDateTime.now().minusMinutes(30), LocalDateTime.now(), OrderState.IN_PROCESS, 30.25, OrderType.LOCAL);
-			Order order4 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.DELIVERED, 20.16, OrderType.DELIVERY);
-			Order order5 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.CANCELED, 19.43, OrderType.TAKEAWAY);
+			Order order3 = new Order(LocalDateTime.now().minusMinutes(30), LocalDateTime.now(), OrderState.IN_PROCESS, 72D, OrderType.LOCAL);
+			Order order4 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.DELIVERED, 146D, OrderType.DELIVERY);
+			Order order5 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.CANCELED, 89D, OrderType.TAKEAWAY);
 
 			// Brian: Adding order to Users
 			user1.addOrder(order1);
