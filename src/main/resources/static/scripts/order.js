@@ -752,8 +752,15 @@ const app = Vue.createApp({
         })
 
     },
-
-  },
+    logout(){
+      axios.get("/api/logout")
+      .then(res=>{
+        console.log(res)
+        window.location.href="/web/login.html"
+      })
+      .catch(err=>console.log(err))
+    }
+   },
   computed: {
     filterProducts() {
       return this.products.filter((product) =>

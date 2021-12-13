@@ -26,7 +26,7 @@
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
           <a class="nav-link" href="booking.html">BOOKING</a>
-          <a class="nav-link" href="contact.html">CONTACT</a>
+          <a @click="logout" class="nav-link">LOG OUT</a>   
         </div>
 
         <div>
@@ -35,8 +35,6 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
-          <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
-              class="bi bi-cart-fill"></i><button class="navIcon"><i class="bi bi-search"></i></button></button>
         </div>
 
         <!-- MENU RESPONSIVE -->
@@ -59,9 +57,6 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="booking.html">Bookings</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact</a>
               </li>
             </ul>
           </div>

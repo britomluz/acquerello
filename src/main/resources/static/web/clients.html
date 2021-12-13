@@ -25,7 +25,7 @@
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
           <a class="nav-link" href="booking.html">BOOKING</a>
-          <a class="nav-link" href="contact.html">CONTACT</a>
+          <a @click="logout" class="nav-link">LOG OUT</a>   
         </div>
 
         <div>
@@ -36,10 +36,6 @@
 
 
           <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
-          <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart">
-            <i class="bi bi-cart-fill"></i>
-            <div class="badge"><small class="cWhite">1</small></div>
-          </button>
         </div>
 
 
@@ -58,9 +54,6 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="booking.html">Bookings</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact</a>
               </li>
             </ul>
           </div>
@@ -109,13 +102,6 @@
             <p>Categories</p>
           </a>
         </li>
-
-        <li class="item-list">
-          <a class="item-link l5" href="#">
-            <div><i class="bi bi-question-diamond-fill fs-3"></i></div>
-            <p>Help</p>
-          </a>
-        </li>
       </ul>
     </div>
     <div class="p-4">
@@ -155,107 +141,7 @@
           </table>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12 col-md-6 bg-info mt-5">
-          <h1>aaaaaaa</h1>
-        </div>
-        <div class="col-12 col-md-6 bg-warning mt-5">
-          <h1>aaaaaaa</h1>
-        </div>
-      </div>
-
-
     </main>
-
-
-
-    <button type="submit" @click="showOrder">View order</button>
-    <!-- DELETE PRODUCTS -->
-    <form @submit.prevent="deleteProduct()">
-      <label>Select products: </label>
-      <select v-model="idproducts">
-        <option v-for="producto in products" :value="producto.id">
-          {{producto.id}} - {{producto.name}}
-        </option>
-      </select>
-      <button type="submit">
-        send
-      </button>
-      <div>
-        <p>State: {{producto}}</p>
-      </div>
-    </form>
-    <!-- ADD PRODUCTS -->
-    <form @submit.prevent="product_add()">
-      <label>products name</label>
-      <input type="text" v-model="nameproducts">
-      <label>produtc img</label>
-      <!-- <input type="file"  
-            style="display: none;" 
-            @change="previewfile"
-            ref="fileinput"> -->
-      <button type="button" @click="$refs.fileinput.click()">
-        pick img
-      </button>
-      <label for="description">description products</label>
-      <input type="text" v-model="descriptionproducts">
-      <label>price</label>
-      <input type="number" v-model="priceproduct">
-      <label>stock </label>
-      <input type="number" v-model="stockproduct">
-      <button>
-        send
-      </button>
-    </form>
-    <!-- PATCH PRODUCTS -->
-    <form @submit.prevent=" path_product()">
-      <select v-model="idpatch">
-        <option v-for="producto in products" :value="producto.id">
-          {{producto.id}} - {{producto.name}}
-        </option>
-      </select>
-      <label>name</label>
-      <input type="text" v-model="namepatch">
-      <label>description</label>
-      <input type="text" v-model="descriptionpatch">
-      <label>img</label>
-      <input type="file">
-      <label>price</label>
-      <input type="number" v-model=" pricepatch">
-      <label> stock</label>
-      <input type="number" v-model=" stockpatch">
-      <button>
-        send
-      </button>
-    </form>
-
-    <h2>Order Section</h2>
-    <form>
-      <label for="order">Select Order: </label>
-      <select id="order" v-model="idOrder">
-        <option value="">Select</option>
-        <option v-for="order in orders" :value="order.id">{{order.id}}</option>
-      </select>
-      <input type="button" value="Send" @click="getOrderState">
-    </form>
-    <p>{{orderState}}</p>
-    <form>
-      <label for="state">Select new state: </label>
-      <select id="state" v-model="orderStateSelected">
-        <option value="">Select</option>
-        <option v-for="state in orderStates" :value="state">{{state}}</option>
-      </select>
-      <input type="button" value="Send" @click="changeOrderState">
-    </form>
-    <form>
-      <label for="order">Delete Order: </label>
-      <select id="order" v-model="idOrderDelete">
-        <option value="">Select</option>
-        <option v-for="order in orders" :value="order.id">{{order.id}}</option>
-      </select>
-      <input type="button" value="Send" @click="deleteOrder">
-    </form>
-    <p id="response"></p>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"

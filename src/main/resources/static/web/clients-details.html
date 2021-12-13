@@ -2,360 +2,269 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../styles/style.css">    
-    <link rel="stylesheet" href="../styles/account.css">    
-    <title>Acquerello</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="stylesheet" href="../styles/account.css">
+  <link rel="shortcut icon" href="../assets/favicon.png">  
+  <title>Acquerello</title>
 </head>
 
 <body>
-    <div id="app">
-        <nav id="navbar" class="navbar fondoBlack fixed-top">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <img src="../assets/acquerello.png" alt="" width="150">
-                </a>
+  <div id="app">
+    <nav id="navbar" class="navbar navbar-light fondoBlack fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="../assets/acquerello.png" alt="" width="150">
+        </a>
 
-            <div class="d-flex">
-              <a class="nav-link" href="index.html">HOME</a>
-              <a class="nav-link" href="order.html">ORDER NOW</a>
-              <a class="nav-link" href="booking.html">BOOKING</a>
-              <a class="nav-link" href="contact.html">CONTACT</a>                  
-            </div>  
+        <div class="d-flex navlinks">
+          <a class="nav-link" href="index.html">HOME</a>
+          <a class="nav-link" href="order.html">ORDER NOW</a>
+          <a class="nav-link" href="booking.html">BOOKING</a>
+          <a @click="logout" class="nav-link">LOG OUT</a>
+        </div>
 
-            <div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  
-                    
-                    <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
-                    <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart">
-                      <i class="bi bi-cart-fill"></i><div class="badge"><small class="cWhite">1</small></div></button>          
-            </div>
+        <div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-              
-              <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                  <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-                  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                  <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="home.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="order.html">Order Now</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="booking.html">Bookings</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                  </ul>                  
-                </div>
-              </div>
-            </div>
-          </nav>
+          <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+        </div>
 
-          <header class="headerPagesPanel d-flex align-items-center">
-              <h1>My Account</h1>   
-              <h3>ADMIN PANEL</h3>                         
-          </header>
-          <div class="mt-1 d-flex-justify-content-center mb-5">              
-            <ul class="list ">
-      
-              <li class="item-list">
-                <a class="item-link l5" href="myaccount.html">
-                  <div><i class="bi bi-person-fill fs-2"></i></div>
-                  <p>My account</p>
-                </a>
+        <!-- MENU RESPONSIVE -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <a class="navbar-brand" href="#">
+              <img src="../assets/acquerello.png" alt="" width="150">
+            </a>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+              <h5>x</h5>
+            </button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
               </li>
-
-              <li class="item-list">
-                <a class="item-link l5" href="clients.html">
-                  <div><i class="bi bi-people-fill fs-3"></i></div>
-                  <p>Clients</p>
-                </a>
+              <li class="nav-item">
+                <a class="nav-link" href="order.html">Order Now</a>
               </li>
-
-              <li class="item-list">
-                <a class="item-link l5" href="bookings.html">
-                  <div><i class="bi bi-card-checklist fs-3"></i></div>
-                  <p>Bookings</p>
-                </a>
-              </li>
-      
-              <li class="item-list">
-                <a class="item-link l5" href="products.html">
-                  <div><i class="bi bi-bag-fill fs-3"></i></div>
-                  <p>Products</p>
-                </a>
-              </li>
-
-              <li class="item-list">
-                <a class="item-link l5" href="category.html">
-                  <div><i class="bi bi-bag-fill fs-3"></i></div>
-                  <p>Categories</p>
-                </a>
-              </li>
-      
-              <li class="item-list">
-                <a class="item-link l5" href="#">
-                  <div><i class="bi bi-question-diamond-fill fs-3"></i></div>
-                  <p>Help</p>
-                </a>
+              <li class="nav-item">
+                <a class="nav-link" href="booking.html">Bookings</a>
               </li>
             </ul>
           </div>
+        </div>
+      </div>
+    </nav>
+
+    <header class="headerPagesPanel d-flex align-items-center">
+      <h1>My Account</h1>
+      <h3>ADMIN PANEL</h3>
+    </header>
+    <div class="mt-1 d-flex-justify-content-center mb-5">
+      <ul class="list ">
+
+        <li class="item-list">
+          <a class="item-link l5" href="myaccount.html">
+            <div><i class="bi bi-person-fill fs-2"></i></div>
+            <p>My account</p>
+          </a>
+        </li>
+
+        <li class="item-list">
+          <a class="item-link l5" href="clients.html">
+            <div><i class="bi bi-people-fill fs-3"></i></div>
+            <p>Clients</p>
+          </a>
+        </li>
+
+        <li class="item-list">
+          <a class="item-link l5" href="bookings.html">
+            <div><i class="bi bi-card-checklist fs-3"></i></div>
+            <p>Bookings</p>
+          </a>
+        </li>
+
+        <li class="item-list">
+          <a class="item-link l5" href="products.html">
+            <div><i class="bi bi-bag-fill fs-3"></i></div>
+            <p>Products</p>
+          </a>
+        </li>
+
+        <li class="item-list">
+          <a class="item-link l5" href="category.html">
+            <div><i class="bi bi-bag-fill fs-3"></i></div>
+            <p>Categories</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="p-4">
+      <h3>
+        USER INFO
+      </h3>
+    </div>
+    <main>
+      <div class="d-flex justify-content-center">
+        <div class="col-12 col-md-8">
+          <div class="table-responsive">
+            <table class="table tableAdmin">
+              <thead>
+              <tr>
+                <th scope="col">Image</th>
+                <th scope="col" class="text-center">First Name</th>
+                <th scope="col" class="text-center">Last Name</th>
+                <th scope="col" class="text-center">Address</th>
+                <th scope="col" class="text-center">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="text-center"><img :src="user.img" :alt="user.firstName" class="img-user"></th>
+                <td class="text-center">{{user.firstName}}</td>
+                <td class="text-center">{{user.lastName}}</td>
+                <td>
+                  <p v-for="add in address">{{add.name}}</p>
+                </td>
+                <td class="text-center">{{user.type}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
           <div class="p-4">
             <h3>
-                USER INFO
+              ADDRESS
             </h3>
           </div>
-          <main>
-              <div class="d-flex justify-content-center">
-                <div class="col-12 col-md-8">
-                  <table class="table tableAdmin">
-                    <thead>
-                      <tr>
-                        <th scope="col">Image</th>
-                        <th scope="col" class="text-center">First Name</th>
-                        <th scope="col" class="text-center">Last Name</th>
-                        <th scope="col" class="text-center">Address</th>
-                        <th scope="col" class="text-center">Type</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row" class="text-center"><img :src="user.img" :alt="user.firstName" class="img-user"></th>
-                        <td class="text-center">{{user.firstName}}</td>
-                        <td class="text-center">{{user.lastName}}</td>
-                        <td><p v-for="add in address">{{add.name}}</p></td>
-                        <td class="text-center">{{user.type}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div class="p-4">
-                    <h3>
-                        ADDRESS
-                    </h3>
-                  </div>
-                  <table class="table tableAdmin">
-                    <thead>
-                      <tr>
-                        <th scope="col">Street</th>
-                        <th scope="col" class="text-center">Nº</th>
-                        <th scope="col" class="text-center">State</th>
-                        <th scope="col" class="text-center">Reference</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="text-center">{{address.street}}</td>
-                        <td class="text-center">{{address.number}}</td>
-                        <td class="text-center">{{address.state}}</td>
-                        <td class="text-center">{{address.reference}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div class="p-4" v-if="userAcc">
-                    <h3>
-                        BOOKINGS
-                    </h3>
-                  </div>
-                  <table class="table tableAdmin" v-if="userAcc">
-                    <thead>
-                      <tr>
-                        <th scope="col">Booking day</th>
-                        <th scope="col" class="text-center">Hour</th>
-                        <th scope="col" class="text-center">End Booking hour</th>
-                        <th scope="col" class="text-center">Persons</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="text-center">{{bookings.dateBooking}}</td>
-                        <td class="text-center">{{bookings.bookingHour}}</td>
-                        <td class="text-center">{{bookings.endBooking}}</td>
-                        <td class="text-center">{{bookings.quantity}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div class="p-4" v-if="card">
-                    <h3>
-                        CARD INFO
-                    </h3>
-                  </div>
-                  <table class="table tableAdmin" v-if="card">
-                    <thead>
-                      <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col" class="text-center">Card Holder</th>
-                        <th scope="col" class="text-center">CVV</th>
-                        <th scope="col" class="text-center">Number</th>
-                        <th scope="col" class="text-center">From Date</th>
-                        <th scope="col" class="text-center">Type</th>
-                        <th scope="col" class="text-center">Level</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="text-center">{{cardInfo.id}}</td>
-                        <td class="text-center">{{cardInfo.cardHolder}}</td>
-                        <td class="text-center">{{cardInfo.cvv}}</td>
-                        <td class="text-center">{{cardInfo.number}}</td>
-                        <td class="text-center">{{cardInfo.fromDate}}</td>
-                        <td class="text-center">{{cardInfo.type}}</td>
-                        <td class="text-center">{{cardInfo.level}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div class="p-4" v-if="orderBoolean">
-                    <h3>
-                        ORDER INFO
-                    </h3>
-                  </div>
-                  <table class="table tableAdmin" v-if="orderBoolean">
-                    <thead>
-                      <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col" class="text-center">Acepted Date</th>
-                        <th scope="col" class="text-center">Creation Date</th>
-                        <th scope="col" class="text-center">State</th>
-                        <th scope="col" class="text-center">Total</th>
-                        <th scope="col" class="text-center">Type</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="text-center">{{orderInfo.id}}</td>
-                        <td class="text-center">{{orderInfo.aceptedDate}}</td>
-                        <td class="text-center">{{orderInfo.creationDate}}</td>
-                        <td class="text-center">{{orderInfo.state}}</td>
-                        <td class="text-center">{{orderInfo.total}}</td>
-                        <td class="text-center">{{orderInfo.type}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            <div class="row">
-                <div class="col-12 col-md-6 bg-info mt-5">
-                    <h1>aaaaaaa</h1>
-                </div>
-                <div class="col-12 col-md-6 bg-warning mt-5">
-                    <h1>aaaaaaa</h1>
-                </div>
-              </div>
-        
-            
-          </main>
-
-
-
-        <button type="submit" @click="showOrder">View order</button>
-        <!-- DELETE PRODUCTS -->
-        <form @submit.prevent="deleteProduct()">
-            <label>Select products: </label>
-            <select v-model="idproducts">
-                <option v-for="producto in products" :value="producto.id">
-                    {{producto.id}} - {{producto.name}}
-                </option>
-            </select>
-            <button type="submit">
-                send
-            </button>
-            <div>
-                <p>State: {{producto}}</p>
-            </div>
-        </form>
-        <!-- ADD PRODUCTS -->
-        <form @submit.prevent="product_add()">
-            <label>products name</label>
-            <input type="text" v-model="nameproducts">
-            <label>produtc img</label>
-            <!-- <input type="file"  
-            style="display: none;" 
-            @change="previewfile"
-            ref="fileinput"> -->
-            <button type="button" @click="$refs.fileinput.click()">
-                pick img
-            </button>
-            <label for="description">description products</label>
-            <input type="text" v-model="descriptionproducts">
-            <label>price</label>
-            <input type="number" v-model="priceproduct">
-            <label>stock </label>
-            <input type="number" v-model="stockproduct">
-            <button>
-                send
-            </button>
-        </form>
-        <!-- PATCH PRODUCTS -->
-        <form @submit.prevent=" path_product()">
-            <select v-model="idpatch">
-                <option v-for="producto in products" :value="producto.id">
-                    {{producto.id}} - {{producto.name}}
-                </option>
-            </select>
-            <label>name</label>
-            <input type="text" v-model="namepatch">
-            <label>description</label>
-            <input type="text" v-model="descriptionpatch">
-            <label>img</label>
-            <input type="file">
-            <label>price</label>
-            <input type="number" v-model=" pricepatch">
-            <label> stock</label>
-            <input type="number" v-model=" stockpatch">
-            <button>
-                send
-            </button>
-        </form>
-
-        <h2>Order Section</h2>
-        <form>
-            <label for="order">Select Order: </label>
-            <select id="order" v-model="idOrder">
-                <option value="">Select</option>
-                <option v-for="order in orders" :value="order.id">{{order.id}}</option>
-            </select>
-            <input type="button" value="Send" @click="getOrderState">
-        </form>
-        <p>{{orderState}}</p>
-        <form>
-            <label for="state">Select new state: </label>
-            <select id="state" v-model="orderStateSelected">
-                <option value="">Select</option>
-                <option v-for="state in orderStates" :value="state">{{state}}</option>
-            </select>
-            <input type="button" value="Send" @click="changeOrderState">
-        </form>
-        <form>
-            <label for="order">Delete Order: </label>
-            <select id="order" v-model="idOrderDelete">
-                <option value="">Select</option>
-                <option v-for="order in orders" :value="order.id">{{order.id}}</option>
-            </select>
-            <input type="button" value="Send" @click="deleteOrder">
-        </form>
-        <p id="response"></p>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-        crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/vue@next"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="../scripts/paneladmin.js"></script>
+          <div class="table-responsive">
+            <table class="table tableAdmin">
+              <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col" class="text-center">Street</th>
+                <th scope="col" class="text-center">Nº</th>
+                <th scope="col" class="text-center">State</th>
+                <th scope="col" class="text-center">Reference</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center">{{address.id}}</td>
+                <td class="text-center">{{address.street}}</td>
+                <td class="text-center">{{address.number}}</td>
+                <td class="text-center">{{address.state}}</td>
+                <td class="text-center">{{address.reference}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+          <div class="p-4" v-if="userAcc">
+            <h3>
+              BOOKINGS
+            </h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table tableAdmin" v-if="userAcc">
+              <thead>
+              <tr>
+                <th scope="col" class="text-center">ID</th>
+                <th scope="col" class="text-center">Booking day</th>
+                <th scope="col" class="text-center">Hour</th>
+                <th scope="col" class="text-center">End Booking hour</th>
+                <th scope="col" class="text-center">Persons</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center">{{bookings.id}}</td>
+                <td class="text-center">{{bookings.dateBooking}}</td>
+                <td class="text-center">{{bookings.bookingHour}}</td>
+                <td class="text-center">{{bookings.endBooking}}</td>
+                <td class="text-center">{{bookings.quantity}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+          <div class="p-4" v-if="card">
+            <h3>
+              CARD INFO
+            </h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table tableAdmin" v-if="card">
+              <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col" class="text-center">Card Holder</th>
+                <th scope="col" class="text-center">CVV</th>
+                <th scope="col" class="text-center">Number</th>
+                <th scope="col" class="text-center">From Date</th>
+                <th scope="col" class="text-center">Type</th>
+                <th scope="col" class="text-center">Level</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center">{{cardInfo.id}}</td>
+                <td class="text-center">{{cardInfo.cardHolder}}</td>
+                <td class="text-center">{{cardInfo.cvv}}</td>
+                <td class="text-center">{{cardInfo.number}}</td>
+                <td class="text-center">{{cardInfo.fromDate}}</td>
+                <td class="text-center">{{cardInfo.type}}</td>
+                <td class="text-center">{{cardInfo.level}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+          <div class="p-4" v-if="orderBoolean">
+            <h3>
+              ORDER INFO
+            </h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table tableAdmin" v-if="orderBoolean">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col" class="text-center">Acepted Date</th>
+                  <th scope="col" class="text-center">Creation Date</th>
+                  <th scope="col" class="text-center">State</th>
+                  <th scope="col" class="text-center">Total</th>
+                  <th scope="col" class="text-center">Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">{{orderInfo.id}}</td>
+                  <td class="text-center">{{orderInfo.aceptedDate}}</td>
+                  <td class="text-center">{{orderInfo.creationDate}}</td>
+                  <td class="text-center">{{orderInfo.state}}</td>
+                  <td class="text-center">{{orderInfo.total}}</td>
+                  <td class="text-center">{{orderInfo.type}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="../scripts/paneladmin.js"></script>
 </body>
 
 </html>

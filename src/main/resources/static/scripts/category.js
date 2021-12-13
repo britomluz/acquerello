@@ -19,7 +19,6 @@ const App = Vue.createApp({
     created() {
         axios.get('/api/categories')
             .then(response => {
-                console.log(response.data)
                 this.categories = response.data.categories
             })
             .catch(err => console.log(err))
@@ -56,7 +55,15 @@ const App = Vue.createApp({
                     window.location.reload();
                 })
                 .catch(err => console.log(err))
-        }
+        },
+        logout(){
+            axios.get("/api/logout")
+            .then(res=>{
+              console.log(res)
+              window.location.href="/web/login.html"
+            })
+            .catch(err=>console.log(err))
+          }
     },
 });
 App.mount("#app");

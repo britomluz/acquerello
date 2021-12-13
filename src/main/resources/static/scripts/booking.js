@@ -91,7 +91,7 @@ const app = Vue.createApp({
   created() {
     this.get_users();
     this.get_bookings();
-    
+
 
     if (localStorage.getItem("cart")) {
       this.cart = JSON.parse(localStorage.getItem("cart"));
@@ -126,12 +126,12 @@ const app = Vue.createApp({
             icon: "success",
             button: "Ok",
           })
-          .then(res => window.location.reload())          
+          .then(res => window.location.reload())
         })
         .catch((err) =>{
           console.log(err.response.data)
           if(err.response.status == 401){
-            this.error_bookTable = 'Please log in to book a table'  
+            this.error_bookTable = 'Please log in to book a table'
           }
 
           this.errorBookTable = err.response.data
@@ -193,9 +193,9 @@ const app = Vue.createApp({
     get_bookings() {
       axios.get("/api/booking")
         .then((response) => {
-          this.bookingsUsers = response.data;   
-         // console.log(this.bookingsUsers)  
-         // this.tableAvailability()    
+          this.bookingsUsers = response.data;
+         // console.log(this.bookingsUsers)
+         // this.tableAvailability()
         })
         .catch((err) => console.log(err));
     },
@@ -218,15 +218,15 @@ const app = Vue.createApp({
         });
     },
     tableAvailability() {
-      let tables = this.bookingsUsers.filter(booking =>  booking.dateBooking.match(this.datetime) && (booking.bookingHour <= this.bookingHour  &&  this.bookingHour <= booking.endBooking))      
+      let tables = this.bookingsUsers.filter(booking =>  booking.dateBooking.match(this.datetime) && (booking.bookingHour <= this.bookingHour  &&  this.bookingHour <= booking.endBooking))
 
-      //let tables = this.bookingsUsers.filter(booking =>  booking.dateBooking.match(this.datetime) && (booking.bookingHour.match(this.bookingHour)))      
-      
+      //let tables = this.bookingsUsers.filter(booking =>  booking.dateBooking.match(this.datetime) && (booking.bookingHour.match(this.bookingHour)))
+
       this.tab = tables.map( tb => tb.tableNumber)
 
       console.log(tables)
       console.log(this.tab)
-      
+
     },
     //cart
     deleteOne(clickEvent) {
@@ -269,17 +269,25 @@ const app = Vue.createApp({
       localStorage.setItem("cart", JSON.stringify(this.cart));
       localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
     }, 
+    logout(){
+      axios.get("/api/logout")
+      .then(res=>{
+        console.log(res)
+        window.location.href="/web/login.html"
+      })
+      .catch(err=>console.log(err))
+    }
   },
   computed: {
     // tableAvailability() {
     //   let imgBooking = document.querySelectorAll('.tbBooking')
-      
+
     //   let tables = this.bookingsUsers.filter(booking => booking.tableAvailability == 'NOTAVAILABLE')
 
 
     //   console.log(tables)
     //   //let imgBooking = document.querySelectorAll('.tbBooking')
-      
+
     // },
     filterBookings(){
       let a = this.bookingsUsers

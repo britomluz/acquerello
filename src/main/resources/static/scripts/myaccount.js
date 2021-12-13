@@ -214,6 +214,14 @@ const app = Vue.createApp({
       localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
     },
 
+      logout(){
+        axios.get("/api/logout")
+        .then(res=>{
+          console.log(res)
+          window.location.href="/web/login.html"
+        })
+        .catch(err=>console.log(err))
+      }
   },
 });
 app.mount("#app");

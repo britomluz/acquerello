@@ -94,10 +94,10 @@ public class BookingController {
     public ResponseEntity<?> editBooking(Authentication authentication, @RequestParam Long id, @RequestBody BookingCreateDTO bookingCreateDTO) {
         User user = userService.getByEmail(authentication.getName());
         Booking booking = bookingService.getById(id).orElse(null);
-/*
+
         if(user.getType().equals(UserType.USER)) {
             return new ResponseEntity<>("User cannot edit a booking", HttpStatus.FORBIDDEN);
-        }*/
+        }
         if (booking == null){
             return new ResponseEntity<>("Booking doesn't exist", HttpStatus.FORBIDDEN);
         }
@@ -110,7 +110,7 @@ public class BookingController {
         }
 
         if(bookingCreateDTO.getBookingHour() != null) {
-            booking.setEndBooking(bookingCreateDTO.getBookingHour());
+            booking.setBookingHour(bookingCreateDTO.getBookingHour());
         }
 
         if(bookingCreateDTO.getSector() != null) {
@@ -124,7 +124,6 @@ public class BookingController {
         if(bookingCreateDTO.getQuantity() != null) {
             booking.setQuantity(bookingCreateDTO.getQuantity());
         }
-
         bookingService.save(booking);
 
         return new ResponseEntity<>("Booking edited", HttpStatus.ACCEPTED);
