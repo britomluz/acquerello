@@ -54,6 +54,10 @@ public class BookingController {
             return new ResponseEntity<>("Already have a booking to this day", HttpStatus.FORBIDDEN);
         }
 
+        if(bookingCreateDTO.getTable() == null) {
+            return new ResponseEntity<>("Select a table number", HttpStatus.FORBIDDEN);
+        }
+
         LocalTime plus = bookingCreateDTO.getBookingHour().plusHours(4);
 
         Booking booking = new Booking(bookingCreateDTO.getDate(), bookingCreateDTO.getBookingHour(), plus, bookingCreateDTO.getSector(), bookingCreateDTO.getTable(), bookingCreateDTO.getQuantity(), TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);

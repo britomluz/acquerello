@@ -12,11 +12,23 @@ public class OrderToBuyDTO {
     private OrderType type;
     private Long id;
 
-    public OrderToBuyDTO(List<Product> products, Double total, OrderType type, Long id) {
+    // field if the user create address
+    private String street;
+    private Integer numberStreet;
+    private String zip;
+    private String state;
+    private String reference;
+
+    public OrderToBuyDTO(List<Product> products, Double total, OrderType type, Long id, String street, Integer numberStreet, String zip, String state, String reference) {
         this.products = products;
         this.total = total;
         this.type = type;
         this.id = id;
+        this.street = street;
+        this.numberStreet = numberStreet;
+        this.zip = zip;
+        this.state = state;
+        this.reference = reference;
     }
 
     public List<Product> getProducts() {
@@ -49,5 +61,45 @@ public class OrderToBuyDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public Integer getNumberStreet() {
+        return numberStreet;
+    }
+
+    public void setNumberStreet(Integer numberStreet) {
+        this.numberStreet = numberStreet;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 }

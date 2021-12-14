@@ -173,12 +173,14 @@ const app = Vue.createApp({
 
     // check if a user is logged
     axios.get("/api/users/current").then(res => {
-      if (res.status === 200) {
+      if (res.status === 202) {
         this.logged = true;
         this.user = res.data;
-        this.address = [...res.data.address];
+        this.address = res.data.address;
+        console.log(this.address)
       }
     }).catch(err => {
+      console.log(err.response)
       if (err.response.status === 401) {
         this.logged = false;
         this.guest = true;
@@ -440,6 +442,7 @@ const app = Vue.createApp({
         const div = document.getElementById("check")
         div.style.height = "1000px";
         div.style.transition = "height 1s ease"
+        this.addressId = 0;
       } else {
         this.show = false;
         this.addressId = e.target.value;
@@ -487,7 +490,13 @@ const app = Vue.createApp({
 
         // if an authenticated user send a request
         if (this.logged) {
-          axios.post("/api/order/buy", { products: product, total: total, type: this.type, id: this.addressId }).then(res => {
+          axios.post("/api/order/buy", {
+            products: product, total: total, type: this.type, id: this.addressId, street: this.street,
+            numberStreet: number,
+            zip: this.zip,
+            state: this.state,
+            reference: this.reference
+          }).then(res => {
             // create payment
             axios.post("https://mindhub-b.herokuapp.com/api/payments", { number: this.numberCard, cvv: cvv, amount: total, description: this.description, accountNumber: this.accountNumber }).then(res => {
               console.log(res)
@@ -559,7 +568,13 @@ const app = Vue.createApp({
                   icon: "success",
                   button: "Ok",
                 }).then(res => {
-                  window.location.href = "/web/login.html"
+
+                  axios.post(`/api/login?email=${this.email}&password=${this.password}`).then(res => {
+                    window.location.href = "/web/myaccount.html"
+                  }).catch(err => {
+                    console.log(err.response)
+                  })
+
                 });
                 localStorage.clear();
               }).catch(err => {
@@ -646,7 +661,7 @@ const app = Vue.createApp({
     },
     showProduct(e) {
       let id = e.target.parentElement.id;
-      
+
       window.location.href = `./product-details.html?id=${id}`;
     },
     // edit products
@@ -752,15 +767,15 @@ const app = Vue.createApp({
         })
 
     },
-    logout(){
+    logout() {
       axios.get("/api/logout")
-      .then(res=>{
-        console.log(res)
-        window.location.href="/web/login.html"
-      })
-      .catch(err=>console.log(err))
+        .then(res => {
+          console.log(res)
+          window.location.href = "/web/login.html"
+        })
+        .catch(err => console.log(err))
     }
-   },
+  },
   computed: {
     filterProducts() {
       return this.products.filter((product) =>

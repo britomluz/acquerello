@@ -35,8 +35,14 @@ public class UserController {
     }
 
     @RequestMapping("/users/current")
-    public UserDTO getUser(Authentication authentication) {
-        return new UserDTO(userService.getByEmail(authentication.getName()));
+    public ResponseEntity<?> getUser(Authentication authentication) {
+        User user = userService.getByEmail(authentication.getName());
+
+        if(user == null) {
+            return new ResponseEntity<>("no looged", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new UserDTO(user), HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/users/create")

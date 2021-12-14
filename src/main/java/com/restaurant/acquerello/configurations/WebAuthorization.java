@@ -27,8 +27,8 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/users/create", "/api/order/checkout", "/api/order/buy").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/users").permitAll()
                 .antMatchers( "/web/index.html", "/web/login.html", "/web/booking.html", "/web/checkout.html", "/scripts/**", "/assets/**","/styles/**").permitAll()
-                .antMatchers("/api/**","/web/myaccount.html", "/web/order-details.html").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/rest/**", "/h2-console/**", "/web/admin.html", "/web/products.html", "/web/product-details.html").hasAuthority("ADMIN")
+                .antMatchers("/api/**","/web/myaccount.html", "/web/order-details.html", "/h2-console/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/rest/**", "/web/admin.html", "/web/products.html", "/web/product-details.html").hasAuthority("ADMIN")
                 .and()
                 .formLogin()
                     .usernameParameter("email")
@@ -49,7 +49,7 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
         http.headers().frameOptions().disable();
-        http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendRedirect("/web/login.html"));
+        http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
     }
 
     @Bean

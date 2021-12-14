@@ -93,7 +93,7 @@ public class OrderController {
     public ResponseEntity<?> createOrder(Authentication authentication, @RequestBody OrderToBuyDTO orderToBuyDTO) {
 
         User user = userServices.getByEmail(authentication.getName());
-        Address address = addressService.getAddressBydId(orderToBuyDTO.getId());
+
 
         if(orderToBuyDTO.getProducts().size() < 1) {
             return new ResponseEntity<>("Dont have products selected", HttpStatus.FORBIDDEN);
@@ -111,20 +111,31 @@ public class OrderController {
         user.addOrder(order);
         orderService.save(order);
 
+        if(orderToBuyDTO.getType().equals(OrderType.DELIVERY)) {
+            if(orderToBuyDTO.getId() < 1) {
+                Address address = new Address(orderToBuyDTO.getStreet(), orderToBuyDTO.getNumberStreet(), orderToBuyDTO.getZip(), orderToBuyDTO.getState(), orderToBuyDTO.getReference());
+                user.addAddress(address);
+                order.addAddress(address);
+                addressService.save(address);
+            }else {
+                Address address = addressService.getAddressBydId(orderToBuyDTO.getId());
+                order.addAddress(address);
+            }
+        }
+
         for (Product product : orderToBuyDTO.getProducts()){
-           Integer quantity = product.getQuantity();
-           Long idProduct = product.getId();
-           Product product1 = productService.getById(idProduct).orElse(null);
-           if (product1 == null){
-               return new ResponseEntity<>("Product doesn't exist", HttpStatus.FORBIDDEN);
-           }
-           if (product1.getStock() < quantity){
-               return new ResponseEntity<>("Sorry we don't have enough stock", HttpStatus.FORBIDDEN);
-           }
-           OrderDetails orderDetails = new OrderDetails(quantity,product1,order);
-           product1.setStock(product1.getStock() - quantity);
-           productService.save(product1);
-           orderDetailsService.save(orderDetails);
+            Integer quantity = product.getQuantity();
+            Long idProduct = product.getId();
+            Product product1 = productService.getById(idProduct).orElse(null);
+            if (product1 == null){
+                return new ResponseEntity<>("Product doesn't exist", HttpStatus.FORBIDDEN);
+            }
+            if (product1.getStock() < quantity){
+                return new ResponseEntity<>("Sorry we don't have enough stock", HttpStatus.FORBIDDEN);
+            }
+            OrderDetails orderDetails = new OrderDetails(quantity,product1,order);
+
+            orderDetailsService.save(orderDetails);
         }
 
         return new ResponseEntity<>("Order created",HttpStatus.ACCEPTED);

@@ -132,6 +132,7 @@ const app = Vue.createApp({
       order_user(){
           axios.get("/api/order/current")
           .then(response=>{
+            console.log(response)
             this.order=response.data            
         })
           .catch(err=>console.log(err))

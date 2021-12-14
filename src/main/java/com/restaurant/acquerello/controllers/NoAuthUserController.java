@@ -10,6 +10,7 @@ import com.restaurant.acquerello.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,9 @@ public class NoAuthUserController {
     @Autowired
     public ProductService productService;
 
+    @Autowired
+    public PasswordEncoder passwordEncoder;
+
     @PostMapping("/order/checkout")
     public ResponseEntity<?> createUser(@RequestBody CompleteRegisterDTO completeRegisterDTO) {
         // check empty field for user
@@ -62,28 +66,6 @@ public class NoAuthUserController {
             return new ResponseEntity<>("Phone field cannot are empty", HttpStatus.FORBIDDEN);
         }
 
-        // check empty fields for address
-
-        if(completeRegisterDTO.getStreet().isEmpty()) {
-            return new ResponseEntity<>("Street field cannot are empty", HttpStatus.FORBIDDEN);
-        }
-
-        if(completeRegisterDTO.getNumberStreet() == null) {
-            return new ResponseEntity<>("Nº Street field cannot are empty", HttpStatus.FORBIDDEN);
-        }
-
-        if(completeRegisterDTO.getZip().isEmpty()) {
-            return new ResponseEntity<>("Zip field cannot are empty", HttpStatus.FORBIDDEN);
-        }
-
-        if(completeRegisterDTO.getState().isEmpty()) {
-            return new ResponseEntity<>("State field cannot are empty", HttpStatus.FORBIDDEN);
-        }
-
-        if(completeRegisterDTO.getReference().isEmpty()) {
-            return new ResponseEntity<>("Reference field cannot are empty", HttpStatus.FORBIDDEN);
-        }
-
         // check order fields
 
         if(completeRegisterDTO.getTotal() == null || completeRegisterDTO.getTotal() < 1) {
@@ -92,18 +74,38 @@ public class NoAuthUserController {
 
         // create user order and address
 
-        User user = new User(completeRegisterDTO.getFirstName(), completeRegisterDTO.getLastName(), completeRegisterDTO.getEmail(), completeRegisterDTO.getPassword(), completeRegisterDTO.getNumber(), UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
-        Address address = new Address(completeRegisterDTO.getStreet(), completeRegisterDTO.getNumberStreet(), completeRegisterDTO.getZip(), completeRegisterDTO.getState(), completeRegisterDTO.getReference());
+        User user = new User(completeRegisterDTO.getFirstName(), completeRegisterDTO.getLastName(), completeRegisterDTO.getEmail(), passwordEncoder.encode(completeRegisterDTO.getPassword()), completeRegisterDTO.getNumber(), UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
         Order order = new Order(LocalDateTime.now(), LocalDateTime.now(), OrderState.PENDING, completeRegisterDTO.getTotal(), completeRegisterDTO.getType());
 
         // add address and order to user
-        user.addAddress(address);
-        user.addOrder(order);
-        order.addAddress(address);
 
+        user.addOrder(order);
+
+        // save repository
         userService.save(user);
         orderService.save(order);
-        addressService.save(address);
+
+        // check empty fields for address
+
+        if(completeRegisterDTO.getStreet().length() > 0 && completeRegisterDTO.getNumberStreet() != null && completeRegisterDTO.getZip().length() > 0 && completeRegisterDTO.getState().length() > 0 && completeRegisterDTO.getReference().length() > 0) {
+            Address address = new Address(completeRegisterDTO.getStreet(), completeRegisterDTO.getNumberStreet(), completeRegisterDTO.getZip(), completeRegisterDTO.getState(), completeRegisterDTO.getReference());
+            user.addAddress(address);
+            System.out.println(address);
+            addressService.save(address);
+            orderService.save(order);
+
+            for (Product product : completeRegisterDTO.getProducts()){
+                Integer quantity = product.getQuantity();
+                Long idProduct = product.getId();
+                Product product1 = productService.getById(idProduct).orElse(null);
+                assert product1 != null;
+                OrderDetails orderDetails = new OrderDetails(quantity,product1,order);
+                order.addAddress(address);
+                orderDetailsRepository.save(orderDetails);
+            }
+
+            return new ResponseEntity<>("Checkout and user created", HttpStatus.CREATED);
+        }
 
         // Brian: keep "for" on this place, or get server error
 
@@ -117,6 +119,6 @@ public class NoAuthUserController {
         }
 
 
-        return new ResponseEntity<>("Checkout and user created", HttpStatus.CREATED);
+        return new ResponseEntity<>("Checkout successfully", HttpStatus.CREATED);
     }
 }

@@ -122,17 +122,16 @@
                               <th scope="row" class="text-center">{{booking.id}}</th>
                               <td class="text-center">{{(booking.creationDate).slice(0,10)}}</td>
                               <td class="text-center">{{booking.state}}</td>
-                              <td class="text-center"> {{booking.total}}</td>
+                              <td class="text-center"> ${{booking.total}}</td>
                               <td class="justify-content-center">
                                   <button :id="booking.id" type="button" @click="order_cancel_user" class="btnTransp"><i
-                                      class="bi bi-x-square text-danger"></i>
-                                </td>
-                              </form>
+                                          class="bi bi-x-square text-danger"></i></button>
                               </td>
                               <td class="justify-content-center align-items-center">
                                 <button :id="booking.id" type="button" @click="showOrderDetails" class="btnTransp"><i
                                         class="bi bi-eye-fill cRed"></i></button>
                               </td>
+                          </tr>
                       </tbody>
                   </table>
                 </div>
