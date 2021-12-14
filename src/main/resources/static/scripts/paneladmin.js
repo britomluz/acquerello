@@ -22,6 +22,7 @@ const App = Vue.createApp({
       idOrderDelete: "",
 
       orderDetailId: [],
+      show_address :"",
       orderDetail:[],
       orders: [],
       //each order
@@ -65,6 +66,8 @@ const App = Vue.createApp({
     this.loadDataUser()
     this.loadUsers()
     this.showOrder()
+    
+    
     // check if the localStorage have the user selected
 
     if(localStorage.getItem("user") != null) {
@@ -321,7 +324,10 @@ const App = Vue.createApp({
       .filter(order=>order.creationDate.slice(5,7).match(this.monthfilter))
       .filter(order=>order.creationDate.slice(8,10).match(this.dayfilter))
       .filter(order=>order.creationDate.slice(11,13).match(this.hoursfilter))
-    }
+    },
+    showAddress(){
+     return this.show_address = this.orderDetailId[0].address.number+" "+ this.orderDetailId[0].address.street
+    },
   }
 });
 App.mount("#app");

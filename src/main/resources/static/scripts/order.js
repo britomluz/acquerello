@@ -96,6 +96,7 @@ const app = Vue.createApp({
       guest: false,
       user: "",
       address: [],
+      show_address :"",
 
       // payment ways
 
@@ -498,7 +499,7 @@ const app = Vue.createApp({
           }).then(res => {
             // create payment
             axios.post("https://mindhub-b.herokuapp.com/api/payments", { number: this.numberCard, cvv: cvv, amount: total, description: this.description, accountNumber: this.accountNumber }).then(res => {
-              console.log(res)
+              console.log(res.data)
               swal({
                 title: "Payment succesfull!",
                 text: "Yumm!",
@@ -557,7 +558,8 @@ const app = Vue.createApp({
               type: this.type
             })
             .then((res) => {
-              console.log(res);
+              let orderId = res.data.slice(35);
+              console.log(orderId)
               // create payment
               axios.post("https://mindhub-b.herokuapp.com/api/payments", { number: this.numberCard, cvv: cvv, amount: total, description: this.description, accountNumber: this.accountNumber }).then(res => {
                 console.log(res)
@@ -570,12 +572,14 @@ const app = Vue.createApp({
 
                   axios.post(`/api/login?email=${this.email}&password=${this.password}`).then(res => {
                     window.location.href = "/web/myaccount.html"
+                    axios.post(`/api/sendMail?id=${orderId}`)
+                                          .then(res => res )
                   }).catch(err => {
                     console.log(err.response)
                   })
 
                   console.log(res.data)
-                 // window.location.href = "/web/login.html"
+                 //window.location.href = "/web/login.html"
                 });
                 localStorage.clear();
               }).catch(err => {
@@ -785,6 +789,9 @@ const app = Vue.createApp({
         product.name.toLowerCase().match(this.filterNameProduct.toLowerCase())
       );
     },
+    showAddress(){
+      this.show_address = orderDetailId[0].address
+    }
   },
 });
 app.mount("#app");

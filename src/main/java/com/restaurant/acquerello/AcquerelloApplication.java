@@ -44,7 +44,7 @@ public class AcquerelloApplication {
 
 			// Brian: Create User and Order
 			User user1 = new User("Antonio", "Costa", "antonio_c@admin.com", passwordEncoder.encode("admin1234"), 5554343L, UserType.ADMIN, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
-			User user2 = new User("Gabriel", "Torrealba", "gabriel.torrealba33@gmail.com", passwordEncoder.encode("user1234"), 5551232L, UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
+			User user2 = new User("Gabriel", "Torrealba", "mailst664@gmail.com", passwordEncoder.encode("user1234"), 5551232L, UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
 			User user3 = new User("Logan", "Brown", "logan.brown@acquerello.com", passwordEncoder.encode("user1234"),5552324L ,UserType.USER,"https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
 			User user4 = new User("Zoe", "Williams", "zoe.williams@acquerello.com", passwordEncoder.encode("user1234"),5554542L ,UserType.USER,"https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
 			User user5 = new User("Chloe", "Smith", "chloe.smith@acquerello.com", passwordEncoder.encode("user1234"),5551957L ,UserType.USER,"https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");

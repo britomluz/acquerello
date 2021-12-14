@@ -138,7 +138,7 @@ public class OrderController {
             orderDetailsService.save(orderDetails);
         }
 
-        return new ResponseEntity<>("Order created",HttpStatus.ACCEPTED);
+        return new ResponseEntity<>("Order No."+order.getId(),HttpStatus.ACCEPTED);
     }
 //consultar y de no servir borrar
    @GetMapping("/order/confirm/{id}")
@@ -187,7 +187,7 @@ public class OrderController {
             return new ResponseEntity<>("Order was canceled", HttpStatus.FORBIDDEN);
         }
         if (order.getState().equals(OrderState.DELIVERED)){
-            return new ResponseEntity<>("Order was canceled", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Order was delivered", HttpStatus.FORBIDDEN);
         }
         order.setState(orderType);
         order.setAceptedDate(LocalDateTime.now());
@@ -202,7 +202,7 @@ public class OrderController {
         Order order = orderService.getById(id).orElse(null);
 
         // if the user dont have the order
-        if (!user.getType().equals(UserType.USER)){
+        if (user == null){
             return new ResponseEntity<>("Don't have authority", HttpStatus.FORBIDDEN);
         }
         if(!user.getOrders().contains(order)) {
