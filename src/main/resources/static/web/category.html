@@ -38,8 +38,11 @@
             aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
-
-          <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+          
+          <a href="myaccount.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+          <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
+              class="bi bi-cart-fill"></i>
+              <div class="badge"><small class="cWhite" v-if="totalQantity > 0">{{totalQantity}}</small></div></button>
         </div>
 
         <!-- MENU RESPONSIVE -->
@@ -144,7 +147,7 @@
       <div class="d-flex justify-content-center">
         <div class="col-12 col-md-8">
           <div class="table-responsive">
-            <table class="table tableAdmin">
+            <table class="table">
               <thead>
                 <tr>
                   <th scope="col">Nº Id</th>

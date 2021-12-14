@@ -40,7 +40,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           
-          <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+          <a href="myaccount.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
           <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
               class="bi bi-cart-fill"></i>
               <div class="badge"><small class="cWhite" v-if="totalQantity > 0">{{totalQantity}}</small></div></button>
@@ -347,24 +347,20 @@
         </table>
       </div>
       <div v-if="cart.length > 0" id="template-footer">
-        <th scope="row" colspan="2">products:
+        <p scope="row" colspan="2">products:
           <span>
             {{totalQantity}}
           </span>
-        </th>
-        <td class="font-weight-bold">  total :$<span>{{calculateTotal()}}</span></td>
-        <td>
-          <button class="btn-green" id="vaciar-carrito" @click="emptyCart">
-            Clear cart
-          </button>
-        </td>
+        </p>
+        <p class="font-weight-bold">  total :$<span>{{calculateTotal()}}</span></p>
       </div>
-
-
       <div class="canvas-bottom">
         <button id="btn-seguir-comprando" type="button" class="btn-green" data-bs-dismiss="offcanvas"
           aria-label="Close">
           <p> Keep buying</p>
+        </button>
+        <button class="btn-green" type="button" id="vaciar-carrito" @click="emptyCart">
+          Clear cart
         </button>
         <a href="../web/checkout.html">
           <button id="btn-finalizar-compra" type="button" class="btn-green">

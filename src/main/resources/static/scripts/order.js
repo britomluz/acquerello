@@ -575,6 +575,8 @@ const app = Vue.createApp({
                     console.log(err.response)
                   })
 
+                  console.log(res.data)
+                 // window.location.href = "/web/login.html"
                 });
                 localStorage.clear();
               }).catch(err => {

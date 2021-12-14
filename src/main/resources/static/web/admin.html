@@ -29,7 +29,7 @@
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
           <a class="nav-link" href="booking.html">BOOKING</a>
-          <a href="#" @click="logout" class="nav-link">LOG OUT</a>   
+          <a href="#" @click="logout" class="nav-link">LOG OUT</a>
         </div>
 
         <div>
@@ -37,8 +37,8 @@
             aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
-          
-          <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+
+          <a href="myaccount.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
         </div>
 
         <!-- MENU RESPONSIVE -->
@@ -63,7 +63,7 @@
                 <a class="nav-link" href="booking.html">Bookings</a>
               </li>
               <li class="nav-item">
-                <a href="#" @click="logout" class="nav-link">Log out</a> 
+                <a href="#" @click="logout" class="nav-link">Log out</a>
               </li>
             </ul>
           </div>
@@ -79,7 +79,7 @@
       <ul class="list ">
 
         <li class="item-list">
-          <a class="item-link l5" href="myaccount.html">
+          <a id="adminPanel" class="item-link l5" href="myaccount.html">
             <div><i class="bi bi-person-fill fs-2"></i></div>
             <p>My account</p>
           </a>
@@ -101,14 +101,14 @@
 
         <li class="item-list">
           <a class="item-link l5" href="products.html">
-            <div><i class="bi bi-bag-fill fs-3"></i></div>
+            <div><i class="bi bi-ui-checks-grid fs-3"></i></div>
             <p>Products</p>
           </a>
         </li>
 
         <li class="item-list">
           <a class="item-link l5" href="category.html">
-            <div><i class="bi bi-bag-fill fs-3"></i></div>
+            <div><i class="bi bi-ui-checks fs-3"></i></div>
             <p>Categories</p>
           </a>
         </li>
@@ -120,97 +120,115 @@
       </h3>
     </div>
     <main>
-      <input type="text" name="" id="" v-model="emailfilter" placeholder="email">
-      <select name="" id="" v-model="typefilter">
-        <option value="">
-          type
-        </option>
-        <option value="DELIVERY">
-          delivery
-        </option>
-        <option value="TAKEAWAY">
-          take away
-        </option>
-        <option value="LOCAL">
-          local
-        </option>
-      </select>
-      <select name="" id="" v-model="statefilter">
-        <option value="" >
-          status
-        </option>
-        <option value="PENDING">
-          pending
-        </option>
-        <option value="IN_PROCESS">
-          in process
-        </option>
-        <option value="DELIVERED">
-          delivered
-        </option>
-        <option value="CANCELED">
-          canceled
-        </option>
-      </select>
-      <input type="text" name="" v-model="yearsfilter" id="" placeholder="years">
-      <input type="text" name="" v-model="monthfilter" id="" placeholder="month">
-      <input type="text" name="" v-model=" dayfilter" id="" placeholder="day">
+      <div class="d-flex justify-content-center mb-3">
+        <div class="ipt-g  p-1 d-flex">
+          <input type="text" name="" id="" v-model="emailfilter" placeholder="Email">
+        </div>
 
-      <select name="people" id="peop" v-model="hoursfilter">
-        <option value="">Hour</option>
-        <option value="9">09:00 am</option>
-        <option value="10">10:00 am</option>
-        <option value="11">11:00 am </option>
-        <option value="12">12:00 pm</option>
-        <option value="13">13:00 pm</option>
-        <option value="18">18:00 pm</option>
-        <option value="19">19:00 pm</option>
-        <option value="20">20:00 pm</option>
-        <option value="21">21:00 pm</option>
-        <option value="22">22:00 pm</option>
-      </select>
+        <div class="ipt-g  p-1 d-flex">
+          <select name="" id="" v-model="typefilter">
+            <option value="">
+              Type
+            </option>
+            <option value="DELIVERY">
+              Delivery
+            </option>
+            <option value="TAKEAWAY">
+              Take away
+            </option>
+            <option value="LOCAL">
+              Local
+            </option>
+          </select>
+        </div>
+
+        <div class="ipt-g  p-1 d-flex">
+          <select name="" id="" v-model="statefilter">
+            <option value="">
+              Status
+            </option>
+            <option value="PENDING">
+              pending
+            </option>
+            <option value="IN_PROCESS">
+              in process
+            </option>
+            <option value="DELIVERED">
+              delivered
+            </option>
+            <option value="CANCELED">
+              canceled
+            </option>
+          </select>
+        </div>
+
+        <div class="ipt-g  p-1 d-flex">
+          <select name="people" id="peop" v-model="hoursfilter">
+            <option value="">Hour</option>
+            <option value="9">09:00 am</option>
+            <option value="10">10:00 am</option>
+            <option value="11">11:00 am </option>
+            <option value="12">12:00 pm</option>
+            <option value="13">13:00 pm</option>
+            <option value="18">18:00 pm</option>
+            <option value="19">19:00 pm</option>
+            <option value="20">20:00 pm</option>
+            <option value="21">21:00 pm</option>
+            <option value="22">22:00 pm</option>
+          </select>
+        </div>
+
+        <div class="ipt-g  p-1 d-flex">
+          <input type="text" name="" v-model="yearsfilter" id="" placeholder="yyyy">/
+          <input type="text" name="" v-model="monthfilter" id="" placeholder="mm">/
+          <input type="text" name="" v-model=" dayfilter" id="" placeholder="dd">
+        </div>
+      </div>
+
       <div class="d-flex justify-content-center">
         <div class="col-12 col-md-8">
           <div class="table-responsive">
-            <table class="table tableAdmin">
+            <table class="table">
               <thead>
-              <tr>
-                <th scope="col">Nº</th>
-                <th scope="col" class="text-center">Date</th>
-                <th scope="col" class="text-center">Status</th>
-                <th scope="col" class="text-center">Actions</th>
-                <th scope="col" class="text-center">Total</th>
-                <th scope="col" class="text-center">View</th>
-              </tr>
+                <tr>
+                  <th scope="col">Nº</th>
+                  <th scope="col" class="text-center">Date</th>
+                  <th scope="col" class="text-center">Email</th>
+                  <th scope="col" class="text-center">Status</th>
+                  <th scope="col" class="text-center">Actions</th>
+                  <th scope="col" class="text-center">Total</th>
+                  <th scope="col" class="text-center">View</th>
+                </tr>
               </thead>
               <tbody>
-              <tr v-for="order in filter_order">
-                <th scope="row" class="text-center">{{order.id}}</th>
-                <td class="text-center">{{order.creationDate.slice(5,10)}} - {{order.creationDate.slice(11,16)}}</td>
-                <td class="text-center">{{order.state}}</td>
-                <td class="d-flex justify-content-around">
-                  <form @submit.prevent="editOrderState">
-                    <button class="btn-i" :id="order.id" value="CANCELED" type="submit"><i
-                            class="bi bi-x-square text-danger"></i></button>
-                  </form>
-                  <form @submit.prevent="editOrderState">
-                    <button class="btn-i" :id="order.id" value="IN_PROCESS" type="submit"><i
-                            class="bi bi-check-square text-success"></i></button>
-                  </form>
-                  <form @submit.prevent="editOrderState">
-                    <button class="btn-i" :id="order.id" value="DELIVERED" type="submit"><i
-                            class="bi bi-check-all bg-success px-2 text-light"></i></button>
-                  </form>
-                </td>
-                <td class="text-center">$ {{order.total}}</td>
-                <td class="d-flex justify-content-center">
-                  <button :id="order.id" type="button" @click="showOrderDetails" class="btnTransp"><i
-                          class="bi bi-eye-fill cRed"></i></button>
-                </td>
-              </tr>
-              <tr v-if="filter_order.length === 0" colspan="6">
-                <td colspan="9" class="text-danger">No results found</td>
-              </tr>
+                <tr v-for="order in filter_order">
+                  <th scope="row" class="text-center">{{order.id}}</th>
+                  <td class="text-center">{{order.creationDate.slice(5,10)}} - {{order.creationDate.slice(11,16)}}</td>
+                  <td class="text-center">{{order.email}}</td>
+                  <td class="text-center">{{order.state}}</td>
+                  <td class="d-flex justify-content-around">
+                    <form @submit.prevent="editOrderState">
+                      <button class="btn-i" :id="order.id" value="CANCELED" type="submit"><i
+                          class="bi bi-x-square text-danger"></i></button>
+                    </form>
+                    <form @submit.prevent="editOrderState">
+                      <button class="btn-i" :id="order.id" value="IN_PROCESS" type="submit"><i
+                          class="bi bi-check-square text-success"></i></button>
+                    </form>
+                    <form @submit.prevent="editOrderState">
+                      <button class="btn-i" :id="order.id" value="DELIVERED" type="submit"><i
+                          class="bi bi-check-all bg-success px-2 text-light"></i></button>
+                    </form>
+                  </td>
+                  <td class="text-center">$ {{order.total}}</td>
+                  <td class="d-flex justify-content-center">
+                    <button :id="order.id" type="button" @click="showOrderDetails" class="btnTransp"><i
+                        class="bi bi-eye-fill cRed"></i></button>
+                  </td>
+                </tr>
+                <tr v-if="filter_order.length === 0" colspan="6">
+                  <td colspan="9" class="text-danger">No results found</td>
+                </tr>
               </tbody>
             </table>
           </div>

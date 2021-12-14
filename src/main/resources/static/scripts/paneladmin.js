@@ -255,7 +255,9 @@ const App = Vue.createApp({
       axios.patch('/api/admin/order/edit',`id=${orderId}&type=${orderState}`)
       .then(res => {
         console.log(res)
-        window.location.reload();
+        window.location.reload()
+        axios.post(`/api/sendMail?id=${orderId}`)
+        .then(res => res )
       }).catch(err => {
         this.errororder=true
         this.errorcancel=err.response.data

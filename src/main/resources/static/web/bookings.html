@@ -38,8 +38,11 @@
             aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
-
-          <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+          
+          <a href="myaccount.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+          <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
+              class="bi bi-cart-fill"></i>
+              <div class="badge"><small class="cWhite" v-if="totalQantity > 0">{{totalQantity}}</small></div></button>
         </div>
 
         <!-- MENU RESPONSIVE -->
@@ -117,7 +120,7 @@
             </div>
 
             <div class="ipt-g py-1">
-              <small>Hora: </small>
+              <small>Hour: </small>
               <select name="people" id="peop" v-model="hoursfilter">
                 <option value="">Hour</option>
                 <option value="9">09:00 am</option>
@@ -134,7 +137,7 @@
             </div>
 
             <div class="ipt-g  py-1 d-flex">
-              <small>Fecha: </small>
+              <small>Date: </small>
               <div class=" px-3">
                 <input type="text" v-model="yearfilter" max="9999" placeholder="yyyy">
                 <small class="cRed">/</small>
@@ -152,7 +155,7 @@
         <div class="d-flex justify-content-center">
           <div class="col-12 col-md-8">
             <div class="table-responsive">
-              <table class="table tableAdmin">
+              <table class="table">
                 <thead>
                   <tr>
                     <th scope="col">Nº</th>

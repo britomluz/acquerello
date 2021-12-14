@@ -125,9 +125,7 @@ public class PaymentsController {
         if (order == null){
             return new ResponseEntity<>("Order doesn't exist",HttpStatus.FORBIDDEN);
         }
-        if (!user.getOrders().contains(order)){
-            return new ResponseEntity<>("Order don't belongs you",HttpStatus.FORBIDDEN);
-        }
+
         httpServletResponse.setContentType("application/pdf");
         DateFormat dateFormat= new SimpleDateFormat("MM-dd-yyyy_hh:mm:ss");
         String currentDatTime= dateFormat.format(new Date());

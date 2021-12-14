@@ -6,6 +6,7 @@ const app = Vue.createApp({
       sectortime: "",
       table: "",
       quantitytime: 0,
+      disabled:true,
 
       //booking grid
       errorBookTable:"",
@@ -91,8 +92,6 @@ const app = Vue.createApp({
   created() {
     this.get_users();
     this.get_bookings();
-
-
     if (localStorage.getItem("cart")) {
       this.cart = JSON.parse(localStorage.getItem("cart"));
       this.totalQantity = JSON.parse(localStorage.getItem("quantity"));
@@ -220,12 +219,10 @@ const app = Vue.createApp({
     tableAvailability() {
       let tables = this.bookingsUsers.filter(booking =>  booking.dateBooking.match(this.datetime) && (booking.bookingHour <= this.bookingHour  &&  this.bookingHour <= booking.endBooking))
 
-      //let tables = this.bookingsUsers.filter(booking =>  booking.dateBooking.match(this.datetime) && (booking.bookingHour.match(this.bookingHour)))
-
       this.tab = tables.map( tb => tb.tableNumber)
 
-      console.log(tables)
-      console.log(this.tab)
+     // console.log(tables)
+     // console.log(this.tab)
 
     },
     //cart
@@ -278,9 +275,11 @@ const app = Vue.createApp({
       .catch(err=>console.log(err))
     }
   },
-  computed: {
+  computed: {    
     // tableAvailability() {
     //   let imgBooking = document.querySelectorAll('.tbBooking')
+
+//    n.tableAvailability == 'NOTAVAILABLE'
 
     //   let tables = this.bookingsUsers.filter(booking => booking.tableAvailability == 'NOTAVAILABLE')
 
