@@ -109,7 +109,7 @@ const app = Vue.createApp({
         this.sectortime = "VIP";
       }
 
-      //this.table = parseInt(this.table)
+      this.table = parseInt(this.table)
       
       axios.post("/api/booking/create", {
           date: this.datetime,

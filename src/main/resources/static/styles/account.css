@@ -245,6 +245,7 @@ body{
 }
 
 .disabled{
+    cursor:default;
     filter: invert(89%) sepia(10%) saturate(22%) hue-rotate(342deg) brightness(81%) contrast(87%);
     
 } 

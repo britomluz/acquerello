@@ -60,7 +60,7 @@ public class BookingController {
 
         LocalTime plus = bookingCreateDTO.getBookingHour().plusHours(4);
 
-        Booking booking = new Booking(bookingCreateDTO.getDate(), bookingCreateDTO.getBookingHour(), plus, bookingCreateDTO.getSector(), bookingCreateDTO.getTable(), bookingCreateDTO.getQuantity(), TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+        Booking booking = new Booking(bookingCreateDTO.getDate(), bookingCreateDTO.getBookingHour().minusMinutes(1), plus, bookingCreateDTO.getSector(), bookingCreateDTO.getTable(), bookingCreateDTO.getQuantity(), TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
 
         System.out.println(booking);
         user.addBooking(booking);

@@ -51,13 +51,17 @@ public class AcquerelloApplication {
 
 			// Brian: Creating bookings
 			Booking booking1 = new Booking(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(4), SectorTables.GOLDEN, 4, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+
 			Booking booking2 = new Booking(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(8), SectorTables.GOLDEN, 4, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking3 = new Booking(LocalDate.parse("2021-12-15"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 4, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking4 = new Booking(LocalDate.parse("2021-12-15"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 5, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking5 = new Booking(LocalDate.parse("2021-12-15"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 6, 3, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking6 = new Booking(LocalDate.parse("2021-12-15"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 7, 5, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking7 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 4, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking8 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 1, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking3 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 4, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking4 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 5, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking5 = new Booking(LocalDate.parse("2021-12-16"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 7, 5, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+
+			/*
+			Booking booking6 = new Booking(LocalDate.parse("2021-12-16"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 12, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking7 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 19, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking8 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 15, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			/*
 			Booking booking9 = new Booking(LocalDate.parse("2021-12-16"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 8, 3, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
 			Booking booking10 = new Booking(LocalDate.parse("2021-12-16"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 6, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
 			Booking booking11 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 8, 3, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
@@ -77,7 +81,7 @@ public class AcquerelloApplication {
 			Booking booking24 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.PLATINUM, 17, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
 			Booking booking25 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.PLATINUM, 20, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
 			Booking booking26 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.PLATINUM, 21, 3, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-
+			*/
 			user1.addAddress(address1);
 			user2.addAddress(address2);
 			user3.addAddress(address3);
@@ -86,10 +90,13 @@ public class AcquerelloApplication {
 
 			// Brian: Adding bookings to User
 			user2.addBooking(booking1);
+
+
 			user3.addBooking(booking2);
 			user4.addBooking(booking3);
 			user5.addBooking(booking4);
 			user2.addBooking(booking5);
+			/*
 			user3.addBooking(booking6);
 			user4.addBooking(booking7);
 			user5.addBooking(booking8);
@@ -112,7 +119,7 @@ public class AcquerelloApplication {
 			user2.addBooking(booking24);
 			user3.addBooking(booking25);
 			user4.addBooking(booking26);
-
+			*/
 			userRepository.save(user1);
 			userRepository.save(user2);
 			userRepository.save(user3);
@@ -122,10 +129,13 @@ public class AcquerelloApplication {
 
 
 			bookingRepository.save(booking1);
+
 			bookingRepository.save(booking2);
 			bookingRepository.save(booking3);
 			bookingRepository.save(booking4);
 			bookingRepository.save(booking5);
+
+			/*
 			bookingRepository.save(booking6);
 			bookingRepository.save(booking7);
 			bookingRepository.save(booking8);
@@ -147,6 +157,8 @@ public class AcquerelloApplication {
 			bookingRepository.save(booking24);
 			bookingRepository.save(booking25);
 			bookingRepository.save(booking26);
+			*/
+
 
 			//GABRIEL: CREATE CARDS TO TEST THE APP
 			Card card1 = new Card("1234-5654-9874-6321", 315, LocalDateTime.now(), 0D, 20, 1, CardType.ACTIVE, user2);
