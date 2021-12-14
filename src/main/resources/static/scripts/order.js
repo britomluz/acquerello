@@ -243,8 +243,7 @@ const app = Vue.createApp({
         .catch((err) => console.log(err));
     },
     createProduct() {
-      axios
-        .post("/api/products/create", (idCategory = productId), {
+      axios.post("/api/products/create", (idCategory = productId), {
           //ren, I added {} because I got an error
 
           name: this.productName,
@@ -763,8 +762,10 @@ const app = Vue.createApp({
           this.imagePreviewDos.src = res.data.secure_url
 
           this.products_img = this.imagePreviewDos.src
+          this.productsimg = this.imagePreviewDos.src
 
-          console.log(this.products_img)
+
+          //console.log(this.products_img)
 
         })
 

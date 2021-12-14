@@ -77,70 +77,89 @@
 
     <header class="headerPagesPanel d-flex align-items-center">
       <h1>Categories</h1>
-
+      <h3 class="cWhite">ADMIN PANEL</h3>
     </header>
 
     <main>
       <div class="mt-1">
         <a href="admin.html" class="btn-green"><i class="bi bi-arrow-left text-light"></i> Admin Panel</a>
       </div>
-      <div class="d-flex f-justify-c-space-a">
+      <h3 class="cGreen py-5">CATEGORIES</h3>
+      <div class="d-flex f-justify-c-space-a d-fl">
+        
         <div class="d-flex flex-d-col category-w">
-          <h4>Add Category</h4>
+          <h3 class="fs-5">Add Category</h3>
           <form @submit.prevent="createCategory()">
-            <div class="d-flex flex-d-col">
-              <label>Category name:</label>
-              <input type="text" v-model="categoryName">
+            <div class="d-flex flex-d-col pb-3">
+              <label>Name:</label>
+              <input class="iptGreen" placeholder="....." type="text" v-model="categoryName">
+            </div>            
+            <div class="d-flex flex-d-col pb-3">
+              <label for="description">Description:</label>
+              <input class="iptGreen" placeholder="....."  type="text" v-model="categoryDescription">
             </div>
-            <div class="d-flex flex-d-col">
-              <label>Category img</label>
-              <input type="file" v-model="categoryImage">
-            </div>
-            <div class="d-flex flex-d-col">
-              <label for="description">category description</label>
-              <input type="text" v-model="categoryDescription">
-            </div>
-            <button type="submit" class="category-button">Add</button>
+
+            <div class="d-flex flex-column justify-content-center align-items-start btn-profile">
+              <div class="containerImg">
+                <label>Image:</label>
+                <div class="cardImg">
+                  <img :src="categoryImage" id="img-preview" ref="imagePreviewDos">
+                </div>
+                <div class="cardImg-footer">
+                  <input ref="imageUploaderDos" type="file" @change="uploadImageCategory($event)" id="img-uploader2">
+                </div>
+              </div>
+            </div>            
+            <button type="submit" class="category-button btn-green">Add</button>
           </form>
         </div>
         <div class="d-flex flex-d-col category-w">
-          <h4>Edit Category</h4>
-          <form @submit.prevent=" editCategory()">
-            <div class="d-flex flex-d-col">
+          <h3 class="fs-5">Edit Category</h3>
+          <form @submit.prevent="editCategory()">
+            <div class="d-flex flex-d-col pb-3">
               <label>Select Category: </label>
-              <select v-model="idEdited">
+              <select class="iptGreen" v-model="idEdited">
                 <option v-for="category in categories" :value="category.id">
                   {{category.id}} - {{category.name}}
                 </option>
               </select>
             </div>
-            <div class="d-flex flex-d-col">
-              <label>name</label>
-              <input type="text" v-model="nameEdited">
+            <div class="d-flex flex-d-col pb-3">
+              <label>Name</label>
+              <input class="iptGreen" placeholder="....." type="text" v-model="nameEdited">
             </div>
-            <div class="d-flex flex-d-col">
-              <label>description</label>
-              <input type="text" v-model="descriptionEdited">
+            <div class="d-flex flex-d-col pb-3">
+              <label>Description</label>
+              <input class="iptGreen" placeholder="....." type="text" v-model="descriptionEdited">
             </div>
-            <div class="d-flex flex-d-col">
-              <label>img</label>
-              <input type="file" v-model="categoryImageEdited">
-            </div>
-            <button class="category-button">Edit</button>
+            
+            <div class="d-flex flex-column justify-content-center align-items-start btn-profile">
+              <div class="containerImg">
+                <label>Image:</label>
+                <div class="cardImg">
+                  <img :src="categoryImageEdited" id="img-preview" ref="imagePreviewDos">
+                </div>
+                <div class="cardImg-footer">
+                  <input ref="imageUploaderDos" type="file" @change="uploadImageCategory($event)" id="img-uploader2">
+                </div>
+              </div>
+            </div> 
+
+            <button class="category-button btn-green">Edit</button>
           </form>
         </div>
         <div class="d-flex flex-d-col category-w">
-          <h4>Delete Category</h4>
+          <h3 class="fs-5">Delete Category</h3>
           <form @submit.prevent="deleteCategory()">
             <div class="d-flex flex-d-col">
               <label>Select category: </label>
-              <select v-model="idCategory">
+              <select class="iptGreen" v-model="idCategory">
                 <option v-for="category in categories" :value="category.id">
                   {{category.id}} - {{category.name}}
                 </option>
               </select>
             </div>
-            <button type="submit" class="category-button">Delete</button>
+            <button type="submit" class="category-button btn-green">Delete</button>
           </form>
         </div>
       </div>
@@ -175,17 +194,6 @@
     </main>
 
   </div>
-
-
-  <script>
-    let menu = document.getElementById('navbar')
-    window.addEventListener('scroll', function () {
-      // navbar.style.background = 'black'
-      menu.classList.toggle('fondoBlack', window.scrollY > 0)
-
-    })
-  </script>
-
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"

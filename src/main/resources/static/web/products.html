@@ -74,7 +74,7 @@
 
     <header class="headerPagesPanel d-flex align-items-center">
       <h1>Products</h1>
-
+      <h3 class="cWhite">ADMIN PANEL</h3>
     </header>
 
     <main>
@@ -82,7 +82,7 @@
         <a href="admin.html" class="btn-green"><i class="bi bi-arrow-left text-light"></i> Admin Panel</a>
       </div>
       <div>
-        <h3 class="py-5">Products</h3>
+        <h3 class="mt-4 fs-2">Products</h3>
       </div>
       <div class="row mb-4 d-flex flex-column align-items-center ">
         <div class="col-12 col-md-6 square">
@@ -92,23 +92,24 @@
               <form @submit.prevent="product_add()">
                 <div class="py-2">
                   <label><b>Product name: </b></label>
-                  <input type="text" v-model="nameproducts">
+                  <input  class="iptGreen" type="text" v-model="nameproducts" placeholder=".....">
                 </div>
                 <div class="py-2">
                   <label for="description"><b>Description: </b></label>
-                  <input type="text" v-model="descriptionproducts">
+                  <input class="iptGreen" type="text" v-model="descriptionproducts" placeholder=".....">
                 </div>
                 <div class="py-2">
                   <label><b>Price: </b></label>
-                  <input type="number" v-model="priceproduct">
+                  <input class="iptGreen" type="number" v-model="priceproduct">
                 </div>
                 <div class="py-2">
                   <label><b>Stock: </b></label>
-                  <input type="number" v-model="stockproduct">
+                  <input class="iptGreen" type="number" v-model="stockproduct">
                 </div>
                 <div class="py-2">
                   <label for=""><b>Category: </b></label>
-                  <select name="" id="" v-model="id_addproduct">
+                  <select class="iptGreen" name="" id="" v-model="id_addproduct">
+                    <option value=""> Category </option>
                     <option v-for=" categorie in categories" :value="categorie.id">
                       {{categorie.name}}
                     </option>
@@ -134,7 +135,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row  mt-5">
           <div class="mb-3 col-12 col-md-10">
             <input type="search" name="" v-model="filterNameProduct" id="" placeholder="Search by name"
               class="text-muted">
@@ -143,7 +144,7 @@
         <div class="d-flex flex-column align-items-center justify-content-center">
           <div class="col-12 col-md-10">
             <div class="table-responsive">
-              <table class="table tableProducts table-striped">
+              <table class="table tableP">
                 <thead>
                   <tr>
                     <th scope="col">ID</th>

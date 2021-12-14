@@ -14,6 +14,13 @@ const App = Vue.createApp({
             categoryImageEdited: "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgDefault_qbhg4k.jpg",
             descriptionEdited:"",
             
+            //upload category image
+            //image products
+            CLOUDINARY_URL: "",
+            CLOUDINARY_UPLOAD_PRESET: "",
+            urlImg: "",
+            imagePreviewDos: "",
+            imageUploaderDos: "",
         };
     },
     created() {
@@ -31,10 +38,17 @@ const App = Vue.createApp({
                 description: this.categoryDescription,
                 categoryImage: this.categoryImage,
             })
-                .then(() => swal('Category created'))
-                .then(console.log("Category created"))
+            .then((res) => {
+                console.log("Product created");
+                swal({
+                  title: "Good job!",
+                  text: "Category added successfully",
+                  icon: "success",
+                  button: "OK!",
+                })
                 .then(window.location.reload())
-                .catch(err => console.log(err))
+            })
+            .catch(err => console.log(err))
         },
         editCategory(){
             axios.patch(`/api/categories/edit/${this.idEdited}`,{
@@ -42,10 +56,17 @@ const App = Vue.createApp({
                 description: this.descriptionEdited,
                 categoryImage: this.categoryImageEdited,
             })
-                .then(() => swal('Category edited'))
-                .then(console.log("Category edited"))
+            .then((res) => {
+                console.log("Product created");
+                swal({
+                  title: "Good job!",
+                  text: "Category edited successfully",
+                  icon: "success",
+                  button: "OK!",
+                })
                 .then(window.location.reload())
-                .catch(err => console.log(err))
+            })
+            .catch(err => console.log(err))
         },
         deleteCategory(){
             axios.delete(`/api/categories/delete/${this.idCategory}`)
@@ -56,6 +77,35 @@ const App = Vue.createApp({
                 })
                 .catch(err => console.log(err))
         },
+        uploadImageCategory(event) {
+            this.imagePreviewDos = this.$refs.imagePreviewDos
+            this.imageUploaderDos = this.$refs.imageUploaderDos
+            this.CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/luz-brito/image/upload'
+            this.CLOUDINARY_UPLOAD_PRESET = 'qda9s173'
+      
+            console.log(event.target.files[0])
+            const fileImg = event.target.files[0]
+      
+            const formData = new FormData;
+      
+            formData.append('file', fileImg)
+            formData.append('upload_preset', this.CLOUDINARY_UPLOAD_PRESET)
+      
+            axios.post(this.CLOUDINARY_URL, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+              .then(res => {
+                console.log("Imagen cargada!")
+                console.log(res)
+                this.imagePreviewDos.src = res.data.secure_url
+      
+                this.categoryImage = this.imagePreviewDos.src
+                this.categoryImageEdited = this.imagePreviewDos.src
+      
+      
+                //console.log(this.products_img)
+      
+              })
+      
+          },
         logout(){
             axios.get("/api/logout")
             .then(res=>{

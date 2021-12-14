@@ -170,22 +170,6 @@
                   data-bs-target="#cardModal">Add balance</button>
               </div>
             </div>
-
-            <!-- <div v-if="card.length > 5" class="row a mt-5">
-              <div class="">
-                <div>
-                  <img class="img-fluid" src="../assets/card.png" alt="">
-                </div>
-                <div v-for="card in card">
-                  <p class="cardNumber text-center">{{card.number}}</p>
-                </div>
-              </div>
-            </div>
-            <div v-else class="mt-5">
-              <h5>{{user.firstName}} you dont have any card.</h5>
-              <p>Request your card and score points!!</p>
-              <button class="btn-green" @click="createCard">Request your card</button>
-            </div> -->
             <div class="mt-5">
               <div v-if="card.length > 0">
                 <div class="cardDiv">
@@ -247,8 +231,8 @@
               </div>
             </div>
             <div class="modal-footer d-flex">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" @click="addBalanceCardRest">Confirm</button>
+              <button type="button" class="btn-green" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn-red" @click="addBalanceCardRest">Confirm</button>
             </div>
           </div>
         </div>
@@ -333,7 +317,7 @@
             </div>
           </tbody>
           <tfoot v-if="cart.length === 0">
-            <tr id="footer-cart">
+            <tr id="footer-cart">              
               <td scope="row" colspan="5">Cart empty</td>
             </tr>
             <tr>
@@ -343,33 +327,21 @@
           </tfoot>
         </table>
       </div>
-      <div v-if="cart.length > 0" id="template-footer">
-        <th scope="row" colspan="2">products:
-          <span>
-            {{totalQantity}}
-          </span>
-        </th>
-        <td class="font-weight-bold"> total :$<span>{{calculateTotal()}}</span></td>
-        <td>
-          <button class="btn-green" id="vaciar-carrito" @click="emptyCart">
-            Clear cart
-          </button>
-        </td>
+      <div class="d-flex justify-content-around" v-if="cart.length > 0" id="template-footer">
+        <a class="" type="button" id="vaciar-carrito" @click="emptyCart">
+          Clear cart
+        </a>
+        <p scope="row" colspan="2">
+          Total prod.: <span> {{totalQantity}}</span>
+        </p>
+        <p class="font-weight-bold"> <b>Total $ <span>{{calculateTotal()}}</span></b></p>
+      </div>
+      <div class="canvas-bottom d-flex justify-content-around mb-3">
+        <a href="" class="btn-green w-100 text-center">Keep buying</a> 
+        <a href="../web/checkout.html" class="btn-red w-100 text-center"> Checkout</a>
       </div>
 
-
-    <div class="canvas-bottom">
-      <button id="btn-seguir-comprando" type="button" class="btn-green" data-bs-dismiss="offcanvas"
-        aria-label="Close">
-        <p> Keep buying</p>
-      </button>
-      <button id="btn-finalizar-compra" type="button" class="btn-green" href="compra.html">
-        <p>Checkout</p>
-      </button>
-
     </div>
-
-  </div>
   </div>
 
 

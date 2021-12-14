@@ -123,7 +123,7 @@
       <div class="d-flex justify-content-center">
         <div class="col-12 col-md-8">
           <div class="table-responsive">
-            <table class="table tableAdmin">
+            <table class="table">
               <thead>
                 <tr>
                   <th scope="col">Image</th>
@@ -135,7 +135,8 @@
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row" class="text-center"><img :src="user.img" :alt="user.firstName" class="img-user"></th>
+                  <th scope="row" class="text-center"><img :src="user.img" 
+                    :alt="user.firstName" class="img-user"></th>
                   <td class="text-center">{{user.firstName}}</td>
                   <td class="text-center">{{user.lastName}}</td>
                   <td>
@@ -152,7 +153,7 @@
             </h3>
           </div>
           <div class="table-responsive">
-            <table class="table tableAdmin" v-if="addressboolean">
+            <table class="table" v-if="addressboolean">
               <thead>
                 <tr>
                   <th scope="col">ID</th>
@@ -179,7 +180,7 @@
             </h3>
           </div>
           <div class="table-responsive">
-            <table class="table tableAdmin" v-if="bookingboolean">
+            <table class="table" v-if="bookingboolean">
               <thead>
                 <tr>
                   <th scope="col" class="text-center">ID</th>
@@ -206,7 +207,7 @@
             </h3>
           </div>
           <div class="table-responsive">
-            <table class="table tableAdmin" v-if="card">
+            <table class="table" v-if="card">
               <thead>
                 <tr>
                   <th scope="col">ID</th>
@@ -237,7 +238,7 @@
             </h3>
           </div>
           <div class="table-responsive">
-            <table class="table tableAdmin" v-if="orderBoolean">
+            <table class="table" v-if="orderBoolean">
               <thead>
                 <tr>
                   <th scope="col">ID</th>
@@ -251,7 +252,7 @@
               <tbody>
                 <tr>
                   <td class="text-center">{{orderInfo.id}}</td>
-                  <td class="text-center">{{orderInfo.aceptedDate}}</td>
+                  <td class="text-center">{{(orderInfo.aceptedDate).slice(0,10)}} - {{ (orderInfo.aceptedDate).slice(11,16)}}</td>
                   <td class="text-center">{{orderInfo.creationDate}}</td>
                   <td class="text-center">{{orderInfo.state}}</td>
                   <td class="text-center">{{orderInfo.total}}</td>

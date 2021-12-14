@@ -408,19 +408,26 @@ body{
   background: var(--color1);
   color: var(--color4);
 }
-.tableProducts i{
+.tableP i{
   color: var(--color2);
 }
-.tableProducts button{
+.tableP button{
   border: none;
   background: transparent;
 }
-.square{
-  border: 2px solid var(--color1);
+.square{  
   padding: 20px;
 }
 .text-green{
   color: var(--color1);
+}
+.iptGreen{
+  background: none;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid var(--color1);
+  padding: 0px 20px;
+  width: 150px;
 }
 /* ADMIN PANEL END*/
 
