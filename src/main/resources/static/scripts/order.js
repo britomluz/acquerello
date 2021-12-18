@@ -442,7 +442,7 @@ const app = Vue.createApp({
 
       // this.errorLoan = false
     },
-    show_address(e) {
+    show_address_select(e) {
       if (e.target.value == "newAdress") {
         this.show = true;
         const div = document.getElementById("check")
