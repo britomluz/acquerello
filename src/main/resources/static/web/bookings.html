@@ -436,6 +436,9 @@
                   <tr v-if="filterBookings.length === 0" colspan="6">
                     <td colspan="9" class="text-danger">No results found</td>
                   </tr>
+                  <tr v-if="bookingsUsers.length === 0">
+                    <td colspan="6" class="text-danger">You don't have any booking yet </td>
+                </tr>
                 </tbody>
               </table>
             </div>

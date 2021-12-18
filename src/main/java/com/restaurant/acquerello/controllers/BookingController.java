@@ -39,6 +39,15 @@ public class BookingController {
         User user = userService.getByEmail(authentication.getName());
         Booking table = bookingService.getTable(bookingCreateDTO.getTable());
 
+        String dateDto = String.valueOf(bookingCreateDTO.getDate());
+        String time1Dto = String.valueOf(bookingCreateDTO.getBookingHour());
+        String sectorDto = String.valueOf(bookingCreateDTO.getSector());
+        String tableDto = String.valueOf(bookingCreateDTO.getTable());
+        String quantityDto = String.valueOf(bookingCreateDTO.getQuantity());
+
+        if(dateDto.isEmpty() || time1Dto.isEmpty() || sectorDto.isEmpty() || tableDto.isEmpty() || quantityDto.isEmpty()){
+            return new ResponseEntity<>("Missing data. Please, check all inputs", HttpStatus.FORBIDDEN);
+        }
 
         if(bookingCreateDTO.getDate().lengthOfMonth() < 1) {
             return new ResponseEntity<>("The field date is empty", HttpStatus.FORBIDDEN);

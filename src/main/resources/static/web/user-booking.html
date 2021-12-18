@@ -92,8 +92,8 @@
         </nav>
 
         <header class="headerPagesPanel d-flex align-items-center">
-            <h1>Bookings</h1>
-            <h3 class="cWhite">ADMIN PANEL</h3>
+            <h1>My Bookings</h1>
+            <h3 class="cWhite">MY ACCOUNT</h3>
         </header>
 
         <main>
@@ -108,7 +108,7 @@
                   </li>
           
                   <li class="item-list">
-                    <a class="item-link l5" href="#">
+                    <a class="item-link l5" href="my-orders.html">
                       <div><i class="bi bi-bag-fill fs-3"></i></div>
                       <p>My Orders</p>
                     </a>
@@ -163,10 +163,12 @@
                                     <td class="d-flex justify-content-center">
                                         <button :id="booking.id" type="button" @click="cancel_booking" class="btnTransp"><i
                                             class="bi bi-x-square text-danger"></i>
-                                      </td>
-                                    </form>
-                                    </td>
-                            </tbody>
+                                     </td>                                                                        
+                                </tr>
+                                <tr v-if="bookinget.length === 0">
+                                    <td colspan="8" class="text-danger">You don't have any booking yet </td>
+                                </tr>
+                            </tbody>                            
                         </table>
                     </div>
                 </div>

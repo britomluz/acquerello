@@ -141,7 +141,7 @@ const app = Vue.createApp({
           axios.get("/api/order/current")
           .then(response=>{
             console.log(response)
-            this.order=response.data            
+            this.order=response.data.sort((a,b) => parseInt(b.id - a.id))            
         })
           .catch(err=>console.log(err))
       },

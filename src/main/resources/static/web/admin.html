@@ -249,6 +249,9 @@
                 <tr v-if="filter_order.length === 0" colspan="6">
                   <td colspan="9" class="text-danger">No results found</td>
                 </tr>
+                <tr v-if="orders.length === 0">
+                  <td colspan="8" class="text-danger">You don't have any order yet </td>
+              </tr>
               </tbody>
             </table>
           </div>

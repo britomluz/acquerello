@@ -183,7 +183,7 @@ const app = Vue.createApp({
         this.user = res.data;
         this.card = res.data.card[0]
 
-        console.log(this.card)
+        //console.log(this.card)
         this.address = res.data.address;
 
         if (res.data.card.length > 0) {
@@ -842,8 +842,7 @@ const app = Vue.createApp({
   },
   computed: {
     filterProducts() {
-      return this.products.filter((product) =>
-        product.name.toLowerCase().match(this.filterNameProduct.toLowerCase())
+      return this.products.filter((product) => product.name.toLowerCase().match(this.filterNameProduct.toLowerCase())
       );
     },
     showAddress() {

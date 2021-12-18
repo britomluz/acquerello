@@ -240,7 +240,9 @@
                   <td class="d-flex justify-content-around"><img :src="category.categoryImage" class="card-img-top"
                       alt="category.name" style="width: 200px; height: 100px;"></td>
                 </tr>
-
+                <tr v-if="categories.length === 0">
+                  <td colspan="6" class="text-danger">You don't have any category yet </td>
+                </tr>
               </tbody>
             </table>
           </div>

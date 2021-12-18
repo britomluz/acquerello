@@ -164,7 +164,7 @@
             <p id="response"></p>
           </div>
           <!-- Form Steps -->
-          <form @submit.prevent="" v-cloak>
+          <form @submit.prevent.once="confirmBuy" v-cloak>
 
             <div class="errors" id="error" v-if="errorCardRest">
               <div class="error-div">
@@ -214,7 +214,7 @@
                 </div>
                 <div class="d-flex flex-a-items-center radio">
                   <input type="radio" @click="selectRadio" value="withdraw" name="method" id="in">
-                  <label for="in">Withdraw order in restaurant </label>
+                  <label for="in">Take away </label>
                 </div>
                 <div class="title mt-3" v-if="deliver">
                   <h4 v-if="guest">Already are you registered?</h4>
@@ -365,7 +365,7 @@
                     @click="backForms(this.$refs.back2, this.$refs.form2, this.$refs.form3, this.$refs.progressStep3)"
                     class="btn btn-prev"><i class="bi bi-arrow-left"></i>
                     Go back</a>
-                  <button ref="submit" type="submit" value="submit" class="btn btn-confirm" @click="confirmBuy"
+                  <button ref="submit" type="submit" value="submit" class="btn btn-confirm" 
                     id="confirm">Confirm <i class="bi bi-check-lg"></i></button>
                   <!-- <p> @click="nextProgressBar(this.$refs.submit, this.$refs.progressStep3)"</p> NO SE QUE FUNCION CUMPLE-->
                 </div>

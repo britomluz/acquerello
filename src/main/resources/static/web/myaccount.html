@@ -103,7 +103,7 @@
         </li>
 
         <li class="item-list">
-          <a class="item-link l5" href="#">
+          <a class="item-link l5" href="my-orders.html">
             <div><i class="bi bi-bag-fill fs-3"></i></div>
             <p>My Orders</p>
           </a>
@@ -200,9 +200,9 @@
                 </div>
               </div>
               <div v-else>
-                <h5>{{user.firstName}} you dont have any card.</h5>
-                <p>Request your card and score points!!</p>
-                <button class="btn-green" @click="createCard">Request your card</button>
+                <h5 class="cRed">{{user.firstName}} you dont have any card.</h5>
+                <p class="fs-1 cGreen">Request your <span><b class="cRed"> Acquerello Card</b></span> and score points!!</p>
+                <button class="btn-red" @click="createCard">Request your card</button>
               </div>
             </div>
           </div>

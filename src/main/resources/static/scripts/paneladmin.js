@@ -58,7 +58,9 @@ const App = Vue.createApp({
        typefilterClient:"",
        // errors
        errororder:false,
-       errorcancel:""
+       errorcancel:"",
+
+       user:[]
     };
   },
   created() {
@@ -67,7 +69,7 @@ const App = Vue.createApp({
     });
     this.loadcreate();
     this.loadDataOrders()
-
+    this.load_user()
     this.loadDataUser()
     this.loadUsers()
     this.showOrder()
@@ -113,6 +115,19 @@ const App = Vue.createApp({
 
   },
   methods: {
+    load_user(){
+      axios.get("/api/users/current")
+      .then(res => {
+        this.user = res.data
+        this.card = res.data.card
+        this.myaddress = res.data.address 
+    })
+      .catch(err =>{
+        // err.message
+        console.log(err.response)  
+      } 
+      )
+  },
     loadUsers(){
       axios.get(`/api/users`)
       .then((response) => {
@@ -190,7 +205,7 @@ const App = Vue.createApp({
     loadcreate() {
       axios.get(`/api/order`)
         .then((response) => {
-          this.orders = response.data;
+          this.orders = response.data.sort((a,b) => parseInt(b.id - a.id))
         })
         .catch((err) => console.log(err));
     },

@@ -88,18 +88,19 @@ const app = Vue.createApp({
        quantity: [],
        searchProducts: false,
        show: false,
+
     };
   },
   created() {
     this.get_users();
-    this.load_user()
+    this.load_user()    
     this.get_bookings();
     if (localStorage.getItem("cart")) {
       this.cart = JSON.parse(localStorage.getItem("cart"));
       this.totalQantity = JSON.parse(localStorage.getItem("quantity"));
     } 
   },
-  methods: {
+  methods: {        
     load_user(){
       axios.get("/api/users/current")
       .then(res => {
@@ -205,14 +206,14 @@ const app = Vue.createApp({
         .get("/api/user/current/bookings")
         .then((response) => {
           this.bookinget = response.data;
-          this.bookinget = response.data.sort((a,b) => parseInt(a.id - b.id))
+          this.bookinget = response.data.sort((a,b) => parseInt(b.id - a.id))
         })
         .catch((err) => console.log(err));
     },
     get_bookings() {
       axios.get("/api/booking")
         .then((response) => {
-          this.bookingsUsers = response.data;
+          this.bookingsUsers = response.data.sort((a,b) => parseInt(b.id - a.id))
          // console.log(this.bookingsUsers)
          // this.tableAvailability()
         })
@@ -295,19 +296,7 @@ const app = Vue.createApp({
       .catch(err=>console.log(err))
     }
   },
-  computed: {    
-    // tableAvailability() {
-    //   let imgBooking = document.querySelectorAll('.tbBooking')
-
-//    n.tableAvailability == 'NOTAVAILABLE'
-
-    //   let tables = this.bookingsUsers.filter(booking => booking.tableAvailability == 'NOTAVAILABLE')
-
-
-    //   console.log(tables)
-    //   //let imgBooking = document.querySelectorAll('.tbBooking')
-
-    // },
+  computed: {        
     filterBookings(){
       let a = this.bookingsUsers
       return this.bookingsUsers.filter(booking=>this.statesfilter.includes(booking.sector)||this.statesfilter.length === 0)
