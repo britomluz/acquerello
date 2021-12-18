@@ -38,7 +38,24 @@
             <span class="navbar-toggler-icon"></span>
           </button>
 
-          <a href="myaccount.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+          <div class="d-flex align-items-center px-2">    
+            <div v-if="user.type == 'ADMIN' || user.type == 'USER'" class="dropdown fondoBlack">              
+              <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-fill navIcon cWhite"></i>
+                <span class="emailNav cWhite">{{user.email}}</span> 
+              </a>
+              <ul class="dropdown-menu fondoBlack" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="myaccount.html">My Account</a></li>
+                <li><a class="dropdown-item" href="my-orders.html">My Orders</a></li>
+                <li><a class="dropdown-item" href="user-booking.html">My Bookings</a></li>
+                <li v-if="user.type == 'ADMIN'"><a class="dropdown-item" href="admin.html">Admin Panel</a></li>
+                <li><a href="#" @click="logout" class="nav-link">Log out</a></li>
+              </ul>
+            </div> 
+            <div v-else>
+              <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+            </div>                        
+          </div>
         </div>
 
         <!-- MENU RESPONSIVE -->
@@ -72,7 +89,7 @@
     </nav>
 
     <header class="headerPagesPanel d-flex align-items-center">
-      <h1 id="title-pages">My Account</h1>
+      <h1 id="title-pages">My Account</h1>    
       <h3 id="title-pages3">ADMIN PANEL</h3>
     </header>
     <div class="mt-1 d-flex-justify-content-center mb-5">

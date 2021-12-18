@@ -51,6 +51,11 @@ const App = Vue.createApp({
        monthfilter:[],
        dayfilter:[],
        hoursfilter:"",
+       //filter clients
+       firstNamefilterClient:"",
+       lastNamefilterClient:"",
+       emailfilterClient:"",
+       typefilterClient:"",
        // errors
        errororder:false,
        errorcancel:""
@@ -144,8 +149,9 @@ const App = Vue.createApp({
       axios.get(`/api/order/details?id=${id}`).then(res => {
         this.orderDetail = res.data
         this.orderDetailId = this.orderDetail.filter(idP => idP.orderId == id)
-        console.log(this.orderDetail)
-        console.log(this.orderDetailId)
+        this.show_address = this.orderDetailId[0].address.number+" "+ this.orderDetailId[0].address.street+", "+this.orderDetailId[0].address.state
+        console.log(this.show_address)
+        
       }).catch(err => {
         console.log(err.response)
       })
@@ -313,7 +319,6 @@ const App = Vue.createApp({
   },
   computed:{
     filter_order(){
-
       let b =this.orders
       return this.orders
 
@@ -325,9 +330,12 @@ const App = Vue.createApp({
       .filter(order=>order.creationDate.slice(8,10).match(this.dayfilter))
       .filter(order=>order.creationDate.slice(11,13).match(this.hoursfilter))
     },
-    showAddress(){
-     return this.show_address = this.orderDetailId[0].address.number+" "+ this.orderDetailId[0].address.street
-    },
+    filterClients(){
+       return this.users.filter(user => user.firstName.toLowerCase().match(this.firstNamefilterClient.toLowerCase()))
+                        .filter(user => user.lastName.toLowerCase().match(this.lastNamefilterClient.toLowerCase()))
+                        .filter(user => user.email.toLowerCase().match(this.emailfilterClient.toLowerCase()))
+                        .filter(user => this.typefilterClient.includes(user.type) || this.typefilterClient.length === 0)
+    }
   }
 });
 App.mount("#app");

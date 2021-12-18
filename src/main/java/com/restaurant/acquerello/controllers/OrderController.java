@@ -110,7 +110,6 @@ public class OrderController {
         if(orderToBuyDTO.getType().equals(OrderType.LOCAL)){
             if(orderToBuyDTO.getTableNumber() < 1 || orderToBuyDTO.getTableNumber() == null){
                 return new ResponseEntity<>("Please, write the table number", HttpStatus.FORBIDDEN);
-
             }
         }
 

@@ -39,19 +39,20 @@ public class BookingController {
         User user = userService.getByEmail(authentication.getName());
         Booking table = bookingService.getTable(bookingCreateDTO.getTable());
 
+
         if(bookingCreateDTO.getDate().lengthOfMonth() < 1) {
             return new ResponseEntity<>("The field date is empty", HttpStatus.FORBIDDEN);
         }
 
-        LocalTime bHour = bookingService.getTable(bookingCreateDTO.getTable()).getBookingHour().minusMinutes(1);
+        LocalTime bHour = bookingCreateDTO.getBookingHour().minusMinutes(1);
 
 
         // verify booking availability in range of 4 hours
+
         if (table != null){
-            if(bookingCreateDTO.getBookingHour().isAfter(bHour) && bookingCreateDTO.getBookingHour().isBefore(bHour.plusHours(4).minusMinutes(1))){
+            if(bookingCreateDTO.getBookingHour().isAfter(bHour) && bookingCreateDTO.getBookingHour().isBefore(bHour.plusHours(4))){
                 return new ResponseEntity<>("Table not available", HttpStatus.FORBIDDEN);
             }
-
         }
 
 
@@ -66,7 +67,7 @@ public class BookingController {
 
         LocalTime plus = bookingCreateDTO.getBookingHour().plusHours(4);
 
-        Booking booking = new Booking(bookingCreateDTO.getDate(), bookingCreateDTO.getBookingHour().minusMinutes(1), plus, bookingCreateDTO.getSector(), bookingCreateDTO.getTable(), bookingCreateDTO.getQuantity(), TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+        Booking booking = new Booking(bookingCreateDTO.getDate(), bookingCreateDTO.getBookingHour(), plus, bookingCreateDTO.getSector(), bookingCreateDTO.getTable(), bookingCreateDTO.getQuantity(), TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
 
         System.out.println(booking);
         user.addBooking(booking);

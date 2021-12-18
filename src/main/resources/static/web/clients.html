@@ -27,17 +27,33 @@
         <div class="d-flex navlinks">
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
-          <a class="nav-link" href="booking.html">BOOKING</a>
-          <a href="#" @click="logout" class="nav-link">LOG OUT</a>   
+          <a class="nav-link" href="booking.html">BOOKING</a>         
         </div>
 
-        <div>
+        <div class="d-flex">
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
             aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
           
-          <a href="myaccount.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+          <div class="d-flex align-items-center px-2">    
+            <div v-if="user.type == 'ADMIN' || user.type == 'USER'" class="dropdown fondoBlack">              
+              <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-fill navIcon cWhite"></i>
+                <span class="emailNav cWhite">{{user.email}}</span> 
+              </a>
+              <ul class="dropdown-menu fondoBlack" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="myaccount.html">My Account</a></li>
+                <li><a class="dropdown-item" href="my-orders.html">My Orders</a></li>
+                <li><a class="dropdown-item" href="user-booking.html">My Bookings</a></li>
+                <li v-if="user.type == 'ADMIN'"><a class="dropdown-item" href="admin.html">Admin Panel</a></li>
+                <li><a href="#" @click="logout" class="nav-link">Log out</a></li>
+              </ul>
+            </div> 
+            <div v-else>
+              <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+            </div>                        
+          </div>
         </div>
 
         <!-- MENU RESPONSIVE -->
@@ -77,7 +93,7 @@
       <ul class="list ">
 
         <li class="item-list">
-          <a class="item-link l5" href="myaccount.html">
+          <a id="adminPanel" class="item-link l5" href="myaccount.html">
             <div><i class="bi bi-person-fill fs-2"></i></div>
             <p>My account</p>
           </a>
@@ -112,13 +128,44 @@
         </li>
       </ul>
     </div>
+    <div class="mt-1">
+      <a href="admin.html" class="btn-green"><i class="bi bi-arrow-left text-light"></i> Admin Panel</a>
+    </div>
     <div class="p-4">
       <h3>
         CLIENTS
       </h3>
     </div>
     <main>
-      <div class="d-flex justify-content-center">
+      <div class="d-flex flex-column align-items-center justify-content-center">
+        <div>
+          <div class="d-flex justify-content-center mb-3">
+            <div class="ipt-g  p-1 d-flex">
+              <input type="text" name="" id="" v-model="firstNamefilterClient" placeholder="FirstName">
+            </div>
+            <div class="ipt-g  p-1 d-flex">
+              <input type="text" name="" id="" v-model="lastNamefilterClient" placeholder="LastName">
+            </div>
+            <div class="ipt-g  p-1 d-flex">
+              <input type="text" name="" id="" v-model="emailfilterClient" placeholder="Email">
+            </div>
+    
+            <div class="ipt-g  p-1 d-flex">
+              <select name="" id="" v-model="typefilterClient">
+                <option value="">
+                  Type
+                </option>
+                <option value="ADMIN">
+                  Admin
+                </option>
+                <option value="USER">
+                  User
+                </option>                
+              </select>
+            </div>    
+            
+          </div>
+        </div>
         <div class="col-12 col-md-8">
           <div class="table-responsive">
             <table class="table">
@@ -134,7 +181,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="u in users">
+                <tr v-for="u in filterClients">
                   <th scope="row" class="text-center">{{u.id}}</th>
                   <td class="text-center">{{u.firstName}}</td>
                   <td class="text-center">{{u.lastName}}</td>

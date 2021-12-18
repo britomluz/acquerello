@@ -1,6 +1,7 @@
 const App = Vue.createApp({
     data() {
         return {
+            user:[],
             categories: [],
             categoryName: "",
             categoryDescription: "",
@@ -24,6 +25,7 @@ const App = Vue.createApp({
         };
     },
     created() {
+        this.load_user()
         axios.get('/api/categories')
             .then(response => {
                 this.categories = response.data.categories
@@ -31,6 +33,19 @@ const App = Vue.createApp({
             .catch(err => console.log(err))
     },
     methods: {
+        load_user(){
+            axios.get("/api/users/current")
+            .then(res => {
+              this.user = res.data
+              this.card=res.data.card
+              this.myaddress = res.data.address 
+          })
+            .catch(err =>{
+              // err.message
+              console.log(err.response)  
+            } 
+            )
+        },
         createCategory(){
             axios.post('/api/categories/create',{
                 // id: this.categoryId,

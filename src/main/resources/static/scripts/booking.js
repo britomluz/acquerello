@@ -1,6 +1,7 @@
 const app = Vue.createApp({
   data() {
     return {
+      user:[],
       datetime: "",
       bookingHour: "",
       sectortime: "",
@@ -9,7 +10,7 @@ const app = Vue.createApp({
       disabled:true,
 
       //booking grid
-      errorBookTable:"",
+      errorBookTable: false,
       error_bookTable:"",
       tab:[],
       num:[
@@ -91,6 +92,7 @@ const app = Vue.createApp({
   },
   created() {
     this.get_users();
+    this.load_user()
     this.get_bookings();
     if (localStorage.getItem("cart")) {
       this.cart = JSON.parse(localStorage.getItem("cart"));
@@ -98,6 +100,19 @@ const app = Vue.createApp({
     } 
   },
   methods: {
+    load_user(){
+      axios.get("/api/users/current")
+      .then(res => {
+        this.user = res.data
+        this.card=res.data.card
+        this.myaddress = res.data.address 
+    })
+      .catch(err =>{
+        // err.message
+        console.log(err.response)  
+      } 
+      )
+  },
     //   user and admin    
     create_booking() {
       console.log(this.datetime, this.bookingHour, this.sectortime, this.table, this.quantitytime)
@@ -127,14 +142,19 @@ const app = Vue.createApp({
           })
           .then(res => window.location.reload())
         })
-        .catch((err) =>{
-          console.log(err.response.data)
-          if(err.response.status == 401){
+        .catch((err) =>{         
+
+          this.errorBookTable = true
+
+          if(err.response.data.status === 401){
+            
             this.error_bookTable = 'Please log in to book a table'
+          } else{
+            this.error_bookTable = err.response.data
           }
 
-          this.errorBookTable = err.response.data
-          this.error_bookTable = err.response.data
+          
+          
         });
     },
     // cancel user booking
