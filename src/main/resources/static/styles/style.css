@@ -1137,8 +1137,13 @@ footer{
         width: 300px;
     }
 
+    .emailNav{
+        display: none;
+    }
+
+
     #title-pages{
-        font-size: 60px;
+        font-size: 60px;        
     }
     #title-pages3{
         font-size: 20px;

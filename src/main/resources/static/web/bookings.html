@@ -29,17 +29,33 @@
         <div class="d-flex navlinks">
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
-          <a class="nav-link" href="booking.html">BOOKING</a>
-          <a href="#" @click="logout" class="nav-link">LOG OUT</a>
+          <a class="nav-link" href="booking.html">BOOKING</a>         
         </div>
 
-        <div>
+        <div class="d-flex">
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
             aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
-          
-          <a href="myaccount.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+          <div class="d-flex align-items-center px-2">    
+            <div v-if="user.type == 'ADMIN' || user.type == 'USER'" class="dropdown fondoBlack">              
+              <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-fill navIcon cWhite"></i>
+                <span class="emailNav cWhite">{{user.email}}</span> 
+              </a>
+              <ul class="dropdown-menu fondoBlack" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="myaccount.html">My Account</a></li>
+                <li><a class="dropdown-item" href="my-orders.html">My Orders</a></li>
+                <li><a class="dropdown-item" href="#">My Bookings</a></li>
+                <li v-if="user.type == 'ADMIN'"><a class="dropdown-item" href="admin.html">Admin Panel</a></li>
+                <li><a href="#" @click="logout" class="nav-link">Log out</a></li>
+              </ul>
+            </div> 
+            <div v-else>
+              <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+            </div>                        
+          </div> 
+         
           <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
               class="bi bi-cart-fill"></i>
               <div class="badge"><small class="cWhite" v-if="totalQantity > 0">{{totalQantity}}</small></div></button>
@@ -80,6 +96,45 @@
       <h3 class="cWhite">ADMIN PANEL</h3>
     </header>
     <main>
+      <div class="mt-1 d-flex-justify-content-center mb-5">
+        <ul class="list ">
+  
+          <li class="item-list">
+            <a id="adminPanel" class="item-link l5" href="myaccount.html">
+              <div><i class="bi bi-person-fill fs-2"></i></div>
+              <p>My account</p>
+            </a>
+          </li>
+  
+          <li class="item-list">
+            <a class="item-link l5" href="clients.html">
+              <div><i class="bi bi-people-fill fs-3"></i></div>
+              <p>Clients</p>
+            </a>
+          </li>
+  
+          <li class="item-list">
+            <a class="item-link l5" href="bookings.html">
+              <div><i class="bi bi-card-checklist fs-3"></i></div>
+              <p>Bookings</p>
+            </a>
+          </li>
+  
+          <li class="item-list">
+            <a class="item-link l5" href="products.html">
+              <div><i class="bi bi-ui-checks-grid fs-3"></i></div>
+              <p>Products</p>
+            </a>
+          </li>
+  
+          <li class="item-list">
+            <a class="item-link l5" href="category.html">
+              <div><i class="bi bi-ui-checks fs-3"></i></div>
+              <p>Categories</p>
+            </a>
+          </li>
+        </ul>
+      </div>
       <div class="mt-1">
         <a href="admin.html" class="btn-green"><i class="bi bi-arrow-left text-light"></i> Admin Panel</a>
       </div>

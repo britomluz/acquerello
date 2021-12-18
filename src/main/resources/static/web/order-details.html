@@ -28,17 +28,34 @@
         <div class="d-flex navlinks">
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
-          <a class="nav-link" href="booking.html">BOOKING</a>
-          <a href="#" @click="logout" class="nav-link">LOG OUT</a>
+          <a class="nav-link" href="booking.html">BOOKING</a>          
         </div>
 
-        <div>
+        <div class="d-flex">
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
             aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
           
-          <a href="myaccount.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+          <div class="d-flex align-items-center px-2">    
+            <div v-if="user.type == 'ADMIN' || user.type == 'USER'" class="dropdown fondoBlack">              
+              <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-fill navIcon cWhite"></i>
+                <span class="emailNav cWhite">{{user.email}}</span> 
+              </a>
+              <ul class="dropdown-menu fondoBlack" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="myaccount.html">My Account</a></li>
+                <li><a class="dropdown-item" href="my-orders.html">My Orders</a></li>
+                <li><a class="dropdown-item" href="#">My Bookings</a></li>
+                <li v-if="user.type == 'ADMIN'"><a class="dropdown-item" href="admin.html">Admin Panel</a></li>
+                <li><a href="#" @click="logout" class="nav-link">Log out</a></li>
+              </ul>
+            </div> 
+            <div v-else>
+              <a href="login.html" class="navIcon"><i class="bi bi-person-fill"></i></a>
+            </div>                        
+          </div>
+
           <button class="navIcon" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCart"><i
               class="bi bi-cart-fill"></i>
               <div class="badge"><small class="cWhite" v-if="totalQantity > 0">{{totalQantity}}</small></div></button>

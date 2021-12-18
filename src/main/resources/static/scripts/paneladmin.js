@@ -51,6 +51,11 @@ const App = Vue.createApp({
        monthfilter:[],
        dayfilter:[],
        hoursfilter:"",
+       //filter clients
+       firstNamefilterClient:"",
+       lastNamefilterClient:"",
+       emailfilterClient:"",
+       typefilterClient:"",
        // errors
        errororder:false,
        errorcancel:""
@@ -314,7 +319,6 @@ const App = Vue.createApp({
   },
   computed:{
     filter_order(){
-
       let b =this.orders
       return this.orders
 
@@ -326,7 +330,12 @@ const App = Vue.createApp({
       .filter(order=>order.creationDate.slice(8,10).match(this.dayfilter))
       .filter(order=>order.creationDate.slice(11,13).match(this.hoursfilter))
     },
-    
+    filterClients(){
+       return this.users.filter(user => user.firstName.toLowerCase().match(this.firstNamefilterClient.toLowerCase()))
+                        .filter(user => user.lastName.toLowerCase().match(this.lastNamefilterClient.toLowerCase()))
+                        .filter(user => user.email.toLowerCase().match(this.emailfilterClient.toLowerCase()))
+                        .filter(user => this.typefilterClient.includes(user.type) || this.typefilterClient.length === 0)
+    }
   }
 });
 App.mount("#app");

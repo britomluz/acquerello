@@ -1,6 +1,7 @@
 const app = Vue.createApp({
   data() {
     return {
+      user:[],
       datetime: "",
       bookingHour: "",
       sectortime: "",
@@ -91,6 +92,7 @@ const app = Vue.createApp({
   },
   created() {
     this.get_users();
+    this.load_user()
     this.get_bookings();
     if (localStorage.getItem("cart")) {
       this.cart = JSON.parse(localStorage.getItem("cart"));
@@ -98,6 +100,19 @@ const app = Vue.createApp({
     } 
   },
   methods: {
+    load_user(){
+      axios.get("/api/users/current")
+      .then(res => {
+        this.user = res.data
+        this.card=res.data.card
+        this.myaddress = res.data.address 
+    })
+      .catch(err =>{
+        // err.message
+        console.log(err.response)  
+      } 
+      )
+  },
     //   user and admin    
     create_booking() {
       console.log(this.datetime, this.bookingHour, this.sectortime, this.table, this.quantitytime)
