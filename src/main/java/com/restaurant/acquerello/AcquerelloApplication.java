@@ -97,8 +97,8 @@ public class AcquerelloApplication {
 			//GABRIEL: CREATE CARDS TO TEST THE APP
 			Card card1 = new Card("1234-5654-9874-6321", 315, LocalDateTime.now(), 0D, 20, 1, CardType.ACTIVE, user2);
 			cardRepository.save(card1);
-			Card card2 = new Card("9842-7562-3249-5741", 315, LocalDateTime.now(), 0D, 20, 1, CardType.ACTIVE, user1);
-			cardRepository.save(card3);
+			Card card2 = new Card("9842-7562-3249-5741", 315, LocalDateTime.now(), 20D, 20, 1, CardType.ACTIVE, user1);
+			cardRepository.save(card2);
 
 			//GABRIEL: CREATE PRODUCTS TO TEST THE APP
 			Product product1 = new Product("Bruschetta", 2, "Tomato Reduction base, Mozzarella, Torn Basil, Olive Oil", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/bruschetta_bbzjzr.jpg", 17D, 25);
