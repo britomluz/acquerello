@@ -206,7 +206,7 @@
                   <a href="./login.html" v-if="guest">Log in</a>                  
 
                   <h4>Where do you want your order?</h4>
-                  <select class="w-100 iptGreen" name="cuentas" @change="show_address" id="" placeholder="">
+                  <select class="w-100 iptGreen" name="cuentas" @change="show_address_a" id="" placeholder="">
                     <option value="">Select adress</option>
                     <option v-if="logged" v-for="add in address" :value="add.id">{{add.street}} {{add.number}}</option>
                     <option value="newAdress">Add new adress</option>

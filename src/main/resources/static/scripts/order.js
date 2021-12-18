@@ -152,7 +152,6 @@ const app = Vue.createApp({
     this.loadCategories();
     this.loadDataProduct();
 
-
     this.showModal();
     if (localStorage.getItem("cart")) {
       this.cart = JSON.parse(localStorage.getItem("cart"));
@@ -437,7 +436,7 @@ const app = Vue.createApp({
 
       // this.errorLoan = false
     },
-    show_address(e) {
+    show_address_a(e) {
       if (e.target.value == "newAdress") {
         this.show = true;
         const div = document.getElementById("check")
@@ -808,9 +807,9 @@ const app = Vue.createApp({
         product.name.toLowerCase().match(this.filterNameProduct.toLowerCase())
       );
     },
-    showAddress(){
+    /* showAddress(){
       this.show_address = orderDetailId[0].address
-    }
+    } */
   },
 });
 app.mount("#app");

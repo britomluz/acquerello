@@ -36,11 +36,11 @@ public class AcquerelloApplication {
 									  AddressRepository addressRepository, CardRepository cardRepository, BookingRepository bookingRepository) {
 		return (args) -> {
 
-			Address address1 = new Address("Bids Hills", 332, "HI-3232", "California", "A white house");
-			Address address2 = new Address("Bids Hills", 113, "HI-3110", "California", "A gray house");
-			Address address3 = new Address("Jackson St", 2250, "HI-3110", "California", "Red door");
-			Address address4 = new Address("Jackson St",2350,"HI-3110","California","Green door");
-			Address address5 = new Address("Washington St",2370,"HI-3232","California","A light blue house");
+			Address address1 = new Address("Brea Hills Ave", 332, "HI-3232", "California", "A white house");
+			Address address2 = new Address("Bob White Rd", 4329, "HI-3110", "California", "A gray house");
+			Address address3 = new Address("Woodpecker St", 3654, "HI-3110", "California", "Red door");
+			Address address4 = new Address("Tangerine Pl",467,"HI-3110","California","Green door");
+			Address address5 = new Address("Trolley Ct",3950,"HI-3232","California","A light blue house");
 
 			// Brian: Create User and Order
 			User user1 = new User("Melba", "Morel", "mailst664@gmail.com", passwordEncoder.encode("melba1234"), 5554343L, UserType.ADMIN, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");

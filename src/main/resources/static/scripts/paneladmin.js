@@ -144,8 +144,9 @@ const App = Vue.createApp({
       axios.get(`/api/order/details?id=${id}`).then(res => {
         this.orderDetail = res.data
         this.orderDetailId = this.orderDetail.filter(idP => idP.orderId == id)
-        console.log(this.orderDetail)
-        console.log(this.orderDetailId)
+        this.show_address = this.orderDetailId[0].address.number+" "+ this.orderDetailId[0].address.street+", "+this.orderDetailId[0].address.state
+        console.log(this.show_address)
+        
       }).catch(err => {
         console.log(err.response)
       })
@@ -325,9 +326,7 @@ const App = Vue.createApp({
       .filter(order=>order.creationDate.slice(8,10).match(this.dayfilter))
       .filter(order=>order.creationDate.slice(11,13).match(this.hoursfilter))
     },
-    showAddress(){
-     return this.show_address = this.orderDetailId[0].address.number+" "+ this.orderDetailId[0].address.street
-    },
+    
   }
 });
 App.mount("#app");
