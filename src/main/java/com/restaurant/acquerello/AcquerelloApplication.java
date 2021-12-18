@@ -43,19 +43,20 @@ public class AcquerelloApplication {
 			Address address5 = new Address("Washington St",2370,"HI-3232","California","A light blue house");
 
 			// Brian: Create User and Order
-			User user1 = new User("Antonio", "Costa", "antonio_c@admin.com", passwordEncoder.encode("admin1234"), 5554343L, UserType.ADMIN, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
-			User user2 = new User("Gabriel", "Torrealba", "mailst664@gmail.com", passwordEncoder.encode("user1234"), 5551232L, UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
+			User user1 = new User("Melba", "Morel", "mailst664@gmail.com", passwordEncoder.encode("melba1234"), 5554343L, UserType.ADMIN, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
+			User user2 = new User("Jhon", "Wrick", "jhon_wr@gmail.com", passwordEncoder.encode("user1234"), 5551232L, UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
 			User user3 = new User("Logan", "Brown", "logan.brown@acquerello.com", passwordEncoder.encode("user1234"),5552324L ,UserType.USER,"https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
 			User user4 = new User("Zoe", "Williams", "zoe.williams@acquerello.com", passwordEncoder.encode("user1234"),5554542L ,UserType.USER,"https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
 			User user5 = new User("Chloe", "Smith", "chloe.smith@acquerello.com", passwordEncoder.encode("user1234"),5551957L ,UserType.USER,"https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
 
 			// Brian: Creating bookings
-			Booking booking1 = new Booking(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(4), SectorTables.GOLDEN, 4, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking1 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 9, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
 
-			Booking booking2 = new Booking(LocalDate.now(), LocalTime.now(), LocalTime.now().plusHours(8), SectorTables.GOLDEN, 4, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking3 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 4, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking4 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 5, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking5 = new Booking(LocalDate.parse("2021-12-16"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 7, 5, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking2 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 6, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking3 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 7, 5, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking4 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 19, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking5 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("18:59"), LocalTime.parse("18:59").plusHours(4), SectorTables.GOLDEN, 17, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+
 
 			/*
 			Booking booking6 = new Booking(LocalDate.parse("2021-12-16"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 12, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
@@ -247,21 +248,21 @@ public class AcquerelloApplication {
 			//GABRIEL: CREATE CATEGORIES TO TEST THEE APP
 			Category category1 = new Category("Entries & Snacks", "Whether you need healthy snacks that are gluten free, low calorie, low sugar, high protein, vegan, or more, there's something on this list for you.", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/linguine_veodru.jpg");
 			categoryRepository.save(category1);
-			Category category2 = new Category("Specials", "xxxxxxx", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/lasagna_alla_gino_kpjovx.jpg");
+			Category category2 = new Category("Specials", "A mixture of raw usually green leafy vegetables (as lettuce) combined with other vegetables (as tomato and cucumber) and served with a dressing", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/lasagna_alla_gino_kpjovx.jpg");
 			categoryRepository.save(category2);
-			Category category3 = new Category("Chef Picks", "xxxxxx", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/skewers_y8qyip.jpg");
+			Category category3 = new Category("Chef Picks", "Specials food by Acquerello Chef", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/skewers_y8qyip.jpg");
 			categoryRepository.save(category3);
-			Category category4 = new Category("Main Course", "xxxxx", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/stinco_divitello_a8xa5i.jpg");
+			Category category4 = new Category("Main Course", "The long cooking of soup enabled nourishment to be drawn from meagre quantities of fish and meat too bony", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/stinco_divitello_a8xa5i.jpg");
 			categoryRepository.save(category4);
 			Category category5 = new Category("Soup", "xxxxx", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/pumpkin_soup_w7xtgb.jpg");
 			categoryRepository.save(category5);
-			Category category6 = new Category("Drinks", "xxxxx", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/category_drinks_xklgfs.jpg");
+			Category category6 = new Category("Drinks", "A drink (or beverage) is a liquid intended for human consumption. In addition to their basic function", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/category_drinks_xklgfs.jpg");
 			categoryRepository.save(category6);
-			Category category7 = new Category("Pasta", "xxxx", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/panzotti_rrpets.jpg");
+			Category category7 = new Category("Pasta", "The first written record of pasta comes from the Talmud in the 5th century AD and refers to dried pasta that could be cooked through boiling", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/panzotti_rrpets.jpg");
 			categoryRepository.save(category7);
-			Category category8 = new Category("Vegetarian", "xxxxxxxx", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/garden_saladtacos_wdpdiv.jpg");
+			Category category8 = new Category("Vegetarian", "The simplest definition of vegetarianism is a diet free of meat, fish, and fowl flesh. ", "https://res.cloudinary.com/luz-brito/image/upload/v1638657511/Acquerello/garden_saladtacos_wdpdiv.jpg");
 			categoryRepository.save(category8);
-			Category category9 = new Category("Salads", "xxxxxxxxx", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/rapini_pgxvot.jpg");
+			Category category9 = new Category("Salads", "A mixture of raw usually green leafy vegetables (as lettuce) combined with other vegetables", "https://res.cloudinary.com/luz-brito/image/upload/v1638657512/Acquerello/rapini_pgxvot.jpg");
 			categoryRepository.save(category9);
 
 			//GABRIEL: CREATE PRODUCTS/CATEGORIES (MANY TO MANY) TO TEST THE APP
@@ -351,11 +352,11 @@ public class AcquerelloApplication {
 			productCategoryRepository.save(productCategory51);
 
 			// Brian: Creating order
-			Order order1 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.PENDING, 103D, OrderType.DELIVERY);
-			Order order2 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.PENDING, 203D, OrderType.TAKEAWAY);
-			Order order3 = new Order(LocalDateTime.now().minusMinutes(30), LocalDateTime.now(), OrderState.IN_PROCESS, 72D, OrderType.LOCAL);
-			Order order4 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.DELIVERED, 146D, OrderType.DELIVERY);
-			Order order5 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.CANCELED, 89D, OrderType.TAKEAWAY);
+			Order order1 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.PENDING, 103D, OrderType.DELIVERY, null);
+			Order order2 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.PENDING, 203D, OrderType.TAKEAWAY, null);
+			Order order3 = new Order(LocalDateTime.now().minusMinutes(30), LocalDateTime.now(), OrderState.IN_PROCESS, 72D, OrderType.LOCAL, 7);
+			Order order4 = new Order(LocalDateTime.now().minusMinutes(20), LocalDateTime.now(), OrderState.DELIVERED, 146D, OrderType.DELIVERY, null);
+			Order order5 = new Order(LocalDateTime.now().minusMinutes(10), LocalDateTime.now(), OrderState.CANCELED, 89D, OrderType.TAKEAWAY, null);
 
 			// Brian: Adding order to Users
 			user1.addOrder(order1);

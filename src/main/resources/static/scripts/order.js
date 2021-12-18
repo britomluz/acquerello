@@ -85,6 +85,7 @@ const app = Vue.createApp({
       vec: "",
       accountNumber: "VIN-64578965",
       description: "Accquerello order",
+      tableNumber: "",
 
       total: 0,
       totalProduct: 0,
@@ -472,8 +473,9 @@ const app = Vue.createApp({
 
       const list = JSON.parse(localStorage.getItem("cart"))
 
-      let product = [];
+      let product = []; 
 
+      
       if (list != null) {
         list.forEach(l => {
           let obj = {
@@ -490,16 +492,27 @@ const app = Vue.createApp({
 
         // if an authenticated user send a request
         if (this.logged) {
+          let spinner = this.$refs.spinnerContainer
+          spinner.style.display='flex';
+
           axios.post("/api/order/buy", {
             products: product, total: total, type: this.type, id: this.addressId, street: this.street,
             numberStreet: number,
             zip: this.zip,
             state: this.state,
-            reference: this.reference
+            reference: this.reference,
+            tableNumber: this.tableNumber
           }).then(res => {
             // create payment
+            let orderId = res.data.slice(9);
+                        console.log(orderId)
+
+
+            axios.post(`/api/sendMail?id=${orderId}`)
+
             axios.post("https://mindhub-b.herokuapp.com/api/payments", { number: this.numberCard, cvv: cvv, amount: total, description: this.description, accountNumber: this.accountNumber }).then(res => {
               console.log(res.data)
+              spinner.style.display='none';
               swal({
                 title: "Payment succesfull!",
                 text: "Yumm!",
@@ -539,6 +552,8 @@ const app = Vue.createApp({
           })
         } else {
           // create user and address and order
+          let spinner = this.$refs.spinnerContainer
+          spinner.style.display='flex';
           axios
             .post("/api/order/checkout", {
               firstName: this.firstName,
@@ -555,14 +570,18 @@ const app = Vue.createApp({
 
               products: product,
               total: total,
-              type: this.type
+              type: this.type,
+              tableNumber: this.tableNumber
             })
             .then((res) => {
-              let orderId = res.data.slice(35);
+              let orderId = res.data.slice(9);
               console.log(orderId)
+              
               // create payment
+             
               axios.post("https://mindhub-b.herokuapp.com/api/payments", { number: this.numberCard, cvv: cvv, amount: total, description: this.description, accountNumber: this.accountNumber }).then(res => {
                 console.log(res)
+                spinner.style.display='none';
                 swal({
                   title: "Payment succesfull!",
                   text: "Account registered!",

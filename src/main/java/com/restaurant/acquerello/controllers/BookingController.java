@@ -43,9 +43,15 @@ public class BookingController {
             return new ResponseEntity<>("The field date is empty", HttpStatus.FORBIDDEN);
         }
 
+        LocalTime bHour = bookingService.getTable(bookingCreateDTO.getTable()).getBookingHour().minusMinutes(1);
 
+
+        // verify booking availability in range of 4 hours
         if (table != null){
-            return new ResponseEntity<>("Table not available", HttpStatus.FORBIDDEN);
+            if(bookingCreateDTO.getBookingHour().isAfter(bHour) && bookingCreateDTO.getBookingHour().isBefore(bHour.plusHours(4).minusMinutes(1))){
+                return new ResponseEntity<>("Table not available", HttpStatus.FORBIDDEN);
+            }
+
         }
 
 

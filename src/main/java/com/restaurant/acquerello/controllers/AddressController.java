@@ -44,9 +44,6 @@ public class AddressController {
 
         User user = userService.getByEmail(authentication.getName());
 
-        if(user.getType().equals(UserType.ADMIN)) {
-            return new ResponseEntity<>("The admin cannot create a address for the user", HttpStatus.FORBIDDEN);
-        }
 
         Address address = new Address(addressCreateDTO.getStreet(), addressCreateDTO.getNumber(), addressCreateDTO.getZip(), addressCreateDTO.getState(), addressCreateDTO.getReference());
         user.addAddress(address);

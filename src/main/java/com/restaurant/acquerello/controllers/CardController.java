@@ -44,9 +44,7 @@ public class CardController {
         if (user == null){
             return new ResponseEntity<>("Don't have authority",HttpStatus.FORBIDDEN);
         }
-        if (!user.getType().equals(UserType.USER)){
-            return new ResponseEntity<>("Don't have authority",HttpStatus.FORBIDDEN);
-        }
+
         if (user.getCards().stream().anyMatch(card -> card.getType().equals(CardType.ACTIVE))){
             return new ResponseEntity<>("Only 1 card allowed",HttpStatus.FORBIDDEN);
         }

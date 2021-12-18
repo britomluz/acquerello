@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../styles/style.css">
   <link rel="stylesheet" href="../styles/account.css">
+  <link rel="stylesheet" href="../styles/spinner.css">
   <link rel="shortcut icon" href="../assets/favicon.png">
   <title>Acquerello</title>
 </head>
@@ -264,7 +265,7 @@
             <div ref="form2" class="form-step form2">
               <div v-if="table">
                 <label for="table">Number Table: </label>
-                <select class="iptGreen" name="table" id="table">
+                <select class="iptGreen" name="table" id="table" v-model="tableNumber">
                   <option value="" selected disabled>Select Table</option>
                 </select>
               </div>
@@ -359,6 +360,28 @@
 
     </main>
 
+    <!-- SPINNER -->
+    <div ref="spinnerContainer" class="spinnerContainer">
+      <div class="spinnerDiv">
+          <div class="sk-circle">
+              <div class="sk-circle1 sk-child"></div>
+              <div class="sk-circle2 sk-child"></div>
+              <div class="sk-circle3 sk-child"></div>
+              <div class="sk-circle4 sk-child"></div>
+              <div class="sk-circle5 sk-child"></div>
+              <div class="sk-circle6 sk-child"></div>
+              <div class="sk-circle7 sk-child"></div>
+              <div class="sk-circle8 sk-child"></div>
+              <div class="sk-circle9 sk-child"></div>
+              <div class="sk-circle10 sk-child"></div>
+              <div class="sk-circle11 sk-child"></div>
+              <div class="sk-circle12 sk-child"></div>
+              <small class="enviar">Loading...</small>
+          </div>
+          
+      </div>
+      
+  </div>
   </div>
 
   <footer class="d-flex flex-wrap justify-content-around align-items-center py-4" style="position: relative;">

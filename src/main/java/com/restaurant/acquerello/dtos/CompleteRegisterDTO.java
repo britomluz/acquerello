@@ -13,6 +13,7 @@ public class CompleteRegisterDTO {
     private String email;
     private String password;
     private Long number;
+    private Integer tableNumber;
 
     // get address info
     private String street;
@@ -26,7 +27,7 @@ public class CompleteRegisterDTO {
     private Double total;
     private OrderType type;
 
-    public CompleteRegisterDTO(String firstName, String lastName, String email, String password, Long number, String street, Integer numberStreet, String zip, String state, String reference, List<Product> products, Double total, OrderType type) {
+    public CompleteRegisterDTO(String firstName, String lastName, String email, String password, Long number, String street, Integer numberStreet, String zip, String state, String reference, List<Product> products, Double total, OrderType type, Integer tableNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -40,6 +41,7 @@ public class CompleteRegisterDTO {
         this.products = products;
         this.total = total;
         this.type = type;
+        this.tableNumber = tableNumber;
     }
 
     public String getFirstName() {
@@ -144,5 +146,13 @@ public class CompleteRegisterDTO {
 
     public void setType(OrderType type) {
         this.type = type;
+    }
+
+    public Integer getTableNumber() {
+        return tableNumber;
+    }
+
+    public void setTableNumber(Integer tableNumber) {
+        this.tableNumber = tableNumber;
     }
 }

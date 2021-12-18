@@ -83,7 +83,15 @@ const app = Vue.createApp({
             state: this.state,
             reference: this.reference,
           })
-          .then((response) => alert(response.data))
+          .then((response) =>{
+            swal({
+              title: "Good job!",
+              text: "Address added succesfully",
+              icon: "success",
+              button: "OK",
+            })
+            .then(res => window.location.reload())
+          })
           .catch((err) => console.log(err.response.data));
       },
       edit_address(e) {
@@ -161,7 +169,8 @@ const app = Vue.createApp({
               text: "You add balance to Acquerello Card",
               icon: "success",
               button: "OK",
-            });
+            })
+            .then(res => window.location.reload())
           })
           .catch(error =>{
             console.log(error.response.data)
@@ -172,9 +181,16 @@ const app = Vue.createApp({
       },
       createCard() {
         axios.post('/api/cards/create')
-            .then(() => swal('Card created'))
-            .then(console.log("Card created"))
-            .catch(err => console.log(err))
+            .then(res => {
+              swal({
+                title: "Good job!",
+                text: "Card created!",
+                icon: "success",
+                button: "OK",
+              })
+              .then(res => window.location.reload())
+            })
+            
     },
     showOrderDetails(e) {
       let id = e.target.parentElement.id

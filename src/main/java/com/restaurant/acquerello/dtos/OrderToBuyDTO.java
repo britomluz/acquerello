@@ -11,6 +11,7 @@ public class OrderToBuyDTO {
     private Double total;
     private OrderType type;
     private Long id;
+    private Integer tableNumber;
 
     // field if the user create address
     private String street;
@@ -19,7 +20,7 @@ public class OrderToBuyDTO {
     private String state;
     private String reference;
 
-    public OrderToBuyDTO(List<Product> products, Double total, OrderType type, Long id, String street, Integer numberStreet, String zip, String state, String reference) {
+    public OrderToBuyDTO(List<Product> products, Double total, OrderType type, Long id, String street, Integer numberStreet, String zip, String state, String reference, Integer tableNumber) {
         this.products = products;
         this.total = total;
         this.type = type;
@@ -29,6 +30,7 @@ public class OrderToBuyDTO {
         this.zip = zip;
         this.state = state;
         this.reference = reference;
+        this.tableNumber = tableNumber;
     }
 
     public List<Product> getProducts() {
@@ -101,5 +103,13 @@ public class OrderToBuyDTO {
 
     public void setReference(String reference) {
         this.reference = reference;
+    }
+
+    public Integer getTableNumber() {
+        return tableNumber;
+    }
+
+    public void setTableNumber(Integer tableNumber) {
+        this.tableNumber = tableNumber;
     }
 }

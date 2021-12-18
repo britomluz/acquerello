@@ -83,7 +83,7 @@
 
     <main>
       <div class="mt-1">
-        <a href="admin.html" class="btn-green"><i class="bi bi-arrow-left text-light"></i> Admin Panel</a>
+        <a href="admin.html" class="btn-green"><i class="bi bi-arrow-left text-light"></i> Go back</a>
       </div>
       <h3 class="cGreen mt-4">Order details</h3>
       <div class="row mb-4 d-flex flex-column align-items-center ">
@@ -91,8 +91,9 @@
           <h3 class="fs-5 ">Pedido Nº {{order.id}}</h3>
           <div class="row d-flex justify-content-center mb-5">
             <div class="col-12 col-md-4 mt-5">
-              <p><b>Email: </b> {{order.email}}</p>
-              <div>
+              
+              <div class="d-flex flex-column align-items-center justify-content-center">
+                <p><b>Email: </b> {{order.email}}</p>
                 <section>
                   <div class="row" v-if="order.type == 'DELIVERY'">
                     <p><b>Direccion: </b>{{show_address}}</p>
@@ -103,8 +104,8 @@
                   </div>
 
                   <div class="row" v-if="order.type == 'LOCAL'">
-                    <p><b>{{order.type}}</b></p>
-                    <small>{{order.tableNumber}}</small>
+                    <p><b>Order type: {{order.type}}</b></p>
+                    <p><b>Table number: </b> {{order.tableNumber}}</p>
                   </div>
 
                   <div class="row" v-if="order.type == 'TAKEAWAY'">

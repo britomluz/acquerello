@@ -107,9 +107,18 @@ public class OrderController {
             return new ResponseEntity<>("Fields cannot are empty", HttpStatus.FORBIDDEN);
         }
 
-        Order order = new Order(LocalDateTime.now(), LocalDateTime.now(), OrderState.PENDING, orderToBuyDTO.getTotal(), orderToBuyDTO.getType());
+        if(orderToBuyDTO.getType().equals(OrderType.LOCAL)){
+            if(orderToBuyDTO.getTableNumber() < 1 || orderToBuyDTO.getTableNumber() == null){
+                return new ResponseEntity<>("Please, write the table number", HttpStatus.FORBIDDEN);
+
+            }
+        }
+
+        Order order = new Order(LocalDateTime.now(), LocalDateTime.now(), OrderState.PENDING, orderToBuyDTO.getTotal(), orderToBuyDTO.getType(), orderToBuyDTO.getTableNumber());
         user.addOrder(order);
         orderService.save(order);
+
+
 
         if(orderToBuyDTO.getType().equals(OrderType.DELIVERY)) {
             if(orderToBuyDTO.getId() < 1) {

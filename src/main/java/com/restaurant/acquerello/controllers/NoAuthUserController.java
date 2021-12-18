@@ -72,10 +72,17 @@ public class NoAuthUserController {
             return new ResponseEntity<>("Fields cannot are empty", HttpStatus.FORBIDDEN);
         }
 
+        if(completeRegisterDTO.getType().equals(OrderType.LOCAL)){
+            if(completeRegisterDTO.getTableNumber() < 1 || completeRegisterDTO.getTableNumber() == null){
+                return new ResponseEntity<>("Please, write the table number", HttpStatus.FORBIDDEN);
+
+            }
+        }
+
         // create user order and address
 
         User user = new User(completeRegisterDTO.getFirstName(), completeRegisterDTO.getLastName(), completeRegisterDTO.getEmail(), passwordEncoder.encode(completeRegisterDTO.getPassword()), completeRegisterDTO.getNumber(), UserType.USER, "https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
-        Order order = new Order(LocalDateTime.now(), LocalDateTime.now(), OrderState.PENDING, completeRegisterDTO.getTotal(), completeRegisterDTO.getType());
+        Order order = new Order(LocalDateTime.now(), LocalDateTime.now(), OrderState.PENDING, completeRegisterDTO.getTotal(), completeRegisterDTO.getType(), completeRegisterDTO.getTableNumber());
 
         // add address and order to user
 
@@ -104,7 +111,7 @@ public class NoAuthUserController {
                 orderDetailsRepository.save(orderDetails);
             }
 
-            return new ResponseEntity<>("Checkout and user created", HttpStatus.CREATED);
+            return new ResponseEntity<>("Order No."+order.getId(), HttpStatus.CREATED);
         }
 
         // Brian: keep "for" on this place, or get server error
@@ -120,6 +127,6 @@ public class NoAuthUserController {
 
 
 
-        return new ResponseEntity<>("Checkout and user created order No."+order.getId(), HttpStatus.CREATED);
+        return new ResponseEntity<>("Order No." +order.getId(), HttpStatus.CREATED);
     }
 }

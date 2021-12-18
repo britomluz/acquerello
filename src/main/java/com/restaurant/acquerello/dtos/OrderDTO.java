@@ -14,6 +14,7 @@ public class OrderDTO {
     private OrderState state;
     private Double total;
     private OrderType type;
+    private Integer tableNumber;
 
     public OrderDTO(Order order) {
         this.id = order.getId();
@@ -23,6 +24,7 @@ public class OrderDTO {
         this.state = order.getState();
         this.total = order.getTotal();
         this.type = order.getType();
+        this.tableNumber = order.getTableNumber();
     }
 
     public Long getId() {
@@ -79,5 +81,13 @@ public class OrderDTO {
 
     public void setType(OrderType type) {
         this.type = type;
+    }
+
+    public Integer getTableNumber() {
+        return tableNumber;
+    }
+
+    public void setTableNumber(Integer tableNumber) {
+        this.tableNumber = tableNumber;
     }
 }
