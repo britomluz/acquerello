@@ -27,6 +27,7 @@ const app = Vue.createApp({
       priceorder: 0,
       totalorder: 0,
       categories: [],
+      card:[],
 
       //product categories
       mainCourses: [],
@@ -104,7 +105,7 @@ const app = Vue.createApp({
 
       acquerelloCard: false,
       bankCard: true,
-
+      cardPay:"bank",
       // conteo de peticiones exitosas
 
       requests: {
@@ -180,6 +181,9 @@ const app = Vue.createApp({
       if (res.status === 202) {
         this.logged = true;
         this.user = res.data;
+        this.card = res.data.card[0]
+
+        console.log(this.card)
         this.address = res.data.address;
 
         if (res.data.card.length > 0) {

@@ -287,31 +287,42 @@
               <div class="title  mt-3">
                 <h3 class="text-center">Billing data</h3>
               </div>
-              <div class="d-flex flex-a-items-center radio">
-                <input type="radio" name="card" id="acquerello" @input="selectPayment">
-                <label for="acquerello">Acquerello Card </label>
+              <!-- v-if="card.length > 0" -->
+              <div v-if="card.length != 0"  class="d-flex flex-column radio mb-2">
+                <div class="mb-2">
+                  <input type="radio" name="card" id="acquerello" value="acquerello" @input="selectPayment" v-model="cardPay">
+                  <label for="acquerello">Acquerello Card </label>
+                </div>
+                
+                <div v-if="!bankCard" class="d-flex">
+                  <div class="d-flex flex-column">                    
+                    <label><b class="cGreen">Balance: </b> ${{card.balance}}</label>
+                    <label><b class="cGreen">Level: </b> {{card.level}}</label>
+                    <label><b class="cGreen">Points: </b> {{card.points}}</label>
+                  </div>
+                </div>
               </div>
               <div class="d-flex flex-a-items-center radio">
-                <input type="radio" name="card" id="bank" @input="selectPayment">
+                <input type="radio" name="card" id="bank" value="bank" @input="selectPayment" v-model="cardPay">
                 <label for="bank">Bank Card </label>
               </div>
               <div v-if="bankCard" class="mt-4">
                 <div class="">
                   <div class=" d-flex flex-column">
-                    <label for="ccn">Card Number: </label>
-                    <input class="iptGreen w-100" id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,16}" autocomplete="cc-number"
+                    <label for="cn">Card Number: </label>
+                    <input class="iptGreen w-100" id="cn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,16}" autocomplete="cc-number"
                       maxlength="16" placeholder="xxxxxxxxxxxxxxxx" v-model="numberCard">
                   </div>
                 </div>
                 <div class="d-flex justify-content-around mt-3">
                   <div class=" d-flex flex-column">
-                    <label for="ccn">CVV</label>
-                    <input class="iptGreen" id="ccn" type="tel" inputmode="numeric" autocomplete="cc-number" maxlength="3"
+                    <label for="cvv">CVV</label>
+                    <input class="iptGreen" id="cvv" type="tel" inputmode="numeric" autocomplete="cc-number" maxlength="3"
                       placeholder="xxx" v-model="cvv">
                   </div>
                   <div class=" d-flex flex-column">
-                    <label for="ccn">Vec.</label>
-                    <input class="iptGreen" id="ccn" type="tel" inputmode="text" autocomplete="cc-number" maxlength="5"
+                    <label for="vec">Vec.</label>
+                    <input class="iptGreen" id="vec" type="tel" inputmode="text" autocomplete="cc-number" maxlength="5"
                       placeholder="yy/mm" v-model="vec">
                   </div>
                 </div>
