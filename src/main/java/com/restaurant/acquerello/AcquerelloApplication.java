@@ -50,39 +50,15 @@ public class AcquerelloApplication {
 			User user5 = new User("Chloe", "Smith", "chloe.smith@acquerello.com", passwordEncoder.encode("user1234"),5551957L ,UserType.USER,"https://res.cloudinary.com/luz-brito/image/upload/v1638657510/Acquerello/imgUser_sps9k8.jpg");
 
 			// Brian: Creating bookings
-			Booking booking1 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 9, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
 
-			Booking booking2 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 6, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking3 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 7, 5, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking4 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 19, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking5 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("18:59"), LocalTime.parse("18:59").plusHours(4), SectorTables.GOLDEN, 17, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking1 = new Booking(LocalDate.now().plusDays(1),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 9, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+
+			Booking booking2 = new Booking(LocalDate.now().plusDays(1),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 6, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking3 = new Booking(LocalDate.now().plusDays(1),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 7, 5, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking4 = new Booking(LocalDate.now().plusDays(1),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 19, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
+			Booking booking5 = new Booking(LocalDate.now().plusDays(1),LocalTime.parse("18:59"), LocalTime.parse("18:59").plusHours(4), SectorTables.GOLDEN, 17, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
 
 
-			/*
-			Booking booking6 = new Booking(LocalDate.parse("2021-12-16"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 12, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking7 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 19, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking8 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 15, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			/*
-			Booking booking9 = new Booking(LocalDate.parse("2021-12-16"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 8, 3, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking10 = new Booking(LocalDate.parse("2021-12-16"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 6, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking11 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 8, 3, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking12 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.GOLDEN, 9, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking13 = new Booking(LocalDate.parse("2021-12-17"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 10, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking14 = new Booking(LocalDate.parse("2021-12-17"), LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.GOLDEN, 5, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-
-			Booking booking15 = new Booking(LocalDate.parse("2021-12-15"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.PLATINUM, 11, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking16 = new Booking(LocalDate.parse("2021-12-15"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.PLATINUM, 16, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking17 = new Booking(LocalDate.parse("2021-12-15"),LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.PLATINUM, 18, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking18 = new Booking(LocalDate.parse("2021-12-15"),LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.PLATINUM, 20, 3, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking19 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.PLATINUM, 13, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking20 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.PLATINUM, 18, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking21 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.PLATINUM, 22, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking22 = new Booking(LocalDate.parse("2021-12-16"),LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.PLATINUM, 20, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking23 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.PLATINUM, 15, 2, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking24 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("08:59"), LocalTime.parse("08:59").plusHours(4), SectorTables.PLATINUM, 17, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking25 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.PLATINUM, 20, 4, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			Booking booking26 = new Booking(LocalDate.parse("2021-12-17"),LocalTime.parse("17:59"), LocalTime.parse("17:59").plusHours(4), SectorTables.PLATINUM, 21, 3, TableState.ACCEPTED, TableAvailability.NOTAVAILABLE);
-			*/
 			user1.addAddress(address1);
 			user2.addAddress(address2);
 			user3.addAddress(address3);
@@ -90,6 +66,7 @@ public class AcquerelloApplication {
 			user5.addAddress(address5);
 
 			// Brian: Adding bookings to User
+
 			user2.addBooking(booking1);
 
 
@@ -97,30 +74,9 @@ public class AcquerelloApplication {
 			user4.addBooking(booking3);
 			user5.addBooking(booking4);
 			user2.addBooking(booking5);
-			/*
-			user3.addBooking(booking6);
-			user4.addBooking(booking7);
-			user5.addBooking(booking8);
-			user2.addBooking(booking9);
-			user3.addBooking(booking10);
-			user4.addBooking(booking11);
-			user5.addBooking(booking12);
-			user2.addBooking(booking13);
-			user3.addBooking(booking14);
-			user4.addBooking(booking15);
-			user5.addBooking(booking16);
-			user2.addBooking(booking17);
-			user3.addBooking(booking18);
-			user4.addBooking(booking18);
-			user5.addBooking(booking19);
-			user2.addBooking(booking20);
-			user3.addBooking(booking21);
-			user4.addBooking(booking22);
-			user5.addBooking(booking23);
-			user2.addBooking(booking24);
-			user3.addBooking(booking25);
-			user4.addBooking(booking26);
-			*/
+
+
+
 			userRepository.save(user1);
 			userRepository.save(user2);
 			userRepository.save(user3);
@@ -136,29 +92,6 @@ public class AcquerelloApplication {
 			bookingRepository.save(booking4);
 			bookingRepository.save(booking5);
 
-			/*
-			bookingRepository.save(booking6);
-			bookingRepository.save(booking7);
-			bookingRepository.save(booking8);
-			bookingRepository.save(booking9);
-			bookingRepository.save(booking10);
-			bookingRepository.save(booking11);
-			bookingRepository.save(booking12);
-			bookingRepository.save(booking13);
-			bookingRepository.save(booking14);
-			bookingRepository.save(booking15);
-			bookingRepository.save(booking16);
-			bookingRepository.save(booking17);
-			bookingRepository.save(booking18);
-			bookingRepository.save(booking19);
-			bookingRepository.save(booking20);
-			bookingRepository.save(booking21);
-			bookingRepository.save(booking22);
-			bookingRepository.save(booking23);
-			bookingRepository.save(booking24);
-			bookingRepository.save(booking25);
-			bookingRepository.save(booking26);
-			*/
 
 
 			//GABRIEL: CREATE CARDS TO TEST THE APP

@@ -96,19 +96,26 @@
       <ul class="list ">
 
         <li class="item-list">
-          <a class="item-link l5" href="#">
+          <a class="item-link l5" href="myaccount.html">
             <div><i class="bi bi-person-fill fs-2"></i></div>
             <p>My account</p>
           </a>
         </li>
 
         <li class="item-list">
-          <a class="item-link l5" href="./my-orders.html">
-            <div><i class="bi bi-basket2-fill fs-3"></i></div>
+          <a class="item-link l5" href="#">
+            <div><i class="bi bi-bag-fill fs-3"></i></div>
             <p>My Orders</p>
           </a>
         </li>
 
+        <li class="item-list">
+          <a class="item-link l5" href="user-booking.html">            
+            <div><i class="bi bi-list-check fs-3"></i></div>
+            <p>My Bookings</p>
+          </a>
+        </li>
+        
         <li class="item-list" v-if="user.type == 'ADMIN'">
           <a id="adminPanel" class="item-link l5" href="admin.html">
             <div><i class="bi bi-filter-square-fill fs-3"></i></div>

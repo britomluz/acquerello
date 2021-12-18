@@ -10,7 +10,7 @@ const app = Vue.createApp({
       disabled:true,
 
       //booking grid
-      errorBookTable:"",
+      errorBookTable: false,
       error_bookTable:"",
       tab:[],
       num:[
@@ -142,14 +142,19 @@ const app = Vue.createApp({
           })
           .then(res => window.location.reload())
         })
-        .catch((err) =>{
-          console.log(err.response.data)
-          if(err.response.status == 401){
+        .catch((err) =>{         
+
+          this.errorBookTable = true
+
+          if(err.response.data.status === 401){
+            
             this.error_bookTable = 'Please log in to book a table'
+          } else{
+            this.error_bookTable = err.response.data
           }
 
-          this.errorBookTable = err.response.data
-          this.error_bookTable = err.response.data
+          
+          
         });
     },
     // cancel user booking
