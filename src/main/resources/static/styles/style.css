@@ -276,7 +276,7 @@ nav a:hover{
 /*about us*/
 
 .aboutUs{        
-    height: 80vh; 
+    min-height: 80vh; 
     width: 100%;     
     padding: 150px 50px 50px 50px;    
 }
@@ -284,8 +284,8 @@ nav a:hover{
 /* explore the menu*/
 .exploreMenu{    
     background: var(--color3);
-    height: 60vh;
-    padding: 50px 0px;
+    min-height: 60vh;
+    padding: 50px 20px;
 }
 .sectionDark{
     background-image: linear-gradient(rgba(5,7,12, 0.75), rgba(5,7,12, 0.75)), url("../assets/pastatres.jpg");
@@ -1142,7 +1142,7 @@ footer{
         display: inline;
     }
     .aboutUs img{
-        width: 300px;
+        width: 250px;
     }
 
     .emailNav{

@@ -64,6 +64,7 @@ const App = Vue.createApp({
       quantity: [],
       searchProducts: false,
       show: false,
+      showPassword: true, 
     };
   },
   created() {
@@ -74,6 +75,9 @@ const App = Vue.createApp({
     }
   },
   methods: {
+    showPasswords(){
+      this.showPassword = !this.showPassword
+    },
     validator_firstname(data) {
       if (!data.input) {
         data.msg = "field is empty";
@@ -193,7 +197,7 @@ const App = Vue.createApp({
         })
           .then(response => {
             this.login(this.email.input,this.password.input)
-            window.location.href = "/web/myaccount.html"
+           // window.location.href = "/web/myaccount.html"
         })
           .catch(err => {
             swal({

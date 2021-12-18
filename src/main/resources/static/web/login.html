@@ -29,7 +29,7 @@
         <div class="d-flex navlinks">
           <a class="nav-link" href="index.html">HOME</a>
           <a class="nav-link" href="order.html">ORDER NOW</a>
-          <a class="nav-link" href="booking.html">BOOKING</a>  
+          <a class="nav-link" href="booking.html">BOOKING</a>
         </div>
 
         <div class="d-flex">
@@ -83,14 +83,24 @@
               <div class="email">
                 <i class="bi bi-envelope-fill"></i>
                 <input id="mailLogin" type="text" placeholder="Email" v-model="email_two.input"
-                  v-on:input="validator_emial_2(email_two)">
+                   required>
               </div>
               <div v-if="email_two.correct == false">{{email_two.msg}}</div>
               <!-- PASSWORD -->
-              <div class="password">
+              <!-- <div class="password">
                 <i class="bi bi-lock-fill"></i>
                 <input id="passwordLogin" type="password" v-model="password_two.input"
                   v-on:input="validator_password_2(password_two)" placeholder="Password">
+
+              </div> -->
+              <div class="password">
+                <i class="bi bi-lock-fill"></i>
+                <input v-if="showPassword" id="passwordLogin" type="password" v-model="password_two.input"
+                   placeholder="Password">
+                <input v-if="!showPassword" id="Login" type="text" v-model="password_two.input"
+                  placeholder="Password">
+                <a @click="showPasswords"><i class="bi bi-eye-slash" v-if="showPassword"></i></a>
+                <a @click="showPasswords" v-cloak><i class="bi bi-eye" v-if="!showPassword"></i></a>
 
               </div>
               <div v-if="password_two.correct == false">{{password_two.msg}}</div>
@@ -113,52 +123,39 @@
               <div class="fname">
                 <i class="bi bi-person-fill"></i>
                 <input id="fname" type="text" placeholder="Firstname" v-model="firstname.input"
-                  v-on:input="validator_firstname(firstname)">
+                 >
 
-              </div>
-              <div v-if="firstname.correct == false">
-                <small class="errorForm"> {{firstname.msg}} </small>
               </div>
               <!-- LASTNAME -->
               <div class="lname">
                 <i class="bi bi-person-fill"></i>
                 <input id="lname" type="text" placeholder="Lastname" v-model="lastname.input"
-                  v-on:input="validator_lastname(lastname)">
+                  >
 
-              </div>
-              <div v-if="lastname.correct==false">
-                <small class="errorForm"> {{lastname.msg}} </small>
               </div>
               <!-- EMIAL -->
               <div class="email">
                 <i class="bi bi-envelope-fill"></i>
                 <input id="mailRegister" type="text" placeholder="Email" v-model="email.input"
-                  v-on:input="validator_emial(email)">
+                  >
                 <!-- aaaa -->
-              </div>
-              <div v-if="email.correct == false">
-                <small class="errorForm">{{email.msg}} </small>
               </div>
               <!-- PASSWORD -->
               <div class="password">
                 <i class="bi bi-lock-fill"></i>
-                <input id="passwordRegister" type="password" v-model="password.input"
-                  v-on:input="validator_password(password)" placeholder="Password">
+                <input v-if="showPassword" id="passwordRegister" type="password" v-model="password.input"
+                  placeholder="Password">
+                <input v-if="!showPassword" id="passwordRegister" type="text" v-model="password.input"
+                   placeholder="Password">
+                <a @click="showPasswords"><i class="bi bi-eye-slash" v-if="showPassword"></i></a>
+                <a @click="showPasswords" v-cloak><i class="bi bi-eye" v-if="!showPassword"></i></a>
 
-              </div>
-              <div v-if="password.correct == false">
-                <small class="errorForm">
-                  {{password.msg}}</small>
               </div>
               <!--PHONE -->
               <div class="phone">
                 <i class="bi bi-telephone-fill"></i>
-                <input id="phone" type="text" v-model="phone.input" v-on:input="validator_phone(phone)"
+                <input id="phone" type="text" v-model="phone.input" 
                   placeholder="Phone">
-
-              </div>
-              <div v-if="phone.correct == false">
-                <small class="errorForm">{{phone.msg}} </small>
               </div>
               <div><small>Eg. 1231234566</small></div>
               <!-- BTN -->
