@@ -79,6 +79,7 @@ const app = Vue.createApp({
       reference: "",
       state: "",
       addressId: "",
+      userCardAcquerello: "",
 
       numberCard: "",
       cvv: "",
@@ -97,7 +98,7 @@ const app = Vue.createApp({
       guest: false,
       user: "",
       address: [],
-      show_address :"",
+      show_address: "",
 
       // payment ways
 
@@ -131,6 +132,7 @@ const app = Vue.createApp({
 
       //shop
       cardNumber: "",
+      cardTypeCheck: "",
 
       // error div
       errorCardRest: false,
@@ -179,7 +181,10 @@ const app = Vue.createApp({
         this.logged = true;
         this.user = res.data;
         this.address = res.data.address;
-        console.log(this.address)
+
+        if (res.data.card.length > 0) {
+          this.userCardAcquerello = res.data.card[0].id;
+        }
       }
     }).catch(err => {
       console.log(err.response)
@@ -246,14 +251,14 @@ const app = Vue.createApp({
     },
     createProduct() {
       axios.post("/api/products/create", (idCategory = productId), {
-          //ren, I added {} because I got an error
+        //ren, I added {} because I got an error
 
-          name: this.productName,
-          description: this.description,
-          productImage: this.productImage,
-          price: this.price,
-          stock: this.stock,
-        })
+        name: this.productName,
+        description: this.description,
+        productImage: this.productImage,
+        price: this.price,
+        stock: this.stock,
+      })
         .then((res) => {
           console.log("Product created");
           swal({
@@ -473,9 +478,9 @@ const app = Vue.createApp({
 
       const list = JSON.parse(localStorage.getItem("cart"))
 
-      let product = []; 
+      let product = [];
 
-      
+
       if (list != null) {
         list.forEach(l => {
           let obj = {
@@ -493,7 +498,7 @@ const app = Vue.createApp({
         // if an authenticated user send a request
         if (this.logged) {
           let spinner = this.$refs.spinnerContainer
-          spinner.style.display='flex';
+          spinner.style.display = 'flex';
 
           axios.post("/api/order/buy", {
             products: product, total: total, type: this.type, id: this.addressId, street: this.street,
@@ -501,18 +506,54 @@ const app = Vue.createApp({
             zip: this.zip,
             state: this.state,
             reference: this.reference,
-            tableNumber: this.tableNumber
+            tableNumber: this.tableNumber,
           }).then(res => {
             // create payment
             let orderId = res.data.slice(9);
-                        console.log(orderId)
+            spinner.style.display = 'none';
 
+            // if the user selected bank card
+            if (this.cardTypeCheck == "bank") {
+              console.log(this.cardTypeCheck)
+              spinner.style.display = 'flex';
+              axios.post("https://mindhub-b.herokuapp.com/api/payments", { number: this.numberCard, cvv: cvv, amount: total, description: this.description, accountNumber: this.accountNumber }).then(res => {
+                spinner.style.display = 'none';
+                swal({
+                  title: "Payment succesfull!",
+                  text: "Yumm!",
+                  icon: "success",
+                  button: "Ok",
+                }).then(res => {
+                  axios.post(`/api/sendMail?id=${orderId}`)
+                  window.location.href = "/web/my-orders.html"
+                });
+                localStorage.clear();
+              }).catch(err => {
+                this.errorCardRest = true;
+                spinner.style.display = 'none';
 
-            axios.post(`/api/sendMail?id=${orderId}`)
+                if (err.response.status == 500) {
+                  this.error_cardRest = "Check empty fields";
+                } else {
+                  this.error_cardRest = err.response.message;
+                }
 
-            axios.post("https://mindhub-b.herokuapp.com/api/payments", { number: this.numberCard, cvv: cvv, amount: total, description: this.description, accountNumber: this.accountNumber }).then(res => {
-              console.log(res.data)
-              spinner.style.display='none';
+                setTimeout(() => {
+                  this.errorCardRest = false;
+                  this.error_cardRest = ""
+                }, 3000)
+              })
+            } else {
+              console.log(this.cardTypeCheck)
+              spinner.style.display = 'flex';
+              let id = Number(this.userCardAcquerello)
+              let total = Number(this.totalProduct);
+
+              axios.post(`/api/payments/${id}?amount=${total}`).then(res => {
+                console.log(res)
+                spinner.style.display = 'none';
+                localStorage.clear();
+                axios.post(`/api/sendMail?id=${orderId}`)
               swal({
                 title: "Payment succesfull!",
                 text: "Yumm!",
@@ -521,21 +562,12 @@ const app = Vue.createApp({
               }).then(res => {
                 window.location.href = "/web/my-orders.html"
               });
-              localStorage.clear();
-            }).catch(err => {
-              this.errorCardRest = true;
+              }).catch(err => {
+                console.log(err.response)
+                spinner.style.display = 'none';
+              })
+            }
 
-              if (err.response.status == 500) {
-                this.error_cardRest = "Check empty fields";
-              } else {
-                this.error_cardRest = err.response.message;
-              }
-
-              setTimeout(() => {
-                this.errorCardRest = false;
-                this.error_cardRest = ""
-              }, 3000)
-            })
           }).catch(err => {
             this.errorCardRest = true;
 
@@ -553,7 +585,7 @@ const app = Vue.createApp({
         } else {
           // create user and address and order
           let spinner = this.$refs.spinnerContainer
-          spinner.style.display='flex';
+          spinner.style.display = 'flex';
           axios
             .post("/api/order/checkout", {
               firstName: this.firstName,
@@ -576,12 +608,12 @@ const app = Vue.createApp({
             .then((res) => {
               let orderId = res.data.slice(9);
               console.log(orderId)
-              
+
               // create payment
-             
+
               axios.post("https://mindhub-b.herokuapp.com/api/payments", { number: this.numberCard, cvv: cvv, amount: total, description: this.description, accountNumber: this.accountNumber }).then(res => {
                 console.log(res)
-                spinner.style.display='none';
+                spinner.style.display = 'none';
                 swal({
                   title: "Payment succesfull!",
                   text: "Account registered!",
@@ -592,13 +624,13 @@ const app = Vue.createApp({
                   axios.post(`/api/login?email=${this.email}&password=${this.password}`).then(res => {
                     window.location.href = "/web/myaccount.html"
                     axios.post(`/api/sendMail?id=${orderId}`)
-                                          .then(res => res )
+                      .then(res => res)
                   }).catch(err => {
                     console.log(err.response)
                   })
 
                   console.log(res.data)
-                 //window.location.href = "/web/login.html"
+                  //window.location.href = "/web/login.html"
                 });
                 localStorage.clear();
               }).catch(err => {
@@ -757,10 +789,12 @@ const app = Vue.createApp({
         case "acquerello":
           this.acquerelloCard = true;
           this.bankCard = false;
+          this.cardTypeCheck = e.target.id;
           break;
         case "bank":
           this.acquerelloCard = false;
           this.bankCard = true;
+          this.cardTypeCheck = e.target.id;
           break;
       }
     },
@@ -808,7 +842,7 @@ const app = Vue.createApp({
         product.name.toLowerCase().match(this.filterNameProduct.toLowerCase())
       );
     },
-    showAddress(){
+    showAddress() {
       this.show_address = orderDetailId[0].address
     }
   },

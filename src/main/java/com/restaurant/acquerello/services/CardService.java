@@ -9,4 +9,5 @@ public interface CardService {
     public List<Card> getAll();
     public Card save(Card card);
     public Optional<Card> getById(Long id);
+    Card findById(Long id);
 }
