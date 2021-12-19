@@ -1093,8 +1093,24 @@ footer{
     display: none;
 }
 
-
-
+.errorPage h1{
+    font-family: 'Montserrat';
+    font-weight: bolder;  
+    line-height: .7;  
+}
+.errorPage h2{
+    font-family: 'Montserrat';
+    font-weight: bolder;    
+}
+.errorPage h4{
+    font-family: 'Montserrat';
+    font-weight: lighter;    
+}
+.errorPage .error{
+    border: 2px solid var(--color1);
+    padding: 30px 50px;
+    margin-bottom: 30px;
+}
 /* QUERIES*/
 @media screen and (max-width:767px){
   

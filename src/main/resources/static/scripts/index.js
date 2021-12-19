@@ -281,6 +281,10 @@ const App = Vue.createApp({
         .filter(order => order.date.slice(3, 5).match(this.filterMonthUser))
         .filter(order => order.date.slice(6, 10).match(this.filterYearUser))
     },
+    goBack() {
+      window.history.back();
+    },
+  
     /* prueba(){
       let side1 = this.$refs.side1
       let side2 = this.$refs.side1
