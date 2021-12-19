@@ -54,7 +54,7 @@ public class CardController {
             cardNumber = Util.cardNumber();
         }
 
-        Card newCard = new Card(cardNumber, Util.cvvCard(), LocalDateTime.now(), 0D, 25, 1, CardType.ACTIVE, user);
+        Card newCard = new Card(cardNumber, Util.cvvCard(), LocalDateTime.now(), 100D, 25, 1, CardType.ACTIVE, user);
         cardService.save(newCard);
         return new ResponseEntity<>("Card created",HttpStatus.CREATED);
     }
