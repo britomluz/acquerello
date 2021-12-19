@@ -140,11 +140,10 @@
       </div>
       <div class="mt-1">
         <a href="admin.html" class="btn-green"><i class="bi bi-arrow-left text-light"></i> Admin Panel</a>
-      </div>
-      <h3 class="cGreen py-5">CATEGORIES</h3>
-      <div class="d-flex f-justify-c-space-a d-fl">
+      </div>      
+      <div class="d-flex row">
         
-        <div class="d-flex flex-d-col category-w">
+        <div class="d-flex flex-column align-items-center col-12 col-lg-4 mt-5">
           <h3 class="fs-5">Add Category</h3>
           <form @submit.prevent="createCategory()">
             <div class="d-flex flex-d-col pb-3">
@@ -170,7 +169,7 @@
             <button type="submit" class="category-button btn-green">Add</button>
           </form>
         </div>
-        <div class="d-flex flex-d-col category-w">
+        <div class="d-flex flex-column align-items-center col-12 col-lg-4 mt-5">
           <h3 class="fs-5">Edit Category</h3>
           <form @submit.prevent="editCategory()">
             <div class="d-flex flex-d-col pb-3">
@@ -205,7 +204,7 @@
             <button class="category-button btn-green">Edit</button>
           </form>
         </div>
-        <div class="d-flex flex-d-col category-w">
+        <div class="d-flex flex-column align-items-center col-12 col-lg-4 mt-5">
           <h3 class="fs-5">Delete Category</h3>
           <form @submit.prevent="deleteCategory()">
             <div class="d-flex flex-d-col">
@@ -220,7 +219,8 @@
           </form>
         </div>
       </div>
-      <div class="d-flex justify-content-center">
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <h3 class="cGreen py-5 fs-1">CATEGORIES</h3>
         <div class="col-12 col-md-8">
           <div class="table-responsive">
             <table class="table">

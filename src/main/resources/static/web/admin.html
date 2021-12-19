@@ -32,12 +32,13 @@
           <a href="#" @click="logout" class="nav-link">LOG OUT</a>
         </div>
 
-        <div>
+        <div class="d-flex">
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
             aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
 
+          <!-- menu dropdown user -->
           <div class="d-flex align-items-center px-2">    
             <div v-if="user.type == 'ADMIN' || user.type == 'USER'" class="dropdown fondoBlack">              
               <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -78,11 +79,8 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="booking.html">Bookings</a>
-              </li>
-              <li class="nav-item">
-                <a href="#" @click="logout" class="nav-link">Log out</a>
-              </li>
-            </ul>
+              </li>              
+            </ul>            
           </div>
         </div>
       </div>
@@ -138,7 +136,7 @@
     </div>
     <main>
       <h5 class="text-center cGreen">Filtrar por:</h5>
-      <div class="d-flex justify-content-center mb-3">
+      <div class="d-flex flex-wrap justify-content-center mb-3">
         <div class="ipt-g  p-1 d-flex">
           <input type="text" name="" id="" v-model="emailfilter" placeholder="Email">
         </div>

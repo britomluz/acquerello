@@ -164,13 +164,7 @@
             <p id="response"></p>
           </div>
           <!-- Form Steps -->
-          <form @submit.prevent.once="confirmBuy" v-cloak>
-
-            <div class="errors" id="error" v-if="errorCardRest">
-              <div class="error-div">
-                <small class="cRed"><i class="bi bi-info-circle-fill px-3 cRed"></i>{{error_cardRest}}</small>
-              </div>
-            </div>
+          <form @submit.prevent.once="confirmBuy" v-cloak>            
             <!-- Step 1 -->
             <div ref="form1" class="form-step form1 form-step-active">
               <div class="title">
@@ -258,7 +252,7 @@
                               </div>
                             </div>
                             <div>
-                              <label for="reference">Reference: </label>
+                              <label for="reference">Reference: (optional)</label>
                               <textarea name="" id="reference" cols="20" rows="1" class="col-12"
                                 v-model="reference"></textarea>
                             </div>
@@ -266,7 +260,7 @@
                         </div>
                       </form>
                     </div>
-                  </div>
+                  </div>                  
                 </div>
               </div>
               <div class="mt-2">
@@ -278,16 +272,22 @@
 
             <!-- Step 2 -->
             <div ref="form2" class="form-step form2">
-              <div v-if="table">
-                <label for="table">Number Table: </label>
+              
+              <div class="title">
+                <h3 class="text-center">Billing data</h3>
+              </div>
+              <div v-if="table" class="py-3">
+                <h4>
+                  Table
+                </h4>
                 <select class="iptGreen" name="table" id="table" v-model="tableNumber">
                   <option value="" selected disabled>Select Table</option>
                 </select>
               </div>
-              <div class="title  mt-3">
-                <h3 class="text-center">Billing data</h3>
-              </div>
-              <!-- v-if="card.length > 0" -->
+              <!-- card restaurant -->
+              <h4>
+                Card
+              </h4>
               <div v-if="card.length != 0"  class="d-flex flex-column radio mb-2">
                 <div class="mb-2">
                   <input type="radio" name="card" id="acquerello" value="acquerello" @input="selectPayment" v-model="cardPay">
@@ -302,6 +302,7 @@
                   </div>
                 </div>
               </div>
+              <!-- bank card  -->
               <div class="d-flex flex-a-items-center radio">
                 <input type="radio" name="card" id="bank" value="bank" @input="selectPayment" v-model="cardPay">
                 <label for="bank">Bank Card </label>
@@ -366,18 +367,15 @@
                     class="btn btn-prev"><i class="bi bi-arrow-left"></i>
                     Go back</a>
                   <button ref="submit" type="submit" value="submit" class="btn btn-confirm" 
-                    id="confirm">Confirm <i class="bi bi-check-lg"></i></button>
+                    id="confirm" :disabled="confirm_btn">Confirm <i class="bi bi-check-lg"></i></button>
                   <!-- <p> @click="nextProgressBar(this.$refs.submit, this.$refs.progressStep3)"</p> NO SE QUE FUNCION CUMPLE-->
                 </div>
               </div>
-              <!-- <div v-if="errorLoan" id="advertencia" class="d-flex justify-content-center align-items-center pt-4"
-                v-cloak>
-                <div class="d-flex align-items-center er">
-                  <div class="barraError"></div>
-                  <div class="circleError"><i class="bi bi-exclamation"></i></div>
+              <div class="errors" id="error" v-if="errorCardRest">
+                <div class="error-div">
+                  <small class="cRed"><i class="bi bi-info-circle-fill px-3 cRed"></i>{{error_cardRest}}</small>
                 </div>
-                <small class="text-danger">{{error_newLoan}}</small>
-              </div> -->
+              </div>
             </div>
           </form>
         </div>

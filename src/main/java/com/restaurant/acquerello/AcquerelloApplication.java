@@ -189,7 +189,7 @@ public class AcquerelloApplication {
 			categoryRepository.save(category3);
 			Category category4 = new Category("Main Course", "The long cooking of soup enabled nourishment to be drawn from meagre quantities of fish and meat too bony", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/stinco_divitello_a8xa5i.jpg");
 			categoryRepository.save(category4);
-			Category category5 = new Category("Soup", "xxxxx", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/pumpkin_soup_w7xtgb.jpg");
+			Category category5 = new Category("Soup", "The long cooking of soup enabled nourishment to be drawn from meagre quantities of fish and meat too bony or tough to be otherwise utilized.", "https://res.cloudinary.com/luz-brito/image/upload/v1638657513/Acquerello/pumpkin_soup_w7xtgb.jpg");
 			categoryRepository.save(category5);
 			Category category6 = new Category("Drinks", "A drink (or beverage) is a liquid intended for human consumption. In addition to their basic function", "https://res.cloudinary.com/luz-brito/image/upload/v1638657514/Acquerello/category_drinks_xklgfs.jpg");
 			categoryRepository.save(category6);

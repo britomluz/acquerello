@@ -100,6 +100,7 @@ const app = Vue.createApp({
       user: "",
       address: [],
       show_address: "",
+      addressInfo:"",
 
       // payment ways
 
@@ -145,6 +146,10 @@ const app = Vue.createApp({
       urlImg: "",
       imagePreviewDos: "",
       imageUploaderDos: "",
+
+      //error checkout
+      errorCheckout:false,
+      error_msgCheckout:"",
 
     };
   },
@@ -523,8 +528,8 @@ const app = Vue.createApp({
               axios.post("https://mindhub-b.herokuapp.com/api/payments", { number: this.numberCard, cvv: cvv, amount: total, description: this.description, accountNumber: this.accountNumber }).then(res => {
                 spinner.style.display = 'none';
                 swal({
-                  title: "Payment succesfull!",
-                  text: "Yumm!",
+                  title: "Good job!",
+                  text: "Payment succesfull!",
                   icon: "success",
                   button: "Ok",
                 }).then(res => {
@@ -846,7 +851,60 @@ const app = Vue.createApp({
       );
     },
     showAddress() {
-      this.show_address = orderDetailId[0].address
+      this.show_address = orderDetailId[0].address            
+    },
+    confirm_btn(){
+      if(this.logged){ 
+        if(this.cardTypeCheck== ''){
+          return true
+        }
+        if(this.cardTypeCheck =='bank'){
+          if(this.numberCard =='' || this.cvv =='' || this.vec==''){
+            return true
+          }
+        }
+        if(this.type == 'LOCAL'){
+          if(this.tableNumber == ''){
+            return true
+          }
+          return false
+        }
+        if(this.type == 'DELIVERY'){
+          if(this.street == '' || this.number == '' || this.state == '' || this.zip == ''){
+            return true
+          }
+          return false
+        }
+      }else{
+        if(this.cardTypeCheck ==''){
+          return true
+        }
+        if(this.cardTypeCheck =='bank'){
+          if(this.numberCard =='' || this.cvv =='' || this.vec==''){
+            return true
+          }
+          return false
+        }
+        if(this.firstName ==''||this.lastName==''||this.phone ==''){
+          return true
+        }
+        if(this.type == 'LOCAL'){
+          if(this.tableNumber == ''){
+            return true
+          }
+          return false
+        }
+        if(this.email==''||this.password==''){
+          return true
+        }
+        if(this.type == 'DELIVERY'){
+          if(this.street == '' || this.number == '' || this.state == '' || this.zip == ''){
+            return true
+          }
+          return false
+        }
+      }
+      return false
     }
   },
 });

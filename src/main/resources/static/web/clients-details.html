@@ -152,7 +152,7 @@
               <tbody>
                 <tr>
                   <th scope="row" class="text-center"><img :src="user.img" 
-                    :alt="user.firstName" class="img-user"></th>
+                    :alt="user.firstName" width="60" class="img-user"></th>
                   <td class="text-center">{{user.firstName}}</td>
                   <td class="text-center">{{user.lastName}}</td>
                   <td>
@@ -219,7 +219,7 @@
           </div>
           <div class="p-4" v-if="card">
             <h3>
-              CARD INFO
+              CARDS
             </h3>
           </div>
           <div class="table-responsive">
@@ -241,7 +241,7 @@
                   <td class="text-center">{{cardInfo.cardHolder}}</td>
                   <td class="text-center">{{cardInfo.cvv}}</td>
                   <td class="text-center">{{cardInfo.number}}</td>
-                  <td class="text-center">{{cardInfo.fromDate}}</td>
+                  <td class="text-center">{{(cardInfo.fromDate).slice(0,10)}} - {{(cardInfo.fromDate).slice(11,16)}}</td>
                   <td class="text-center">{{cardInfo.type}}</td>
                   <td class="text-center">{{cardInfo.level}}</td>
                 </tr>
@@ -250,7 +250,7 @@
           </div>
           <div class="p-4" v-if="orderBoolean">
             <h3>
-              ORDER INFO
+              ORDERS
             </h3>
           </div>
           <div class="table-responsive">
@@ -269,7 +269,7 @@
                 <tr>
                   <td class="text-center">{{orderInfo.id}}</td>
                   <td class="text-center">{{(orderInfo.aceptedDate).slice(0,10)}} - {{ (orderInfo.aceptedDate).slice(11,16)}}</td>
-                  <td class="text-center">{{orderInfo.creationDate}}</td>
+                  <td class="text-center">{{(orderInfo.creationDate).slice(0,10)}} - {{(orderInfo.creationDate).slice(11,16)}}</td>
                   <td class="text-center">{{orderInfo.state}}</td>
                   <td class="text-center">{{orderInfo.total}}</td>
                   <td class="text-center">{{orderInfo.type}}</td>

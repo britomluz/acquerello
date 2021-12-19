@@ -43,6 +43,7 @@ const App = Vue.createApp({
       cardInfo: "",
       orderInfo: "",
       addressUser: "",
+      adressInfo:"",
        // filter orders
        emailfilter:[],
        typefilter:"",
@@ -165,7 +166,8 @@ const App = Vue.createApp({
         this.orderDetail = res.data
         this.orderDetailId = this.orderDetail.filter(idP => idP.orderId == id)
         this.show_address = this.orderDetailId[0].address.number+" "+ this.orderDetailId[0].address.street+", "+this.orderDetailId[0].address.state
-        console.log(this.show_address)
+        this.adressInfo = this.orderDetailId[0].address
+        //console.log(this.orderDetailId[0].address)
         
       }).catch(err => {
         console.log(err.response)

@@ -222,6 +222,9 @@ public class OrderController {
         if (order.getState().equals(OrderState.CANCELED)){
             return new ResponseEntity<>("Order already canceled", HttpStatus.FORBIDDEN);
         }
+        if (order.getState().equals(OrderState.DELIVERED)){
+            return new ResponseEntity<>("Order already delivered", HttpStatus.FORBIDDEN);
+        }
 
         order.setState(OrderState.CANCELED);
 

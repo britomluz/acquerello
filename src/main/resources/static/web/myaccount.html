@@ -217,33 +217,33 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title cRed" id="exampleModalLabel">Add balance Acquerello Card</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="">
                 <div class=" d-flex flex-column">
                   <label for="ccn">Card Number</label>
-                  <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,16}" autocomplete="cc-number"
+                  <input class="iptGreen w-100" id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,16}" autocomplete="cc-number"
                     maxlength="16" placeholder="xxxxxxxxxxxxxxxx" v-model="numberCardRest">
                 </div>
               </div>
               <div class="d-flex justify-content-between">
-                <div class=" d-flex flex-column">
+                <div class=" d-flex flex-column mt-3">
                   <label for="ccn">CVV</label>
-                  <input id="ccn" type="tel" inputmode="numeric" autocomplete="cc-number" maxlength="3"
+                  <input class="iptGreen" id="ccn" type="tel" inputmode="numeric" autocomplete="cc-number" maxlength="3"
                     placeholder="xxx" v-model="cvvCardRest">
                 </div>
-                <div class=" d-flex flex-column">
+                <div class=" d-flex flex-column mt-3">
                   <label for="ccn">Vec.</label>
-                  <input id="ccn" type="tel" inputmode="text" autocomplete="cc-number" maxlength="5" placeholder="yy/mm"
+                  <input class="iptGreen" id="ccn" type="tel" inputmode="text" autocomplete="cc-number" maxlength="5" placeholder="yy/mm"
                     v-model="vecCardRest">
                 </div>
 
               </div>
-              <div class=" d-flex flex-column">
+              <div class=" d-flex flex-column mt-3">
                 <label for="ccn">Amount</label>
-                <input type="number" name="" id="" v-model="amountCardRest">
+                <input class="iptGreen" type="number" name="" id="" v-model="amountCardRest">
               </div>
             </div>
             <div class="errors" v-if="errorCardRest">
@@ -251,7 +251,7 @@
                 <small class="cRed"><i class="bi bi-info-circle-fill px-3 cRed"></i>{{error_cardRest}}</small>
               </div>
             </div>
-            <div class="modal-footer d-flex">
+            <div class="modal-footer d-flex mt-3">
               <button type="button" class="btn-green" data-bs-dismiss="modal">Close</button>
               <button type="button" class="btn-red" @click="addBalanceCardRest">Confirm</button>
             </div>
@@ -265,7 +265,7 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title text-danger" id="exampleModalLabel">Add new adress</h5>
+            <h5 class="modal-title cRed" id="exampleModalLabel">Add new adress</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -301,83 +301,10 @@
         </div>
       </div>
     </div>
-
-    <!-- CART MODAL -->
-    <div id="canvasCart" class="offcanvas offcanvas-end" tabindex="-1" aria-labelledby="offcanvasRightLabel">
-      <div id="" class="offcanvas-header">
-        <h5 id="offcanvasRightLabel">Shopping cart</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
-          <h5>x</h5>
-        </button>
-      </div>
-      <div class="offcanvas-body">
-        <table class="table">
-          <thead>
-            <tr class="title-offcanvas">
-              <th scope="col" colspan="2" class="cRed">Product</th>
-              <th scope="col" class="cRed">Qty.</th>
-              <th scope="col" class="cRed">Action</th>
-              <th scope="col" class="cRed">Total</th>
-            </tr>
-          </thead>
-          <!-- Template del carrito  -->
-          <tbody v-if="cart.length > 0" id="items">
-            <div>
-              <tr v-for="product in cart" :key="product.id" id="template-cart">
-                <td class="imgFill"><img :src="product.productImage" alt=""></td>
-                <!-- <td scope="row" class=""><img class="img-fluid img-thumbnail" :src="product.productImage" :alt="product.name"> -->
-                </td>
-                <td>{{product.name}}</td>
-                <td>{{product.quantity}}</td>
-                <td>
-                  <button class="btn btn-info btn-sm" type="button" :id="product.id" @click="addOne"> + </button>
-                  <button class="btn btn-danger btn-sm" type="button" :id="product.id" @click="deleteOne"> - </button>
-                </td>
-                <td class="off-canvas-priceTotal">${{product.price * product.quantity}}</td>
-              </tr>
-            </div>
-          </tbody>
-          <tfoot v-if="cart.length === 0">
-            <tr id="footer-cart">              
-              <td scope="row" colspan="5">Cart empty</td>
-            </tr>
-            <tr>
-              <!-- v-if="carrito.length === 0" -->
-              <td scope="row" colspan="5"><a href="order.html">ORDER NOW </a></td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-      <div class="d-flex justify-content-around" v-if="cart.length > 0" id="template-footer">
-        <a class="" type="button" id="vaciar-carrito" @click="emptyCart">
-          Clear cart
-        </a>
-        <p scope="row" colspan="2">
-          Total prod.: <span> {{totalQantity}}</span>
-        </p>
-        <p class="font-weight-bold"> <b>Total $ <span>{{calculateTotal()}}</span></b></p>
-      </div>
-      <div class="canvas-bottom d-flex justify-content-around mb-3">
-        <a href="" class="btn-green w-100 text-center">Keep buying</a> 
-        <a href="../web/checkout.html" class="btn-red w-100 text-center"> Checkout</a>
-      </div>
-
-    </div>
+    
   </div>
 
-
-
-  <script>
-    let menu = document.getElementById('navbar')
-    window.addEventListener('scroll', function () {
-      // navbar.style.background = 'black'
-      menu.classList.toggle('fondoBlack', window.scrollY > 0)
-
-    })
-  </script>
-
-
-
+ 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
     crossorigin="anonymous"></script>
