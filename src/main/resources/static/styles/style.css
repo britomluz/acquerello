@@ -59,18 +59,26 @@ h3 {
 .badge{
     background: var(--color2);
     border-radius: 100%;
-    position: absolute;
-    top: 15px;
-    right: 5px;  
+    padding: 0;    
+    /* position: absolute; */
+    /* top: 15px;
+    right: 5px;   */
+    /* font-size: .5em;
+    line-height: 0; */
+    margin-left: -5px;
+    margin-top: -15px;
     width: 20px;  
     height: 20px;
 }
 .badge small{
     line-height: 0;
     font-size: 12px;
-    position: absolute;
-    top: 10px;
-    right: 7px;
+    /* position: absolute; */
+    /* top: 10px; */
+    /* margin-top: -50px; */
+    /* margin-left: -4px; */
+    padding: 0;
+    /* right: 7px; */
 }
 
 /*btns*/
