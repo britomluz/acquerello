@@ -216,6 +216,10 @@
           <div class="tab-pane fade garden" id="garden" role="tabpanel" aria-labelledby="nav-profile-tab" v-cloak>
             <div class=" d-flex justify-content-center">
               <div class="pb-2 col-12 col-md-8 d-flex flex-column justify-content-center align-items-center">
+                <div class="d-flex">
+                  <div class="px-2"> <i class="bi bi-tablet-landscape-fill px-1"></i> <small>Available</small></div>
+                  <div class="px-2"> <i class="bi bi-tablet-landscape-fill px-1 cGrey"></i> <small class="text-muted">Not Available</small></div>
+                </div>
                 <div>
                   <h4 class="text-center mt-5">Select your table</h4>
                 </div>
@@ -236,10 +240,7 @@
                             <img  src="../assets/mesabar.svg" alt=""  v-if="n.capacity == 80">
                         </label>
                         <small>{{n.id}}</small>
-                      </div>
-                      <!-- <div v-if="n.capacity == 80" v-for="n in nums" class="c2 bg-info d-inline d-flex justify-content-center">
-                          <img  src="../assets/mesa1.svg" alt="">
-                      </div>     -->
+                      </div>                      
                   </div>
               </div>
 
@@ -248,9 +249,13 @@
           </div>
 
           <div class="tab-pane fade vip" id="vip" role="tabpanel" aria-labelledby="nav-profile-tab" v-cloak>
-            <div class=" d-flex justify-content-center">
-              <div class=" d-flex justify-content-center">
-                <div class=" col-12 col-lg-8">
+            <div class=" d-flex justify-content-center">              
+              <div class=" d-flex justify-content-center">                
+                <div class=" col-12 col-lg-8 d-flex flex-column">            
+                  <div class="d-flex justify-content-center">
+                    <div class="px-2"> <i class="bi bi-tablet-landscape-fill px-1"></i> <small>Available</small></div>
+                    <div class="px-2"> <i class="bi bi-tablet-landscape-fill px-1 cGrey"></i> <small class="text-muted">Not Available</small></div>
+                  </div>      
                   <div class="pb-5">
                     <h4 class="text-center mt-5">Select your table</h4>
                   </div>
