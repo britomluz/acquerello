@@ -260,7 +260,9 @@ const App = Vue.createApp({
       localStorage.setItem("cart", JSON.stringify(this.cart));
       localStorage.setItem("quantity", JSON.stringify(this.totalQantity));
     },
-   
+    goBack() {
+      window.history.back();
+    },   
     
   },
 
@@ -281,9 +283,7 @@ const App = Vue.createApp({
         .filter(order => order.date.slice(3, 5).match(this.filterMonthUser))
         .filter(order => order.date.slice(6, 10).match(this.filterYearUser))
     },
-    goBack() {
-      window.history.back();
-    },
+    
   
     /* prueba(){
       let side1 = this.$refs.side1
